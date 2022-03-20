@@ -1,8 +1,17 @@
-html, body {
+* {
   margin: 0;
   padding: 0;
 }
 
 canvas {
   display: block;
+}
+
+form{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#drawButton{
+  margin-left: 10px;
+  margin-bottom: 10px;
 }

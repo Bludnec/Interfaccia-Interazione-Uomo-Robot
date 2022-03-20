@@ -2,20 +2,36 @@ var cols, rows;
 var w = 50;
 var grid = [];
 
+document.getElementById("drawButton").addEventListener("click",setup )
+
 function setup() {
-  var canvas = createCanvas(500, 500);
+  rows = document.getElementById("height").value * 100;
+  cols = document.getElementById("width").value * 100;
+  var canvas = createCanvas(cols,rows);
   canvas.parent("canvas-zone");
+  canvas.mouseClicked(colorCell);
   frameRate(5);
 
   cols = floor(width / w);
   rows = floor(height / w);
 
+  /* Creazione della lista delle celle */
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
       var cell = new Cell(i, j);
       grid.push(cell);
     }
   }
+}
+
+function colorCell() {
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+  fill(255, 0, 255, 100);
+  rect(x * w, y * w, w, w);
+  var cell = grid[cellIndex(x, y)];
+
+  console.log(cell);
 }
 
 /* Ritorna l'indice dell'array della cella in posizione i,j  */
