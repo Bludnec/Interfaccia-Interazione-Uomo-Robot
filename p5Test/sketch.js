@@ -3,7 +3,10 @@ var w = 50;
 var grid = [];
 
 function setup() {
-  createCanvas(500, 500);
+  var canvas = createCanvas(500, 500);
+  canvas.parent("canvas-zone");
+  frameRate(5);
+
   cols = floor(width / w);
   rows = floor(height / w);
 
@@ -13,6 +16,14 @@ function setup() {
       grid.push(cell);
     }
   }
+}
+
+/* Ritorna l'indice dell'array della cella in posizione i,j  */
+function cellIndex(i, j) {
+  if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
+    return -1;
+  }
+  return i + j * cols;
 }
 
 function draw() {
@@ -25,6 +36,8 @@ function draw() {
 function Cell(i, j) {
   this.i = i;
   this.j = j;
+
+  this.zone = "";
   /* Boolean per i muri  [top,right,bottom,left] */
   this.walls = [true, true, true, true];
   /* Variabile per verificare se la cella è già stata visitata */
