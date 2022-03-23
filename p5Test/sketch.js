@@ -8,15 +8,12 @@ document.getElementById("drawButton").addEventListener("click", setup);
 function setup() {
   grid = [];
   w = document.getElementById("cell-size").value;
-  rows = document.getElementById("height").value * w;
-  cols = document.getElementById("width").value * w;
-  var canvas = createCanvas(cols, rows);
+  rows = document.getElementById("height").value;
+  cols = document.getElementById("width").value;
+  var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
   canvas.mouseClicked(colorCell);
   frameRate(5);
-
-  cols = floor(width / w);
-  rows = floor(height / w);
 
   /* Creazione della lista delle celle */
   for (var j = 0; j < rows; j++) {
