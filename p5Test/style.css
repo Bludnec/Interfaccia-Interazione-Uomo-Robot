@@ -1,3 +1,8 @@
+#container{
+  margin: 0 auto;
+  width: 1000px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,6 +10,7 @@
 
 canvas {
   display: block;
+  background-color:aquamarine
 }
 
 form{
