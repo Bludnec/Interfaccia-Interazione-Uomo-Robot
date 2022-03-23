@@ -13,24 +13,6 @@ function setup() {
   var canvas = createCanvas(cols * w + 400, rows * w);
   canvas.parent("canvas-zone");
   canvas.mouseClicked(clickedCell);
-
-  leftBuffer = createGraphics(cols * w, rows * w);
-  rightBuffer = createGraphics(400, rows * w);
-
-  // Draw on your buffers however you like
-  drawLeftBuffer();
-  drawRightBuffer();
-  // Paint the off-screen buffers onto the main canvas
-  image(leftBuffer, 0, 0);
-  image(rightBuffer, 400, 0);
-}
-
-function draw() {
-  console.log("draw");
-  frameRate(1);
-}
-
-function drawLeftBuffer() {
   /* Creazione della lista delle celle */
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
@@ -43,16 +25,11 @@ function drawLeftBuffer() {
   }
 }
 
-<<<<<<< HEAD
-function drawRightBuffer() {
-  rightBuffer.background(255, 100, 255);
-  rightBuffer.fill(0, 0, 0);
-  rightBuffer.textSize(32);
-  rightBuffer.text("This is the right buffer!", 50, 50);
+function draw() {
+  console.log("draw");
+  frameRate(1);
 }
 
-=======
->>>>>>> parent of 079dae3 (Update sketch.js)
 /* Funzione per ridisegnare il canvas dopo il click al bottone "Draw" */
 function redrawCanvas() {
   rows = document.getElementById("height").value * w;
@@ -68,7 +45,6 @@ function cellIndex(i, j) {
   return i + j * cols;
 }
 
-<<<<<<< HEAD
 class Cell {
   constructor(i, j) {
     this.i = i;
@@ -80,25 +56,6 @@ class Cell {
     /* Variabile per verificare se la cella è già stata visitata */
     this.visited = false;
   }
-=======
-function draw() {
-  background(51);
-  for (var i = 0; i < grid.length; i++) {
-    grid[i].show();
-  }
-}
-
-function Cell(i, j) {
-  this.i = i;
-  this.j = j;
-
-  this.zone = "";
-  /* Boolean per i muri  [top,right,bottom,left] */
-  this.walls = [true, true, true, true];
-  /* Variabile per verificare se la cella è già stata visitata */
-  this.visited = false;
-
->>>>>>> parent of 079dae3 (Update sketch.js)
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show = function () {
     var x = this.i * w;
