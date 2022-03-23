@@ -24,6 +24,13 @@ function setup() {
   }
 }
 
+function draw() {
+  background(51);
+  for (var i = 0; i < grid.length; i++) {
+    grid[i].show();
+  }
+}
+
 /* Funzione per ridisegnare il canvas dopo il click al bottone "Draw" */
 function redrawCanvas() {
   rows = document.getElementById("height").value * w;
@@ -37,13 +44,6 @@ function cellIndex(i, j) {
     return -1;
   }
   return i + j * cols;
-}
-
-function draw() {
-  background(51);
-  for (var i = 0; i < grid.length; i++) {
-    grid[i].show();
-  }
 }
 
 function Cell(i, j) {
