@@ -1,4 +1,4 @@
-#container{
+#container {
   margin: 0 auto;
   width: 1000px;
 }
@@ -10,13 +10,9 @@
 
 canvas {
   display: block;
-  background-color:aquamarine
 }
 
-
-
-
-#drawButton{
+#drawButton {
   margin-bottom: 10px;
   margin-top: 10px;
 }
