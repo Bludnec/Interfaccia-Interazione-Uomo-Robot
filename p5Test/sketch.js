@@ -1,12 +1,15 @@
 var cols, rows;
-var w = 50;
+var w = document.getElementById("cell-size").value;
+
 var grid = [];
 
 document.getElementById("drawButton").addEventListener("click",setup )
 
 function setup() {
-  rows = document.getElementById("height").value * 100;
-  cols = document.getElementById("width").value * 100;
+  grid = [];
+  w = document.getElementById("cell-size").value;
+  rows = document.getElementById("height").value * w;
+  cols = document.getElementById("width").value * w;
   var canvas = createCanvas(cols,rows);
   canvas.parent("canvas-zone");
   canvas.mouseClicked(colorCell);
@@ -24,14 +27,19 @@ function setup() {
   }
 }
 
+/* Funzione per ridisegnare il canvas dopo il click al bottone "Draw" */
+function redrawCanvas(){
+  rows = document.getElementById("height").value * w;
+  cols = document.getElementById("width").value * w;
+  resizeCanvas(cols,rows);
+}
+
 function colorCell() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   fill(255, 0, 255, 100);
   rect(x * w, y * w, w, w);
   var cell = grid[cellIndex(x, y)];
-
-  console.log(cell);
 }
 
 /* Ritorna l'indice dell'array della cella in posizione i,j  */
@@ -83,4 +91,3 @@ function Cell(i, j) {
   };
 }
 
-console.log(grid);
