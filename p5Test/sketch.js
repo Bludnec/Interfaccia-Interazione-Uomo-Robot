@@ -35,12 +35,63 @@ function redrawCanvas() {
   cols = document.getElementById("width").value * w;
   resizeCanvas(cols, rows);
 }
+
+/* Funzione per rimuovere i muri se le celle adiacenti hanno lo stesso valore di zone */
 function deleteWalls(i) {
+  var x = cellList[i].i;
+  var y = cellList[i].j;
   // controllo a destra
-  if (cellList[i].zone == cellList[i + 1].zone && i + 1 < cellList.length) {
-    cellList[i + 1].walls[3] = false;
+  if (
+    x + 1 < cols &&
+    i < cellList.length &&
+    cellList[cellIndex(x + 1, y)].zone == cellList[i].zone
+  ) {
+    cellList[cellIndex(x + 1, y)].walls[3] = false;
+    cellList[i].walls[1] = false;
+  } else if (x + 1 < cols && i < cellList.length) {
+    cellList[i].walls[1] = true;
+    cellList[cellIndex(x + 1, y)].walls[3] = true;
+  }
+  // controllo a sx
+  if (
+    x - 1 < cols &&
+    i < 0 &&
+    i < cellList.length &&
+    cellList[cellIndex(x - 1, y)].zone == cellList[i].zone
+  ) {
+    cellList[cellIndex(x - 1, y)].walls[1] = false;
+    cellList[i].walls[3] = false;
+  } else if (x - 1 < cols && i < 0 && i < cellList.length) {
+    cellList[i].walls[3] = true;
+    cellList[cellIndex(x - 1, y)].walls[1] = true;
+  }
+  // controllo a su
+  if (
+    y - 1 < 0 &&
+    i < 0 &&
+    i < cellList.length &&
+    cellList[cellIndex(x, y - 1)].zone == cellList[i].zone
+  ) {
+    cellList[cellIndex(x, y - 1)].walls[2] = false;
+    cellList[i].walls[0] = false;
+  } else if (y - 1 < 0 && i < 0 && i < cellList.length) {
+    cellList[i].walls[0] = true;
+    cellList[cellIndex(x, y - 1)].walls[2] = true;
+  }
+  // controllo a giu
+  if (
+    y + 1 < rows &&
+    i < cellList.length &&
+    cellList[cellIndex(x, y + 1)].zone == cellList[i].zone
+  ) {
+    cellList[cellIndex(x, y + 1)].walls[0] = false;
+    cellList[i].walls[2] = false;
+  } else if (y + 1 < rows && i < cellList.length) {
+    cellList[i].walls[2] = true;
+    cellList[cellIndex(x, y + 1)].walls[0] = true;
   }
 }
+
 /* Ritorna l'indice dell'array della cella in posizione i,j  */
 function cellIndex(i, j) {
   if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
@@ -65,6 +116,7 @@ class Cell {
 
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
+    // this.walls = [true, true, true, true];
     var x = this.i * w;
     var y = this.j * w;
     /*Creo il rettangolo della cella */
@@ -91,20 +143,37 @@ class Cell {
   }
 }
 
+// DA REVISIONARE
 function clickedCell() {
   console.log("mouse clicked on " + mouseX + "," + mouseY);
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-  if (cellList[cellIndex(x, y)] != undefined) {
-    if (document.getElementById("zone").value == "") {
-      alert("Inserire nome zona");
+  var check = document.getElementById("color-checkbox");
+  if (check.checked == true) {
+    if (cellList[cellIndex(x, y)] != undefined) {
+      if (document.getElementById("zone").value == "") {
+        alert("Inserire nome zona");
+      } else {
+        cellList[cellIndex(x, y)].zone = document.getElementById("zone").value;
+        cellList[cellIndex(x, y)].cellColor =
+          document.getElementById("cell-color").value;
+      }
+      console.log(cellList[cellIndex(x, y)]);
     } else {
-      cellList[cellIndex(x, y)].zone = document.getElementById("zone").value;
-      cellList[cellIndex(x, y)].cellColor =
-        document.getElementById("cell-color").value;
+      console.log("Nessuna cella cliccata.");
     }
-    console.log(cellList[cellIndex(x, y)]);
   } else {
-    console.log("Nessuna cella cliccata.");
+    showCellName();
+  }
+}
+
+function showCellName() {
+  var textZone = document.getElementById("text-zone");
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+  if (cellList[cellIndex(x, y)] != undefined) {
+    textZone.innerHTML = cellList[cellIndex(x, y)].zone;
+  } else {
+    textZone.innerHTML = "Nessuna cella cliccata";
   }
 }

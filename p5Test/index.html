@@ -14,33 +14,40 @@
 
   <body>
     <div id="container">
-      <h1>p5 Test</h1>
+      <h1 id="title">p5 Test</h1>
 
-      <form>
-        <legend>Impostare la grandezza in celle</legend>
-        <label for="fname">Altezza </label><br />
+      <form id="map-setting-form">
+        <legend>Impostazioni mappa</legend>
+        <label for="fname">Numero righe </label><br />
         <input type="number" id="height" name="height" value="5" /><br />
-        <label for="lname">Larghezza</label><br />
+        <label for="lname">Numero colonne</label><br />
         <input type="number" id="width" name="width" value="5" /><br /><br />
-        <label for="cname">Grandezza celle</label><br />
+        <label for="cname">Dimensione celle</label><br />
         <select name="list" id="cell-size">
           <option value="30">30</option>
           <option value="40">40</option>
           <option value="50">50</option>
           <option value="60">60</option>
           <option value="70">70</option>
-          <option value="80">80</option>
-        </select>
+          <option value="80">80</option></select
+        ><br />
+        <button type="button" id="drawButton">Redraw canvas</button>
       </form>
 
-      <button id="drawButton">Draw</button>
       <form id="zone-form">
-        <legend>La zona della cella</legend>
+        <legend>Zona e colore della cella</legend>
         <label for="fname">Zona </label><br />
         <input type="text" id="zone" name="zone" placeholder="kitchen" /><br />
         <label for="fname">Colore </label><br />
         <input type="color" id="cell-color" name="cell-color" /><br />
+        <label for="checkBox">Cambia colore</label><br />
+        <input
+          type="checkbox"
+          id="color-checkbox"
+          title="Abilitare modifiche"
+        /><br />
       </form>
+      <h2 id="text-zone">Zone</h2>
       <div id="canvas-zone"></div>
     </div>
     <script src="sketch.js"></script>

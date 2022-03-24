@@ -1,7 +1,10 @@
 {
   "folders": [
-    {
-      "path": "p5Test"
-    }
-  ]
+	{
+		"path": "p5Test"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "null"
+  }
 }
