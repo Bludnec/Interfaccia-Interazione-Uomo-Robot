@@ -26,6 +26,9 @@ function setup() {
 
 function draw() {
   frameRate(1);
+  for (var i = 0; i < cellList.length; i++) {
+    cellList[i].show();
+  }
 }
 
 /* Funzione per ridisegnare il canvas dopo il click al bottone "Draw" */
