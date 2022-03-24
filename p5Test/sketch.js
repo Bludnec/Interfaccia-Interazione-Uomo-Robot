@@ -1,31 +1,32 @@
 var cols, rows;
 var w = document.getElementById("cell-size").value;
-var cellList = [];
+var cellsList = [];
+var itemsList = [];
 
 document.getElementById("drawButton").addEventListener("click", setup);
 
 function setup() {
-  cellList = [];
+  cellsList = [];
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-  var canvas = createCanvas(cols * w + 400, rows * w + 400);
+  var canvas = createCanvas(cols * w, rows * w + 200);
   canvas.parent("canvas-zone");
   canvas.mouseClicked(clickedCell);
   /* Creazione della lista delle celle */
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
       var cell = new Cell(i, j);
-      cellList.push(cell);
+      cellsList.push(cell);
     }
   }
 }
 
 function draw() {
   frameRate(5);
-  for (var i = 0; i < cellList.length; i++) {
+  for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
-    cellList[i].show();
+    cellsList[i].show();
   }
 }
 
@@ -38,57 +39,57 @@ function redrawCanvas() {
 
 /* Funzione per rimuovere i muri se le celle adiacenti hanno lo stesso valore di zone */
 function deleteWalls(i) {
-  var x = cellList[i].i;
-  var y = cellList[i].j;
+  var x = cellsList[i].i;
+  var y = cellsList[i].j;
   // controllo a destra
   if (
     x + 1 < cols &&
-    i < cellList.length &&
-    cellList[cellIndex(x + 1, y)].zone == cellList[i].zone
+    i < cellsList.length &&
+    cellsList[cellIndex(x + 1, y)].zone == cellsList[i].zone
   ) {
-    cellList[cellIndex(x + 1, y)].walls[3] = false;
-    cellList[i].walls[1] = false;
-  } else if (x + 1 < cols && i < cellList.length) {
-    cellList[i].walls[1] = true;
-    cellList[cellIndex(x + 1, y)].walls[3] = true;
+    cellsList[cellIndex(x + 1, y)].walls[3] = false;
+    cellsList[i].walls[1] = false;
+  } else if (x + 1 < cols && i < cellsList.length) {
+    cellsList[i].walls[1] = true;
+    cellsList[cellIndex(x + 1, y)].walls[3] = true;
   }
   // controllo a sx
   if (
     x - 1 < cols &&
     i < 0 &&
-    i < cellList.length &&
-    cellList[cellIndex(x - 1, y)].zone == cellList[i].zone
+    i < cellsList.length &&
+    cellsList[cellIndex(x - 1, y)].zone == cellsList[i].zone
   ) {
-    cellList[cellIndex(x - 1, y)].walls[1] = false;
-    cellList[i].walls[3] = false;
-  } else if (x - 1 < cols && i < 0 && i < cellList.length) {
-    cellList[i].walls[3] = true;
-    cellList[cellIndex(x - 1, y)].walls[1] = true;
+    cellsList[cellIndex(x - 1, y)].walls[1] = false;
+    cellsList[i].walls[3] = false;
+  } else if (x - 1 < cols && i < 0 && i < cellsList.length) {
+    cellsList[i].walls[3] = true;
+    cellsList[cellIndex(x - 1, y)].walls[1] = true;
   }
   // controllo a su
   if (
     y - 1 < 0 &&
     i < 0 &&
-    i < cellList.length &&
-    cellList[cellIndex(x, y - 1)].zone == cellList[i].zone
+    i < cellsList.length &&
+    cellsList[cellIndex(x, y - 1)].zone == cellsList[i].zone
   ) {
-    cellList[cellIndex(x, y - 1)].walls[2] = false;
-    cellList[i].walls[0] = false;
-  } else if (y - 1 < 0 && i < 0 && i < cellList.length) {
-    cellList[i].walls[0] = true;
-    cellList[cellIndex(x, y - 1)].walls[2] = true;
+    cellsList[cellIndex(x, y - 1)].walls[2] = false;
+    cellsList[i].walls[0] = false;
+  } else if (y - 1 < 0 && i < 0 && i < cellsList.length) {
+    cellsList[i].walls[0] = true;
+    cellsList[cellIndex(x, y - 1)].walls[2] = true;
   }
   // controllo a giu
   if (
     y + 1 < rows &&
-    i < cellList.length &&
-    cellList[cellIndex(x, y + 1)].zone == cellList[i].zone
+    i < cellsList.length &&
+    cellsList[cellIndex(x, y + 1)].zone == cellsList[i].zone
   ) {
-    cellList[cellIndex(x, y + 1)].walls[0] = false;
-    cellList[i].walls[2] = false;
-  } else if (y + 1 < rows && i < cellList.length) {
-    cellList[i].walls[2] = true;
-    cellList[cellIndex(x, y + 1)].walls[0] = true;
+    cellsList[cellIndex(x, y + 1)].walls[0] = false;
+    cellsList[i].walls[2] = false;
+  } else if (y + 1 < rows && i < cellsList.length) {
+    cellsList[i].walls[2] = true;
+    cellsList[cellIndex(x, y + 1)].walls[0] = true;
   }
 }
 
@@ -150,15 +151,15 @@ function clickedCell() {
   var y = parseInt(mouseY / w);
   var check = document.getElementById("color-checkbox");
   if (check.checked == true) {
-    if (cellList[cellIndex(x, y)] != undefined) {
+    if (cellsList[cellIndex(x, y)] != undefined) {
       if (document.getElementById("zone").value == "") {
         alert("Inserire nome zona");
       } else {
-        cellList[cellIndex(x, y)].zone = document.getElementById("zone").value;
-        cellList[cellIndex(x, y)].cellColor =
+        cellsList[cellIndex(x, y)].zone = document.getElementById("zone").value;
+        cellsList[cellIndex(x, y)].cellColor =
           document.getElementById("cell-color").value;
       }
-      console.log(cellList[cellIndex(x, y)]);
+      console.log(cellsList[cellIndex(x, y)]);
     } else {
       console.log("Nessuna cella cliccata.");
     }
@@ -171,8 +172,8 @@ function showCellName() {
   var textZone = document.getElementById("text-zone");
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-  if (cellList[cellIndex(x, y)] != undefined) {
-    textZone.innerHTML = cellList[cellIndex(x, y)].zone;
+  if (cellsList[cellIndex(x, y)] != undefined) {
+    textZone.innerHTML = cellsList[cellIndex(x, y)].zone;
   } else {
     textZone.innerHTML = "Nessuna cella cliccata";
   }
