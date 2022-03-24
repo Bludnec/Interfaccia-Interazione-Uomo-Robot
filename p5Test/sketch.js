@@ -175,11 +175,8 @@ class Item {
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
 
     line(x, y, wInt + x, y);
-
     line(x + wInt, y, x + wInt, y + wInt);
-
     line(x + wInt, y + wInt, x, y + wInt);
-
     line(x, y + wInt, x, y);
   }
 }
@@ -190,31 +187,29 @@ function mouseClicked() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var check = document.getElementById("color-checkbox");
-  if (check.checked == true) {
-    if (cellsList[cellIndex(x, y)] != undefined) {
-      if (document.getElementById("zone").value == "") {
-        alert("Inserire nome zona");
-      } else {
-        cellsList[cellIndex(x, y)].zone = document.getElementById("zone").value;
-        cellsList[cellIndex(x, y)].cellColor =
-          document.getElementById("cell-color").value;
-      }
-      console.log(cellsList[cellIndex(x, y)]);
-    } else {
-      console.log("Nessuna cella cliccata.");
-    }
-  } else {
-    //showCellName();
+  if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
+    colorCell(x, y);
+  }
+
+  if (cellsList[cellIndex(x, y)] != undefined) {
+    console.log(cellsList[cellIndex(x, y)]);
+  }
+
+  itemX = parseInt(mouseX / w);
+  itemY = parseInt(mouseY / w) - rows - 1;
+  if (itemsList[cellIndex(itemX, itemY)] != undefined) {
+    console.log(itemsList[cellIndex(itemX, itemY)]);
   }
 }
 
-function showCellName() {
-  var textZone = document.getElementById("text-zone");
-  var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w);
-  if (cellsList[cellIndex(x, y)] != undefined) {
-    textZone.innerHTML = cellsList[cellIndex(x, y)].zone;
+/* Colora le celle della mappa e assegna il valore a "zone" */
+function colorCell(x, y) {
+  if (document.getElementById("zone").value == "") {
+    alert("Inserire nome zona");
   } else {
-    textZone.innerHTML = "Nessuna cella cliccata";
+    cellsList[cellIndex(x, y)].zone = document.getElementById("zone").value;
+    cellsList[cellIndex(x, y)].cellColor =
+      document.getElementById("cell-color").value;
   }
+  console.log(cellsList[cellIndex(x, y)]);
 }
