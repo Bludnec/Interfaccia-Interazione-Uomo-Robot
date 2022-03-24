@@ -158,6 +158,7 @@ class Item {
   constructor(i, j) {
     this.i = i;
     this.j = j;
+    this.selected = false;
   }
 
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
@@ -171,7 +172,11 @@ class Item {
     noFill();
 
     /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
-    stroke(255);
+    if (this.selected) {
+      stroke(255, 0, 0);
+    } else {
+      stroke(255, 255, 255);
+    }
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
 
     line(x, y, wInt + x, y);
