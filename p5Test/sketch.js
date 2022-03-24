@@ -10,14 +10,22 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
+
   var canvas = createCanvas(cols * w, rows * w + 200);
   canvas.parent("canvas-zone");
-  canvas.mouseClicked(clickedCell);
+
   /* Creazione della lista delle celle */
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
       var cell = new Cell(i, j);
       cellsList.push(cell);
+    }
+  }
+
+  for (var j = 0; j < 3; j++) {
+    for (var i = 0; i < cols; i++) {
+      var item = new Item(i, j);
+      itemsList.push(item);
     }
   }
 }
@@ -27,6 +35,9 @@ function draw() {
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();
+  }
+  for (var i = 0; i < itemsList.length; i++) {
+    itemsList[i].show();
   }
 }
 
@@ -117,7 +128,6 @@ class Cell {
 
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
-    // this.walls = [true, true, true, true];
     var x = this.i * w;
     var y = this.j * w;
     /*Creo il rettangolo della cella */
@@ -144,9 +154,39 @@ class Cell {
   }
 }
 
-// DA REVISIONARE
-function clickedCell() {
-  console.log("mouse clicked on " + mouseX + "," + mouseY);
+class Item {
+  constructor(i, j) {
+    this.i = i;
+    this.j = j;
+  }
+
+  /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
+  show() {
+    var x = this.i * w;
+    var y = this.j * w + rows * w + parseInt(w);
+
+    fill(100);
+    noStroke();
+    rect(x, y, w, w);
+    noFill();
+
+    /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
+    stroke(255);
+    var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
+
+    line(x, y, wInt + x, y);
+
+    line(x + wInt, y, x + wInt, y + wInt);
+
+    line(x + wInt, y + wInt, x, y + wInt);
+
+    line(x, y + wInt, x, y);
+  }
+}
+
+function mouseClicked() {
+  //console.log(mouseX, mouseY);
+
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var check = document.getElementById("color-checkbox");
@@ -164,7 +204,7 @@ function clickedCell() {
       console.log("Nessuna cella cliccata.");
     }
   } else {
-    showCellName();
+    //showCellName();
   }
 }
 
