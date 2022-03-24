@@ -22,8 +22,9 @@ function setup() {
 }
 
 function draw() {
-  frameRate(1);
+  frameRate(5);
   for (var i = 0; i < cellList.length; i++) {
+    deleteWalls(i);
     cellList[i].show();
   }
 }
@@ -34,7 +35,12 @@ function redrawCanvas() {
   cols = document.getElementById("width").value * w;
   resizeCanvas(cols, rows);
 }
-
+function deleteWalls(i) {
+  // controllo a destra
+  if (cellList[i].zone == cellList[i + 1].zone && i + 1 < cellList.length) {
+    cellList[i + 1].walls[3] = false;
+  }
+}
 /* Ritorna l'indice dell'array della cella in posizione i,j  */
 function cellIndex(i, j) {
   if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
@@ -55,25 +61,6 @@ class Cell {
     this.visited = false;
     /* Colore della cella */
     this.cellColor = 51;
-  }
-
-  getI() {
-    return this.i;
-  }
-  getJ() {
-    return this.j;
-  }
-
-  setI(i) {
-    this.i = i;
-  }
-  setJ(j) {
-    this.i = j;
-  }
-
-  /* Cambia il colore alla casella */
-  setCellColor(newCellColor) {
-    this.cellColor = newCellColor;
   }
 
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
@@ -109,7 +96,13 @@ function clickedCell() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   if (cellList[cellIndex(x, y)] != undefined) {
-    cellList[cellIndex(x, y)].setCellColor(0);
+    if (document.getElementById("zone").value == "") {
+      alert("Inserire nome zona");
+    } else {
+      cellList[cellIndex(x, y)].zone = document.getElementById("zone").value;
+      cellList[cellIndex(x, y)].cellColor =
+        document.getElementById("cell-color").value;
+    }
     console.log(cellList[cellIndex(x, y)]);
   } else {
     console.log("Nessuna cella cliccata.");

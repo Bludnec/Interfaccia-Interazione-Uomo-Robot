@@ -7,7 +7,9 @@
   margin: 0;
   padding: 0;
 }
-
+#zone-form {
+  margin-bottom: 10px;
+}
 canvas {
   display: block;
   background-color: aqua;

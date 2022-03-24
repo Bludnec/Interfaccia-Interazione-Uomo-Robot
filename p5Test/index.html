@@ -32,8 +32,15 @@
           <option value="80">80</option>
         </select>
       </form>
-      <button id="drawButton">Draw</button>
 
+      <button id="drawButton">Draw</button>
+      <form id="zone-form">
+        <legend>La zona della cella</legend>
+        <label for="fname">Zona </label><br />
+        <input type="text" id="zone" name="zone" placeholder="kitchen" /><br />
+        <label for="fname">Colore </label><br />
+        <input type="color" id="cell-color" name="cell-color" /><br />
+      </form>
       <div id="canvas-zone"></div>
     </div>
     <script src="sketch.js"></script>
