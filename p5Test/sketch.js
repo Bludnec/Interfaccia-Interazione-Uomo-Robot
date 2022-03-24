@@ -19,9 +19,6 @@ function setup() {
       cellList.push(cell);
     }
   }
-  for (var i = 0; i < cellList.length; i++) {
-    cellList[i].show();
-  }
 }
 
 function draw() {
@@ -56,6 +53,8 @@ class Cell {
     this.walls = [true, true, true, true];
     /* Variabile per verificare se la cella è già stata visitata */
     this.visited = false;
+    /* Colore della cella */
+    this.cellColor = 51;
   }
 
   getI() {
@@ -72,12 +71,17 @@ class Cell {
     this.i = j;
   }
 
+  /* Cambia il colore alla casella */
+  setCellColor(newCellColor) {
+    this.cellColor = newCellColor;
+  }
+
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
     var x = this.i * w;
     var y = this.j * w;
     /*Creo il rettangolo della cella */
-    fill(51);
+    fill(this.cellColor);
     noStroke();
     rect(x, y, w, w);
     noFill();
@@ -105,6 +109,7 @@ function clickedCell() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   if (cellList[cellIndex(x, y)] != undefined) {
+    cellList[cellIndex(x, y)].setCellColor(0);
     console.log(cellList[cellIndex(x, y)]);
   } else {
     console.log("Nessuna cella cliccata.");
