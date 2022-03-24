@@ -9,7 +9,7 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-  var canvas = createCanvas(cols * w, rows * w);
+  var canvas = createCanvas(cols * w + 400, rows * w + 400);
   canvas.parent("canvas-zone");
   canvas.mouseClicked(clickedCell);
   /* Creazione della lista delle celle */
@@ -25,7 +25,6 @@ function setup() {
 }
 
 function draw() {
-  console.log("draw");
   frameRate(1);
 }
 
@@ -55,11 +54,25 @@ class Cell {
     /* Variabile per verificare se la cella è già stata visitata */
     this.visited = false;
   }
+
+  getI() {
+    return this.i;
+  }
+  getJ() {
+    return this.j;
+  }
+
+  setI(i) {
+    this.i = i;
+  }
+  setJ(j) {
+    this.i = j;
+  }
+
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
     var x = this.i * w;
     var y = this.j * w;
-
     /*Creo il rettangolo della cella */
     fill(51);
     noStroke();
@@ -68,23 +81,29 @@ class Cell {
 
     /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
     stroke(255);
+    var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
     if (this.walls[0]) {
-      line(x, y, x + w, y);
+      line(x, y, wInt + x, y);
     }
     if (this.walls[1]) {
-      line(x + w, y, x + w, y + w);
+      line(x + wInt, y, x + wInt, y + wInt);
     }
     if (this.walls[2]) {
-      line(x + w, y + w, x, y + w);
+      line(x + wInt, y + wInt, x, y + wInt);
     }
     if (this.walls[3]) {
-      line(x, y + w, x, y);
+      line(x, y + wInt, x, y);
     }
   }
 }
 
 function clickedCell() {
+  console.log("mouse clicked on " + mouseX + "," + mouseY);
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-  console.log(cellList[cellIndex(x, y)]);
+  if (cellList[cellIndex(x, y)] != undefined) {
+    console.log(cellList[cellIndex(x, y)]);
+  } else {
+    console.log("Nessuna cella cliccata.");
+  }
 }

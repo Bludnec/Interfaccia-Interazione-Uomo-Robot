@@ -10,6 +10,7 @@
 
 canvas {
   display: block;
+  background-color: aqua;
 }
 
 #drawButton {
