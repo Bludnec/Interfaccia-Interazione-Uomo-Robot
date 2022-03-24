@@ -1,6 +1,5 @@
 var cols, rows;
 var w = document.getElementById("cell-size").value;
-
 var cellList = [];
 
 document.getElementById("drawButton").addEventListener("click", setup);
@@ -10,7 +9,7 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-  var canvas = createCanvas(cols * w + 400, rows * w);
+  var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
   canvas.mouseClicked(clickedCell);
   /* Creazione della lista delle celle */
@@ -57,7 +56,7 @@ class Cell {
     this.visited = false;
   }
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
-  show = function () {
+  show() {
     var x = this.i * w;
     var y = this.j * w;
 
@@ -81,7 +80,7 @@ class Cell {
     if (this.walls[3]) {
       line(x, y + w, x, y);
     }
-  };
+  }
 }
 
 function clickedCell() {
