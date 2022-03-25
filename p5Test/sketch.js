@@ -227,6 +227,18 @@ function mouseClicked() {
   }
 }
 
+function keyPressed() {
+  /* Press "Escape" for unselect the selected item. */
+  if (keyCode === ESCAPE && boolItemSelected) {
+    itemsList[indexItemSelected].selected = false;
+    boolItemSelected = false;
+    indexItemSelected = null;
+    console.log(indexItemSelected);
+  } else {
+    return null;
+  }
+}
+
 /* Colora le celle della mappa e assegna il valore a "zone" */
 function colorCell(x, y) {
   if (document.getElementById("zone").value == "") {
