@@ -2,6 +2,8 @@ var cols, rows;
 var w = document.getElementById("cell-size").value;
 var cellsList = [];
 var itemsList = [];
+var boolItemSelected = false;
+var indexItemSelected;
 
 document.getElementById("drawButton").addEventListener("click", setup);
 
@@ -32,12 +34,20 @@ function setup() {
 
 function draw() {
   frameRate(5);
+
+  /* Disegno la mappa e gli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
     itemsList[i].show();
+  }
+
+  /* Disegno il quadrato rosso intorno al item selezionato (lo disegno dopo perché senno le linee dei contorni degli)
+   *  item mostrati dopo sovrappongono le linee dell'elemento selezionato */
+  if (boolItemSelected) {
+    itemsList[indexItemSelected].show();
   }
 }
 
@@ -203,6 +213,16 @@ function mouseClicked() {
   itemX = parseInt(mouseX / w);
   itemY = parseInt(mouseY / w) - rows - 1;
   if (itemsList[cellIndex(itemX, itemY)] != undefined) {
+    if (itemsList[cellIndex(itemX, itemY)].selected) {
+      boolItemSelected = false;
+      indexItemSelected = null;
+      itemsList[cellIndex(itemX, itemY)].selected = false;
+    } else if (!boolItemSelected) {
+      boolItemSelected = true;
+      indexItemSelected = cellIndex(itemX, itemY);
+      itemsList[cellIndex(itemX, itemY)].selected = true;
+    }
+
     console.log(itemsList[cellIndex(itemX, itemY)]);
   }
 }
