@@ -35,7 +35,7 @@ function setup() {
 function draw() {
   frameRate(5);
 
-  /* Disegno la mappa e gli items */
+  /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();

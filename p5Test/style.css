@@ -44,3 +44,7 @@ h2 {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
+.clear-float {
+  clear: both;
+}
