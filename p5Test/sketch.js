@@ -203,6 +203,7 @@ function mouseClicked() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var check = document.getElementById("color-checkbox");
+  /* Colora la cella e assegna il valore "zone" alla cella */
   if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
     colorCell(x, y);
   }
@@ -214,14 +215,18 @@ function mouseClicked() {
   itemX = parseInt(mouseX / w);
   itemY = parseInt(mouseY / w) - rows - 1;
   if (itemsList[cellIndex(itemX, itemY)] != undefined) {
-    if (itemsList[cellIndex(itemX, itemY)].selected) {
+    /* prendo l'item selezionato */
+    itemSelected = itemsList[cellIndex(itemX, itemY)];
+
+    /* Se l'item è selezionato, lo deseleziona */
+    if (itemSelected.selected) {
       boolItemSelected = false;
       indexItemSelected = null;
-      itemsList[cellIndex(itemX, itemY)].selected = false;
+      itemSelected.selected = false;
     } else if (!boolItemSelected) {
       boolItemSelected = true;
       indexItemSelected = cellIndex(itemX, itemY);
-      itemsList[cellIndex(itemX, itemY)].selected = true;
+      itemSelected.selected = true;
     }
 
     console.log(itemsList[cellIndex(itemX, itemY)]);
