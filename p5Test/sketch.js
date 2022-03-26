@@ -134,32 +134,33 @@ class Cell {
     this.visited = false;
     /* Colore della cella */
     this.cellColor = 51;
+    /* Coordinate della cella */
+    this.x = this.i * w;
+    this.y = this.j * w;
   }
 
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
-    var x = this.i * w;
-    var y = this.j * w;
     /*Creo il rettangolo della cella */
     fill(this.cellColor);
     noStroke();
-    rect(x, y, w, w);
+    rect(this.x, this.y, w, w);
     noFill();
 
     /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
     stroke(255);
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
     if (this.walls[0]) {
-      line(x, y, wInt + x, y);
+      line(this.x, this.y, wInt + this.x, this.y);
     }
     if (this.walls[1]) {
-      line(x + wInt, y, x + wInt, y + wInt);
+      line(this.x + wInt, this.y, this.x + wInt, this.y + wInt);
     }
     if (this.walls[2]) {
-      line(x + wInt, y + wInt, x, y + wInt);
+      line(this.x + wInt, this.y + wInt, this.x, this.y + wInt);
     }
     if (this.walls[3]) {
-      line(x, y + wInt, x, y);
+      line(this.x, this.y + wInt, this.x, this.y);
     }
   }
 }
