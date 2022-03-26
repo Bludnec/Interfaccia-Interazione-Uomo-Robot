@@ -218,18 +218,34 @@ function mouseClicked() {
     /* prendo l'item selezionato */
     itemSelected = itemsList[cellIndex(itemX, itemY)];
 
-    /* Se l'item è selezionato, lo deseleziona */
-    if (itemSelected.selected) {
-      boolItemSelected = false;
-      indexItemSelected = null;
-      itemSelected.selected = false;
-    } else if (!boolItemSelected) {
+    /**
+     * 1° if: controlla se c'è un elemento già selezionato (boolItemSelected = false)
+     * sennò seleziona quello cliccato.
+     * 2° if: controlla se c'è già un elemento selezionato ma è diverso da quello cliccato,
+     * quindi deseleziona quello vecchio e seleziona l'ultimo cliccato.
+     * 3° if: se l'elemento cliccato è quello già selezionato lo deseleziona.
+     */
+    if (!boolItemSelected) {
       boolItemSelected = true;
       indexItemSelected = cellIndex(itemX, itemY);
       itemSelected.selected = true;
+      console.log("1");
+    } else if (
+      boolItemSelected &&
+      cellIndex(itemX, itemY) != indexItemSelected
+    ) {
+      itemsList[indexItemSelected].selected = false;
+      indexItemSelected = cellIndex(itemX, itemY);
+      itemSelected.selected = true;
+      console.log("2");
+    } else if (itemSelected.selected) {
+      boolItemSelected = false;
+      indexItemSelected = null;
+      itemSelected.selected = false;
+      console.log("3");
     }
 
-    console.log(itemsList[cellIndex(itemX, itemY)]);
+    console.log(indexItemSelected);
   }
 }
 
