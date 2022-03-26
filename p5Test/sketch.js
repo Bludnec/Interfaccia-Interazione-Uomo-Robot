@@ -206,4 +206,8 @@ function colorCell(x, y) {
   console.log(cellsList[cellIndex(x, y)]);
 }
 
-function saveMap() {}
+function saveMap() {
+  let myJSON = JSON.stringify(cellsList);
+  console.log(myJSON);
+  //saveJSON(myJSON, "myJSON");
+}
