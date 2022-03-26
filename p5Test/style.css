@@ -36,6 +36,7 @@
 canvas {
   clear: both;
   display: block;
+  background-color: aquamarine;
 }
 h2 {
   clear: both;
@@ -47,4 +48,8 @@ h2 {
 
 .clear-float {
   clear: both;
+}
+
+#save-map-button {
+  margin-bottom: 30px;
 }

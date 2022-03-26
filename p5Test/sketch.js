@@ -4,8 +4,14 @@ var cellsList = [];
 var itemsList = [];
 var boolItemSelected = false;
 var indexItemSelected;
+/* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
+ * (verrà dopo assegnato un valore facendo il calcolo con il
+ * numero degli elementi nella lsita)
+ */
+var numberOfRowsItem = 4;
 
 document.getElementById("drawButton").addEventListener("click", setup);
+document.getElementById("save-map-button").addEventListener("click", saveMap);
 
 function setup() {
   cellsList = [];
@@ -13,7 +19,7 @@ function setup() {
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
 
-  var canvas = createCanvas(cols * w, rows * w + 200);
+  var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
   canvas.parent("canvas-zone");
 
   /* Creazione della lista delle celle */
@@ -123,8 +129,13 @@ function cellIndex(i, j) {
 }
 
 function mouseClicked() {
-  //console.log(mouseX, mouseY);
+  console.log(mouseX, mouseY);
 
+  /* Se il click avviene fuori dal canvas ritorna null */
+  if (mouseX < 0 || mouseY < 0) {
+    return null;
+  }
+  /* Controllo se il click è fatto sulla zona delle celle. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var check = document.getElementById("color-checkbox");
@@ -137,14 +148,16 @@ function mouseClicked() {
     console.log(cellsList[cellIndex(x, y)]);
   }
 
-  itemX = parseInt(mouseX / w);
-  itemY = parseInt(mouseY / w) - rows - 1;
+  /* Controllo se il click è fatto sulla zona degli items. */
+  itemX = x;
+  itemY = y - rows - 1;
   if (itemsList[cellIndex(itemX, itemY)] != undefined) {
-    /* prendo l'item selezionato */
+    console.log(itemsList[cellIndex(itemX, itemY)]);
+
+    /* Prendo l'item selezionato */
     itemSelected = itemsList[cellIndex(itemX, itemY)];
 
-    /**
-     * 1° if: controlla se c'è un elemento già selezionato (boolItemSelected = false)
+    /* 1° if: controlla se c'è un elemento già selezionato (boolItemSelected = false)
      * sennò seleziona quello cliccato.
      * 2° if: controlla se c'è già un elemento selezionato ma è diverso da quello cliccato,
      * quindi deseleziona quello vecchio e seleziona l'ultimo cliccato.
@@ -154,7 +167,6 @@ function mouseClicked() {
       boolItemSelected = true;
       indexItemSelected = cellIndex(itemX, itemY);
       itemSelected.selected = true;
-      console.log("1");
     } else if (
       boolItemSelected &&
       cellIndex(itemX, itemY) != indexItemSelected
@@ -162,15 +174,11 @@ function mouseClicked() {
       itemsList[indexItemSelected].selected = false;
       indexItemSelected = cellIndex(itemX, itemY);
       itemSelected.selected = true;
-      console.log("2");
     } else if (itemSelected.selected) {
       boolItemSelected = false;
       indexItemSelected = null;
       itemSelected.selected = false;
-      console.log("3");
     }
-
-    console.log(indexItemSelected);
   }
 }
 
@@ -197,3 +205,5 @@ function colorCell(x, y) {
   }
   console.log(cellsList[cellIndex(x, y)]);
 }
+
+function saveMap() {}
