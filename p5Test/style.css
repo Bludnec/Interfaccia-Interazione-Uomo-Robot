@@ -9,9 +9,9 @@
   margin: 0;
   padding: 0;
 }
-#zone-form {
+#zone-form,
+#resize-canvas-form {
   float: left;
-  margin-bottom: 30px;
   margin-left: 30px;
   background-color: coral;
   padding: 10px;
@@ -23,15 +23,20 @@
   background-color: coral;
   padding: 10px;
 }
+
 #map-setting-form legend,
-#zone-form legend {
+#zone-form legend,
+#resize-canvas-form legend {
   font-size: 1.3em;
   padding-bottom: 3px;
   font-weight: bold;
 }
 
-#drawButton {
+#drawButton,
+#resizeButton {
   padding: 3px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 canvas {
   clear: both;
@@ -40,10 +45,6 @@ canvas {
 }
 h2 {
   clear: both;
-}
-#drawButton {
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
 
 .clear-float {

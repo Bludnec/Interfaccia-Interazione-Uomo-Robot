@@ -12,8 +12,14 @@ var cellMap;
  */
 var numberOfRowsItem = 4;
 
+var boolLoadMap = false;
+var boolResize = false;
+
 var w = document.getElementById("cell-size").value;
+
 document.getElementById("drawButton").addEventListener("click", setup);
+document.getElementById("resizeButton").addEventListener("click", resizeCanv);
+
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
@@ -30,21 +36,9 @@ function preload() {
  * It's used to define initial environment properties.
  */
 function setup() {
-  cellsList = [];
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-
-  var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
-  canvas.parent("canvas-zone");
-
-  /* Creating the list of the cells. */
-  for (var j = 0; j < rows; j++) {
-    for (var i = 0; i < cols; i++) {
-      var cell = new Cell(i, j);
-      cellsList.push(cell);
-    }
-  }
 
   /* Creating the list of the selectable objects. */
   for (var j = 0; j < 3; j++) {
@@ -53,8 +47,47 @@ function setup() {
       itemsList.push(item);
     }
   }
+
+  /**
+   * Creating canvas.
+   * If boolLoadMap = true => load the saved map, else create a new one.
+   * If boolResize = true => resize canvas and use old cellList.
+   * If boolLoadMap and boolResize = false => create a new canvas and new cellList.
+   */
+  console.log(boolResize);
+
+  if (!boolLoadMap) {
+    if (!boolResize) {
+      cellsList = [];
+      for (var j = 0; j < rows; j++) {
+        for (var i = 0; i < cols; i++) {
+          var cell = new Cell(i, j);
+          cellsList.push(cell);
+        }
+      }
+    } else {
+      for (var j = 0; j < rows; j++) {
+        for (var i = 0; i < cols; i++) {
+          cellsList[cellIndex(i, j)].x = i * w;
+          cellsList[cellIndex(i, j)].y = j * w;
+        }
+      }
+      boolResize = false;
+    }
+  } else if (boolLoadMap) {
+    boolLoadMap = false;
+  }
+
+  var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
+  canvas.parent("canvas-zone");
 }
 
+function resetSketch() {}
+
+/**
+ * the draw() function continuously executes the lines of code
+ * contained inside its block until the program is stopped.
+ */
 function draw() {
   frameRate(5);
 
@@ -72,13 +105,6 @@ function draw() {
   if (boolItemSelected) {
     itemsList[indexItemSelected].show();
   }
-}
-
-/* Redraw canvas after the click on "Draw" button. */
-function redrawCanvas() {
-  rows = document.getElementById("height").value * w;
-  cols = document.getElementById("width").value * w;
-  resizeCanvas(cols, rows);
 }
 
 /* Delete the walls if adjacent cells have the same "zone" value. */
@@ -224,6 +250,11 @@ function colorCell(x, y) {
   console.log(cellsList[cellIndex(x, y)]);
 }
 
+function resizeCanv() {
+  boolResize = true;
+  setup();
+}
+
 /* Save the map into a json file */
 function saveMap() {
   var myJSON = JSON.parse(JSON.stringify(cellsList));
@@ -233,5 +264,7 @@ function saveMap() {
 
 /* Load the existing map. */
 function loadMap() {
+  boolLoadMap = true;
   console.log(cellMap[0].zone);
+  setup();
 }
