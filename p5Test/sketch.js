@@ -4,6 +4,7 @@ var cellsList = [];
 var itemsList = [];
 var boolItemSelected = false;
 var indexItemSelected;
+var cellMap;
 /* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
  * (verrà dopo assegnato un valore facendo il calcolo con il
  * numero degli elementi nella lsita)
@@ -12,6 +13,15 @@ var numberOfRowsItem = 4;
 
 document.getElementById("drawButton").addEventListener("click", setup);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
+document.getElementById("load-map-button").addEventListener("click", loadMap);
+
+/**
+ * The preload() function is used to handle
+ *  asynchronous loading of external files in a blocking way
+ */
+ function preload(){
+  cellMap = loadJSON('map/map.json');
+}
 
 function setup() {
   cellsList = [];
@@ -194,7 +204,7 @@ function keyPressed() {
   }
 }
 
-/* Colora le celle della mappa e assegna il valore a "zone" */
+/* Color the cells of map and assign the value to "zone" */
 function colorCell(x, y) {
   if (document.getElementById("zone").value == "") {
     alert("Inserire nome zona");
@@ -206,8 +216,18 @@ function colorCell(x, y) {
   console.log(cellsList[cellIndex(x, y)]);
 }
 
+/* Salvo la mappa trasformano l'array cellsList in json */
 function saveMap() {
-  let myJSON = JSON.stringify(cellsList);
+  var myJSON = JSON.parse(JSON.stringify(cellsList));
   console.log(myJSON);
-  //saveJSON(myJSON, "myJSON");
+  saveJSON(myJSON, "myJSON");
+}
+
+
+
+/* Carica la mappa esistente scelta */
+function loadMap() {
+
+  
+  console.log(cellMap[0].zone);
 }

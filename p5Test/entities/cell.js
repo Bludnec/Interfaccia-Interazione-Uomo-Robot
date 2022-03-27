@@ -1,5 +1,5 @@
 class Cell {
-  constructor(i, j) {
+  constructor(i, j, zone) {
     this.i = i;
     this.j = j;
     /* Zona della casa della cella */

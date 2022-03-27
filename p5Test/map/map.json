@@ -1,0 +1,1502 @@
+[
+  {
+    "i": 0,
+    "j": 0,
+    "zone": "bedroom",
+    "walls": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 0,
+    "y": 0
+  },
+  {
+    "i": 1,
+    "j": 0,
+    "zone": "bedroom",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 30,
+    "y": 0
+  },
+  {
+    "i": 2,
+    "j": 0,
+    "zone": "bedroom",
+    "walls": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 60,
+    "y": 0
+  },
+  {
+    "i": 3,
+    "j": 0,
+    "zone": "bathroom",
+    "walls": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 90,
+    "y": 0
+  },
+  {
+    "i": 4,
+    "j": 0,
+    "zone": "bathroom",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 120,
+    "y": 0
+  },
+  {
+    "i": 5,
+    "j": 0,
+    "zone": "bathroom",
+    "walls": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 150,
+    "y": 0
+  },
+  {
+    "i": 6,
+    "j": 0,
+    "zone": "kitchen",
+    "walls": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 180,
+    "y": 0
+  },
+  {
+    "i": 7,
+    "j": 0,
+    "zone": "kitchen",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 210,
+    "y": 0
+  },
+  {
+    "i": 8,
+    "j": 0,
+    "zone": "kitchen",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 240,
+    "y": 0
+  },
+  {
+    "i": 9,
+    "j": 0,
+    "zone": "kitchen",
+    "walls": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 270,
+    "y": 0
+  },
+  {
+    "i": 0,
+    "j": 1,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 0,
+    "y": 30
+  },
+  {
+    "i": 1,
+    "j": 1,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 30,
+    "y": 30
+  },
+  {
+    "i": 2,
+    "j": 1,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 60,
+    "y": 30
+  },
+  {
+    "i": 3,
+    "j": 1,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 90,
+    "y": 30
+  },
+  {
+    "i": 4,
+    "j": 1,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 120,
+    "y": 30
+  },
+  {
+    "i": 5,
+    "j": 1,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 150,
+    "y": 30
+  },
+  {
+    "i": 6,
+    "j": 1,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 180,
+    "y": 30
+  },
+  {
+    "i": 7,
+    "j": 1,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 210,
+    "y": 30
+  },
+  {
+    "i": 8,
+    "j": 1,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 240,
+    "y": 30
+  },
+  {
+    "i": 9,
+    "j": 1,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 270,
+    "y": 30
+  },
+  {
+    "i": 0,
+    "j": 2,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 0,
+    "y": 60
+  },
+  {
+    "i": 1,
+    "j": 2,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 30,
+    "y": 60
+  },
+  {
+    "i": 2,
+    "j": 2,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 60,
+    "y": 60
+  },
+  {
+    "i": 3,
+    "j": 2,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 90,
+    "y": 60
+  },
+  {
+    "i": 4,
+    "j": 2,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 120,
+    "y": 60
+  },
+  {
+    "i": 5,
+    "j": 2,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 150,
+    "y": 60
+  },
+  {
+    "i": 6,
+    "j": 2,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 180,
+    "y": 60
+  },
+  {
+    "i": 7,
+    "j": 2,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 210,
+    "y": 60
+  },
+  {
+    "i": 8,
+    "j": 2,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 240,
+    "y": 60
+  },
+  {
+    "i": 9,
+    "j": 2,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 270,
+    "y": 60
+  },
+  {
+    "i": 0,
+    "j": 3,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 0,
+    "y": 90
+  },
+  {
+    "i": 1,
+    "j": 3,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 30,
+    "y": 90
+  },
+  {
+    "i": 2,
+    "j": 3,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 60,
+    "y": 90
+  },
+  {
+    "i": 3,
+    "j": 3,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 90,
+    "y": 90
+  },
+  {
+    "i": 4,
+    "j": 3,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 120,
+    "y": 90
+  },
+  {
+    "i": 5,
+    "j": 3,
+    "zone": "bathroom",
+    "walls": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#05ff37",
+    "x": 150,
+    "y": 90
+  },
+  {
+    "i": 6,
+    "j": 3,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 180,
+    "y": 90
+  },
+  {
+    "i": 7,
+    "j": 3,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 210,
+    "y": 90
+  },
+  {
+    "i": 8,
+    "j": 3,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 240,
+    "y": 90
+  },
+  {
+    "i": 9,
+    "j": 3,
+    "zone": "kitchen",
+    "walls": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#f10404",
+    "x": 270,
+    "y": 90
+  },
+  {
+    "i": 0,
+    "j": 4,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 0,
+    "y": 120
+  },
+  {
+    "i": 1,
+    "j": 4,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 30,
+    "y": 120
+  },
+  {
+    "i": 2,
+    "j": 4,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 60,
+    "y": 120
+  },
+  {
+    "i": 3,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 90,
+    "y": 120
+  },
+  {
+    "i": 4,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 120,
+    "y": 120
+  },
+  {
+    "i": 5,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 150,
+    "y": 120
+  },
+  {
+    "i": 6,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 180,
+    "y": 120
+  },
+  {
+    "i": 7,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 210,
+    "y": 120
+  },
+  {
+    "i": 8,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 240,
+    "y": 120
+  },
+  {
+    "i": 9,
+    "j": 4,
+    "zone": "living room",
+    "walls": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 270,
+    "y": 120
+  },
+  {
+    "i": 0,
+    "j": 5,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 0,
+    "y": 150
+  },
+  {
+    "i": 1,
+    "j": 5,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 30,
+    "y": 150
+  },
+  {
+    "i": 2,
+    "j": 5,
+    "zone": "bedroom",
+    "walls": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#e0e407",
+    "x": 60,
+    "y": 150
+  },
+  {
+    "i": 3,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 90,
+    "y": 150
+  },
+  {
+    "i": 4,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 120,
+    "y": 150
+  },
+  {
+    "i": 5,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 150,
+    "y": 150
+  },
+  {
+    "i": 6,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 180,
+    "y": 150
+  },
+  {
+    "i": 7,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 210,
+    "y": 150
+  },
+  {
+    "i": 8,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 240,
+    "y": 150
+  },
+  {
+    "i": 9,
+    "j": 5,
+    "zone": "living room",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 270,
+    "y": 150
+  },
+  {
+    "i": 0,
+    "j": 6,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 0,
+    "y": 180
+  },
+  {
+    "i": 1,
+    "j": 6,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 30,
+    "y": 180
+  },
+  {
+    "i": 2,
+    "j": 6,
+    "zone": "balcony",
+    "walls": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 60,
+    "y": 180
+  },
+  {
+    "i": 3,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 90,
+    "y": 180
+  },
+  {
+    "i": 4,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 120,
+    "y": 180
+  },
+  {
+    "i": 5,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 150,
+    "y": 180
+  },
+  {
+    "i": 6,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 180,
+    "y": 180
+  },
+  {
+    "i": 7,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 210,
+    "y": 180
+  },
+  {
+    "i": 8,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 240,
+    "y": 180
+  },
+  {
+    "i": 9,
+    "j": 6,
+    "zone": "living room",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 270,
+    "y": 180
+  },
+  {
+    "i": 0,
+    "j": 7,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 0,
+    "y": 210
+  },
+  {
+    "i": 1,
+    "j": 7,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 30,
+    "y": 210
+  },
+  {
+    "i": 2,
+    "j": 7,
+    "zone": "balcony",
+    "walls": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 60,
+    "y": 210
+  },
+  {
+    "i": 3,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 90,
+    "y": 210
+  },
+  {
+    "i": 4,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 120,
+    "y": 210
+  },
+  {
+    "i": 5,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 150,
+    "y": 210
+  },
+  {
+    "i": 6,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 180,
+    "y": 210
+  },
+  {
+    "i": 7,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 210,
+    "y": 210
+  },
+  {
+    "i": 8,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 240,
+    "y": 210
+  },
+  {
+    "i": 9,
+    "j": 7,
+    "zone": "living room",
+    "walls": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#0931fb",
+    "x": 270,
+    "y": 210
+  },
+  {
+    "i": 0,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 0,
+    "y": 240
+  },
+  {
+    "i": 1,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 30,
+    "y": 240
+  },
+  {
+    "i": 2,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 60,
+    "y": 240
+  },
+  {
+    "i": 3,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 90,
+    "y": 240
+  },
+  {
+    "i": 4,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 120,
+    "y": 240
+  },
+  {
+    "i": 5,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 150,
+    "y": 240
+  },
+  {
+    "i": 6,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 180,
+    "y": 240
+  },
+  {
+    "i": 7,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 210,
+    "y": 240
+  },
+  {
+    "i": 8,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 240,
+    "y": 240
+  },
+  {
+    "i": 9,
+    "j": 8,
+    "zone": "balcony",
+    "walls": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 270,
+    "y": 240
+  },
+  {
+    "i": 0,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 0,
+    "y": 270
+  },
+  {
+    "i": 1,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 30,
+    "y": 270
+  },
+  {
+    "i": 2,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 60,
+    "y": 270
+  },
+  {
+    "i": 3,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 90,
+    "y": 270
+  },
+  {
+    "i": 4,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 120,
+    "y": 270
+  },
+  {
+    "i": 5,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 150,
+    "y": 270
+  },
+  {
+    "i": 6,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 180,
+    "y": 270
+  },
+  {
+    "i": 7,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 210,
+    "y": 270
+  },
+  {
+    "i": 8,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 240,
+    "y": 270
+  },
+  {
+    "i": 9,
+    "j": 9,
+    "zone": "balcony",
+    "walls": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "visited": false,
+    "cellColor": "#10ead0",
+    "x": 270,
+    "y": 270
+  }
+]
