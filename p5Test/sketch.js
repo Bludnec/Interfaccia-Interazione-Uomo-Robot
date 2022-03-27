@@ -1,9 +1,10 @@
 var cols, rows;
-var w = document.getElementById("cell-size").value;
 var cellsList = [];
 var itemsList = [];
+
 var boolItemSelected = false;
 var indexItemSelected;
+
 var cellMap;
 /* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
  * (verrà dopo assegnato un valore facendo il calcolo con il
@@ -11,6 +12,7 @@ var cellMap;
  */
 var numberOfRowsItem = 4;
 
+var w = document.getElementById("cell-size").value;
 document.getElementById("drawButton").addEventListener("click", setup);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
@@ -72,18 +74,18 @@ function draw() {
   }
 }
 
-/* Funzione per ridisegnare il canvas dopo il click al bottone "Draw" */
+/* Redraw canvas after the click on "Draw" button. */
 function redrawCanvas() {
   rows = document.getElementById("height").value * w;
   cols = document.getElementById("width").value * w;
   resizeCanvas(cols, rows);
 }
 
-/* Funzione per rimuovere i muri se le celle adiacenti hanno lo stesso valore di zone */
+/* Delete the walls if adjacent cells have the same "zone" value. */
 function deleteWalls(i) {
   var x = cellsList[i].i;
   var y = cellsList[i].j;
-  // controllo a destra
+  // right check
   if (
     x + 1 < cols &&
     i < cellsList.length &&
@@ -95,7 +97,7 @@ function deleteWalls(i) {
     cellsList[i].walls[1] = true;
     cellsList[cellIndex(x + 1, y)].walls[3] = true;
   }
-  // controllo a sx
+  // left check
   if (
     x - 1 < cols &&
     i < 0 &&
@@ -108,7 +110,7 @@ function deleteWalls(i) {
     cellsList[i].walls[3] = true;
     cellsList[cellIndex(x - 1, y)].walls[1] = true;
   }
-  // controllo a su
+  // up check
   if (
     y - 1 < 0 &&
     i < 0 &&
@@ -121,7 +123,7 @@ function deleteWalls(i) {
     cellsList[i].walls[0] = true;
     cellsList[cellIndex(x, y - 1)].walls[2] = true;
   }
-  // controllo a giu
+  // down check
   if (
     y + 1 < rows &&
     i < cellsList.length &&
@@ -135,7 +137,7 @@ function deleteWalls(i) {
   }
 }
 
-/* Ritorna l'indice dell'array della cella in posizione i,j  */
+/* Return the array's index of the cell in position i,j. */
 function cellIndex(i, j) {
   if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
     return -1;
@@ -146,15 +148,17 @@ function cellIndex(i, j) {
 function mouseClicked() {
   console.log(mouseX, mouseY);
 
-  /* Se il click avviene fuori dal canvas ritorna null */
+  /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
     return null;
   }
-  /* Controllo se il click è fatto sulla zona delle celle. */
+
+  /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var check = document.getElementById("color-checkbox");
-  /* Colora la cella e assegna il valore "zone" alla cella */
+
+  /* Color the cell and assign the value "zone" to the cell. */
   if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
     colorCell(x, y);
   }
@@ -163,20 +167,19 @@ function mouseClicked() {
     console.log(cellsList[cellIndex(x, y)]);
   }
 
-  /* Controllo se il click è fatto sulla zona degli items. */
+  /* I check if the click is done on the items area. */
   itemX = x;
   itemY = y - rows - 1;
   if (itemsList[cellIndex(itemX, itemY)] != undefined) {
     console.log(itemsList[cellIndex(itemX, itemY)]);
 
-    /* Prendo l'item selezionato */
+    /* Take the selected item */
     itemSelected = itemsList[cellIndex(itemX, itemY)];
 
-    /* 1° if: controlla se c'è un elemento già selezionato (boolItemSelected = false)
-     * sennò seleziona quello cliccato.
-     * 2° if: controlla se c'è già un elemento selezionato ma è diverso da quello cliccato,
-     * quindi deseleziona quello vecchio e seleziona l'ultimo cliccato.
-     * 3° if: se l'elemento cliccato è quello già selezionato lo deseleziona.
+    /* 1° if: checks if there is an item already selected (boolItemSelected = false) if not, it selects the clicked one.
+     * 2° if: checks if there is an item already selected but it is different from the one clicked,
+     * then uncheck the old one and select the last one clicked.
+     * 3° if: deselects the element if the one clicked is already the one selected.
      */
     if (!boolItemSelected) {
       boolItemSelected = true;
@@ -209,7 +212,7 @@ function keyPressed() {
   }
 }
 
-/* Color the cells of map and assign the value to "zone" */
+/* Color the cells of map and assign the value to "zone". */
 function colorCell(x, y) {
   if (document.getElementById("zone").value == "") {
     alert("Inserire nome zona");
@@ -221,14 +224,14 @@ function colorCell(x, y) {
   console.log(cellsList[cellIndex(x, y)]);
 }
 
-/* Salvo la mappa trasformano l'array cellsList in json */
+/* Save the map into a json file */
 function saveMap() {
   var myJSON = JSON.parse(JSON.stringify(cellsList));
   console.log(myJSON);
   saveJSON(myJSON, "myJSON");
 }
 
-/* Carica la mappa esistente scelta */
+/* Load the existing map. */
 function loadMap() {
   console.log(cellMap[0].zone);
 }
