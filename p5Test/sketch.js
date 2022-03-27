@@ -52,12 +52,13 @@ function setup() {
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
    * If boolResize = true => resize canvas and use old cellList.
-   * If boolLoadMap and boolResize = false => create a new canvas and new cellList.
+   * If boolLoadMap and boolResize = false => create a new canvas and new cellsList.
    */
   console.log(boolResize);
 
   if (!boolLoadMap) {
     if (!boolResize) {
+      /* Create a new cellsList */
       cellsList = [];
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
@@ -66,6 +67,7 @@ function setup() {
         }
       }
     } else {
+      /* Resize canvas */
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
           cellsList[cellIndex(i, j)].x = i * w;
@@ -75,6 +77,7 @@ function setup() {
       boolResize = false;
     }
   } else if (boolLoadMap) {
+    /* Load the saved map */
     boolLoadMap = false;
   }
 
