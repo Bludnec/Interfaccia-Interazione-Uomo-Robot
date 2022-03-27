@@ -19,10 +19,14 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
- function preload(){
-  cellMap = loadJSON('map/map.json');
+function preload() {
+  cellMap = loadJSON("map/map.json");
 }
 
+/**
+ * The setup() function is called once when the program starts.
+ * It's used to define initial environment properties.
+ */
 function setup() {
   cellsList = [];
   w = document.getElementById("cell-size").value;
@@ -32,7 +36,7 @@ function setup() {
   var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
   canvas.parent("canvas-zone");
 
-  /* Creazione della lista delle celle */
+  /* Creating the list of the cells. */
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < cols; i++) {
       var cell = new Cell(i, j);
@@ -40,6 +44,7 @@ function setup() {
     }
   }
 
+  /* Creating the list of the selectable objects. */
   for (var j = 0; j < 3; j++) {
     for (var i = 0; i < cols; i++) {
       var item = new Item(i, j);
@@ -223,11 +228,7 @@ function saveMap() {
   saveJSON(myJSON, "myJSON");
 }
 
-
-
 /* Carica la mappa esistente scelta */
 function loadMap() {
-
-  
   console.log(cellMap[0].zone);
 }
