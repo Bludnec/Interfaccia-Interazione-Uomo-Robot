@@ -2,6 +2,8 @@ var cols, rows;
 var cellsList = [];
 var itemsList = [];
 
+var boolLoadMap = false;
+var boolResizeCanvas = false;
 var boolItemSelected = false;
 var indexItemSelected;
 
@@ -11,9 +13,6 @@ var loadedCellMap;
  * numero degli elementi nella lsita)
  */
 var numberOfRowsItem = 4;
-
-var boolLoadMap = false;
-var boolResize = false;
 
 var w = document.getElementById("cell-size").value;
 
@@ -51,13 +50,13 @@ function setup() {
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
-   * If boolResize = true => resize canvas and use old cellList.
-   * If boolLoadMap and boolResize = false => create a new canvas and new cellsList.
+   * If boolResizeCanvas = true => resize canvas and use old cellList.
+   * If boolLoadMap and boolResizeCanvas = false => create a new canvas and new cellsList.
    */
-  console.log(boolResize);
+  console.log(boolResizeCanvas);
 
   if (!boolLoadMap) {
-    if (!boolResize) {
+    if (!boolResizeCanvas) {
       /* Create a new cellsList */
       cellsList = [];
       for (var j = 0; j < rows; j++) {
@@ -74,7 +73,7 @@ function setup() {
           cellsList[cellIndex(i, j)].y = j * w;
         }
       }
-      boolResize = false;
+      boolResizeCanvas = false;
     }
   } else if (boolLoadMap) {
     cellsList = [];
@@ -267,7 +266,7 @@ function colorCell(x, y) {
 }
 
 function resizeCanv() {
-  boolResize = true;
+  boolResizeCanvas = true;
   setup();
 }
 
@@ -281,6 +280,5 @@ function saveMap() {
 /* Load the existing map. */
 function loadMap() {
   boolLoadMap = true;
-  console.log(loadedCellMap[0].zone);
   setup();
 }
