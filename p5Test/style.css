@@ -38,11 +38,12 @@
   margin-bottom: 5px;
   margin-top: 5px;
 }
+
 canvas {
   clear: both;
   display: block;
-  background-color: aquamarine;
 }
+
 h2 {
   clear: both;
 }
