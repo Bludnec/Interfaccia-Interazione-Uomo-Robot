@@ -1,5 +1,5 @@
 class Cell {
-  constructor(i, j, zone) {
+  constructor(i, j) {
     this.i = i;
     this.j = j;
     /* Zona della casa della cella */
@@ -24,7 +24,7 @@ class Cell {
     noFill();
 
     /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
-    stroke(255);
+    stroke(0);
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
     if (this.walls[0]) {
       line(this.x, this.y, wInt + this.x, this.y);

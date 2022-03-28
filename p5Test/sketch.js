@@ -5,7 +5,7 @@ var itemsList = [];
 var boolItemSelected = false;
 var indexItemSelected;
 
-var cellMap;
+var loadedCellMap;
 /* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
  * (verrà dopo assegnato un valore facendo il calcolo con il
  * numero degli elementi nella lsita)
@@ -28,7 +28,7 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
  *  asynchronous loading of external files in a blocking way
  */
 function preload() {
-  cellMap = loadJSON("map/map.json");
+  loadedCellMap = loadJSON("map/map.json");
 }
 
 /**
@@ -77,7 +77,20 @@ function setup() {
       boolResize = false;
     }
   } else if (boolLoadMap) {
+    cellsList = [];
     /* Load the saved map */
+    console.log("prova");
+    for (var k = 0; k < 100; k++) {
+      /* create the cells with the coordinates taken from the json. */
+      var cell = new Cell(loadedCellMap[k].i, loadedCellMap[k].j);
+      /* Assign the values ​​taken from the json to the cells just created. */
+      cell.zone = loadedCellMap[k].zone;
+      cell.cellColor = loadedCellMap[k].cellColor;
+
+      cellsList.push(cell);
+    }
+    alert("mappa caricata");
+
     boolLoadMap = false;
   }
 
@@ -88,7 +101,7 @@ function setup() {
 function resetSketch() {}
 
 /**
- * the draw() function continuously executes the lines of code
+ * The draw() function continuously executes the lines of code
  * contained inside its block until the program is stopped.
  */
 function draw() {
@@ -268,6 +281,6 @@ function saveMap() {
 /* Load the existing map. */
 function loadMap() {
   boolLoadMap = true;
-  console.log(cellMap[0].zone);
+  console.log(loadedCellMap[0].zone);
   setup();
 }
