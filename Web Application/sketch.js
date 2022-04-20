@@ -12,7 +12,6 @@ var loadedCellMap;
  * (verrà dopo assegnato un valore facendo il calcolo con il
  * numero degli elementi nella lsita)
  */
-var numberOfRowsItem = 4;
 
 var w = document.getElementById("cell-size").value;
 
@@ -38,14 +37,6 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-
-  /* Creating the list of the selectable objects. */
-  for (var j = 0; j < 3; j++) {
-    for (var i = 0; i < cols; i++) {
-      var item = new Item(i, j);
-      itemsList.push(item);
-    }
-  }
 
   /**
    * Creating canvas.
@@ -93,7 +84,7 @@ function setup() {
     boolLoadMap = false;
   }
 
-  var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
+  var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
 }
 

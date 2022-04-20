@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" type="text/css" href="style.css" />
 
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
   </head>
@@ -58,7 +60,26 @@
 
       <div id="canvas-zone"></div>
 
-      <button style="margin-top: 50px">Avvia comando</button>
+      <div id="list-grid">
+        <div class="row">
+          <div class="column">
+            <img src="images\double-bed.png" class="selected"/><img
+              src="images\double-bed.png"
+            /><img src="images\double-bed.png" /><img
+              src="images\double-bed.png"
+            /><img src="images\double-bed.png" />
+          </div>
+          <div class="column">
+            <img src="images\double-bed.png" /><img
+              src="images\double-bed.png"
+            /><img src="images\double-bed.png" /><img
+              src="images\double-bed.png"
+            /><img src="images\double-bed.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
     <script src="entities\cell.js"></script>
     <script src="entities\item.js"></script>
