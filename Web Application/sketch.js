@@ -36,8 +36,6 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-<<<<<<< HEAD
-=======
 
   /* Creating the list of the selectable objects. */
   for (var j = 0; j < 3; j++) {
@@ -47,7 +45,6 @@ function setup() {
     }
   }
 
->>>>>>> parent of e5230fe (update)
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
