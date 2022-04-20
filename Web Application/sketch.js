@@ -1,6 +1,5 @@
 var cols, rows;
 var cellsList = [];
-var itemsList = [];
 
 var boolLoadMap = false;
 var boolResizeCanvas = false;
@@ -23,11 +22,13 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
 
 var imgIndex = 0;
 
+/* Creo la colonna */
 var el = document.createElement("div");
 el.classList.add("column");
 var box = document.getElementById("row-list-grid");
 box.appendChild(el);
 
+/* Attacco le immagini alla nuova colonna */
 var im = document.createElement("img");
 im.src = "images/double-bed.png";
 im.setAttribute("id", imgIndex);
@@ -43,12 +44,31 @@ im2.setAttribute("id", imgIndex);
 im2.addEventListener("click", selectedItem);
 el.appendChild(im2);
 
+/* Finish creating the object list */
+
 function selectedItem() {
   console.log(this.id);
+
   if (!boolItemSelected) {
     this.classList.add("selected");
+    indexItemSelected = this.id;
     boolItemSelected = true;
+  } else if (
+    /* Se il click è diverso dalla cella cliccata */
+    boolItemSelected &&
+    this.id != indexItemSelected
+  ) {
+    document
+      .getElementById(`${indexItemSelected}`)
+      .classList.remove("selected");
+    indexItemSelected = this.id;
+    this.classList.add("selected");
+  } else if ((this.id = indexItemSelected)) {
+    this.classList.remove("selected");
+    indexItemSelected = -1;
+    boolItemSelected = false;
   }
+  console.log(indexItemSelected);
 }
 
 /**
@@ -131,15 +151,6 @@ function draw() {
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();
-  }
-  for (var i = 0; i < itemsList.length; i++) {
-    itemsList[i].show();
-  }
-
-  /* Disegno il quadrato rosso intorno al item selezionato (lo disegno dopo perché senno le linee dei contorni degli)
-   *  item mostrati dopo sovrappongono le linee dell'elemento selezionato */
-  if (boolItemSelected) {
-    itemsList[indexItemSelected].show();
   }
 }
 
@@ -227,38 +238,6 @@ function mouseClicked() {
 
   if (cellsList[cellIndex(x, y)] != undefined) {
     console.log(cellsList[cellIndex(x, y)]);
-  }
-
-  /* I check if the click is done on the items area. */
-  itemX = x;
-  itemY = y - rows - 1;
-  if (itemsList[cellIndex(itemX, itemY)] != undefined) {
-    console.log(itemsList[cellIndex(itemX, itemY)]);
-
-    /* Take the selected item */
-    itemSelected = itemsList[cellIndex(itemX, itemY)];
-
-    /* 1° if: checks if there is an item already selected (boolItemSelected = false) if not, it selects the clicked one.
-     * 2° if: checks if there is an item already selected but it is different from the one clicked,
-     * then uncheck the old one and select the last one clicked.
-     * 3° if: deselects the element if the one clicked is already the one selected.
-     */
-    if (!boolItemSelected) {
-      boolItemSelected = true;
-      indexItemSelected = cellIndex(itemX, itemY);
-      itemSelected.selected = true;
-    } else if (
-      boolItemSelected &&
-      cellIndex(itemX, itemY) != indexItemSelected
-    ) {
-      itemsList[indexItemSelected].selected = false;
-      indexItemSelected = cellIndex(itemX, itemY);
-      itemSelected.selected = true;
-    } else if (itemSelected.selected) {
-      boolItemSelected = false;
-      indexItemSelected = null;
-      itemSelected.selected = false;
-    }
   }
 }
 
