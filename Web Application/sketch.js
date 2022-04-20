@@ -26,11 +26,16 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
  * The setup() function is called once when the program starts.
  * It's used to define initial environment properties.
  */
+
+let img;
+function preload() {
+  img = loadImage("image/double-bed.png");
+}
+
 function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
