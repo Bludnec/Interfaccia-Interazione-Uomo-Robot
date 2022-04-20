@@ -8,6 +8,11 @@ var boolItemSelected = false;
 var indexItemSelected;
 
 var loadedCellMap;
+/* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
+ * (verrà dopo assegnato un valore facendo il calcolo con il
+ * numero degli elementi nella lsita)
+ */
+var numberOfRowsItem = 4;
 
 var w = document.getElementById("cell-size").value;
 
@@ -21,17 +26,14 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
+function preload() {
+  loadedCellMap = loadJSON("map/map.json");
+}
 
 /**
  * The setup() function is called once when the program starts.
  * It's used to define initial environment properties.
  */
-
-let img;
-function preload() {
-  img = loadImage("image/double-bed.png");
-}
-
 function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
@@ -91,7 +93,7 @@ function setup() {
     boolLoadMap = false;
   }
 
-  var canvas = createCanvas(cols * w, rows * w);
+  var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
   canvas.parent("canvas-zone");
 }
 
