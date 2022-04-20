@@ -8,11 +8,6 @@ var boolItemSelected = false;
 var indexItemSelected;
 
 var loadedCellMap;
-/* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
- * (verrà dopo assegnato un valore facendo il calcolo con il
- * numero degli elementi nella lsita)
- */
-var numberOfRowsItem = 4;
 
 var w = document.getElementById("cell-size").value;
 
@@ -22,14 +17,10 @@ document.getElementById("resizeButton").addEventListener("click", resizeCanv);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
-
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
-function preload() {
-  loadedCellMap = loadJSON("map/map.json");
-}
 
 /**
  * The setup() function is called once when the program starts.
@@ -39,14 +30,6 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-
-  /* Creating the list of the selectable objects. */
-  for (var j = 0; j < 3; j++) {
-    for (var i = 0; i < 10; i++) {
-      var item = new Item(i, j);
-      itemsList.push(item);
-    }
-  }
 
   /**
    * Creating canvas.
@@ -94,7 +77,7 @@ function setup() {
     boolLoadMap = false;
   }
 
-  var canvas = createCanvas(cols * w, rows * w + w * numberOfRowsItem);
+  var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
 }
 
