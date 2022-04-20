@@ -22,6 +22,7 @@ document.getElementById("resizeButton").addEventListener("click", resizeCanv);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
+
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
@@ -41,7 +42,7 @@ function setup() {
 
   /* Creating the list of the selectable objects. */
   for (var j = 0; j < 3; j++) {
-    for (var i = 0; i < cols; i++) {
+    for (var i = 0; i < 10; i++) {
       var item = new Item(i, j);
       itemsList.push(item);
     }
