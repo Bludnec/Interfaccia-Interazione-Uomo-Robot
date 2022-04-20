@@ -21,6 +21,36 @@ document.getElementById("resizeButton").addEventListener("click", resizeCanv);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
+var imgIndex = 0;
+
+var el = document.createElement("div");
+el.classList.add("column");
+var box = document.getElementById("row-list-grid");
+box.appendChild(el);
+
+var im = document.createElement("img");
+im.src = "images/double-bed.png";
+im.setAttribute("id", imgIndex);
+
+im.addEventListener("click", selectedItem);
+var box = document.getElementById("column");
+el.appendChild(im);
+imgIndex++;
+
+var im2 = document.createElement("img");
+im2.src = "images/tv-table.png";
+im2.setAttribute("id", imgIndex);
+im2.addEventListener("click", selectedItem);
+el.appendChild(im2);
+
+function selectedItem() {
+  console.log(this.id);
+  if (!boolItemSelected) {
+    this.classList.add("selected");
+    boolItemSelected = true;
+  }
+}
+
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
