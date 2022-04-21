@@ -33,9 +33,16 @@ class Forniture {
 
 class Television extends Forniture {
   constructor(id, name, i, j) {
-    super(id, name, i, j, false, false, false, false);
+    super(id, name, i, j, false, false, true, false);
 
     this.lexical_references = ["tv", "television"];
-    this.image = "images/television.png";
+  }
+}
+
+class Bed extends Forniture {
+  constructor(id, name, i, j) {
+    super(id, name, i, j, false, true, false, false);
+
+    this.lexical_references = ["bed"];
   }
 }

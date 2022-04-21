@@ -2,8 +2,7 @@ var cols, rows;
 var cellsList = [];
 var itemsList = [];
 
-var boolResizeCanvas,
-  boolItemSelected = false;
+var boolResizeCanvas = false;
 var indexItemSelected;
 
 var boolLoadMap = false;
@@ -15,6 +14,8 @@ document.getElementById("resizeButton").addEventListener("click", resizeCanv);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
+document.getElementById("item-0").addEventListener("dragstart", dragItem);
+document.getElementById("item-0").addEventListener("dragend", undragItem);
 document.getElementById("item-1").addEventListener("dragstart", dragItem);
 document.getElementById("item-1").addEventListener("dragend", undragItem);
 
@@ -83,9 +84,6 @@ function setup() {
     boolLoadMap = false;
   }
 
-  //const television = new Television(1, "television", 1, 1);
-  //itemsList.push(television);
-
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
 }
@@ -102,7 +100,7 @@ function draw() {
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
-    itemsList[i].show(televisionImage);
+    drawItems(i);
   }
 }
 
@@ -198,12 +196,22 @@ function cellIndex(i, j) {
   return i + j * cols;
 }
 
+function drawItems(i) {
+  var name = itemsList[i].name;
+  if (name == "bed") {
+    itemsList[i].show(bedImage);
+  }
+  if (name == "television") {
+    itemsList[i].show(televisionImage);
+  }
+}
+
+/* Funzioni per il drag & drop degli oggetti sulla mappa */
 function dragItem() {
   this.classList.add("selected");
   indexItemSelected = this.id;
-  boolItemSelected = true;
+  console.log(this.id);
 }
-
 function undragItem() {
   document.getElementById(`${indexItemSelected}`).classList.remove("selected");
 }

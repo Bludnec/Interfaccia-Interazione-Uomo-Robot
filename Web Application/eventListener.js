@@ -40,14 +40,21 @@ function mouseReleased() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
 
-  if (cellsList[cellIndex(x, y)] != undefined) {
-    console.log(indexItemSelected);
-    if (indexItemSelected == "item-1") {
-      var television = new Television(idCounter, "television", x, y);
+  switch (indexItemSelected) {
+    case "item-0":
+      console.log("aggiungo letto");
+      var bed = new Bed("bed" + idCounter, "bed", x, y);
+      itemsList.push(bed);
+      idCounter++;
+      break;
+    case "item-1":
+      console.log("aggiungo tv");
+      var television = new Television("tv" + idCounter, "television", x, y);
       itemsList.push(television);
       idCounter++;
-    }
+      break;
   }
+  console.log(itemsList);
   indexItemSelected = -1;
 }
 
