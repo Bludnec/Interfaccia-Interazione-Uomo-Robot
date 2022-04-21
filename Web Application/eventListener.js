@@ -15,7 +15,7 @@ function mouseClicked() {
 
   /* Color the cell and assign the value "zone" to the cell. */
   if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
-    colorCell(x, y);
+    colorCellMap(x, y);
   }
 
   if (cellsList[cellIndex(x, y)] != undefined) {
