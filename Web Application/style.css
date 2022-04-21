@@ -80,3 +80,19 @@ h2 {
   height: 50px;
   width: 50px;
 }
+
+.info-point table {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: auto;
+}
+
+.info-point table th,
+.info-point table td {
+  border: 1px solid black;
+  text-align: left;
+}
+
+#delete-image {
+  font-size: 20px;
+}

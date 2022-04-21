@@ -1,4 +1,9 @@
 var idCounter = 0;
+var lastClickedIndex;
+
+document
+  .getElementById("delete-button")
+  .addEventListener("click", deleteItemOnMap);
 
 function mouseClicked() {
   console.log(mouseX, mouseY);
@@ -24,7 +29,13 @@ function mouseClicked() {
 
   for (var k = 0; k < itemsList.length; k++) {
     if (itemsList[k].i == x && itemsList[k].j == y) {
-      console.log(itemsList[k]);
+      document.getElementById("info-name").textContent = itemsList[k].name;
+      document.getElementById("info-id").textContent = itemsList[k].id;
+      document.getElementById("info-coord").textContent =
+        "x:" + itemsList[k].i + ", y:" + itemsList[k].j;
+      document.getElementById("info-lexRef").textContent =
+        itemsList[k].lexical_references;
+      lastClickedIndex = k;
     }
   }
 }
@@ -69,5 +80,21 @@ function keyPressed() {
     indexItemSelected = null;
   } else {
     return null;
+  }
+}
+
+function deleteItemOnMap() {
+  if (lastClickedIndex != null) {
+    itemsList.splice(lastClickedIndex, 1);
+
+    document.getElementById("info-name").textContent = "";
+    document.getElementById("info-id").textContent = "";
+    document.getElementById("info-coord").textContent = "";
+    document.getElementById("info-lexRef").textContent = "";
+    lastClickedIndex = null;
+  } else {
+    console.log(
+      "Nessun elemento cancellato. Selezionane uno prima di cancellarlo."
+    );
   }
 }

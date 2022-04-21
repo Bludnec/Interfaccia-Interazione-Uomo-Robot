@@ -15,10 +15,10 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-document.getElementById("item-0").addEventListener("dragstart", dragItem);
-document.getElementById("item-0").addEventListener("dragend", undragItem);
-document.getElementById("item-1").addEventListener("dragstart", dragItem);
-document.getElementById("item-1").addEventListener("dragend", undragItem);
+for (var i = 0; i < 2; i++) {
+  document.getElementById(`item-${i}`).addEventListener("dragstart", dragItem);
+  document.getElementById(`item-${i}`).addEventListener("dragend", undragItem);
+}
 
 /**
  * The preload() function is used to handle
