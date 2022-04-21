@@ -1,11 +1,13 @@
 var cols, rows;
 var cellsList = [];
 
-var boolLoadMap = false;
-var boolResizeCanvas = false;
-var boolItemSelected = false;
+var boolResizeCanvas,
+  boolItemSelected = false;
 var indexItemSelected;
 
+var imgRobot;
+
+var boolLoadMap = false;
 var loadedCellMap;
 /* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
  * (verrà dopo assegnato un valore facendo il calcolo con il
@@ -39,7 +41,7 @@ el.appendChild(im);
 imgIndex++;
 
 var im2 = document.createElement("img");
-im2.src = "images/tv-table.png";
+im2.src = "images/television.png";
 im2.setAttribute("id", imgIndex);
 im2.addEventListener("click", selectedItem);
 el.appendChild(im2);
@@ -47,8 +49,6 @@ el.appendChild(im2);
 /* Finish creating the object list */
 
 function selectedItem() {
-  console.log(this.id);
-
   if (!boolItemSelected) {
     this.classList.add("selected");
     indexItemSelected = this.id;
@@ -77,6 +77,7 @@ function selectedItem() {
  */
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
+  imgRobot = loadImage("images/double-bed.png");
 }
 
 /**
@@ -138,8 +139,6 @@ function setup() {
   canvas.parent("canvas-zone");
 }
 
-function resetSketch() {}
-
 /**
  * The draw() function continuously executes the lines of code
  * contained inside its block until the program is stopped.
@@ -152,6 +151,74 @@ function draw() {
     deleteWalls(i);
     cellsList[i].show();
   }
+
+  image(imgRobot, 0, 0, 70, 70);
+}
+
+function mouseClicked() {
+  console.log(mouseX, mouseY);
+
+  /* Returns null if the click is done outside the canvas it.  */
+  if (mouseX < 0 || mouseY < 0) {
+    return null;
+  }
+
+  /* Check if the click is done on the cell area. */
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+  var check = document.getElementById("color-checkbox");
+
+  /* Color the cell and assign the value "zone" to the cell. */
+  if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
+    colorCell(x, y);
+  }
+
+  if (cellsList[cellIndex(x, y)] != undefined) {
+    console.log(cellsList[cellIndex(x, y)]);
+  }
+}
+
+function keyPressed() {
+  /* Press "Escape" for unselect the selected item. */
+  if (keyCode === ESCAPE && boolItemSelected) {
+    document
+      .getElementById(`${indexItemSelected}`)
+      .classList.remove("selected");
+    boolItemSelected = false;
+    indexItemSelected = null;
+  } else {
+    return null;
+  }
+}
+
+/* Color the cells of map and assign the value to "zone". */
+function colorCell(x, y) {
+  if (document.getElementById("zone").value == "") {
+    alert("Inserire nome zona");
+  } else {
+    cellsList[cellIndex(x, y)].zone = document.getElementById("zone").value;
+    cellsList[cellIndex(x, y)].cellColor =
+      document.getElementById("cell-color").value;
+  }
+  console.log(cellsList[cellIndex(x, y)]);
+}
+
+function resizeCanv() {
+  boolResizeCanvas = true;
+  setup();
+}
+
+/* Save the map into a json file */
+function saveMap() {
+  var myJSON = JSON.parse(JSON.stringify(cellsList));
+  console.log(myJSON);
+  saveJSON(myJSON, "myJSON");
+}
+
+/* Load the existing map. */
+function loadMap() {
+  boolLoadMap = true;
+  setup();
 }
 
 /* Delete the walls if adjacent cells have the same "zone" value. */
@@ -216,69 +283,4 @@ function cellIndex(i, j) {
     return -1;
   }
   return i + j * cols;
-}
-
-function mouseClicked() {
-  console.log(mouseX, mouseY);
-
-  /* Returns null if the click is done outside the canvas it.  */
-  if (mouseX < 0 || mouseY < 0) {
-    return null;
-  }
-
-  /* Check if the click is done on the cell area. */
-  var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w);
-  var check = document.getElementById("color-checkbox");
-
-  /* Color the cell and assign the value "zone" to the cell. */
-  if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
-    colorCell(x, y);
-  }
-
-  if (cellsList[cellIndex(x, y)] != undefined) {
-    console.log(cellsList[cellIndex(x, y)]);
-  }
-}
-
-function keyPressed() {
-  /* Press "Escape" for unselect the selected item. */
-  if (keyCode === ESCAPE && boolItemSelected) {
-    itemsList[indexItemSelected].selected = false;
-    boolItemSelected = false;
-    indexItemSelected = null;
-    console.log(indexItemSelected);
-  } else {
-    return null;
-  }
-}
-
-/* Color the cells of map and assign the value to "zone". */
-function colorCell(x, y) {
-  if (document.getElementById("zone").value == "") {
-    alert("Inserire nome zona");
-  } else {
-    cellsList[cellIndex(x, y)].zone = document.getElementById("zone").value;
-    cellsList[cellIndex(x, y)].cellColor =
-      document.getElementById("cell-color").value;
-  }
-  console.log(cellsList[cellIndex(x, y)]);
-}
-
-function resizeCanv() {
-  boolResizeCanvas = true;
-  setup();
-}
-
-/* Save the map into a json file */
-function saveMap() {
-  var myJSON = JSON.parse(JSON.stringify(cellsList));
-  console.log(myJSON);
-  saveJSON(myJSON, "myJSON");
-}
-
-/* Load the existing map. */
-function loadMap() {
-  boolLoadMap = true;
-  setup();
 }
