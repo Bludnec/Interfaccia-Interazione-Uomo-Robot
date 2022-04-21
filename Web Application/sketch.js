@@ -6,8 +6,6 @@ var boolResizeCanvas,
   boolItemSelected = false;
 var indexItemSelected;
 
-var imgRobot;
-
 var boolLoadMap = false;
 var loadedCellMap;
 
@@ -130,6 +128,9 @@ function setup() {
     boolLoadMap = false;
   }
 
+  const television = new Television(1, "tv", 1, 1);
+  itemsList.push(television);
+
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
 }
@@ -140,17 +141,16 @@ function setup() {
  */
 function draw() {
   frameRate(1);
+  console.log("draw");
 
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();
-    console.log("cell");
   }
-
   for (var i = 0; i < itemsList.length; i++) {
+    console.log(itemsList[i].id);
     itemsList[i].show();
-    console.log("item");
   }
 }
 
@@ -199,7 +199,6 @@ function colorCell(x, y) {
     cellsList[cellIndex(x, y)].cellColor =
       document.getElementById("cell-color").value;
   }
-  console.log(cellsList[cellIndex(x, y)]);
 }
 
 function resizeCanv() {
@@ -283,6 +282,3 @@ function cellIndex(i, j) {
   }
   return i + j * cols;
 }
-
-var television1 = new Television(1, "tv", 1, 1);
-itemsList.push(television1);

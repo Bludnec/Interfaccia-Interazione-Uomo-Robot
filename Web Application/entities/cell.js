@@ -13,6 +13,7 @@ class Cell {
     /* Coordinate della cella */
     this.x = this.i * w;
     this.y = this.j * w;
+    this.item = [];
   }
 
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
