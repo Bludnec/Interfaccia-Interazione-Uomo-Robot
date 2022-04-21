@@ -34,12 +34,9 @@
         <legend>Ridimensiona celle</legend>
         <label for="cname">Dimensione celle</label><br />
         <select name="list" id="cell-size">
-          <option value="30">30</option>
           <option value="40">40</option>
           <option value="50">50</option>
-          <option value="60">60</option>
-          <option value="70">70</option>
-          <option value="80">80</option></select
+          <option value="60">60</option></select
         ><br />
         <button type="button" id="resizeButton">Resize canvas</button>
       </form>
@@ -64,12 +61,19 @@
       <div id="canvas-zone"></div>
 
       <div id="list-grid">
-        <div class="row" id="row-list-grid"></div>
+        <div class="row" id="row-list-grid">
+          <div class="column">
+            <img id="item-0" src="images/bed.png" />
+            <img id="item-1" src="images/television.png" />
+          </div>
+        </div>
       </div>
     </div>
     <script src="entities\cell.js"></script>
 
     <script src="items\forniture.js"></script>
     <script src="sketch.js"></script>
+
+    <script src="eventListener.js"></script>
   </body>
 </html>

@@ -7,7 +7,6 @@ var boolResizeCanvas,
 var indexItemSelected;
 
 var boolLoadMap = false;
-var loadedCellMap;
 
 var w = document.getElementById("cell-size").value;
 
@@ -16,38 +15,15 @@ document.getElementById("resizeButton").addEventListener("click", resizeCanv);
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
-var imgIndex = 0;
-
-/* Creo la colonna */
-var el = document.createElement("div");
-el.classList.add("column");
-var box = document.getElementById("row-list-grid");
-box.appendChild(el);
-
-/* Attacco le immagini alla nuova colonna */
-var im = document.createElement("img");
-im.src = "images/bed.png";
-im.setAttribute("id", imgIndex);
-
-im.addEventListener("click", selectedItem);
-var box = document.getElementById("column");
-el.appendChild(im);
-imgIndex++;
-
-var im2 = document.createElement("img");
-im2.src = "images/television.png";
-im2.setAttribute("id", imgIndex);
-im2.addEventListener("click", selectedItem);
-el.appendChild(im2);
-
-/* Finish creating the object list */
+document.getElementById("item-1").addEventListener("dragstart", dragItem);
+document.getElementById("item-1").addEventListener("dragend", undragItem);
 
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
+var loadedCellMap;
 var tvImage, bedImage;
-
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
   televisionImage = loadImage("images/television.png");
@@ -104,7 +80,6 @@ function setup() {
 
       cellsList.push(cell);
     }
-    alert("mappa caricata");
 
     boolLoadMap = false;
   }
@@ -121,7 +96,7 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(1);
+  frameRate(5);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
@@ -129,44 +104,6 @@ function draw() {
   }
   for (var i = 0; i < itemsList.length; i++) {
     itemsList[i].show(televisionImage);
-  }
-}
-
-function mouseClicked() {
-  console.log(mouseX, mouseY);
-
-  /* Returns null if the click is done outside the canvas it.  */
-  if (mouseX < 0 || mouseY < 0) {
-    return null;
-  }
-
-  /* Check if the click is done on the cell area. */
-  var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w);
-  var check = document.getElementById("color-checkbox");
-
-  /* Color the cell and assign the value "zone" to the cell. */
-  if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
-    colorCell(x, y);
-  }
-
-  if (cellsList[cellIndex(x, y)] != undefined) {
-    console.log(cellsList[cellIndex(x, y)]);
-  }
-}
-
-function mouseReleased() {}
-
-function keyPressed() {
-  /* Press "Escape" for unselect the selected item. */
-  if (keyCode === ESCAPE && boolItemSelected) {
-    document
-      .getElementById(`${indexItemSelected}`)
-      .classList.remove("selected");
-    boolItemSelected = false;
-    indexItemSelected = null;
-  } else {
-    return null;
   }
 }
 
@@ -263,25 +200,13 @@ function cellIndex(i, j) {
   return i + j * cols;
 }
 
-function selectedItem() {
-  if (!boolItemSelected) {
-    this.classList.add("selected");
-    indexItemSelected = this.id;
-    boolItemSelected = true;
-  } else if (
-    /* Se il click è diverso dalla cella cliccata */
-    boolItemSelected &&
-    this.id != indexItemSelected
-  ) {
-    document
-      .getElementById(`${indexItemSelected}`)
-      .classList.remove("selected");
-    indexItemSelected = this.id;
-    this.classList.add("selected");
-  } else if ((this.id = indexItemSelected)) {
-    this.classList.remove("selected");
-    indexItemSelected = -1;
-    boolItemSelected = false;
-  }
+function dragItem() {
+  this.classList.add("selected");
+  indexItemSelected = this.id;
+  boolItemSelected = true;
   console.log(indexItemSelected);
+}
+
+function undragItem() {
+  document.getElementById(`${indexItemSelected}`).classList.remove("selected");
 }
