@@ -1,5 +1,6 @@
 var cols, rows;
 var cellsList = [];
+var itemsList = [];
 
 var boolResizeCanvas,
   boolItemSelected = false;
@@ -9,10 +10,6 @@ var imgRobot;
 
 var boolLoadMap = false;
 var loadedCellMap;
-/* Numero delle righe della lista itemsList per calibrare la grandezza del canvas
- * (verrà dopo assegnato un valore facendo il calcolo con il
- * numero degli elementi nella lsita)
- */
 
 var w = document.getElementById("cell-size").value;
 
@@ -32,7 +29,7 @@ box.appendChild(el);
 
 /* Attacco le immagini alla nuova colonna */
 var im = document.createElement("img");
-im.src = "images/double-bed.png";
+im.src = "images/bed.png";
 im.setAttribute("id", imgIndex);
 
 im.addEventListener("click", selectedItem);
@@ -77,7 +74,7 @@ function selectedItem() {
  */
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
-  imgRobot = loadImage("images/double-bed.png");
+  imgRobot = loadImage("images/bed.png");
 }
 
 /**
@@ -95,8 +92,6 @@ function setup() {
    * If boolResizeCanvas = true => resize canvas and use old cellList.
    * If boolLoadMap and boolResizeCanvas = false => create a new canvas and new cellsList.
    */
-  console.log(boolResizeCanvas);
-
   if (!boolLoadMap) {
     if (!boolResizeCanvas) {
       /* Create a new cellsList */
@@ -144,15 +139,19 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(5);
+  frameRate(1);
 
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();
+    console.log("cell");
   }
 
-  image(imgRobot, 0, 0, 70, 70);
+  for (var i = 0; i < itemsList.length; i++) {
+    itemsList[i].show();
+    console.log("item");
+  }
 }
 
 function mouseClicked() {
@@ -284,3 +283,6 @@ function cellIndex(i, j) {
   }
   return i + j * cols;
 }
+
+var television1 = new Television(1, "tv", 1, 1);
+itemsList.push(television1);
