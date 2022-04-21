@@ -13,7 +13,6 @@ var w = document.getElementById("cell-size").value;
 
 document.getElementById("drawButton").addEventListener("click", setup);
 document.getElementById("resizeButton").addEventListener("click", resizeCanv);
-
 document.getElementById("save-map-button").addEventListener("click", saveMap);
 document.getElementById("load-map-button").addEventListener("click", loadMap);
 
@@ -43,36 +42,16 @@ el.appendChild(im2);
 
 /* Finish creating the object list */
 
-function selectedItem() {
-  if (!boolItemSelected) {
-    this.classList.add("selected");
-    indexItemSelected = this.id;
-    boolItemSelected = true;
-  } else if (
-    /* Se il click è diverso dalla cella cliccata */
-    boolItemSelected &&
-    this.id != indexItemSelected
-  ) {
-    document
-      .getElementById(`${indexItemSelected}`)
-      .classList.remove("selected");
-    indexItemSelected = this.id;
-    this.classList.add("selected");
-  } else if ((this.id = indexItemSelected)) {
-    this.classList.remove("selected");
-    indexItemSelected = -1;
-    boolItemSelected = false;
-  }
-  console.log(indexItemSelected);
-}
-
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
+var tvImage, bedImage;
+
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
-  imgRobot = loadImage("images/bed.png");
+  televisionImage = loadImage("images/television.png");
+  bedImage = loadImage("images/bed.png");
 }
 
 /**
@@ -92,8 +71,9 @@ function setup() {
    */
   if (!boolLoadMap) {
     if (!boolResizeCanvas) {
-      /* Create a new cellsList */
+      /* Create a new canvas with new cellsList */
       cellsList = [];
+      itemsList = [];
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
           var cell = new Cell(i, j);
@@ -112,6 +92,7 @@ function setup() {
     }
   } else if (boolLoadMap) {
     cellsList = [];
+    itemsList = [];
     /* Load the saved map */
     console.log("prova");
     for (var k = 0; k < 100; k++) {
@@ -128,8 +109,8 @@ function setup() {
     boolLoadMap = false;
   }
 
-  const television = new Television(1, "tv", 1, 1);
-  itemsList.push(television);
+  //const television = new Television(1, "television", 1, 1);
+  //itemsList.push(television);
 
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
@@ -141,16 +122,13 @@ function setup() {
  */
 function draw() {
   frameRate(1);
-  console.log("draw");
-
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
-    console.log(itemsList[i].id);
-    itemsList[i].show();
+    itemsList[i].show(televisionImage);
   }
 }
 
@@ -176,6 +154,8 @@ function mouseClicked() {
     console.log(cellsList[cellIndex(x, y)]);
   }
 }
+
+function mouseReleased() {}
 
 function keyPressed() {
   /* Press "Escape" for unselect the selected item. */
@@ -281,4 +261,27 @@ function cellIndex(i, j) {
     return -1;
   }
   return i + j * cols;
+}
+
+function selectedItem() {
+  if (!boolItemSelected) {
+    this.classList.add("selected");
+    indexItemSelected = this.id;
+    boolItemSelected = true;
+  } else if (
+    /* Se il click è diverso dalla cella cliccata */
+    boolItemSelected &&
+    this.id != indexItemSelected
+  ) {
+    document
+      .getElementById(`${indexItemSelected}`)
+      .classList.remove("selected");
+    indexItemSelected = this.id;
+    this.classList.add("selected");
+  } else if ((this.id = indexItemSelected)) {
+    this.classList.remove("selected");
+    indexItemSelected = -1;
+    boolItemSelected = false;
+  }
+  console.log(indexItemSelected);
 }

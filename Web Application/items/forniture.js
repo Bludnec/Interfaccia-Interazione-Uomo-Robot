@@ -26,6 +26,9 @@ class Forniture {
     this.ability_to_move = ability_to_move;
     this.ability_to_open = ability_to_open;
   }
+  show(img) {
+    image(img, this.x, this.y, w, w);
+  }
 }
 
 class Television extends Forniture {
@@ -34,11 +37,5 @@ class Television extends Forniture {
 
     this.lexical_references = ["tv", "television"];
     this.image = "images/television.png";
-  }
-  show() {
-    fill(255);
-    noStroke();
-    rect(this.x, this.y, w, w);
-    noFill();
   }
 }
