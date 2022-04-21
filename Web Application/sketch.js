@@ -10,7 +10,10 @@ var boolLoadMap = false;
 var w = document.getElementById("cell-size").value;
 
 document.getElementById("drawButton").addEventListener("click", setup);
-document.getElementById("resizeButton").addEventListener("click", resizeCanv);
+document.getElementById("resizeButton").addEventListener("click", () => {
+  boolResizeCanvas = true;
+  setup();
+});
 
 document.getElementById("item-0").addEventListener("dragstart", dragItem);
 document.getElementById("item-0").addEventListener("dragend", undragItem);
@@ -102,11 +105,6 @@ function draw() {
   }
 }
 
-function resizeCanv() {
-  boolResizeCanvas = true;
-  setup();
-}
-
 /* Return the array's index of the cell in position i,j. */
 function cellIndex(i, j) {
   if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
@@ -115,7 +113,7 @@ function cellIndex(i, j) {
   return i + j * cols;
 }
 
-/* Funzione per disegnare gli oggetti nella lista itemsList sulla mappa */
+/* Function to draw the objects in the itemsList on the map */
 function drawItems(i) {
   var name = itemsList[i].name;
   if (name == "bed") {
@@ -125,7 +123,7 @@ function drawItems(i) {
     itemsList[i].show(televisionImage);
   }
 }
-/* Funzioni per il drag & drop degli oggetti sulla mappa */
+/* Functions for drag & drop of objects on the map */
 function dragItem() {
   this.classList.add("selected");
   indexItemSelected = this.id;
