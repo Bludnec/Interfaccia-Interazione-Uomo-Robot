@@ -70,7 +70,6 @@ function setup() {
     cellsList = [];
     itemsList = [];
     /* Load the saved map */
-    console.log("prova");
     for (var k = 0; k < 100; k++) {
       /* create the cells with the coordinates taken from the json. */
       var cell = new Cell(loadedCellMap[k].i, loadedCellMap[k].j);
@@ -126,7 +125,6 @@ function resizeCanv() {
 /* Save the map into a json file */
 function saveMap() {
   var myJSON = JSON.parse(JSON.stringify(cellsList));
-  console.log(myJSON);
   saveJSON(myJSON, "myJSON");
 }
 
@@ -204,7 +202,6 @@ function dragItem() {
   this.classList.add("selected");
   indexItemSelected = this.id;
   boolItemSelected = true;
-  console.log(indexItemSelected);
 }
 
 function undragItem() {
