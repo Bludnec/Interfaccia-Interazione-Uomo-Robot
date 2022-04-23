@@ -66,9 +66,9 @@ function mouseReleased() {
   var y = parseInt(mouseY / w);
   switch (indexItemSelected) {
     case "item-0":
-      var robot = new Agent("rob" + idCounter, x, y);
-      itemsList.push(robot);
+      var agent = new Agent("rob" + idCounter, x, y);
       idCounter++;
+      itemsList.push(agent);
       break;
     case "item-1":
       console.log("Aggiungo letto");

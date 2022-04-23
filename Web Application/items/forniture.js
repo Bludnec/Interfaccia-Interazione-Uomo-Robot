@@ -31,9 +31,6 @@ class Forniture {
     this.ability_to_move = ability_to_move;
     this.ability_to_open = ability_to_open;
   }
-  show(img) {
-    image(img, this.x, this.y, w, w);
-  }
 }
 
 class Television extends Forniture {
@@ -43,7 +40,7 @@ class Television extends Forniture {
     this.lexical_references = ["tv", "television"];
   }
   show() {
-    super.show(televisionImage);
+    image(televisionImage, this.x, this.y, w, w);
   }
 }
 
@@ -54,6 +51,6 @@ class Bed extends Forniture {
     this.lexical_references = ["bed"];
   }
   show() {
-    super.show(bedImage);
+    image(bedImage, this.x, this.y, w, w);
   }
 }
