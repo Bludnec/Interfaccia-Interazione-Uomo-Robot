@@ -67,7 +67,7 @@ function mouseReleased() {
   switch (indexItemSelected) {
     case "item-0":
       console.log("Aggiungo agente");
-      agentObj = new Agent("rob" + idCounter, x, y);
+      agent = new Agent("rob" + idCounter, x, y);
       idCounter++;
       break;
     case "item-1":
@@ -92,13 +92,13 @@ function keyPressed() {
   if (keyCode === ESCAPE && lastClickedIndex != null) {
     removeInfoPoint();
   } else if (keyCode === UP_ARROW) {
-    agentObj.moveUp();
+    agent.moveUp();
   } else if (keyCode === DOWN_ARROW) {
-    agentObj.moveDown();
+    agent.moveDown();
   } else if (keyCode === RIGHT_ARROW) {
-    agentObj.moveRight();
+    agent.moveRight();
   } else if (keyCode === LEFT_ARROW) {
-    agentObj.moveLeft();
+    agent.moveLeft();
   } else {
     return;
   }

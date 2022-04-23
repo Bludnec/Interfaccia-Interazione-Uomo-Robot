@@ -7,7 +7,7 @@ var indexItemSelected;
 
 var boolLoadMap = false;
 
-var agentObj;
+var agent;
 
 var w = document.getElementById("cell-size").value;
 
@@ -107,8 +107,8 @@ function draw() {
   for (var i = 0; i < itemsList.length; i++) {
     drawItems(i);
   }
-  if (agentObj != null) {
-    agentObj.show(agentImage);
+  if (agent != null) {
+    agent.show(agentImage);
   }
 }
 
