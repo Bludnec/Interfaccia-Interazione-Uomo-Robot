@@ -1,11 +1,7 @@
-var agentImage;
-function preload() {
-  agentImage = loadImage("images/robot.png");
-}
-
 class Agent {
   constructor(id, i, j) {
     this.id = id;
+    this.name = "robot";
     this.i = i;
     this.j = j;
 
@@ -14,11 +10,8 @@ class Agent {
     this.y = j * w;
   }
 
-  show() {
-    image(agentImage, this.x, this.y, w, w);
-  }
-
-  moveUp() {
-    this.j -= 1;
+  show(img) {
+    console.log(this);
+    image(img, this.x, this.y, w, w);
   }
 }

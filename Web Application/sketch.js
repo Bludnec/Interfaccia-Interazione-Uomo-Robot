@@ -7,6 +7,8 @@ var indexItemSelected;
 
 var boolLoadMap = false;
 
+var agentObj;
+
 var w = document.getElementById("cell-size").value;
 
 document.getElementById("drawButton").addEventListener("click", setup);
@@ -25,8 +27,13 @@ for (var i = 0; i < 3; i++) {
  *  asynchronous loading of external files in a blocking way
  */
 var loadedCellMap;
+var televisionImage, bedImage;
+var agentImage;
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
+  televisionImage = loadImage("images/television.png");
+  bedImage = loadImage("images/bed.png");
+  agentImage = loadImage("images/robot.png");
 }
 
 /**
@@ -98,7 +105,10 @@ function draw() {
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
-    itemsList[i].show();
+    drawItems(i);
+  }
+  if (agentObj != null) {
+    agentObj.show(agentImage);
   }
 }
 
@@ -117,4 +127,18 @@ function dragItem() {
 }
 function undragItem() {
   document.getElementById(`${indexItemSelected}`).classList.remove("selected");
+}
+
+function drawItems(i) {
+  switch (itemsList[i].name) {
+    case "bed":
+      itemsList[i].show(bedImage);
+      break;
+    case "robot":
+      itemsList[i].show(agentImage);
+      break;
+    case "television":
+      itemsList[i].show(televisionImage);
+      break;
+  }
 }

@@ -1,8 +1,3 @@
-var televisionImage, bedImage;
-function preload() {
-  televisionImage = loadImage("images/television.png");
-  bedImage = loadImage("images/bed.png");
-}
 class Forniture {
   constructor(
     id,
@@ -39,8 +34,8 @@ class Television extends Forniture {
 
     this.lexical_references = ["tv", "television"];
   }
-  show() {
-    image(televisionImage, this.x, this.y, w, w);
+  show(img) {
+    image(img, this.x, this.y, w, w);
   }
 }
 
@@ -50,7 +45,7 @@ class Bed extends Forniture {
 
     this.lexical_references = ["bed"];
   }
-  show() {
-    image(bedImage, this.x, this.y, w, w);
+  show(img) {
+    image(img, this.x, this.y, w, w);
   }
 }
