@@ -91,8 +91,16 @@ function keyPressed() {
   /* Press "Escape" for unselect the selected item. */
   if (keyCode === ESCAPE && lastClickedIndex != null) {
     removeInfoPoint();
+  } else if (keyCode === UP_ARROW) {
+    agentObj.moveUp();
+  } else if (keyCode === DOWN_ARROW) {
+    agentObj.moveDown();
+  } else if (keyCode === RIGHT_ARROW) {
+    agentObj.moveRight();
+  } else if (keyCode === LEFT_ARROW) {
+    agentObj.moveLeft();
   } else {
-    return null;
+    return;
   }
 }
 
