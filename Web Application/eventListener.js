@@ -72,17 +72,18 @@ function mouseReleased() {
 /* Keyboard events */
 function keyPressed() {
   /* Press "Escape" for unselect the selected item. */
-  if (keyCode === ESCAPE && boolItemSelected) {
-    document
-      .getElementById(`${indexItemSelected}`)
-      .classList.remove("selected");
-    boolItemSelected = false;
-    indexItemSelected = null;
+  if (keyCode === ESCAPE && lastClickedIndex != null) {
+    document.getElementById("info-name").textContent = "";
+    document.getElementById("info-id").textContent = "";
+    document.getElementById("info-coord").textContent = "";
+    document.getElementById("info-lexRef").textContent = "";
+    lastClickedIndex = null;
   } else {
     return null;
   }
 }
 
+/* Funzione per eliminare un item sulla mappa */
 function deleteItemOnMap() {
   if (lastClickedIndex != null) {
     itemsList.splice(lastClickedIndex, 1);
