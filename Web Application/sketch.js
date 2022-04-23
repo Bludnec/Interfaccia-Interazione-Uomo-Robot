@@ -25,7 +25,7 @@ for (var i = 0; i < 2; i++) {
  *  asynchronous loading of external files in a blocking way
  */
 var loadedCellMap;
-var tvImage, bedImage;
+var televisionImage, bedImage;
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
   televisionImage = loadImage("images/television.png");
