@@ -25,11 +25,8 @@ for (var i = 0; i < 2; i++) {
  *  asynchronous loading of external files in a blocking way
  */
 var loadedCellMap;
-var televisionImage, bedImage;
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
-  televisionImage = loadImage("images/television.png");
-  bedImage = loadImage("images/bed.png");
 }
 
 /**
@@ -101,7 +98,7 @@ function draw() {
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
-    drawItems(i);
+    itemsList[i].show();
   }
 }
 
@@ -113,16 +110,6 @@ function cellIndex(i, j) {
   return i + j * cols;
 }
 
-/* Function to draw the objects in the itemsList on the map */
-function drawItems(i) {
-  var name = itemsList[i].name;
-  if (name == "bed") {
-    itemsList[i].show(bedImage);
-  }
-  if (name == "television") {
-    itemsList[i].show(televisionImage);
-  }
-}
 /* Functions for drag & drop of objects on the map */
 function dragItem() {
   this.classList.add("selected");
