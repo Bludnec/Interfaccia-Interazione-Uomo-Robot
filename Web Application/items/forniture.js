@@ -1,9 +1,3 @@
-var tvImage, bedImage;
-function preload() {
-  televisionImage = loadImage("images/television.png");
-  bedImage = loadImage("images/bed.png");
-}
-
 class Forniture {
   constructor(
     id,
