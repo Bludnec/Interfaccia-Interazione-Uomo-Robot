@@ -1,5 +1,6 @@
+var agentImage;
 function preload() {
-  robotImage = loadImage("images/robot.png");
+  agentImage = loadImage("images/robot.png");
 }
 
 class Agent {
@@ -14,6 +15,10 @@ class Agent {
   }
 
   show() {
-    image(robotImage, this.x, this.y, w, w);
+    image(agentImage, this.x, this.y, w, w);
+  }
+
+  moveUp() {
+    this.j -= 1;
   }
 }

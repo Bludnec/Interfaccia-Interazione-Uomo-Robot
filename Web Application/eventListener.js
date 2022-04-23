@@ -64,15 +64,19 @@ function mouseReleased() {
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-
   switch (indexItemSelected) {
     case "item-0":
+      var robot = new Agent("rob" + idCounter, x, y);
+      itemsList.push(robot);
+      idCounter++;
+      break;
+    case "item-1":
       console.log("Aggiungo letto");
       var bed = new Bed("bed" + idCounter, "bed", x, y);
       itemsList.push(bed);
       idCounter++;
       break;
-    case "item-1":
+    case "item-2":
       console.log("Aggiungo tv");
       var television = new Television("tv" + idCounter, "television", x, y);
       itemsList.push(television);

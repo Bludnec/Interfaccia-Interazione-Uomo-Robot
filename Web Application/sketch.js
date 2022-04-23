@@ -15,7 +15,7 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 3; i++) {
   document.getElementById(`item-${i}`).addEventListener("dragstart", dragItem);
   document.getElementById(`item-${i}`).addEventListener("dragend", undragItem);
 }
