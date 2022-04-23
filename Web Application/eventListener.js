@@ -1,13 +1,21 @@
 var idCounter = 0;
 var lastClickedIndex;
 
+var infoName = document.getElementById("info-name");
+var infoId = document.getElementById("info-id");
+var infoCoord = document.getElementById("info-coord");
+var infoLexRef = document.getElementById("info-lexRef");
+var infoPoint = document.getElementById("item-info-point");
+
+var cellInfoPoint = document.getElementById("cell-info-point");
+var cellCoord = document.getElementById("cell-coord");
+var cellZone = document.getElementById("cell-zone");
+
 document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
 
 function mouseClicked() {
-  console.log(mouseX, mouseY);
-
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
     return null;
@@ -24,24 +32,30 @@ function mouseClicked() {
   }
 
   if (cellsList[cellIndex(x, y)] != undefined) {
-    console.log(cellsList[cellIndex(x, y)]);
+    cellInfoPoint.classList.remove("hidden");
+
+    cellCoord.textContent =
+      "x:" +
+      cellsList[cellIndex(x, y)].i +
+      ", y:" +
+      cellsList[cellIndex(x, y)].j;
+    cellZone.textContent = cellsList[cellIndex(x, y)].zone;
   }
 
   for (var k = 0; k < itemsList.length; k++) {
     if (itemsList[k].i == x && itemsList[k].j == y) {
-      document.getElementById("info-name").textContent = itemsList[k].name;
-      document.getElementById("info-id").textContent = itemsList[k].id;
-      document.getElementById("info-coord").textContent =
-        "x:" + itemsList[k].i + ", y:" + itemsList[k].j;
-      document.getElementById("info-lexRef").textContent =
-        itemsList[k].lexical_references;
+      infoPoint.classList.remove("hidden");
+
+      infoName.textContent = itemsList[k].name;
+      infoId.textContent = itemsList[k].id;
+      infoCoord.textContent = "x:" + itemsList[k].i + ", y:" + itemsList[k].j;
+      infoLexRef.textContent = itemsList[k].lexical_references;
       lastClickedIndex = k;
     }
   }
 }
 
 function mouseReleased() {
-  console.log(mouseX, mouseY);
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
     return null;
@@ -53,19 +67,18 @@ function mouseReleased() {
 
   switch (indexItemSelected) {
     case "item-0":
-      console.log("aggiungo letto");
+      console.log("Aggiungo letto");
       var bed = new Bed("bed" + idCounter, "bed", x, y);
       itemsList.push(bed);
       idCounter++;
       break;
     case "item-1":
-      console.log("aggiungo tv");
+      console.log("Aggiungo tv");
       var television = new Television("tv" + idCounter, "television", x, y);
       itemsList.push(television);
       idCounter++;
       break;
   }
-  console.log(itemsList);
   indexItemSelected = -1;
 }
 
@@ -73,11 +86,7 @@ function mouseReleased() {
 function keyPressed() {
   /* Press "Escape" for unselect the selected item. */
   if (keyCode === ESCAPE && lastClickedIndex != null) {
-    document.getElementById("info-name").textContent = "";
-    document.getElementById("info-id").textContent = "";
-    document.getElementById("info-coord").textContent = "";
-    document.getElementById("info-lexRef").textContent = "";
-    lastClickedIndex = null;
+    removeInfoPoint();
   } else {
     return null;
   }
@@ -85,16 +94,21 @@ function keyPressed() {
 
 function deleteItemOnMap() {
   if (lastClickedIndex != null) {
+    removeInfoPoint();
     itemsList.splice(lastClickedIndex, 1);
-
-    document.getElementById("info-name").textContent = "";
-    document.getElementById("info-id").textContent = "";
-    document.getElementById("info-coord").textContent = "";
-    document.getElementById("info-lexRef").textContent = "";
     lastClickedIndex = null;
   } else {
     console.log(
       "Nessun elemento cancellato. Selezionane uno prima di cancellarlo."
     );
   }
+}
+
+/* Funzione per rimuovere l'info point */
+function removeInfoPoint() {
+  infoName.textContent = "";
+  infoId.textContent = "";
+  infoCoord.textContent = "";
+  infoLexRef.textContent = "";
+  infoPoint.classList.add("hidden");
 }

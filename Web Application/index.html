@@ -62,7 +62,7 @@
       <button id="save-map-button">Save Map</button>
       <button id="load-map-button">Load Map</button>
 
-      <div class="info-point">
+      <div id="item-info-point" class="hidden">
         <table>
           <tr>
             <th>Nome</th>
@@ -80,6 +80,19 @@
             <td>
               <button id="delete-button"><i class="bi bi-trash"></i></button>
             </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="cell-info-point" class="hidden">
+        <table>
+          <tr>
+            <th>Coordinate</th>
+            <th>Zona</th>
+          </tr>
+          <tr>
+            <td id="cell-coord"></td>
+            <td id="cell-zone"></td>
           </tr>
         </table>
       </div>

@@ -87,12 +87,16 @@ h2 {
   width: auto;
 }
 
-.info-point table th,
-.info-point table td {
+#item-info-point table th,
+#item-info-point table td {
   border: 1px solid black;
   text-align: left;
 }
 
 #delete-image {
   font-size: 20px;
+}
+
+.hidden {
+  display: none;
 }

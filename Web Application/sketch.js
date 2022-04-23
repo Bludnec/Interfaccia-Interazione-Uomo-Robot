@@ -127,7 +127,6 @@ function drawItems(i) {
 function dragItem() {
   this.classList.add("selected");
   indexItemSelected = this.id;
-  console.log(this.id);
 }
 function undragItem() {
   document.getElementById(`${indexItemSelected}`).classList.remove("selected");
