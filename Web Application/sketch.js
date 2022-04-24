@@ -140,3 +140,13 @@ function drawItems(i) {
       break;
   }
 }
+
+/* Funzione per vedere se nelle coordinate scelte c'è qualcosa */
+function findElement(i, j) {
+  for (var k = 0; k < itemsList.length; k++) {
+    if (itemsList[k].i == i && itemsList[k].j == j) {
+      return itemsList[k];
+    }
+  }
+  return null;
+}
