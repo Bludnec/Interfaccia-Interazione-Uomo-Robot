@@ -63,7 +63,7 @@ function setup() {
         }
       }
     } else {
-      /* Resize canvas */
+      /* Resize canvas with old cellList and itemsList */
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
           cellsList[cellIndex(i, j)].x = i * w;
@@ -77,18 +77,16 @@ function setup() {
     itemsList = [];
     /* Load the saved map */
     for (var k = 0; k < 100; k++) {
-      /* create the cells with the coordinates taken from the json. */
+      /* Create the cells with the coordinates taken from the json. */
       var cell = new Cell(loadedCellMap[k].i, loadedCellMap[k].j);
       /* Assign the values ​​taken from the json to the cells just created. */
       cell.zone = loadedCellMap[k].zone;
       cell.cellColor = loadedCellMap[k].cellColor;
-
       cellsList.push(cell);
     }
-
     boolLoadMap = false;
   }
-
+  /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
 }
@@ -98,7 +96,7 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(5);
+  frameRate(10);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     deleteWalls(i);

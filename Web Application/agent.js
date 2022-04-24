@@ -14,7 +14,7 @@ class Agent {
     image(img, this.x, this.y, w, w);
   }
   moveUp() {
-    if (this.j - 1 >= 0) {
+    if (this.j - 1 >= 0 && !cellsList[cellIndex(this.i, this.j)].walls[0]) {
       this.j -= 1;
       this.y = this.j * w;
     } else {
@@ -22,7 +22,7 @@ class Agent {
     }
   }
   moveDown() {
-    if (this.j + 1 < rows) {
+    if (this.j + 1 < rows && !cellsList[cellIndex(this.i, this.j)].walls[2]) {
       this.j += 1;
       this.y = this.j * w;
     } else {
@@ -31,7 +31,7 @@ class Agent {
   }
 
   moveRight() {
-    if (this.i + 1 < cols) {
+    if (this.i + 1 < cols && !cellsList[cellIndex(this.i, this.j)].walls[1]) {
       this.i += 1;
       this.x = this.i * w;
     } else {
@@ -40,7 +40,7 @@ class Agent {
   }
 
   moveLeft() {
-    if (this.i - 1 >= 0) {
+    if (this.i - 1 >= 0 && !cellsList[cellIndex(this.i, this.j)].walls[3]) {
       this.i -= 1;
       this.x = this.i * w;
     } else {
