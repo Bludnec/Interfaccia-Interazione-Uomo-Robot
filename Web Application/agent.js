@@ -14,10 +14,7 @@ class Agent {
     image(img, this.x, this.y, w, w);
   }
   moveUp() {
-    if (
-      this.j - 1 >= 0 &&
-      cellsList[cellIndex(this.i, this.j)].walls[0] == true
-    ) {
+    if (this.j - 1 >= 0) {
       this.j -= 1;
       this.y = this.j * w;
     } else {
