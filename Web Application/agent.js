@@ -14,7 +14,11 @@ class Agent {
     image(img, this.x, this.y, w, w);
   }
   moveUp() {
-    if (this.j - 1 >= 0 && !cellsList[cellIndex(this.i, this.j)].walls[0]) {
+    if (
+      this.j - 1 >= 0 &&
+      !cellsList[cellIndex(this.i, this.j)].walls[0] &&
+      findElement(this.i, this.j - 1) == null
+    ) {
       this.j -= 1;
       this.y = this.j * w;
     } else {
@@ -22,7 +26,11 @@ class Agent {
     }
   }
   moveDown() {
-    if (this.j + 1 < rows && !cellsList[cellIndex(this.i, this.j)].walls[2]) {
+    if (
+      this.j + 1 < rows &&
+      !cellsList[cellIndex(this.i, this.j)].walls[2] &&
+      findElement(this.i, this.j + 1) == null
+    ) {
       this.j += 1;
       this.y = this.j * w;
     } else {
@@ -31,7 +39,11 @@ class Agent {
   }
 
   moveRight() {
-    if (this.i + 1 < cols && !cellsList[cellIndex(this.i, this.j)].walls[1]) {
+    if (
+      this.i + 1 < cols &&
+      !cellsList[cellIndex(this.i, this.j)].walls[1] &&
+      findElement(this.i + 1, this.j) == null
+    ) {
       this.i += 1;
       this.x = this.i * w;
     } else {
@@ -40,7 +52,11 @@ class Agent {
   }
 
   moveLeft() {
-    if (this.i - 1 >= 0 && !cellsList[cellIndex(this.i, this.j)].walls[3]) {
+    if (
+      this.i - 1 >= 0 &&
+      !cellsList[cellIndex(this.i, this.j)].walls[3] &&
+      findElement(this.i - 1, this.j) == null
+    ) {
       this.i -= 1;
       this.x = this.i * w;
     } else {
