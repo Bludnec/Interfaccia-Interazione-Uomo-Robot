@@ -29,6 +29,7 @@ for (var i = 0; i < 4; i++) {
 var loadedCellMap;
 var televisionImage, bedImage, bookImage;
 var agentImage;
+
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
   televisionImage = loadImage("images/television.png");
@@ -116,10 +117,10 @@ function draw() {
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
-    drawItems(i);
+    itemsList[i].show();
   }
   if (agent != null) {
-    agent.show(agentImage);
+    agent.show();
   }
 }
 
@@ -138,23 +139,6 @@ function dragItem() {
 }
 function undragItem() {
   document.getElementById(`${indexItemSelected}`).classList.remove("selected");
-}
-
-function drawItems(i) {
-  switch (itemsList[i].name) {
-    case "bed":
-      itemsList[i].show(bedImage);
-      break;
-    case "robot":
-      itemsList[i].show(agentImage);
-      break;
-    case "television":
-      itemsList[i].show(televisionImage);
-      break;
-    case "book":
-      itemsList[i].show(bookImage);
-      break;
-  }
 }
 
 /* Funzione per vedere se nelle coordinate scelte c'è qualcosa */

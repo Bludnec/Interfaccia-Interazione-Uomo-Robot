@@ -10,8 +10,8 @@ class Agent {
     this.y = j * w;
   }
 
-  show(img) {
-    image(img, this.x, this.y, w, w);
+  show() {
+    image(agentImage, this.x, this.y, w, w);
   }
   moveUp() {
     if (

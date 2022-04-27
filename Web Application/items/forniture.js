@@ -28,7 +28,7 @@ class Television extends Forniture {
 
     this.lexical_references = ["tv", "television"];
   }
-  show(img) {
+  show() {
     super.show(televisionImage);
   }
 }
@@ -44,8 +44,8 @@ class Bed extends Forniture {
 
     this.lexical_references = ["bed", "couch", "sofa"];
   }
-  show(img) {
-    super.show(img);
+  show() {
+    super.show(bedImage);
   }
 }
 
@@ -60,7 +60,7 @@ class Book extends Forniture {
 
     this.lexical_references = ["book", "volume"];
   }
-  show(img) {
-    super.show(img);
+  show() {
+    super.show(bookImage);
   }
 }
