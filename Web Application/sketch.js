@@ -32,9 +32,10 @@ var agentImage;
 
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
+  agentImage = loadImage("images/robot.png");
+
   televisionImage = loadImage("images/television.png");
   bedImage = loadImage("images/bed.png");
-  agentImage = loadImage("images/robot.png");
   bookImage = loadImage("images/book.png");
 }
 
@@ -98,6 +99,9 @@ function setup() {
       cell.cellColor = loadedCellMap[k].cellColor;
       cellsList.push(cell);
     }
+    for (var i = 0; i < cellsList.length; i++) {
+      deleteWalls(i);
+    }
     boolLoadMap = false;
   }
   /* Create canvas */
@@ -113,7 +117,7 @@ function draw() {
   frameRate(10);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
-    deleteWalls(i);
+    // deleteWalls(i);
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {

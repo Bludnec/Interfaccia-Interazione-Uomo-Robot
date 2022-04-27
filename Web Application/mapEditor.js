@@ -10,6 +10,9 @@ function colorCellMap(x, y) {
     cellsList[cellIndex(x, y)].cellColor =
       document.getElementById("cell-color").value;
   }
+  for (var i = 0; i < cellsList.length; i++) {
+    deleteWalls(i);
+  }
 }
 
 /* Save the map into a json file */

@@ -18,6 +18,43 @@ document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
 
+function modifiedWalls(mX, mY) {
+  console.log(mX, mY);
+
+  var x = parseInt(mX / w);
+  var y = parseInt(mY / w);
+
+  if (mX > w) {
+    mX = mX - x * w;
+  }
+
+  if (mY > w) {
+    mY = mY - y * w;
+  }
+
+  /* Click più vicino al muro sopra */
+  if (mX > (w * 3) / 4 && mY < (w * 3) / 4 && mY > w / 4) {
+    if (!cellsList[cellIndex(x, y)].walls[1]) {
+      console.log("dx");
+      console.log(cellsList[cellIndex(x, y)]);
+      cellsList[cellIndex(x, y)].walls[1] = true;
+      cellsList[cellIndex(x + 1, y)].walls[3] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[1] = false;
+    }
+  }
+  if (mX < w / 4 && mY < (w * 3) / 4 && mY > w / 4) {
+    console.log("sx");
+  }
+
+  if (mY > (w * 3) / 4 && mX < (w * 3) / 4 && mX > w / 4) {
+    console.log("giu");
+  }
+  if (mY < w / 4 && mX < (w * 3) / 4 && mX > w / 4) {
+    console.log("su");
+  }
+}
+
 function mouseClicked() {
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
@@ -34,7 +71,7 @@ function mouseClicked() {
   }
   /* Modifica dei muri */
   if (cellsList[cellIndex(x, y)] != undefined && checkWalls.checked == true) {
-    console.log(mouseX, mouseY);
+    modifiedWalls(mouseX, mouseY);
   }
   /* Fa apparire tabella con info della cella */
   if (cellsList[cellIndex(x, y)] != undefined) {
