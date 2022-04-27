@@ -32,26 +32,62 @@ function modifiedWalls(mX, mY) {
     mY = mY - y * w;
   }
 
-  /* Click più vicino al muro sopra */
-  if (mX > (w * 3) / 4 && mY < (w * 3) / 4 && mY > w / 4) {
+  if (
+    mX > (w * 3) / 4 &&
+    mY < (w * 3) / 4 &&
+    mY > w / 4 &&
+    cellsList[cellIndex(x + 1, y)] != null
+  ) {
     if (!cellsList[cellIndex(x, y)].walls[1]) {
-      console.log("dx");
-      console.log(cellsList[cellIndex(x, y)]);
       cellsList[cellIndex(x, y)].walls[1] = true;
       cellsList[cellIndex(x + 1, y)].walls[3] = true;
     } else {
       cellsList[cellIndex(x, y)].walls[1] = false;
+      cellsList[cellIndex(x + 1, y)].walls[3] = false;
     }
   }
-  if (mX < w / 4 && mY < (w * 3) / 4 && mY > w / 4) {
-    console.log("sx");
+  if (
+    mX < w / 4 &&
+    mY < (w * 3) / 4 &&
+    mY > w / 4 &&
+    cellsList[cellIndex(x - 1, y)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[3]) {
+      cellsList[cellIndex(x, y)].walls[3] = true;
+      cellsList[cellIndex(x - 1, y)].walls[1] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[3] = false;
+      cellsList[cellIndex(x - 1, y)].walls[1] = false;
+    }
   }
 
-  if (mY > (w * 3) / 4 && mX < (w * 3) / 4 && mX > w / 4) {
-    console.log("giu");
+  if (
+    mY > (w * 3) / 4 &&
+    mX < (w * 3) / 4 &&
+    mX > w / 4 &&
+    cellsList[cellIndex(x, y + 1)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[2]) {
+      cellsList[cellIndex(x, y)].walls[2] = true;
+      cellsList[cellIndex(x, y + 1)].walls[0] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[2] = false;
+      cellsList[cellIndex(x, y + 1)].walls[0] = false;
+    }
   }
-  if (mY < w / 4 && mX < (w * 3) / 4 && mX > w / 4) {
-    console.log("su");
+  if (
+    mY < w / 4 &&
+    mX < (w * 3) / 4 &&
+    mX > w / 4 &&
+    cellsList[cellIndex(x, y - 1)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[0]) {
+      cellsList[cellIndex(x, y)].walls[0] = true;
+      cellsList[cellIndex(x, y - 1)].walls[2] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[0] = false;
+      cellsList[cellIndex(x, y - 1)].walls[2] = false;
+    }
   }
 }
 

@@ -117,7 +117,6 @@ function draw() {
   frameRate(10);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
-    // deleteWalls(i);
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {

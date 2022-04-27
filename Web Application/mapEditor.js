@@ -3,15 +3,52 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
 
 /* Color the cells of map and assign the value to "zone". */
 function colorCellMap(x, y) {
+  var thisCell = cellsList[cellIndex(x, y)];
   if (document.getElementById("zone").value == "") {
     alert("Inserire nome zona");
   } else {
-    cellsList[cellIndex(x, y)].zone = document.getElementById("zone").value;
-    cellsList[cellIndex(x, y)].cellColor =
-      document.getElementById("cell-color").value;
-  }
-  for (var i = 0; i < cellsList.length; i++) {
-    deleteWalls(i);
+    thisCell.zone = document.getElementById("zone").value;
+    thisCell.cellColor = document.getElementById("cell-color").value;
+    if (
+      cellsList[cellIndex(x + 1, y)] != null &&
+      thisCell.zone == cellsList[cellIndex(x + 1, y)].zone
+    ) {
+      thisCell.walls[1] = false;
+      cellsList[cellIndex(x + 1, y)].walls[3] = false;
+    } else if (cellsList[cellIndex(x + 1, y)] != null) {
+      thisCell.walls[1] = true;
+      cellsList[cellIndex(x + 1, y)].walls[3] = true;
+    }
+    if (
+      cellsList[cellIndex(x - 1, y)] != null &&
+      thisCell.zone == cellsList[cellIndex(x - 1, y)].zone
+    ) {
+      thisCell.walls[3] = false;
+      cellsList[cellIndex(x - 1, y)].walls[1] = false;
+    } else if (cellsList[cellIndex(x - 1, y)] != null) {
+      thisCell.walls[3] = true;
+      cellsList[cellIndex(x - 1, y)].walls[1] = true;
+    }
+    if (
+      cellsList[cellIndex(x, y + 1)] != null &&
+      thisCell.zone == cellsList[cellIndex(x, y + 1)].zone
+    ) {
+      thisCell.walls[2] = false;
+      cellsList[cellIndex(x, y + 1)].walls[0] = false;
+    } else if (cellsList[cellIndex(x, y + 1)] != null) {
+      thisCell.walls[2] = true;
+      cellsList[cellIndex(x, y + 1)].walls[0] = true;
+    }
+    if (
+      cellsList[cellIndex(x, y - 1)] != null &&
+      thisCell.zone == cellsList[cellIndex(x, y - 1)].zone
+    ) {
+      thisCell.walls[0] = false;
+      cellsList[cellIndex(x, y - 1)].walls[2] = false;
+    } else if (cellsList[cellIndex(x, y - 1)] != null) {
+      thisCell.walls[0] = true;
+      cellsList[cellIndex(x, y - 1)].walls[2] = true;
+    }
   }
 }
 
