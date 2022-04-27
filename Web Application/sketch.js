@@ -17,7 +17,7 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < 5; i++) {
   document.getElementById(`item-${i}`).addEventListener("dragstart", dragItem);
   document.getElementById(`item-${i}`).addEventListener("dragend", undragItem);
 }
@@ -27,7 +27,7 @@ for (var i = 0; i < 4; i++) {
  *  asynchronous loading of external files in a blocking way
  */
 var loadedCellMap;
-var televisionImage, bedImage, bookImage;
+var televisionImage, bedImage, bookImage, tableImage;
 var agentImage;
 
 function preload() {
@@ -37,6 +37,8 @@ function preload() {
   televisionImage = loadImage("images/television.png");
   bedImage = loadImage("images/bed.png");
   bookImage = loadImage("images/book.png");
+
+  tableImage = loadImage("images/table.png");
 }
 
 /**
@@ -147,12 +149,17 @@ function undragItem() {
 /**
  * Funzione per vedere se nelle coordinate scelte c'è qualcosa
  * e vede se si può mettere un altro oggetto sopra
+ * Restituisce true se è possibile posizionare l'oggetto.
  */
 function findElement(i, j) {
   for (var k = 0; k < itemsList.length; k++) {
     if (itemsList[k].i == i && itemsList[k].j == j) {
-      return itemsList[k];
+      if (itemsList[k].support_ability) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
-  return null;
+  return true;
 }

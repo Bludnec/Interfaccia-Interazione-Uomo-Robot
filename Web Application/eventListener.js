@@ -91,7 +91,7 @@ function mouseReleased() {
   var y = parseInt(mouseY / w);
 
   /* Sposta l'elemento pressato dopo il rilascio alle nuove coordinate */
-  if (boolMousePressed && !findElement(x, y)) {
+  if (boolMousePressed && findElement(x, y)) {
     itemsList[indexItemPressed].i = x;
     itemsList[indexItemPressed].j = y;
 
@@ -103,7 +103,7 @@ function mouseReleased() {
   }
 
   /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
-  if (!findElement(x, y)) {
+  if (findElement(x, y)) {
     switch (indexItemSelected) {
       case "item-0":
         console.log("Aggiungo agente");
@@ -126,6 +126,12 @@ function mouseReleased() {
         console.log("Aggiungo libro");
         var book = new Book("bk" + idCounter, "book", x, y);
         itemsList.push(book);
+        idCounter++;
+        break;
+      case "item-4":
+        console.log("Aggiungo tavolo");
+        var table = new Table("tab" + idCounter, "table", x, y);
+        itemsList.push(table);
         idCounter++;
         break;
     }

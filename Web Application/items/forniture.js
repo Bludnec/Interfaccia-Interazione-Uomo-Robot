@@ -64,3 +64,19 @@ class Book extends Forniture {
     super.show(bookImage);
   }
 }
+
+class Table extends Forniture {
+  constructor(id, name, i, j) {
+    super(id, name, i, j);
+
+    this.contain_ability = false;
+    this.support_ability = true;
+    this.ability_to_move = false;
+    this.ability_to_open = false;
+
+    this.lexical_references = ["table"];
+  }
+  show() {
+    super.show(tableImage);
+  }
+}
