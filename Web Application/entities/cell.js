@@ -21,9 +21,18 @@ class Cell {
     fill(this.cellColor);
     noStroke();
     rect(this.x, this.y, w, w);
+
+    /**
+     * Creo un bordo intorno alle
+     * celle per identificarle sulla mappa (i contorni non sono i muri)
+     */
     noFill();
+    stroke(0);
+    strokeWeight(0.1);
+    rect(this.x, this.y, w, w);
 
     /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
+    strokeWeight(3);
     stroke(0);
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
     if (this.walls[0]) {

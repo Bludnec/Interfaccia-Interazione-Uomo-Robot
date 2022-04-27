@@ -48,7 +48,12 @@
       <form id="zone-form">
         <legend>Zona e colore della cella</legend>
         <label for="fname">Zona </label><br />
-        <input type="text" id="zone" name="zone" placeholder="kitchen" /><br />
+
+        <select name="list" id="zone">
+          <option value="Kitchen">Kitchen</option>
+          <option value="Bathroom">Bathroom</option>
+          <option value="Living Room">Living Room</option>
+        </select>
         <label for="fname">Colore </label><br />
         <input type="color" id="cell-color" name="cell-color" /><br />
         <label for="checkBox">Cambia colore</label><br />

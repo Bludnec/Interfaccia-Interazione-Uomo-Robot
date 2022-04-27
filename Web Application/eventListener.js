@@ -32,6 +32,7 @@ function mouseClicked() {
   }
 
   if (cellsList[cellIndex(x, y)] != undefined) {
+    console.log(cellsList[cellIndex(x, y)]);
     cellInfoPoint.classList.remove("hidden");
 
     cellCoord.textContent =
