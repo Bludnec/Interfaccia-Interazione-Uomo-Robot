@@ -63,6 +63,7 @@ function mouseClicked() {
 }
 
 function mousePressed() {
+  console.log("press" + indexItemPressed);
   if (mouseX < 0 || mouseY < 0) {
     return null;
   }
@@ -89,18 +90,6 @@ function mouseReleased() {
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-
-  /* Sposta l'elemento pressato dopo il rilascio alle nuove coordinate */
-  if (boolMousePressed && findElement(x, y)) {
-    itemsList[indexItemPressed].i = x;
-    itemsList[indexItemPressed].j = y;
-
-    itemsList[indexItemPressed].x = x * w;
-    itemsList[indexItemPressed].y = y * w;
-
-    boolMousePressed = false;
-    indexItemPressed = null;
-  }
 
   /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
   if (findElement(x, y)) {
@@ -135,10 +124,20 @@ function mouseReleased() {
         idCounter++;
         break;
     }
-  } else {
-    console.log("C'è un oggetto già presente su questa cella.");
+    indexItemSelected = -1;
   }
-  indexItemSelected = -1;
+
+  /* Sposta l'elemento pressato dopo il rilascio alle nuove coordinate */
+  if (boolMousePressed && findElement(x, y)) {
+    itemsList[indexItemPressed].i = x;
+    itemsList[indexItemPressed].j = y;
+
+    itemsList[indexItemPressed].x = x * w;
+    itemsList[indexItemPressed].y = y * w;
+
+    boolMousePressed = false;
+    indexItemPressed = null;
+  }
 }
 
 /* Keyboard events */
