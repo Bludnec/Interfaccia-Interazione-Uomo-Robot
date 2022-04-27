@@ -119,3 +119,76 @@ function deleteWalls(i) {
     cellsList[cellIndex(x, y + 1)].walls[0] = true;
   }
 }
+
+function editWalls(mX, mY) {
+  var x = parseInt(mX / w);
+  var y = parseInt(mY / w);
+
+  var thisCell = cellsList[cellIndex(x, y)];
+
+  if (mX > w) {
+    mX = mX - x * w;
+  }
+
+  if (mY > w) {
+    mY = mY - y * w;
+  }
+
+  if (
+    mX > (w * 3) / 4 &&
+    mY < (w * 3) / 4 &&
+    mY > w / 4 &&
+    cellsList[cellIndex(x + 1, y)] != null
+  ) {
+    if (!thisCell.walls[1]) {
+      thisCell.walls[1] = true;
+      cellsList[cellIndex(x + 1, y)].walls[3] = true;
+    } else {
+      thisCell.walls[1] = false;
+      cellsList[cellIndex(x + 1, y)].walls[3] = false;
+    }
+  }
+  if (
+    mX < w / 4 &&
+    mY < (w * 3) / 4 &&
+    mY > w / 4 &&
+    cellsList[cellIndex(x - 1, y)] != null
+  ) {
+    if (!thisCell.walls[3]) {
+      thisCell.walls[3] = true;
+      cellsList[cellIndex(x - 1, y)].walls[1] = true;
+    } else {
+      thisCell.walls[3] = false;
+      cellsList[cellIndex(x - 1, y)].walls[1] = false;
+    }
+  }
+
+  if (
+    mY > (w * 3) / 4 &&
+    mX < (w * 3) / 4 &&
+    mX > w / 4 &&
+    cellsList[cellIndex(x, y + 1)] != null
+  ) {
+    if (!thisCell.walls[2]) {
+      thisCell.walls[2] = true;
+      cellsList[cellIndex(x, y + 1)].walls[0] = true;
+    } else {
+      thisCell.walls[2] = false;
+      cellsList[cellIndex(x, y + 1)].walls[0] = false;
+    }
+  }
+  if (
+    mY < w / 4 &&
+    mX < (w * 3) / 4 &&
+    mX > w / 4 &&
+    cellsList[cellIndex(x, y - 1)] != null
+  ) {
+    if (!thisCell.walls[0]) {
+      thisCell.walls[0] = true;
+      cellsList[cellIndex(x, y - 1)].walls[2] = true;
+    } else {
+      thisCell.walls[0] = false;
+      cellsList[cellIndex(x, y - 1)].walls[2] = false;
+    }
+  }
+}

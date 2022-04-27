@@ -15,9 +15,7 @@ var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 
 var boolMousePressed = false;
-var indexItemPressed;
-var xItemPressed;
-var yItemPressed;
+var indexItemPressed, xItemPressed, yItemPressed;
 
 document
   .getElementById("delete-button")
@@ -33,25 +31,22 @@ function mouseClicked() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
 
+  var thisCell = cellsList[cellIndex(x, y)];
+
   /* Color the cell and assign the value "zone" to the cell. */
-  if (cellsList[cellIndex(x, y)] != undefined && checkColor.checked == true) {
+  if (thisCell != undefined && checkColor.checked == true) {
     colorCellMap(x, y);
   }
   /* Modifica dei muri */
-  if (cellsList[cellIndex(x, y)] != undefined && checkWalls.checked == true) {
-    modifiedWalls(mouseX, mouseY);
+  if (thisCell != undefined && checkWalls.checked == true) {
+    editWalls(mouseX, mouseY);
   }
   /* Fa apparire tabella con info della cella */
-  if (cellsList[cellIndex(x, y)] != undefined) {
-    console.log(cellsList[cellIndex(x, y)]);
+  if (thisCell != undefined) {
     cellInfoPoint.classList.remove("hidden");
 
-    cellCoord.textContent =
-      "x:" +
-      cellsList[cellIndex(x, y)].i +
-      ", y:" +
-      cellsList[cellIndex(x, y)].j;
-    cellZone.textContent = cellsList[cellIndex(x, y)].zone;
+    cellCoord.textContent = "x:" + thisCell.i + ", y:" + thisCell.j;
+    cellZone.textContent = thisCell.zone;
   }
   /* Fa apparire tabella con info dell'oggetto */
   for (var k = 0; k < itemsList.length; k++) {
@@ -106,6 +101,7 @@ function mouseReleased() {
     boolMousePressed = false;
     indexItemPressed = null;
   }
+
   /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
   if (!findElement(x, y)) {
     switch (indexItemSelected) {
@@ -134,7 +130,7 @@ function mouseReleased() {
         break;
     }
   } else {
-    console.log("C'è un ggetto già presente su questa cella.");
+    console.log("C'è un oggetto già presente su questa cella.");
   }
   indexItemSelected = -1;
 }
@@ -176,76 +172,4 @@ function removeInfoPoint() {
   infoCoord.textContent = "";
   infoLexRef.textContent = "";
   infoPoint.classList.add("hidden");
-}
-function modifiedWalls(mX, mY) {
-  console.log(mX, mY);
-
-  var x = parseInt(mX / w);
-  var y = parseInt(mY / w);
-
-  if (mX > w) {
-    mX = mX - x * w;
-  }
-
-  if (mY > w) {
-    mY = mY - y * w;
-  }
-
-  if (
-    mX > (w * 3) / 4 &&
-    mY < (w * 3) / 4 &&
-    mY > w / 4 &&
-    cellsList[cellIndex(x + 1, y)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[1]) {
-      cellsList[cellIndex(x, y)].walls[1] = true;
-      cellsList[cellIndex(x + 1, y)].walls[3] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[1] = false;
-      cellsList[cellIndex(x + 1, y)].walls[3] = false;
-    }
-  }
-  if (
-    mX < w / 4 &&
-    mY < (w * 3) / 4 &&
-    mY > w / 4 &&
-    cellsList[cellIndex(x - 1, y)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[3]) {
-      cellsList[cellIndex(x, y)].walls[3] = true;
-      cellsList[cellIndex(x - 1, y)].walls[1] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[3] = false;
-      cellsList[cellIndex(x - 1, y)].walls[1] = false;
-    }
-  }
-
-  if (
-    mY > (w * 3) / 4 &&
-    mX < (w * 3) / 4 &&
-    mX > w / 4 &&
-    cellsList[cellIndex(x, y + 1)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[2]) {
-      cellsList[cellIndex(x, y)].walls[2] = true;
-      cellsList[cellIndex(x, y + 1)].walls[0] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[2] = false;
-      cellsList[cellIndex(x, y + 1)].walls[0] = false;
-    }
-  }
-  if (
-    mY < w / 4 &&
-    mX < (w * 3) / 4 &&
-    mX > w / 4 &&
-    cellsList[cellIndex(x, y - 1)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[0]) {
-      cellsList[cellIndex(x, y)].walls[0] = true;
-      cellsList[cellIndex(x, y - 1)].walls[2] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[0] = false;
-      cellsList[cellIndex(x, y - 1)].walls[2] = false;
-    }
-  }
 }
