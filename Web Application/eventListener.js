@@ -11,6 +11,9 @@ var cellInfoPoint = document.getElementById("cell-info-point");
 var cellCoord = document.getElementById("cell-coord");
 var cellZone = document.getElementById("cell-zone");
 
+var checkWalls = document.getElementById("walls-checkbox");
+var checkColor = document.getElementById("color-checkbox");
+
 document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
@@ -24,13 +27,16 @@ function mouseClicked() {
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-  var check = document.getElementById("color-checkbox");
 
   /* Color the cell and assign the value "zone" to the cell. */
-  if (cellsList[cellIndex(x, y)] != undefined && check.checked == true) {
+  if (cellsList[cellIndex(x, y)] != undefined && checkColor.checked == true) {
     colorCellMap(x, y);
   }
-
+  /* Modifica dei muri */
+  if (cellsList[cellIndex(x, y)] != undefined && checkWalls.checked == true) {
+    console.log(mouseX, mouseY);
+  }
+  /* Fa apparire tabella con info della cella */
   if (cellsList[cellIndex(x, y)] != undefined) {
     console.log(cellsList[cellIndex(x, y)]);
     cellInfoPoint.classList.remove("hidden");
@@ -42,7 +48,7 @@ function mouseClicked() {
       cellsList[cellIndex(x, y)].j;
     cellZone.textContent = cellsList[cellIndex(x, y)].zone;
   }
-
+  /* Fa apparire tabella con info dell'oggetto */
   for (var k = 0; k < itemsList.length; k++) {
     if (itemsList[k].i == x && itemsList[k].j == y) {
       infoPoint.classList.remove("hidden");
