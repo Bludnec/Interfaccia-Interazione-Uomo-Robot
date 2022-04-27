@@ -18,79 +18,6 @@ document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
 
-function modifiedWalls(mX, mY) {
-  console.log(mX, mY);
-
-  var x = parseInt(mX / w);
-  var y = parseInt(mY / w);
-
-  if (mX > w) {
-    mX = mX - x * w;
-  }
-
-  if (mY > w) {
-    mY = mY - y * w;
-  }
-
-  if (
-    mX > (w * 3) / 4 &&
-    mY < (w * 3) / 4 &&
-    mY > w / 4 &&
-    cellsList[cellIndex(x + 1, y)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[1]) {
-      cellsList[cellIndex(x, y)].walls[1] = true;
-      cellsList[cellIndex(x + 1, y)].walls[3] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[1] = false;
-      cellsList[cellIndex(x + 1, y)].walls[3] = false;
-    }
-  }
-  if (
-    mX < w / 4 &&
-    mY < (w * 3) / 4 &&
-    mY > w / 4 &&
-    cellsList[cellIndex(x - 1, y)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[3]) {
-      cellsList[cellIndex(x, y)].walls[3] = true;
-      cellsList[cellIndex(x - 1, y)].walls[1] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[3] = false;
-      cellsList[cellIndex(x - 1, y)].walls[1] = false;
-    }
-  }
-
-  if (
-    mY > (w * 3) / 4 &&
-    mX < (w * 3) / 4 &&
-    mX > w / 4 &&
-    cellsList[cellIndex(x, y + 1)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[2]) {
-      cellsList[cellIndex(x, y)].walls[2] = true;
-      cellsList[cellIndex(x, y + 1)].walls[0] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[2] = false;
-      cellsList[cellIndex(x, y + 1)].walls[0] = false;
-    }
-  }
-  if (
-    mY < w / 4 &&
-    mX < (w * 3) / 4 &&
-    mX > w / 4 &&
-    cellsList[cellIndex(x, y - 1)] != null
-  ) {
-    if (!cellsList[cellIndex(x, y)].walls[0]) {
-      cellsList[cellIndex(x, y)].walls[0] = true;
-      cellsList[cellIndex(x, y - 1)].walls[2] = true;
-    } else {
-      cellsList[cellIndex(x, y)].walls[0] = false;
-      cellsList[cellIndex(x, y - 1)].walls[2] = false;
-    }
-  }
-}
-
 function mouseClicked() {
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
@@ -213,4 +140,76 @@ function removeInfoPoint() {
   infoCoord.textContent = "";
   infoLexRef.textContent = "";
   infoPoint.classList.add("hidden");
+}
+function modifiedWalls(mX, mY) {
+  console.log(mX, mY);
+
+  var x = parseInt(mX / w);
+  var y = parseInt(mY / w);
+
+  if (mX > w) {
+    mX = mX - x * w;
+  }
+
+  if (mY > w) {
+    mY = mY - y * w;
+  }
+
+  if (
+    mX > (w * 3) / 4 &&
+    mY < (w * 3) / 4 &&
+    mY > w / 4 &&
+    cellsList[cellIndex(x + 1, y)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[1]) {
+      cellsList[cellIndex(x, y)].walls[1] = true;
+      cellsList[cellIndex(x + 1, y)].walls[3] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[1] = false;
+      cellsList[cellIndex(x + 1, y)].walls[3] = false;
+    }
+  }
+  if (
+    mX < w / 4 &&
+    mY < (w * 3) / 4 &&
+    mY > w / 4 &&
+    cellsList[cellIndex(x - 1, y)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[3]) {
+      cellsList[cellIndex(x, y)].walls[3] = true;
+      cellsList[cellIndex(x - 1, y)].walls[1] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[3] = false;
+      cellsList[cellIndex(x - 1, y)].walls[1] = false;
+    }
+  }
+
+  if (
+    mY > (w * 3) / 4 &&
+    mX < (w * 3) / 4 &&
+    mX > w / 4 &&
+    cellsList[cellIndex(x, y + 1)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[2]) {
+      cellsList[cellIndex(x, y)].walls[2] = true;
+      cellsList[cellIndex(x, y + 1)].walls[0] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[2] = false;
+      cellsList[cellIndex(x, y + 1)].walls[0] = false;
+    }
+  }
+  if (
+    mY < w / 4 &&
+    mX < (w * 3) / 4 &&
+    mX > w / 4 &&
+    cellsList[cellIndex(x, y - 1)] != null
+  ) {
+    if (!cellsList[cellIndex(x, y)].walls[0]) {
+      cellsList[cellIndex(x, y)].walls[0] = true;
+      cellsList[cellIndex(x, y - 1)].walls[2] = true;
+    } else {
+      cellsList[cellIndex(x, y)].walls[0] = false;
+      cellsList[cellIndex(x, y - 1)].walls[2] = false;
+    }
+  }
 }
