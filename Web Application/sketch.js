@@ -63,13 +63,25 @@ function setup() {
         }
       }
     } else {
-      /* Resize canvas with old cellList and itemsList */
+      /**
+       * Resize canvas with old cell list and object list
+       * by changing x, y coordinates.
+       */
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
           cellsList[cellIndex(i, j)].x = i * w;
           cellsList[cellIndex(i, j)].y = j * w;
         }
       }
+
+      for (var k = 0; k < itemsList.length; k++) {
+        itemsList[k].x = itemsList[k].i * w;
+        itemsList[k].y = itemsList[k].j * w;
+      }
+
+      agent.x = agent.i * w;
+      agent.y = agent.j * w;
+
       boolResizeCanvas = false;
     }
   } else if (boolLoadMap) {
