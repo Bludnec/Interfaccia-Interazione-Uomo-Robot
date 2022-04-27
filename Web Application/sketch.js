@@ -144,7 +144,10 @@ function undragItem() {
   document.getElementById(`${indexItemSelected}`).classList.remove("selected");
 }
 
-/* Funzione per vedere se nelle coordinate scelte c'è qualcosa */
+/**
+ * Funzione per vedere se nelle coordinate scelte c'è qualcosa
+ * e vede se si può mettere un altro oggetto sopra
+ */
 function findElement(i, j) {
   for (var k = 0; k < itemsList.length; k++) {
     if (itemsList[k].i == i && itemsList[k].j == j) {

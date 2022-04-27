@@ -14,6 +14,11 @@ var cellZone = document.getElementById("cell-zone");
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 
+var boolMousePressed = false;
+var indexItemPressed;
+var xItemPressed;
+var yItemPressed;
+
 document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
@@ -62,6 +67,24 @@ function mouseClicked() {
   }
 }
 
+function mousePressed() {
+  if (mouseX < 0 || mouseY < 0) {
+    return null;
+  }
+
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+
+  for (var k = 0; k < itemsList.length; k++) {
+    if (itemsList[k].i == x && itemsList[k].j == y) {
+      boolMousePressed = true;
+      indexItemPressed = k;
+      xItemPressed = itemsList[k].i;
+      yItemPressed = itemsList[k].j;
+    }
+  }
+}
+
 function mouseReleased() {
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
@@ -71,6 +94,19 @@ function mouseReleased() {
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
+
+  /* Sposta l'elemento pressato dopo il rilascio alle nuove coordinate */
+  if (boolMousePressed && !findElement(x, y)) {
+    itemsList[indexItemPressed].i = x;
+    itemsList[indexItemPressed].j = y;
+
+    itemsList[indexItemPressed].x = x * w;
+    itemsList[indexItemPressed].y = y * w;
+
+    boolMousePressed = false;
+    indexItemPressed = null;
+  }
+  /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
   if (!findElement(x, y)) {
     switch (indexItemSelected) {
       case "item-0":
