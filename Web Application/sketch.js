@@ -17,7 +17,7 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 3; i++) {
+for (var i = 0; i < 4; i++) {
   document.getElementById(`item-${i}`).addEventListener("dragstart", dragItem);
   document.getElementById(`item-${i}`).addEventListener("dragend", undragItem);
 }
@@ -27,13 +27,14 @@ for (var i = 0; i < 3; i++) {
  *  asynchronous loading of external files in a blocking way
  */
 var loadedCellMap;
-var televisionImage, bedImage;
+var televisionImage, bedImage, bookImage;
 var agentImage;
 function preload() {
   loadedCellMap = loadJSON("map/map.json");
   televisionImage = loadImage("images/television.png");
   bedImage = loadImage("images/bed.png");
   agentImage = loadImage("images/robot.png");
+  bookImage = loadImage("images/book.png");
 }
 
 /**
@@ -78,10 +79,10 @@ function setup() {
         itemsList[k].x = itemsList[k].i * w;
         itemsList[k].y = itemsList[k].j * w;
       }
-
-      agent.x = agent.i * w;
-      agent.y = agent.j * w;
-
+      if (agent != null) {
+        agent.x = agent.i * w;
+        agent.y = agent.j * w;
+      }
       boolResizeCanvas = false;
     }
   } else if (boolLoadMap) {
@@ -149,6 +150,9 @@ function drawItems(i) {
       break;
     case "television":
       itemsList[i].show(televisionImage);
+      break;
+    case "book":
+      itemsList[i].show(bookImage);
       break;
   }
 }

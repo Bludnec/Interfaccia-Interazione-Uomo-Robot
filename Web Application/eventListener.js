@@ -90,6 +90,12 @@ function mouseReleased() {
         itemsList.push(television);
         idCounter++;
         break;
+      case "item-3":
+        console.log("Aggiungo libro");
+        var book = new Book("bk" + idCounter, "book", x, y);
+        itemsList.push(book);
+        idCounter++;
+        break;
     }
   } else {
     console.log("C'è un ggetto già presente su questa cella.");
