@@ -60,10 +60,11 @@ function mouseClicked() {
       lastClickedIndex = k;
     }
   }
+  /* Serve per impedire lo spostamento se viene solamente clicato l'oggetto invece di essere draggato */
+  boolMousePressed = false;
 }
 
 function mousePressed() {
-  console.log("press" + indexItemPressed);
   if (mouseX < 0 || mouseY < 0) {
     return null;
   }
