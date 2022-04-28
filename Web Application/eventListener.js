@@ -22,10 +22,11 @@ document
   .addEventListener("click", deleteItemOnMap);
 
 function mouseClicked() {
-  console.log("mouseClicked");
   /* Returns null if the click is done outside the canvas it.  */
-  if (mouseX < 0 || mouseY < 0) {
+  if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
+  } else {
+    console.log("mouseClicked");
   }
 
   /* Check if the click is done on the cell area. */
@@ -66,9 +67,10 @@ function mouseClicked() {
 }
 
 function mousePressed() {
-  console.log("mousePressed");
-  if (mouseX < 0 || mouseY < 0) {
+  if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
+  } else {
+    console.log("mousePressed");
   }
 
   var x = parseInt(mouseX / w);
@@ -85,10 +87,11 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-  console.log("mouseReleased");
   /* Returns null if the click is done outside the canvas it.  */
-  if (mouseX < 0 || mouseY < 0) {
+  if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
+  } else {
+    console.log("mouseReleased");
   }
 
   /* Check if the click is done on the cell area. */
