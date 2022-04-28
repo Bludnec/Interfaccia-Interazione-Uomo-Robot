@@ -22,6 +22,7 @@ document
   .addEventListener("click", deleteItemOnMap);
 
 function mouseClicked() {
+  console.log("mouseClicked");
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
     return null;
@@ -65,6 +66,7 @@ function mouseClicked() {
 }
 
 function mousePressed() {
+  console.log("mousePressed");
   if (mouseX < 0 || mouseY < 0) {
     return null;
   }
@@ -83,6 +85,7 @@ function mousePressed() {
 }
 
 function mouseReleased() {
+  console.log("mouseReleased");
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0) {
     return null;
