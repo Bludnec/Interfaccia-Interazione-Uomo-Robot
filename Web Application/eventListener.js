@@ -101,7 +101,7 @@ function mouseReleased() {
   var y = parseInt(mouseY / w);
 
   /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
-  if (findElement(x, y)) {
+  if (possToPutObject(x, y)) {
     switch (indexItemSelected) {
       case "item-0":
         console.log("Aggiungo agente");
@@ -137,7 +137,7 @@ function mouseReleased() {
   }
 
   /* Sposta l'elemento pressato dopo il rilascio alle nuove coordinate */
-  if (boolMousePressed && findElement(x, y)) {
+  if (boolMousePressed && possToPutObject(x, y)) {
     itemsList[indexItemPressed].i = x;
     itemsList[indexItemPressed].j = y;
 

@@ -148,10 +148,10 @@ function undragItem() {
 
 /**
  * Funzione per vedere se nelle coordinate scelte c'è qualcosa
- * e vede se si può mettere un altro oggetto sopra
+ * e vede se si può mettere un altro oggetto sopra.
  * Restituisce true se è possibile posizionare l'oggetto.
  */
-function findElement(i, j) {
+function possToPutObject(i, j) {
   for (var k = 0; k < itemsList.length; k++) {
     if (itemsList[k].i == i && itemsList[k].j == j) {
       if (itemsList[k].support_ability) {
@@ -159,6 +159,19 @@ function findElement(i, j) {
       } else {
         return false;
       }
+    }
+  }
+  return true;
+}
+
+/**
+ * Funzione che permette all'agente di vedere se è in grado di spostarsi nella
+ * cella i,j, o se può camminare sopra l'oggetto.
+ */
+function possMoveOn(i, j) {
+  for (var k = 0; k < itemsList.length; k++) {
+    if (itemsList[k].i == i && itemsList[k].j == j) {
+      return false;
     }
   }
   return true;

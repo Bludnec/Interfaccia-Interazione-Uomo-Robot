@@ -17,7 +17,7 @@ class Agent {
     if (
       this.j - 1 >= 0 &&
       !cellsList[cellIndex(this.i, this.j)].walls[0] &&
-      findElement(this.i, this.j - 1) == true
+      possMoveOn(this.i, this.j - 1) == true
     ) {
       this.j -= 1;
       this.y = this.j * w;
@@ -29,7 +29,7 @@ class Agent {
     if (
       this.j + 1 < rows &&
       !cellsList[cellIndex(this.i, this.j)].walls[2] &&
-      findElement(this.i, this.j + 1) == true
+      possMoveOn(this.i, this.j + 1) == true
     ) {
       this.j += 1;
       this.y = this.j * w;
@@ -42,7 +42,7 @@ class Agent {
     if (
       this.i + 1 < cols &&
       !cellsList[cellIndex(this.i, this.j)].walls[1] &&
-      findElement(this.i + 1, this.j) == true
+      possMoveOn(this.i + 1, this.j) == true
     ) {
       this.i += 1;
       this.x = this.i * w;
@@ -55,7 +55,7 @@ class Agent {
     if (
       this.i - 1 >= 0 &&
       !cellsList[cellIndex(this.i, this.j)].walls[3] &&
-      findElement(this.i - 1, this.j) == true
+      possMoveOn(this.i - 1, this.j) == true
     ) {
       this.i -= 1;
       this.x = this.i * w;
