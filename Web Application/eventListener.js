@@ -60,6 +60,8 @@ function mouseClicked() {
       infoCoord.textContent = "x:" + itemsList[k].i + ", y:" + itemsList[k].j;
       infoLexRef.textContent = itemsList[k].lexical_references;
       lastClickedIndex = k;
+
+      console.log(itemsList[k]);
     }
   }
   /* Serve per impedire lo spostamento se viene solamente clicato l'oggetto invece di essere draggato */
@@ -144,6 +146,21 @@ function mouseReleased() {
 
     boolMousePressed = false;
     indexItemPressed = null;
+  }
+}
+
+function mouseDragged() {
+  if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
+    return null;
+  } else {
+    console.log("mouseDragged");
+  }
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+
+  if (boolMousePressed) {
+    itemsList[indexItemPressed].x = x * w;
+    itemsList[indexItemPressed].y = y * w;
   }
 }
 
