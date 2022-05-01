@@ -1,13 +1,12 @@
 class Forniture {
   constructor(id, name, i, j) {
-    /* Id identificativo */
     this.id = id;
     this.name = name;
-    /* Posizione riga/colonna */
+    /* i = row/ j = column */
     this.i = i;
     this.j = j;
 
-    /* Calcolo le vere coordinate dell'oggetto */
+    /* Real coordinates on the canvas */
     this.x = i * w;
     this.y = j * w;
 

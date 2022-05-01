@@ -94,7 +94,7 @@ function mouseReleased() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
 
-  /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
+  /* Create a new object on mouse release in mouseX, mouseY coordinates */
   if (possToPutObject(x, y)) {
     switch (indexItemSelected) {
       case "forn-0":
@@ -144,7 +144,7 @@ function mouseReleased() {
     indexItemSelected = -1;
   }
 
-  /* Sposta l'elemento pressato dopo il rilascio alle nuove coordinate */
+  /* Moves the pressed element after release to the new coordinates */
   if (boolMousePressed && possToPutObject(x, y)) {
     itemsList[indexItemPressed].i = x;
     itemsList[indexItemPressed].j = y;
@@ -200,7 +200,7 @@ function deleteItemOnMap() {
   }
 }
 
-/* Funzione per rimuovere l'info point */
+/* Function for remove the info-point */
 function removeInfoPoint() {
   infoName.textContent = "";
   infoId.textContent = "";
