@@ -25,8 +25,6 @@ function mouseClicked() {
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
-  } else {
-    console.log("mouseClicked");
   }
 
   /* Check if the click is done on the cell area. */
@@ -71,8 +69,6 @@ function mouseClicked() {
 function mousePressed() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
-  } else {
-    console.log("mousePressed");
   }
 
   var x = parseInt(mouseX / w);
@@ -92,8 +88,6 @@ function mouseReleased() {
   /* Returns null if the click is done outside the canvas it.  */
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
-  } else {
-    console.log("mouseReleased");
   }
 
   /* Check if the click is done on the cell area. */
@@ -103,36 +97,44 @@ function mouseReleased() {
   /* Crea un nuovo oggetti al rilascio del mouse nelle coordinate mouseX, mouseY */
   if (possToPutObject(x, y)) {
     switch (indexItemSelected) {
-      case "item-0":
+      case "forn-0":
         console.log("Aggiungo agente");
         agent = new Agent("rob" + idCounter, x, y);
         idCounter++;
         break;
-      case "item-1":
+      case "forn-1":
         console.log("Aggiungo letto");
         var bed = new Bed("bed" + idCounter, "bed", x, y);
         itemsList.push(bed);
         idCounter++;
         break;
-      case "item-2":
-        console.log("Aggiungo tv");
-        var television = new Television("tv" + idCounter, "television", x, y);
-        itemsList.push(television);
-        idCounter++;
-        break;
-      case "item-3":
-        console.log("Aggiungo libro");
-        var book = new Book("bk" + idCounter, "book", x, y);
-        itemsList.push(book);
-        idCounter++;
-        break;
-      case "item-4":
+      case "forn-2":
         console.log("Aggiungo tavolo");
         var table = new Table("tab" + idCounter, "table", x, y);
         itemsList.push(table);
         idCounter++;
         break;
-      case "item-5":
+      case "ornam-0":
+        console.log("Aggiungo tv");
+        var television = new Television("tv" + idCounter, "television", x, y);
+        television.status = "on";
+        itemsList.push(television);
+        idCounter++;
+        break;
+      case "ornam-1":
+        console.log("Aggiungo tv");
+        var television = new Television("tv" + idCounter, "television", x, y);
+        television.status = "off";
+        itemsList.push(television);
+        idCounter++;
+        break;
+      case "ornam-2":
+        console.log("Aggiungo libro");
+        var book = new Book("bk" + idCounter, "book", x, y);
+        itemsList.push(book);
+        idCounter++;
+        break;
+      case "ornam-3":
         console.log("Aggiungo tappeto");
         var rug = new Rug("rug" + idCounter, "rug", x, y);
         itemsList.push(rug);
@@ -158,8 +160,6 @@ function mouseReleased() {
 function mouseDragged() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
-  } else {
-    console.log("mouseDragged");
   }
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);

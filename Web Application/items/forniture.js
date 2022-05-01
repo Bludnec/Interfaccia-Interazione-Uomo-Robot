@@ -10,6 +10,12 @@ class Forniture {
     /* Calcolo le vere coordinate dell'oggetto */
     this.x = i * w;
     this.y = j * w;
+
+    /* Abilities */
+    this.contain_ability = false;
+    this.support_ability = false;
+    this.ability_to_move = false;
+    this.ability_to_open = false;
   }
   show(img) {
     image(img, this.x, this.y, w, w);
@@ -19,11 +25,6 @@ class Forniture {
 class Bed extends Forniture {
   constructor(id, name, i, j) {
     super(id, name, i, j);
-
-    this.contain_ability = false;
-    this.support_ability = true;
-    this.ability_to_move = false;
-    this.ability_to_open = false;
 
     this.lexical_references = ["bed", "couch", "sofa"];
   }
@@ -36,10 +37,7 @@ class Table extends Forniture {
   constructor(id, name, i, j) {
     super(id, name, i, j);
 
-    this.contain_ability = false;
     this.support_ability = true;
-    this.ability_to_move = false;
-    this.ability_to_open = false;
 
     this.lexical_references = ["table"];
   }

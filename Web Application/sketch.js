@@ -17,9 +17,13 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 6; i++) {
-  document.getElementById(`item-${i}`).addEventListener("dragstart", dragItem);
-  document.getElementById(`item-${i}`).addEventListener("dragend", undragItem);
+for (var i = 0; i < 3; i++) {
+  document.getElementById(`forn-${i}`).addEventListener("dragstart", dragItem);
+  document.getElementById(`forn-${i}`).addEventListener("dragend", undragItem);
+}
+for (var i = 0; i < 4; i++) {
+  document.getElementById(`ornam-${i}`).addEventListener("dragstart", dragItem);
+  document.getElementById(`ornam-${i}`).addEventListener("dragend", undragItem);
 }
 
 /**
@@ -34,7 +38,8 @@ function preload() {
   loadedCellMap = loadJSON("map/map.json");
   agentImage = loadImage("images/robot.png");
 
-  televisionImage = loadImage("images/television.png");
+  tvOnImage = loadImage("images/tvOn.png");
+  tvOffImage = loadImage("images/tvOff.png");
   bedImage = loadImage("images/bed.png");
   bookImage = loadImage("images/book.png");
   tableImage = loadImage("images/table.png");
