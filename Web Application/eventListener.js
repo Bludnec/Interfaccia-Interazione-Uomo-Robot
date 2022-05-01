@@ -132,6 +132,12 @@ function mouseReleased() {
         itemsList.push(table);
         idCounter++;
         break;
+      case "item-5":
+        console.log("Aggiungo tappeto");
+        var rug = new Rug("rug" + idCounter, "rug", x, y);
+        itemsList.push(rug);
+        idCounter++;
+        break;
     }
     indexItemSelected = -1;
   }

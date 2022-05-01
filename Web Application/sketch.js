@@ -17,7 +17,7 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < 6; i++) {
   document.getElementById(`item-${i}`).addEventListener("dragstart", dragItem);
   document.getElementById(`item-${i}`).addEventListener("dragend", undragItem);
 }
@@ -37,8 +37,8 @@ function preload() {
   televisionImage = loadImage("images/television.png");
   bedImage = loadImage("images/bed.png");
   bookImage = loadImage("images/book.png");
-
   tableImage = loadImage("images/table.png");
+  rugImage = loadImage("images/rug.png");
 }
 
 /**
@@ -170,9 +170,16 @@ function possToPutObject(i, j) {
  */
 function possMoveOn(i, j) {
   for (var k = 0; k < itemsList.length; k++) {
-    if (itemsList[k].i == i && itemsList[k].j == j) {
+    if (
+      itemsList[k].i == i &&
+      itemsList[k].j == j &&
+      itemsList[k].ability_to_walk_on
+    ) {
+      return true;
+    } else if (itemsList[k].i == i && itemsList[k].j == j) {
       return false;
+    } else {
+      return true;
     }
   }
-  return true;
 }
