@@ -100,3 +100,7 @@ h2 {
 .hidden {
   display: none;
 }
+
+#input-text {
+  width: 300px;
+}
