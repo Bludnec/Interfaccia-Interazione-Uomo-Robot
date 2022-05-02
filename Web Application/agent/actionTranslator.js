@@ -26,4 +26,6 @@ function translator(formaPredicativaCorretta) {
   console.log(fpcSplit);
 }
 
-translator("MOTION(Goal('to the living room')) & MANIPULATION(Entity(g9))");
+translator(
+  "MOTION(Goal('to the living room')) & MANIPULATION(Entity(g9)) & BRINGING(Theme(h6), Goal(h7))"
+);
