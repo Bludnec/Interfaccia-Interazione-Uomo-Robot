@@ -15,6 +15,7 @@ class Forniture {
     this.support_ability = false;
     this.ability_to_move = false;
     this.ability_to_open = false;
+    this.walkable = false;
   }
   show(img) {
     image(img, this.x, this.y, w, w);

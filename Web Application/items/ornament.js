@@ -15,6 +15,7 @@ class Ornament {
     this.support_ability = false;
     this.ability_to_move = false;
     this.ability_to_open = false;
+    this.walkable = false;
   }
   show(img) {
     image(img, this.x, this.y, w, w);
@@ -63,6 +64,8 @@ class Rug extends Ornament {
 
     this.support_ability = true;
     this.ability_to_walk_on = true;
+
+    this.walkable = true;
 
     this.lexical_references = ["rug", "carpet"];
   }

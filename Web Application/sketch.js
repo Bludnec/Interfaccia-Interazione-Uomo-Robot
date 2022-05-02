@@ -175,16 +175,11 @@ function possToPutObject(i, j) {
  */
 function possMoveOn(i, j) {
   for (var k = 0; k < itemsList.length; k++) {
-    if (
-      itemsList[k].i == i &&
-      itemsList[k].j == j &&
-      itemsList[k].ability_to_walk_on
-    ) {
+    if (itemsList[k].i == i && itemsList[k].j == j && itemsList[k].walkable) {
       return true;
     } else if (itemsList[k].i == i && itemsList[k].j == j) {
       return false;
-    } else {
-      return true;
     }
   }
+  return true;
 }
