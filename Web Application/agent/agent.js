@@ -63,4 +63,6 @@ class Agent {
       console.log("Non posso andare a destra.");
     }
   }
+
+  motion(goal, theme, direction, path, manner, area, distance, source) {}
 }
