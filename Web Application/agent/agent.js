@@ -65,4 +65,6 @@ class Agent {
   }
 
   motion(goal, theme, direction, path, manner, area, distance, source) {}
+
+  bringing(theme, goal, beneficiary, agent, source, manner, area) {}
 }

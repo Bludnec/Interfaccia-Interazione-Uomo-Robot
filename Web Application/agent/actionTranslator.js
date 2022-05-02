@@ -22,10 +22,32 @@ function translator(formaPredicativaCorretta) {
     actionList.push(action);
   }
 
-  console.log(actionList);
   console.log(fpcSplit);
+  console.log(actionList);
 }
 
 translator(
   "MOTION(Goal('to the living room')) & MANIPULATION(Entity(g9)) & BRINGING(Theme(h6), Goal(h7))"
 );
+
+/**
+ * BRINGING(Theme(h6), Goal(h7)
+ *
+ * Cercare di separare l'azione, i singoli input e gli argomenti dell'input
+ * BRINGING(Theme(h6), Goal(h7)) =>
+ * ActionList[0] = "BRINGING" e InputsOfAction[0] = "Theme(h6), Goal(h7)"
+ *
+ * Con l'actionList uso lo switch
+ * switch(ActionList[i]):
+ *  case "MOTION":
+ *    function x(actionIndex)
+ *  case "BRINGING":
+ *    function y(actionIndex)
+ *  ...
+ *
+ * Le funzioni chiamate nello switch avranno l'indice degli input (stesso indice delle azioni) per
+ * andare a prendere gli input e scomporli in Theme = h6 e Goal = h7 (*).
+ *
+ * Quindi chiamerò agent.bringing(theme = h6, goal = 7, beneficiary = null, agent = null,
+ *                                source = null, manner = null, area = null)
+ */
