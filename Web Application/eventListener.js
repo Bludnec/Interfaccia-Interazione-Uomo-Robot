@@ -43,6 +43,7 @@ function mouseClicked() {
   }
   /* Fa apparire tabella con info della cella */
   if (thisCell != undefined) {
+    console.log(thisCell);
     cellInfoPoint.classList.remove("hidden");
 
     cellCoord.textContent = "x:" + thisCell.i + ", y:" + thisCell.j;
