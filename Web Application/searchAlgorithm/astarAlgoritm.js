@@ -9,7 +9,8 @@ function nearestCell(agentI, agentJ, area) {
   return nearestCell;
 }
 
-function astarAlgo(start, end) {
+function astarAlg(start, end) {
+  console.log("Calcolo il percorso con A*");
   for (var x = 0; x < cols; x++) {
     for (var y = 0; y < rows; y++) {
       cellsList[cellIndex(x, y)].f = 0;
@@ -42,18 +43,17 @@ function astarAlgo(start, end) {
         ret.push(curr);
         curr = curr.parent;
       }
+      /* Return path list (cell's list.) */
       return ret.reverse();
     }
 
     // Normal case -- move currentNode from open to closed, process each of its neighbors
-    //openList.remove(lowInd);
     openList.splice(lowInd, 1);
     currentNode.closed = true;
 
     var neighborsList = neighbors(currentNode);
     for (var i = 0; i < neighborsList.length; i++) {
       var neighbor = neighborsList[i];
-
       if (neighbor.closed) {
         // not a valid node to process, skip to next neighbor
         continue;
@@ -88,6 +88,9 @@ function astarAlgo(start, end) {
   return [];
 }
 
+/**
+ * Return list of neighbors's node.
+ */
 function neighbors(node) {
   var ret = [];
   var x = node.i;
@@ -107,6 +110,9 @@ function neighbors(node) {
   return ret;
 }
 
+/**
+ * Heuristic = Manhattan heuristic
+ */
 function heuristic(pos0, pos1) {
   var d1 = Math.abs(pos1.i - pos0.i);
   var d2 = Math.abs(pos1.j - pos0.j);

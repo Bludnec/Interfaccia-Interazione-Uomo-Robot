@@ -1,8 +1,10 @@
-var framteRate = 10;
+var frameRate = 3;
 
 var cols, rows;
 var cellsList = [];
 var itemsList = [];
+
+var agentActionsList = [];
 
 var boolResizeCanvas = false;
 var indexItemSelected;
@@ -123,7 +125,7 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(framteRate);
+  frameRate(3);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     cellsList[i].show();

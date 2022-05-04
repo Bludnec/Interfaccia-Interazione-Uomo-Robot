@@ -13,22 +13,6 @@ class Agent {
   show() {
     image(agentImage, this.x, this.y, w, w);
   }
-
-  move(direction) {
-    if (direction == "left") {
-      this.moveLeft();
-    }
-    if (direction == "right") {
-      this.moveRight();
-    }
-    if (direction == "up") {
-      this.moveUp();
-    }
-    if (direction == "down") {
-      this.moveDown();
-    }
-  }
-
   moveUp() {
     if (
       this.j - 1 >= 0 &&
@@ -79,14 +63,20 @@ class Agent {
       console.log("Non posso andare a destra.");
     }
   }
+  moveTo(toCell) {
+    this.i = toCell.i;
+    this.j = toCell.j;
+    this.x = this.i * w;
+    this.y = this.j * w;
+  }
 
   motion(goal, direction, path, manner, area, distance, source) {
     /* Imposto la velocità del robot in base a manner */
     switch (manner) {
       case "quickly":
-        frameRate = 15;
+        frameRate = 10;
       case "slowly":
-        frameRate = 0.6;
+        frameRate = 0.5;
     }
     /**
      * Faccio partire la ricerca A* e il movimento del robot
@@ -101,9 +91,9 @@ class Agent {
         }
       }
       if (path != null) {
-        astar_search(this.i, this, j, goalObject.i, goalObject.j, path);
+        astarAlg(agent, goal, path);
       } else {
-        astar_search(this.i, this, j, goalObject.i, goalObject.j, null);
+        astarAlg(agent, goal);
       }
     }
     /**
@@ -122,6 +112,4 @@ class Agent {
     /* Reimposto il framerate se è stato modificato */
     frameRate = 10;
   }
-
-  bringing(theme, goal, beneficiary, agent, source, manner, area) {}
 }
