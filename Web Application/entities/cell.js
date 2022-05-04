@@ -6,8 +6,6 @@ class Cell {
     this.zone = "";
     /* Boolean per i muri  [top,right,bottom,left] */
     this.walls = [true, true, true, true];
-    /* Variabile per verificare se la cella è già stata visitata */
-    this.visited = false;
     /* Colore della cella */
     this.cellColor = 51;
     /* Coordinate della cella */

@@ -1,3 +1,5 @@
+var framteRate = 10;
+
 var cols, rows;
 var cellsList = [];
 var itemsList = [];
@@ -121,7 +123,7 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(10);
+  frameRate(framteRate);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     cellsList[i].show();
