@@ -39,15 +39,15 @@ var televisionImage, bedImage, bookImage, tableImage;
 var agentImage;
 
 function preload() {
-  loadedCellMap = loadJSON("map/map.json");
-  agentImage = loadImage("images/robot.png");
+  loadedCellMap = loadJSON("static/map/map.json");
+  agentImage = loadImage("static/images/robot.png");
 
-  tvOnImage = loadImage("images/tvOn.png");
-  tvOffImage = loadImage("images/tvOff.png");
-  bedImage = loadImage("images/bed.png");
-  bookImage = loadImage("images/book.png");
-  tableImage = loadImage("images/table.png");
-  rugImage = loadImage("images/rug.png");
+  tvOnImage = loadImage("static/images/tvOn.png");
+  tvOffImage = loadImage("static/images/tvOff.png");
+  bedImage = loadImage("static/images/bed.png");
+  bookImage = loadImage("static/images/book.png");
+  tableImage = loadImage("static/images/table.png");
+  rugImage = loadImage("static/images/rug.png");
 }
 
 /**
