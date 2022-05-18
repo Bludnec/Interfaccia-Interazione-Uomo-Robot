@@ -3,7 +3,7 @@ from pyswip import Prolog
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
 
-# Return all entities on KB
+# Return all entities on KB.
 def getAllElementDAOImpl():
     try:
         lista = list(prolog.query('entity(Id,Name,Class,X,Y)'))
@@ -11,8 +11,9 @@ def getAllElementDAOImpl():
         lista = []
     return lista
 
+# Inserimento di un elemento nella base di conoscenza.
 def insertElementDAOImpl(entity):
-    prolog.assertz("entity("+ entity["id"]  +","+ entity["name"] +","+ entity["class"]+","+entity["x"] +","+ entity["y"] +")")
+    prolog.assertz("entity("+ entity["id"]  +","+ entity["name"] +","+ entity["class"]+","+entity["x"] +","+ entity["y"] + ","+ entity["y"] + ")")
     print(entity, " inserito nel KB.")
 
     
