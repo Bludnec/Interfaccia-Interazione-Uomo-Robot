@@ -60,7 +60,8 @@ lex_ref(cup,["cup","bowl","tome"]).
 
 % acceso/spento
 entity_with_power_status(Id):-
-    is_class(Id,tv);
+    is_class(Id,tv).
+entity_with_power_status(Id):-
     is_class(Id,pc).
 
 % aperto/chiuso
