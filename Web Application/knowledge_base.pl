@@ -8,6 +8,8 @@
 :- dynamic inside/2.            % inside(id1,id2). --> id1 sta dentro id2.
 :- dynamic entity/6.            % entity(id,name,class,x,y,z).
 
+% assert entity_size(rug4,medium,2,1).
+
 % Classe - class(name).
 class(table).
 class(rug).
@@ -19,6 +21,8 @@ class(wardrobe).
 % Grandezza entità - size(class,size).
 size(table,big).
 size(rug,big).
+size(rug,medium).
+size(rug,small).
 size(tv,medium).
 size(cup,small).
 size(door,medium).
@@ -28,12 +32,15 @@ size(wardrobe,big).
 weight(table,heavy).
 weight(rug,heavy).
 weight(cup,light).
-weight(rug,medium_heavy).
+weight(rug,medium).
 weight(wardrobe,heavy).
 
 % Grandezza spazio
 space(big,2,2).
+space(big,1,4).
+space(big,4,1).
 space(medium,1,2).
+space(medium,2,1).
 space(small,1,1).
 
 % Quanti oggetti può contenere un altro oggetto e di che dimensione.
@@ -47,9 +54,9 @@ img(rug,'static/images/rug.png').
 img(cup,'static/images/cup.png').
 
 % Lexical references lex_ref(Class,List).
-lex_ref(table,[table,bench,desk]).
-lex_ref(book,[book,volume,chalice]).
-lex_ref(cup,[cup,bowl,tome]).
+lex_ref(table,["table","bench","desk"]).
+lex_ref(book,["book","volume","chalice"]).
+lex_ref(cup,["cup","bowl","tome"]).
 
 % acceso/spento
 entity_with_power_status(Id):-
@@ -69,10 +76,12 @@ support_ability(Id):-
 
 % Un oggetto può contenere altri oggetti
 contain_ability(Id):-
-    is_class(Id,cup);
+    is_class(Id,cup).
+    
+contain_ability(Id):-
     is_class(Id,wardrobe).
 
-% Un oggetto può essere mosso (es. door/wall non può essere mossa)
+% Un oggetto può essere mosso (es. door/wall non possono essere mossi)
 move_ability(Id):-
     is_class(Id,table);
     is_class(Id,rug);
