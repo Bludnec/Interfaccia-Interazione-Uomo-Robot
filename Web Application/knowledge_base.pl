@@ -45,20 +45,7 @@ space(medium,1,2).
 space(medium,2,1).
 space(small,1,1).
 
-space_avaiable(Id,List):-
-    is_size(Id,X,Y),
-    Sum is X*Y,!,
-    calcolo(Sum,List).
 
-calcolo(Sum,[]):-
-    Sum = 0,!.
-
-calcolo(Sum,[[Size,X,Y]|R]):-
-    space(Size,X,Y),
-    NewSum is X*Y,
-    Sum2 is Sum - NewSum,
-    Sum2 >= 0,
-    calcolo(Sum2,R).
 
 
 % Quanti oggetti può contenere un altro oggetto e di che dimensione.
@@ -147,3 +134,19 @@ is_img(Id,Url):-
 is_lex_ref(Id,LFList):-
     is_class(Id,Class),
     lex_ref(Class,LFList).
+
+
+space_avaiable(Id,List):-
+    is_size(Id,X,Y),
+    Sum is X*Y,!,
+    calcolo(Sum,List).
+
+calcolo(Sum,[]):-
+    Sum = 0.
+
+calcolo(Sum,[[Size,X,Y]|R]):-
+    space(Size,X,Y),
+    NewSum is X*Y,
+    Sum2 is Sum - NewSum,
+    Sum2 >= 0,
+    calcolo(Sum2,R).
