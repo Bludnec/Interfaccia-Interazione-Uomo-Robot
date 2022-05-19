@@ -36,7 +36,7 @@ space(big,2,2).
 space(medium,1,2).
 space(small,1,1).
 
-% Quanti oggetti può contenere un altro oggetto e di che dimensione
+% Quanti oggetti può contenere un altro oggetto e di che dimensione.
 contain_space(wardrobe,medium,2).
 contain_space(wardrobe,small,4).
 contain_space(cup,small,1).
