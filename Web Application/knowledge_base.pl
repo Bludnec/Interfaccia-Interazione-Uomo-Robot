@@ -7,8 +7,10 @@
 :- dynamic on_bottom/2.         % on_bottom(id1,id2). --> Id1 sta sotto l'Id2
 :- dynamic inside/2.            % inside(id1,id2). --> id1 sta dentro id2.
 :- dynamic entity/6.            % entity(id,name,class,x,y,z).
+:- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
 
-% assert entity_size(rug4,medium,2,1).
+entity(ward1,wardrobe,wardrobe,1,1,0).
+entity(cup1,cup,cup,1,2,0).
 
 % Classe - class(name).
 class(table).
@@ -43,10 +45,31 @@ space(medium,1,2).
 space(medium,2,1).
 space(small,1,1).
 
+space_avaiable(Id,List):-
+    is_size(Id,X,Y),
+    Sum is X*Y,!,
+    calcolo(Sum,List).
+
+calcolo(Sum,[]):-
+    Sum = 0,!.
+
+calcolo(Sum,[[Size,X,Y]|R]):-
+    space(Size,X,Y),
+    NewSum is X*Y,
+    Sum2 is Sum - NewSum,
+    Sum2 >= 0,
+    calcolo(Sum2,R).
+
+
 % Quanti oggetti può contenere un altro oggetto e di che dimensione.
-contain_space(wardrobe,medium,2).
-contain_space(wardrobe,small,4).
-contain_space(cup,small,1).
+contain_space(big,[medium,2]).
+contain_space(big,[small,4]).
+contain_space(big,[[small,2], [medium,1]]).
+
+contain_space(medium,[medium,1]).
+contain_space(medium,[small,2]).
+
+contain_space(cup,[small,1]).
 
 % Url delle immagini - img(class,url).
 img(table,'static/images/table.png'). 
@@ -103,6 +126,11 @@ down_ability(Id):-
     is_class(Id,table).
 
 %%%%
+is_contain(Id,Contain):-
+    is_class(Id,Class),
+    size(Class,Size),
+    contain_space(Size,Contain).
+
 is_size(Id,SizeX,SizeY):-
     is_class(Id,Class),
     size(Class,X),
