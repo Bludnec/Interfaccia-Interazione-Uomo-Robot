@@ -1,4 +1,4 @@
-class Forniture {
+class Entity {
   constructor(id, name, i, j) {
     this.id = id;
     this.name = name;
@@ -16,32 +16,10 @@ class Forniture {
     this.ability_to_move = false;
     this.ability_to_open = false;
     this.walkable = false;
+
+    this.lexical_references = [];
   }
   show(img) {
     image(img, this.x, this.y, w, w);
-  }
-}
-
-class Bed extends Forniture {
-  constructor(id, name, i, j) {
-    super(id, name, i, j);
-
-    this.lexical_references = ["bed", "couch", "sofa"];
-  }
-  show() {
-    super.show(bedImage);
-  }
-}
-
-class Table extends Forniture {
-  constructor(id, name, i, j) {
-    super(id, name, i, j);
-
-    this.support_ability = true;
-
-    this.lexical_references = ["table"];
-  }
-  show() {
-    super.show(tableImage);
   }
 }
