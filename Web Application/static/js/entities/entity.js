@@ -1,14 +1,13 @@
 class Entity {
-  constructor(id, name, i, j) {
+  constructor(id, name, x, y, z) {
     this.id = id;
     this.name = name;
-    /* i = row/ j = column */
-    this.i = i;
-    this.j = j;
+
+    this.position = new Position(x, y, z);
 
     /* Real coordinates on the canvas */
-    this.x = i * w;
-    this.y = j * w;
+    this.mapX = i * w;
+    this.mapY = j * w;
 
     /* Abilities */
     this.contain_ability = false;
@@ -20,6 +19,6 @@ class Entity {
     this.lexical_references = [];
   }
   show(img) {
-    image(img, this.x, this.y, w, w);
+    image(img, this.mapX, this.mapY, w, w);
   }
 }

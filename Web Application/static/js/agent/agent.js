@@ -1,38 +1,38 @@
 class Agent {
-  constructor(id, i, j) {
+  constructor(id, x, y) {
     this.id = id;
     this.name = "robot";
-    this.i = i;
-    this.j = j;
+
+    this.position = new Position(x, y, 0);
 
     /* Calcolo le vere coordinate dell'oggetto */
-    this.x = i * w;
-    this.y = j * w;
+    this.mapX = this.position.x * w;
+    this.mapY = this.position.y * w;
   }
 
   show() {
-    image(agentImage, this.x, this.y, w, w);
+    image(agentImage, this.mapX, this.mapY, w, w);
   }
   moveUp() {
     if (
-      this.j - 1 >= 0 &&
-      !cellsList[cellIndex(this.i, this.j)].walls[0] &&
-      possMoveOn(this.i, this.j - 1) == true
+      this.position.y - 1 >= 0 &&
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[0] &&
+      possMoveOn(this.position.x, this.position.y - 1) == true
     ) {
-      this.j -= 1;
-      this.y = this.j * w;
+      this.position.y -= 1;
+      this.mapY = this.position.y * w;
     } else {
       console.log("Non posso andare su.");
     }
   }
   moveDown() {
     if (
-      this.j + 1 < rows &&
-      !cellsList[cellIndex(this.i, this.j)].walls[2] &&
-      possMoveOn(this.i, this.j + 1) == true
+      this.position.y + 1 < rows &&
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[2] &&
+      possMoveOn(this.position.x, this.position.y + 1) == true
     ) {
-      this.j += 1;
-      this.y = this.j * w;
+      this.position.y += 1;
+      this.mapY = this.position.y * w;
     } else {
       console.log("Non posso andare giù.");
     }
@@ -40,12 +40,12 @@ class Agent {
 
   moveRight() {
     if (
-      this.i + 1 < cols &&
-      !cellsList[cellIndex(this.i, this.j)].walls[1] &&
-      possMoveOn(this.i + 1, this.j) == true
+      this.position.x + 1 < cols &&
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[1] &&
+      possMoveOn(this.position.x + 1, this.position.y) == true
     ) {
-      this.i += 1;
-      this.x = this.i * w;
+      this.position.x += 1;
+      this.mapX = this.position.x * w;
     } else {
       console.log("Non posso andare a destra.");
     }
@@ -53,21 +53,21 @@ class Agent {
 
   moveLeft() {
     if (
-      this.i - 1 >= 0 &&
-      !cellsList[cellIndex(this.i, this.j)].walls[3] &&
-      possMoveOn(this.i - 1, this.j) == true
+      this.position.x - 1 >= 0 &&
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[3] &&
+      possMoveOn(this.position.x - 1, this.position.y) == true
     ) {
-      this.i -= 1;
-      this.x = this.i * w;
+      this.position.x -= 1;
+      this.mapX = this.position.x * w;
     } else {
       console.log("Non posso andare a destra.");
     }
   }
   moveTo(toCell) {
-    this.i = toCell.i;
-    this.j = toCell.j;
-    this.x = this.i * w;
-    this.y = this.j * w;
+    this.position.x = toCell.i;
+    this.position.y = toCell.j;
+    this.mapX = this.position.x * w;
+    this.mapY = this.position.y * w;
   }
 
   motion(goal, direction, path, manner, area, distance, source) {
@@ -106,7 +106,7 @@ class Agent {
      * Faccio muovere il robot nell'"area" richiesta
      */
     if (area != null) {
-      astar_search(this.i, this.j, area);
+      astar_search(this.position.x, this.position.y, area);
     }
 
     /* Reimposto il framerate se è stato modificato */
