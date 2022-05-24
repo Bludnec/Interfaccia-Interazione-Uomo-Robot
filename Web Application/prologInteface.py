@@ -2,11 +2,12 @@ from pyswip import Prolog
 
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
+prolog.assertz("entity(id1,table,table,1,1,0)")
 
 # Return all entities on KB.
 def getAllElementDAOImpl():
     try:
-        lista = list(prolog.query('entity(Id,Name,Class,X,Y)'))
+        lista = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
     except:
         lista = []
     return lista
@@ -16,16 +17,13 @@ def insertElementDAOImpl(entity):
     prolog.assertz("entity("+ entity["id"]  +","+ entity["name"] +","+ entity["class"]+","+entity["x"] +","+ entity["y"] + ","+ entity["y"] + ")")
     print(entity, " inserito nel KB.")
 
-    
-#============= Vecchi DAO da cambiare ==========================================
 
-
-def deleteElementDAOImpl(pers2):
+# Retract di un elemento nella base di conoscenza    
+def deleteElementDAOImpl(entity):
     try:
-        prolog.retract("father(pluto," + pers2 + ")")
+        prolog.assertz("entity("+ entity["id"]  +","+ entity["name"] +","+ entity["class"]+","+entity["x"] +","+ entity["y"] + ","+ entity["y"] + ")")
     except:
-        print("errore nella cancellazione")
-    print("Lista dopo retract: ", list(prolog.query("father(pluto,X)")))
+        print("Errore nella cancellazione")
 
 
 

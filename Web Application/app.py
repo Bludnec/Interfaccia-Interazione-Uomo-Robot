@@ -9,13 +9,18 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/insertEntity', methods=['POST'])
+@app.route('/insert-entity', methods=['POST'])
 def insertElement():
     if request.method == "POST":
       req = request.get_json()
       insertElementDAOImpl(req) #stampa su terminale cmd
       return response
-      
+
+@app.route('/get-all-element')
+def getAllElement():
+    lista = getAllElementDAOImpl()
+    return jsonify(lista)
+
 # @app.route('/getAllElement')
 # def getAllElement():
 #     messaggio = getAllElementDAOImpl()
