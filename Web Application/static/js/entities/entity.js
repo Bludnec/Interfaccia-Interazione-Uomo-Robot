@@ -1,13 +1,13 @@
 class Entity {
-  constructor(id, name, x, y, z) {
+  constructor(id, name, position) {
     this.id = id;
     this.name = name;
 
-    this.position = new Position(x, y, z);
+    this.position = position;
 
     /* Real coordinates on the canvas */
-    this.mapX = i * w;
-    this.mapY = j * w;
+    this.mapX = this.position.x * w;
+    this.mapY = this.position.y * w;
 
     /* Abilities */
     this.contain_ability = false;

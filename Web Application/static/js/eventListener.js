@@ -97,47 +97,48 @@ function mouseReleased() {
 
   /* Create a new object on mouse release in mouseX, mouseY coordinates */
   if (possToPutObject(x, y)) {
+    var position = new Position(x, y, 0);
     switch (indexItemSelected) {
       case "forn-0":
         console.log("Aggiungo agente");
-        agent = new Agent("rob" + idCounter, x, y);
+        agent = new Agent("rob" + idCounter, position);
         idCounter++;
         break;
       case "forn-1":
         console.log("Aggiungo letto");
-        var bed = new Bed("bed" + idCounter, "bed", x, y);
+        var bed = new Enity("bed" + idCounter, "bed", position);
         itemsList.push(bed);
         idCounter++;
         break;
       case "forn-2":
         console.log("Aggiungo tavolo");
-        var table = new Table("tab" + idCounter, "table", x, y);
+        var table = new Table("tab" + idCounter, "table", position);
         itemsList.push(table);
         idCounter++;
         break;
       case "ornam-0":
         console.log("Aggiungo tv");
-        var television = new Television("tv" + idCounter, "television", x, y);
+        var television = new Television("tv" + idCounter, "television", position);
         television.status = "on";
         itemsList.push(television);
         idCounter++;
         break;
       case "ornam-1":
         console.log("Aggiungo tv");
-        var television = new Television("tv" + idCounter, "television", x, y);
+        var television = new Television("tv" + idCounter, "television", position);
         television.status = "off";
         itemsList.push(television);
         idCounter++;
         break;
       case "ornam-2":
         console.log("Aggiungo libro");
-        var book = new Book("bk" + idCounter, "book", x, y);
+        var book = new Book("bk" + idCounter, "book", position);
         itemsList.push(book);
         idCounter++;
         break;
       case "ornam-3":
         console.log("Aggiungo tappeto");
-        var rug = new Rug("rug" + idCounter, "rug", x, y);
+        var rug = new Rug("rug" + idCounter, "rug", position);
         itemsList.push(rug);
         idCounter++;
         break;

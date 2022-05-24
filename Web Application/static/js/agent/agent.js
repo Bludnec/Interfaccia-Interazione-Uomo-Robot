@@ -1,9 +1,9 @@
 class Agent {
-  constructor(id, x, y) {
+  constructor(id, position) {
     this.id = id;
     this.name = "robot";
 
-    this.position = new Position(x, y, 0);
+    this.position = position;
 
     /* Calcolo le vere coordinate dell'oggetto */
     this.mapX = this.position.x * w;
@@ -12,6 +12,7 @@ class Agent {
 
   show() {
     image(agentImage, this.mapX, this.mapY, w, w);
+    console.log(agent);
   }
   moveUp() {
     if (
