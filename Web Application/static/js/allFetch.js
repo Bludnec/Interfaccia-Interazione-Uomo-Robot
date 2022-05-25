@@ -1,5 +1,5 @@
-async function getAllElement() {
-  await fetch("get-all-element")
+async function getAllEntity() {
+  await fetch("get-all-entity")
     .then((jsonData) => jsonData.json())
     .then((data) => createEl(data));
 }

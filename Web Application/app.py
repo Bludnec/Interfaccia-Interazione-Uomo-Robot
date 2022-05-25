@@ -13,12 +13,12 @@ def index():
 def insertElement():
     if request.method == "POST":
       req = request.get_json()
-      insertElementDAOImpl(req) #stampa su terminale cmd
+      insertEntityDAOImpl(req) #stampa su terminale cmd
       return response
 
-@app.route('/get-all-element')
-def getAllElement():
-    lista = getAllElementDAOImpl()
+@app.route('/get-all-entity')
+def getAllEntity():
+    lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
 # @app.route('/getAllElement')
