@@ -1,7 +1,14 @@
-function getAllElement() {
-  var lista;
-  fetch("/get-all-element")
-    .then((response) => response.json())
-    .then((data) => (lista = [...data]));
-  return lista;
+async function getAllElement() {
+  await fetch("get-all-element")
+    .then((jsonData) => jsonData.json())
+    .then((data) => createEl(data));
+}
+
+function createEl(data) {
+  itemsList = [];
+  for (var i = 0; i < data.length; i++) {
+    var position = new Position(data[i].X, data[i].Y, data[i].Z);
+    var entity = new Entity(data[i].Id, data[i].Name, data[i].Class, position);
+    itemsList.push(entity);
+  }
 }

@@ -136,8 +136,7 @@ function draw() {
   if (agent != null) {
     agent.show();
   }
-  list = getAllElement();
-  console.log(list);
+  getAllElement();
 }
 
 /* Return the array's index of the cell in position i,j. */

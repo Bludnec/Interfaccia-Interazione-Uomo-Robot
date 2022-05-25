@@ -1,7 +1,8 @@
 class Entity {
-  constructor(id, name, position) {
+  constructor(id, name, entClass, position) {
     this.id = id;
     this.name = name;
+    this.entClass = entClass;
 
     this.position = position;
 
@@ -18,7 +19,8 @@ class Entity {
 
     this.lexical_references = [];
   }
-  show(img) {
+  show() {
+    var img = eval(`${this.entClass}Image`);
     image(img, this.mapX, this.mapY, w, w);
   }
 }
