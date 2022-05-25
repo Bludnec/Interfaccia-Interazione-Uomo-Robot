@@ -3,7 +3,7 @@ from pyswip import Prolog
 
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
-prolog.assertz("entity(id1,table,table,1,1,0)")
+prolog.assertz("entity(id1,tv,tv,1,1,0)")
 
 # Return all entities on KB.
 def getAllEntityDAOImpl():
@@ -35,7 +35,30 @@ def updateEntityPositionDAOImpl(id,x,y,z):
     deleteEntityDAOImpl(id)
     prolog.assertz("entity("+ id +","+ entityValues["Name"] +","+ entityValues["Class"]+","+str(x) +","+ str(y) + ","+ str(z) + ")")
 
-"""
+def updateEntityStatusDAOImpl(id):
+    checkPow = bool(list(prolog.query('entity_with_power_status('+id+')')))
+    checkPhy = bool(list(prolog.query('entity_with_physical_status('+id+')')))
+    if(checkPow):
+        status = list(prolog.query('power_status('+id+',X)'))
+        prolog.retract('power_status('+id+',_)')
+        if(status[0] == "true"):
+            prolog.assertz('power_status('+id+',false)')
+        else:
+            prolog.assertz('power_status('+id+',true)')
+    elif(checkPhy):
+        status = list(prolog.query('physical_status('+id+',X)'))
+        prolog.retract('physical_status('+id+',_)')
+        if(status[0] == "true"):
+            prolog.assertz('physical_status('+id+',false)')
+        else:
+            prolog.assertz('physical_status('+id+',true)')
+    else:
+        print("L'entity non ha uno stato")
+
+updateEntityStatusDAOImpl("id1")
+
+
+"""getStatus(id) --> status
 updateElStatus(statusName, bool)  --> (retract status + assert status)
 getAbility(idEl,nome) --> true/False
 getLexRef(id) --> list

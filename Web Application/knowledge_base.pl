@@ -123,7 +123,6 @@ is_lex_ref(Id,LFList):-
     is_class(Id,Class),
     lex_ref(Class,LFList).
 
-
 space_avaiable(Id,List):-
     is_size(Id,X,Y),
     Sum is X*Y,!,
