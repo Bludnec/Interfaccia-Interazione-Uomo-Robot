@@ -80,6 +80,7 @@ def getEntityLexRefDAOImpl(id):
     lexRef = list(prolog.query('is_lex_ref('+id+',List)'))
     return lexRef[0]['List']
 
+
 """
 getAbility(idEl,nome) --> true/False
 getLexRef(id) --> list
