@@ -7,8 +7,6 @@ prolog.assertz("entity(id1,tv,tv,1,1,0)")
 prolog.assertz("power_status(id1,false)")
 
 # Return all entities on KB.
-
-
 def getAllEntityDAOImpl():
     try:
         lista = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
@@ -17,23 +15,17 @@ def getAllEntityDAOImpl():
     return lista
 
 # Inserimento di un elemento nella base di conoscenza.
-
-
 def insertEntityDAOImpl(entity):
     prolog.assertz("entity(" + entity["id"] + "," + entity["name"] + "," +
                    entity["class"]+","+entity["x"] + "," + entity["y"] + "," + entity["z"] + ")")
     print(entity, " inserito nel KB.")
 
 # Return i valori Name,Class,X,Y,Z di un entity.
-
-
 def getEntityDAOImpl(id):
     entityValues = list(prolog.query('entity('+id+',Name,Class,X,Y,Z)'))
     return entityValues[0]
 
 # Retract di un elemento nella base di conoscenza
-
-
 def deleteEntityDAOImpl(id):
     try:
         prolog.retract('entity('+id+',_,_,_,_,_ )')
@@ -41,8 +33,6 @@ def deleteEntityDAOImpl(id):
         print("Errore nella cancellazione")
 
 # Aggiorna la posizione dell'entità
-
-
 def updateEntityPositionDAOImpl(id, x, y, z):
     entityValues = getEntityDAOImpl(id)
     deleteEntityDAOImpl(id)
@@ -50,8 +40,6 @@ def updateEntityPositionDAOImpl(id, x, y, z):
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
 
 # Aggiorna lo stato dell'entità
-
-
 def updateEntityStatusDAOImpl(id):
     checkPow = list(prolog.query('power_status('+id+',X)'))
     checkPhy = list(prolog.query('physical_status('+id+',X)'))
@@ -71,22 +59,17 @@ def updateEntityStatusDAOImpl(id):
         print("L'entity non ha uno stato")
 
 # Restituisce lo stato dell'entità
-
-
 def getEntityStatusDAOImpl(id):
     checkPow = bool(list(prolog.query('power_status('+id+',X)')))
     checkPhy = bool(list(prolog.query('physical_status('+id+',X)')))
     if(checkPow):
-        # [0] perché è il primo elemento, ['X'] = status
-        return list(prolog.query('power_status('+id+',X)'))[0]['X']
+        return list(prolog.query('power_status('+id+',X)'))[0]['X'] # [0] perché è il primo elemento, ['X'] = status
     elif(checkPhy):
         return list(prolog.query('physical_status('+id+',X)'))[0]['X']
     else:
         print("L'entity non ha uno stato")
 
 # Restituisce la lista di tutte le abilità di un'entità.
-
-
 def getEntityAbilitiesDAOImpl(id):
     abilitiesList = []
     return abilitiesList
@@ -95,9 +78,7 @@ def getEntityAbilitiesDAOImpl(id):
 # Restituisce la lista delle lexical references.
 def getEntityLexRefDAOImpl(id):
     lexRef = list(prolog.query('is_lex_ref('+id+',List)'))
-    print(list())
     return lexRef[0]['List']
-
 
 """
 getAbility(idEl,nome) --> true/False
