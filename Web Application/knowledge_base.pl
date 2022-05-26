@@ -48,9 +48,10 @@ img(rug,'static/images/rug.png').
 img(cup,'static/images/cup.png').
 
 % Lexical references lex_ref(Class,List).
-lex_ref(table,["table","bench","desk"]).
-lex_ref(book,["book","volume","chalice"]).
-lex_ref(cup,["cup","bowl","tome"]).
+lex_ref(table,['table','bench','desk']).
+lex_ref(book,['book','volume','chalice']).
+lex_ref(cup,['cup','bowl','tome']).
+lex_ref(tv,['tv','television']).
 
 % acceso/spento
 entity_with_power_status(Id):-
