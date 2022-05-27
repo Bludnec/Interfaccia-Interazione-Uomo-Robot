@@ -236,13 +236,13 @@ def deleteInsideDAOImpl(id1,id2):
 def getInsideSpaceDAOImpl(id):
     if(bool(list(prolog.query('contain_ability('+id+')')))):
         sizeList = getEntitySizeDAOImpl(id)
-        spaceAvaiable = sizeList['SizeX']*sizeList['SizeY']
-        print(type(spaceAvaiable))
+        spaceAvailable = sizeList['SizeX']*sizeList['SizeY']
+        print(type(spaceAvailable))
         listEnt = list(prolog.query("inside(Id,id3)"))
         for x in listEnt:
             entSize = list(prolog.query('entity_size('+x['Id']+',Size,SizeX,SizeY)'))[0]
-            spaceAvaiable -= entSize['SizeX'] * entSize['SizeY']        
-            return spaceAvaiable
+            spaceAvailable -= entSize['SizeX'] * entSize['SizeY']        
+            return spaceAvailable
     else:
         print('L entità non può contenere oggetti.')
         return -1

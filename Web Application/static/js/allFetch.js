@@ -32,7 +32,7 @@ function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
 
   var json_string = JSON.stringify(json_arr);
   fetch("/insert-entity", {
-    method: "post",
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

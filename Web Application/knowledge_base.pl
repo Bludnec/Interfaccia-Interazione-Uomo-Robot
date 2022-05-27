@@ -38,14 +38,6 @@ weight(cup,light).
 weight(rug,medium).
 weight(wardrobe,heavy).
 
-% Grandezza spazio
-space(big,2,2).
-space(big,1,4).
-space(big,4,1).
-space(medium,1,2).
-space(medium,2,1).
-space(small,1,1).
-
 % Url delle immagini - img(class,url).
 img(table,'static/images/table.png'). 
 img(rug,'static/images/rug.png').
@@ -56,6 +48,14 @@ lex_ref(table,['table','bench','desk']).
 lex_ref(book,['book','volume','chalice']).
 lex_ref(cup,['cup','bowl','tome']).
 lex_ref(tv,['tv','television']).
+
+% Grandezza spazio
+space(big,2,2).
+space(big,1,4).
+space(big,4,1).
+space(medium,1,2).
+space(medium,2,1).
+space(small,1,1).
 
 % acceso/spento
 entity_with_power_status(Id):-
@@ -132,7 +132,7 @@ is_lex_ref(Id,LFList):-
     is_class(Id,Class),
     lex_ref(Class,LFList).
 
-space_avaiable(Id,List):-
+space_available(Id,List):-
     is_size(Id,X,Y),
     Sum is X*Y,!,
     calcolo(Sum,List).
@@ -146,19 +146,3 @@ calcolo(Sum,[[Size,X,Y]|R]):-
     Sum2 is Sum - NewSum,
     Sum2 >= 0,
     calcolo(Sum2,R).
-
-%% Idea (ma senza inferenza)
-is_contain(Id,Contain):-
-    is_class(Id,Class),
-    size(Class,Size),
-    contain_space(Size,Contain).
-
-% Quanti oggetti può contenere un altro oggetto e di che dimensione.
-contain_space(big,[medium,2]).
-contain_space(big,[small,4]).
-contain_space(big,[[small,2], [medium,1]]).
-
-contain_space(medium,[medium,1]).
-contain_space(medium,[small,2]).
-
-contain_space(cup,[small,1]).
