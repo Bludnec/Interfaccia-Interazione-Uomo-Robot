@@ -45,7 +45,7 @@ def insertEntityDAOImpl(entity):
 
 # Return i valori Name,Class,X,Y,Z di un entity.
 def getEntityDAOImpl(id):
-    entityValues = list(prolog.query('entity('+id+',Name,Class,X,Y,Z)'))
+    entityValues = list(prolog.query('entity('+id['id']+',Name,Class,X,Y,Z)'))
     return entityValues[0]
 
 # Retract di un elemento nella base di conoscenza

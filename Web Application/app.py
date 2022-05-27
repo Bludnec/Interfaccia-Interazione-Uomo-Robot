@@ -13,7 +13,7 @@ def getAllEntity():
     lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
-@app.route('/entity', methods=['POST','DELETE'])
+@app.route('/entity', methods=['POST','DELETE','GET'])
 def insertEntity():
     if request.method == "POST":
         req = request.get_json()
@@ -24,7 +24,7 @@ def insertEntity():
         print(req)
         deleteEntityDAOImpl(req)
         return jsonify(req)
-
+        
 
 
 # @app.route('/getAllElement')

@@ -42,6 +42,8 @@ function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   }).then((response) => {});
 }
 
+function getEntity(id) {}
+
 function deleteEntity(id) {
   fetch("/entity", {
     method: "DELETE",
