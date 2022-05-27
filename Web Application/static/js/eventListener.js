@@ -94,6 +94,7 @@ function mouseReleased() {
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
+  var z = 0;
 
   /* Create a new object on mouse release in mouseX, mouseY coordinates */
   if (possToPutObject(x, y)) {
@@ -106,26 +107,42 @@ function mouseReleased() {
         break;
       case "forn-1":
         console.log("Aggiungo letto");
-        var bed = new Enity("bed" + idCounter, "bed", position);
-        itemsList.push(bed);
+        insertEntity("bed" + idCounter, "bed", "bed", x, y, z, "big", 2, 2);
         idCounter++;
         break;
       case "forn-2":
         console.log("Aggiungo tavolo");
-        var table = new Table("tab" + idCounter, "table", position);
-        itemsList.push(table);
+        insertEntity(
+          "table" + idCounter,
+          "table",
+          "table",
+          x,
+          y,
+          z,
+          "big",
+          2,
+          2
+        );
         idCounter++;
         break;
       case "ornam-0":
         console.log("Aggiungo tv");
-        var television = new Television("tv" + idCounter, "television", position);
+        var television = new Television(
+          "tv" + idCounter,
+          "television",
+          position
+        );
         television.status = "on";
         itemsList.push(television);
         idCounter++;
         break;
       case "ornam-1":
         console.log("Aggiungo tv");
-        var television = new Television("tv" + idCounter, "television", position);
+        var television = new Television(
+          "tv" + idCounter,
+          "television",
+          position
+        );
         television.status = "off";
         itemsList.push(television);
         idCounter++;

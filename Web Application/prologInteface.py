@@ -1,18 +1,23 @@
 from asyncio import constants
+from logging import error
 from traceback import print_tb
+from winreg import QueryInfoKey
 from pyswip import Prolog
 
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
-prolog.assertz("entity(id1,table,table,1,1,0)")
-prolog.assertz("entity(id2,tv,tv,3,2,0)")
-prolog.assertz("entity(id3,wardrobe,wardrobe,5,5,0)")
-prolog.assertz("entity_size(id3,big,2,2)")
-prolog.assertz("entity(id4,cup,cup,5,5,0)")
+prolog.assertz("entity(id7,table,table,1,1,0)")
+prolog.assertz("entity(id6,bed,bed,6,2,0)")
+prolog.assertz("entity_size(id7,big,2,2)")
+prolog.assertz("entity_size(id6,big,2,2)")
+#prolog.assertz("entity(id2,tv,tv,3,2,0)")
+#prolog.assertz("entity(id3,wardrobe,wardrobe,5,5,0)")
+#prolog.assertz("entity_size(id3,big,2,2)")
+#prolog.assertz("entity(id4,cup,cup,5,5,0)")
 
-prolog.assertz("entity_size(id4,small,1,1)")
-prolog.assertz("entity(id5,cup,cup,5,5,0)")
-prolog.assertz("entity_size(id5,small,1,1)")
+#prolog.assertz("entity_size(id4,small,1,1)")
+#prolog.assertz("entity(id5,cup,cup,5,5,0)")
+# prolog.assertz("entity_size(id5,small,1,1)")
 
 prolog.assertz("inside(id4,id3)")
 prolog.assertz("inside(id5,id3)")
@@ -29,13 +34,14 @@ def getAllEntityDAOImpl():
 
 # Inserimento di un elemento nella base di conoscenza.
 def insertEntityDAOImpl(entity):
-    check = insertEntitySizeDAOImpl(entity['id'], entity['sizeX'],entity['sizeY'])
+    print('entity:' ,entity)
+    check = insertEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])
     if(check != 0):
         print('Valori delle dimensioni non valide.')
     else:
         prolog.assertz("entity(" + entity["id"] + "," + entity["name"] + "," +
                     entity["class"]+","+entity["x"] + "," + entity["y"] + "," + entity["z"] + ")")
-        print(entity, " inserito nel KB.")
+        prolog.assertz('entity_size('+entity['id']+','+entity['size']+','+entity['sizeX']+','+entity['sizeY']+')')
 
 # Return i valori Name,Class,X,Y,Z di un entity.
 def getEntityDAOImpl(id):
@@ -46,26 +52,26 @@ def getEntityDAOImpl(id):
 def deleteEntityDAOImpl(id):
     try:
         prolog.retract('entity('+id+',_,_,_,_,_ )')
-        prolog.retract("entity_size("+id+",_,_,_")
         deleteEntitySizeDAOImpl(id)
-    except:
-        print("Errore nella cancellazione dell'entità.")
-
+    except Exception as e: 
+        print(e)
+        
 # Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
-def insertEntitySizeDAOImpl(id,sizeX,sizeY):
+def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
     check = -1
-    for size in prolog.query('is_size('+id+',SizeX,SizeY)'):
-        if size["SizeX"]==sizeX and size["SizeY"]== sizeY:
-            check = 0
+    theSize = list(prolog.query('space(TheSize,'+ sizeX + ',' +sizeY+')'))[0]['TheSize']
+    sizeBool = bool(list(prolog.query('size('+entClass+','+theSize+')')))
+    if(sizeBool):
+        check = 0
     return check
 
 # Cancella le dimensioni dell'entità con id in input
 def deleteEntitySizeDAOImpl(id):
     try:
-        prolog.retract("entity_size("+id+",_,_,_")
-    except:
-        print("Errore nella cancellazione di entity_size.")
+        prolog.retract("entity_size("+id+",_,_,_)")
+    except Exception as e: 
+        print(e)
 
 # Restituisce le dimensioni dell'entità istanziata.
 def getEntitySizeDAOImpl(id):
@@ -77,6 +83,17 @@ def updateEntityPositionDAOImpl(id, x, y, z):
     deleteEntityDAOImpl(id)
     prolog.assertz("entity(" + id + "," + entityValues["Name"] + "," +
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
+
+# DA MODIFICARE
+def insertEntityStatusDAOImpl(id,status):
+    checkPow = bool(list(prolog.query('power_status('+id+',X)')))
+
+def deleteEntityStatusDAOImpl(id):
+    try:
+        prolog.retract('entity('+id+',_,_,_,_,_)')
+        print("Cancellazione andata a buon fine")
+    except:
+        print("Errore nella cancellazione dell'entity")
 
 # Aggiorna lo stato dell'entità
 def updateEntityStatusDAOImpl(id):
@@ -229,9 +246,6 @@ def getInsideSpaceDAOImpl(id):
     else:
         print('L entità non può contenere oggetti.')
         return -1
-
-
 """
-?? getAbility(idEl,nome) --> true/false
-
+ insert e delete status
 """

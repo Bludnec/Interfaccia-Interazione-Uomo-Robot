@@ -10,11 +10,11 @@ def index():
     return render_template('index.html')
 
 @app.route('/insert-entity', methods=['POST'])
-def insertElement():
+def insertEntity():
     if request.method == "POST":
       req = request.get_json()
-      insertEntityDAOImpl(req) #stampa su terminale cmd
-      return response
+      insertEntityDAOImpl(req)
+      return jsonify(req)
 
 @app.route('/get-all-entity')
 def getAllEntity():

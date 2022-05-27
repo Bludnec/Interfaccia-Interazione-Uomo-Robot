@@ -28,6 +28,8 @@ size(tv,medium).
 size(cup,small).
 size(door,medium).
 size(wardrobe,big).
+size(bed,big).
+size(bed,medium).
 
 % Peso - weight(class,weight)
 weight(table,heavy).
