@@ -24,7 +24,7 @@ def getAllEntityDAOImpl():
 # Inserimento di un elemento nella base di conoscenza.
 def insertEntityDAOImpl(entity):
     check = insertEntitySizeDAOImpl(entity['id'], entity['sizeX'],entity['sizeY'])
-    if(check == -1):
+    if(check != 0):
         print('Valori delle dimensioni non valide.')
     else:
         prolog.assertz("entity(" + entity["id"] + "," + entity["name"] + "," +
@@ -43,10 +43,14 @@ def deleteEntityDAOImpl(id):
     except:
         print("Errore nella cancellazione")
 
-# Inserisce le dimensioni dell'entità appena istanziata.
+# Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
+# non corrispondono con quelle del KB, non inserisce l'oggetto.
 def insertEntitySizeDAOImpl(id,sizeX,sizeY):
-    
-    return -1
+    check = -1
+    for size in prolog.query('is_size('+id+',SizeX,SizeY)'):
+        if size["SizeX"]==sizeX and size["SizeY"]== sizeY:
+            check = 0
+    return check
 
 # Restituisce le dimensioni dell'entità istanziata.
 def getEntitySizeDAOImpl(id):
@@ -191,14 +195,14 @@ def deleteInsideDAOImpl(id1,id2):
 # Restistuice lo spazio rimanente dentro un'entità facendo il calcolo con quelle già presenti
 def getInsideSpaceDAOImpl(id):
     if(bool(list(prolog.query('contain_ability('+id+')')))):
-        sizeList = getEntitySizeDAOImpl(id)[0]
+        sizeList = getEntitySizeDAOImpl(id)
         spaceAvaiable = sizeList['SizeX']*sizeList['SizeY']
         return spaceAvaiable
     else:
         print('L entità non può contenere oggetti.')
         return -1
 
-print(getInsideSpaceDAOImpl('id3'))
+print('InsideSpaceAvaiable: ',getInsideSpaceDAOImpl('id3'))
 
 """
 ?? getAbility(idEl,nome) --> true/False
