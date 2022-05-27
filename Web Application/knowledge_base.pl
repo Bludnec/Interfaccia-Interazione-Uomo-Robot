@@ -5,6 +5,8 @@
 :- dynamic physical_status/2.   % physical_status(id,status). status = true/false (open/closed)
 :- dynamic on_top/2.            % on_top(id1,id2). --> Id1 sta sopra l'Id2
 :- dynamic on_bottom/2.         % on_bottom(id1,id2). --> Id1 sta sotto l'Id2
+% on_top e on_bottom differenziati perché on_bottom può averlo solo l'oggetto
+% che ha l'abilità putting_under = true.
 :- dynamic inside/2.            % inside(id1,id2). --> id1 sta dentro id2.
 :- dynamic entity/6.            % entity(id,name,class,x,y,z).
 :- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
@@ -103,7 +105,7 @@ open_ability(Id):-
     is_class(Id,door).
 
 % contenere qualcosa sotto
-down_ability(Id):-
+putting_under_ability(Id):-
     is_class(Id,table).
 
 %%%%
@@ -111,6 +113,10 @@ is_size(Id,SizeX,SizeY):-
     is_class(Id,Class),
     size(Class,X),
     space(X,SizeX,SizeY).
+
+is_weight(Id,Weight):-
+    is_class(Id,Class),
+    weight(Class,Weight).
 
 is_class(Id,Class):-
     entity(Id,_,Class,_,_,_),
