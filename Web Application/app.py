@@ -24,18 +24,3 @@ def insertEntity():
         print(req)
         deleteEntityDAOImpl(req)
         return jsonify(req)
-        
-
-
-# @app.route('/getAllElement')
-# def getAllElement():
-#     messaggio = getAllElementDAOImpl()
-#     return jsonify(messaggio)
-
-
-# @app.route('/deleteElement', methods=['DELETE'])
-# def deleteElement():
-#     if request.method == "DELETE":
-#       req = request.get_json()
-#       deleteElementDAOImpl(req) #stampa su terminale cmd
-#       return jsonify(req)

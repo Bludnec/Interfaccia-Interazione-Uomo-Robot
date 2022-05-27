@@ -19,6 +19,7 @@ class(cup).
 class(door).
 class(wardrobe).
 
+
 % Grandezza entità - size(class,size).
 size(table,big).
 size(rug,big).
