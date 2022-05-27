@@ -208,6 +208,7 @@ print('InsideSpaceAvaiable: ',getInsideSpaceDAOImpl('id3'))
 ?? getAbility(idEl,nome) --> true/False
 
 Appena inserisco un'entità aggiungo anche la sua grandezza
+Quando cancello un'entità cancello anche la sua size
 
 entity_size (add,remove,update)
 
