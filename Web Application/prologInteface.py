@@ -51,7 +51,7 @@ def getEntityDAOImpl(id):
 # Retract di un elemento nella base di conoscenza
 def deleteEntityDAOImpl(id):
     try:
-        prolog.retract('entity('+id+',_,_,_,_,_ )')
+        prolog.retract('entity('+id['id']+',_,_,_,_,_ )')
         deleteEntitySizeDAOImpl(id)
     except Exception as e: 
         print(e)

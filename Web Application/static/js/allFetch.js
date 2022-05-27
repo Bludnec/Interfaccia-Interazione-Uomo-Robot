@@ -14,6 +14,7 @@ function createEl(data) {
   console.log(itemsList);
 }
 
+// Funzione per l'inserimento di una nuova entità nel KB
 function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   var json_arr = {};
 
@@ -31,16 +32,25 @@ function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   json_arr["sizeY"] = str(sizeY);
 
   var json_string = JSON.stringify(json_arr);
-  fetch("/insert-entity", {
+  fetch("/entity", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-
-    //make sure to serialize your JSON body
     body: json_string,
-  }).then((response) => {
-    //do something awesome that makes the world a better place
-  });
+  }).then((response) => {});
+}
+
+function deleteEntity(id) {
+  fetch("/entity", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: id,
+    }),
+  }).then((response) => {});
 }
