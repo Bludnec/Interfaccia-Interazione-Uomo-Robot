@@ -9,7 +9,13 @@ prolog.assertz("entity(id2,tv,tv,3,2,0)")
 prolog.assertz("entity(id3,wardrobe,wardrobe,5,5,0)")
 prolog.assertz("entity_size(id3,big,2,2)")
 prolog.assertz("entity(id4,cup,cup,5,5,0)")
+
+prolog.assertz("entity_size(id4,small,1,1)")
+prolog.assertz("entity(id5,cup,cup,5,5,0)")
+prolog.assertz("entity_size(id5,small,1,1)")
+
 prolog.assertz("inside(id4,id3)")
+prolog.assertz("inside(id5,id3)")
 prolog.assertz("power_status(id2,true)")
 prolog.assertz('on_top(id2,id1)')
 
@@ -40,8 +46,10 @@ def getEntityDAOImpl(id):
 def deleteEntityDAOImpl(id):
     try:
         prolog.retract('entity('+id+',_,_,_,_,_ )')
+        prolog.retract("entity_size("+id+",_,_,_")
+        deleteEntitySizeDAOImpl(id)
     except:
-        print("Errore nella cancellazione")
+        print("Errore nella cancellazione dell'entità.")
 
 # Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
@@ -51,6 +59,13 @@ def insertEntitySizeDAOImpl(id,sizeX,sizeY):
         if size["SizeX"]==sizeX and size["SizeY"]== sizeY:
             check = 0
     return check
+
+# Cancella le dimensioni dell'entità con id in input
+def deleteEntitySizeDAOImpl(id):
+    try:
+        prolog.retract("entity_size("+id+",_,_,_")
+    except:
+        print("Errore nella cancellazione di entity_size.")
 
 # Restituisce le dimensioni dell'entità istanziata.
 def getEntitySizeDAOImpl(id):
@@ -144,7 +159,10 @@ def getSupportEntityDAOImpl(id):
 
 # Cancella il fatto on_top(id1,id2) dalla KB.
 def deleteOnTopDAOImpl(id1,id2):
-    prolog.retract('on_top('+id1+','+id2+')')
+    try:
+        prolog.retract('on_top('+id1+','+id2+')')
+    except:
+        print("Errore nella cancellazione del fatto on_top.")
 
 # Inserisce il fatto on_bottom(id1,id2) nella KB.
 def insertOnBottomDAOImpl(idOnBottom,idTop):
@@ -166,8 +184,10 @@ def getCoverEntityDAOImpl(id):
 
 # Cancella il fatto on_bottom(id1,id2) dalla KB.
 def deleteOnBottomDAOImpl(id1,id2):
-    prolog.retract('on_bottom('+id1+','+id2+')')
-
+    try:
+        prolog.retract('on_bottom('+id1+','+id2+')')
+    except:
+        print("Errore nella cancellazione del fatto on_bottom")
 
 # Inserisce il fatto on_bottom(id1,id2) nella KB.
 def insertOnBottomDAOImpl(idOnBottom,idTop):
@@ -189,27 +209,29 @@ def getContainerEntityDAOImpl(id):
 
 # Cancella il fatto inside(id1,id2) dalla KB.
 def deleteInsideDAOImpl(id1,id2):
-    prolog.retract('inside('+id1+','+id2+')')
-
+    try:
+        prolog.retract('inside('+id1+','+id2+')')
+    except:
+        print("Errore nella cancellazione del fatto inside.")
 
 # Restistuice lo spazio rimanente dentro un'entità facendo il calcolo con quelle già presenti
+# print('InsideSpaceAvaiable: ',getInsideSpaceDAOImpl('id3'))
 def getInsideSpaceDAOImpl(id):
     if(bool(list(prolog.query('contain_ability('+id+')')))):
         sizeList = getEntitySizeDAOImpl(id)
         spaceAvaiable = sizeList['SizeX']*sizeList['SizeY']
-        return spaceAvaiable
+        print(type(spaceAvaiable))
+        listEnt = list(prolog.query("inside(Id,id3)"))
+        for x in listEnt:
+            entSize = list(prolog.query('entity_size('+x['Id']+',Size,SizeX,SizeY)'))[0]
+            spaceAvaiable -= entSize['SizeX'] * entSize['SizeY']        
+            return spaceAvaiable
     else:
         print('L entità non può contenere oggetti.')
         return -1
 
-print('InsideSpaceAvaiable: ',getInsideSpaceDAOImpl('id3'))
 
 """
-?? getAbility(idEl,nome) --> true/False
+?? getAbility(idEl,nome) --> true/false
 
-Appena inserisco un'entità aggiungo anche la sua grandezza
-Quando cancello un'entità cancello anche la sua size
-
-entity_size (add,remove,update)
-
-getInsideSpace(id) --> spazio rimanente nell'oggetto (per vedere se è possibile inserire altro) => getInside + calcolo dello spazio rimanente """
+"""
