@@ -136,6 +136,7 @@ function draw() {
   if (agent != null) {
     agent.show();
   }
+
   getAllEntity();
 }
 

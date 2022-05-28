@@ -1,17 +1,9 @@
-async function getAllEntity() {
-  await fetch("get-all-entity")
+function getAllEntity() {
+  fetch("get-all-entity")
     .then((jsonData) => jsonData.json())
-    .then((data) => createEl(data));
-}
-
-function createEl(data) {
-  itemsList = [];
-  for (var i = 0; i < data.length; i++) {
-    var position = new Position(data[i].X, data[i].Y, data[i].Z);
-    var entity = new Entity(data[i].Id, data[i].Name, data[i].Class, position);
-    itemsList.push(entity);
-  }
-  console.log(itemsList);
+    .then((data) => {
+      createEl(data);
+    });
 }
 
 // Funzione per l'inserimento di una nuova entità nel KB
@@ -39,10 +31,19 @@ function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
       "Content-Type": "application/json",
     },
     body: json_string,
-  }).then((response) => {});
+  }).then((response) => {
+    console.log(response);
+  });
 }
 
-function getEntity(id) {}
+function getEntity(id) {
+  fetch(`entity?id=${id}`)
+    .then((jsonData) => jsonData.json())
+    .then((data) => {
+      console.log(data);
+      // do something with the data
+    });
+}
 
 function deleteEntity(id) {
   fetch("/entity", {
@@ -54,5 +55,22 @@ function deleteEntity(id) {
     body: JSON.stringify({
       id: id,
     }),
-  }).then((response) => {});
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
+function updateEntityPosition(id, x, y, z) {
+  fetch("/entity", {
+    method: "PATCH",
+    body: JSON.stringify({
+      id: id,
+      x: x,
+      y: y,
+      z: z,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
 }

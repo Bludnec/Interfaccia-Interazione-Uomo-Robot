@@ -45,16 +45,16 @@ def insertEntityDAOImpl(entity):
 
 # Return i valori Name,Class,X,Y,Z di un entity.
 def getEntityDAOImpl(id):
-    entityValues = list(prolog.query('entity('+id['id']+',Name,Class,X,Y,Z)'))
-    return entityValues[0]
+    entityValues = list(prolog.query('entity('+id+',Name,Class,X,Y,Z)'))[0]
+    return entityValues
 
 # Retract di un elemento nella base di conoscenza
 def deleteEntityDAOImpl(id):
     try:
-        prolog.retract('entity('+id['id']+',_,_,_,_,_ )')
+        prolog.retract('entity('+id+',_,_,_,_,_ )')
         deleteEntitySizeDAOImpl(id)
     except Exception as e: 
-        print(e)
+        print("deleteEntityDAOImpl: ", e)
         
 # Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
@@ -80,6 +80,7 @@ def getEntitySizeDAOImpl(id):
 # Aggiorna la posizione dell'entità
 def updateEntityPositionDAOImpl(id, x, y, z):
     entityValues = getEntityDAOImpl(id)
+    print(entityValues)
     deleteEntityDAOImpl(id)
     prolog.assertz("entity(" + id + "," + entityValues["Name"] + "," +
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
@@ -154,7 +155,6 @@ def getEntityWeightDAOImpl(id):
 # Restituisce la lista delle url di tutte le entità
 def getAllUrlDAOImpl():
     return list(prolog.query('img(Class,Url)'))
-
 
 # Inserisce il fatto on_top(id1,id2) nella KB.
 def insertOnTopDAOImpl(idOnTop,idSupport):

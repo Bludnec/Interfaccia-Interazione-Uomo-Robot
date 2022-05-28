@@ -13,14 +13,20 @@ def getAllEntity():
     lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
-@app.route('/entity', methods=['POST','DELETE','GET'])
-def insertEntity():
+@app.route('/entity', methods=['POST','DELETE','GET','PATCH'])
+def entity():
     if request.method == "POST":
         req = request.get_json()
         insertEntityDAOImpl(req)
         return jsonify(req)
     if request.method == "DELETE":
         req = request.get_json()
-        print(req)
-        deleteEntityDAOImpl(req)
+        deleteEntityDAOImpl(req['id'])
+        return jsonify(req)
+    if request.method == "GET":
+        entity = getEntityDAOImpl(request.args.get('id'))
+        return jsonify(entity)
+    if request.method == "PATCH":
+        req = request.get_json()
+        updateEntityPositionDAOImpl(req['id'], req['x'],req['y'],req['z'])
         return jsonify(req)
