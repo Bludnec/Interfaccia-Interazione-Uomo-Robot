@@ -1,7 +1,4 @@
 from asyncio import constants
-from logging import error
-from traceback import print_tb
-from winreg import QueryInfoKey
 from pyswip import Prolog
 
 prolog = Prolog()
@@ -10,7 +7,9 @@ prolog.assertz("entity(id7,table,table,1,1,0)")
 prolog.assertz("entity(id6,bed,bed,6,2,0)")
 prolog.assertz("entity_size(id7,big,2,2)")
 prolog.assertz("entity_size(id6,big,2,2)")
-#prolog.assertz("entity(id2,tv,tv,3,2,0)")
+prolog.assertz("entity(id2,tv,tv,3,2,0)")
+prolog.assertz("power_status(id2,true)")
+prolog.assertz("on_top(id2,id7)")
 #prolog.assertz("entity(id3,wardrobe,wardrobe,5,5,0)")
 #prolog.assertz("entity_size(id3,big,2,2)")
 #prolog.assertz("entity(id4,cup,cup,5,5,0)")
@@ -21,8 +20,6 @@ prolog.assertz("entity_size(id6,big,2,2)")
 
 prolog.assertz("inside(id4,id3)")
 prolog.assertz("inside(id5,id3)")
-prolog.assertz("power_status(id2,true)")
-prolog.assertz('on_top(id2,id1)')
 
 # Return all entities on KB.
 def getAllEntityDAOImpl():
@@ -34,7 +31,6 @@ def getAllEntityDAOImpl():
 
 # Inserimento di un elemento nella base di conoscenza.
 def insertEntityDAOImpl(entity):
-    print('entity:' ,entity)
     check = insertEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])
     if(check != 0):
         print('Valori delle dimensioni non valide.')
@@ -85,9 +81,16 @@ def updateEntityPositionDAOImpl(id, x, y, z):
     prolog.assertz("entity(" + id + "," + entityValues["Name"] + "," +
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
 
-# DA MODIFICARE
-def insertEntityStatusDAOImpl(id,status):
-    checkPow = bool(list(prolog.query('power_status('+id+',X)')))
+# Inserisce lo status di un'entità
+def insertEntityStatusDAOImpl(id,status,statusBool):
+    checkAbility = bool(list(prolog.query('entity_with_'+status+'_status('+id+')')))
+    checkPow = list(prolog.query(status+'_status('+id+',X)'))
+    print(checkAbility,checkPow)
+    if checkAbility and not checkPow:
+        print("cazzo")
+        prolog.assertz(status+'_status('+id+','+statusBool+')')
+    else:
+        print("Non è stato possibile inserire lo status.")
 
 def deleteEntityStatusDAOImpl(id):
     try:
@@ -97,21 +100,15 @@ def deleteEntityStatusDAOImpl(id):
         print("Errore nella cancellazione dell'entity")
 
 # Aggiorna lo stato dell'entità
-def updateEntityStatusDAOImpl(id):
+def updateEntityStatusDAOImpl(id,statusBool):
     checkPow = list(prolog.query('power_status('+id+',X)'))
     checkPhy = list(prolog.query('physical_status('+id+',X)'))
     if(len(checkPow) != 0):
         prolog.retract('power_status('+id+',_)')
-        if(checkPow[0]['X'] == 'true'):
-            prolog.assertz('power_status('+id+',false)')
-        else:
-            prolog.assertz('power_status('+id+',true)')
+        prolog.assertz('power_status('+id+','+statusBool+')')
     elif(len(checkPhy) != 0):
         prolog.retract('physical_status('+id+',_)')
-        if(checkPhy[0]['X'] == "true"):
-            prolog.assertz('physical_status('+id+',false)')
-        else:
-            prolog.assertz('physical_status('+id+',true)')
+        prolog.assertz('physical_status('+id+','+statusBool+')')
     else:
         print("L'entity non ha uno stato")
 
@@ -203,18 +200,18 @@ def getCoverEntityDAOImpl(id):
 def deleteOnBottomDAOImpl(id1,id2):
     try:
         prolog.retract('on_bottom('+id1+','+id2+')')
-    except:
-        print("Errore nella cancellazione del fatto on_bottom")
+    except Exception as e: 
+        print("deleteEntityDAOImpl: ", e)
 
-# Inserisce il fatto on_bottom(id1,id2) nella KB.
-def insertOnBottomDAOImpl(idOnBottom,idTop):
-    if(not bool(list(prolog.query('on_bottom('+idOnBottom+','+idTop+')'))) and idOnBottom != idTop):
-        prolog.assertz('on_bottom('+idOnBottom+','+idTop+')')
+# Inserisce il fatto insinde(idInside, idContainer) nel KB.
+def insertInsideDAOImpl(idInside, idContainer):
+    if(not bool(list(prolog.query('on_bottom('+idInside+','+idContainer+')'))) and idInside != idContainer):
+        prolog.assertz('inside('+idInside+','+idContainer+')')
         print('Fatto inserito nel KB.')
-    elif(idOnBottom == idTop):
+    elif(idInside == idContainer):
         print('I due id inseriti sono uguali.')
     else:
-        print('Il fatto è già inserito nella base di conoscenza.')
+        print('Il fatto è già inserito nella base di conoscenza.')    
 
 # Restituisce l'id dell'entità che sta dentro l'entità in input
 def getInsideDAOImpl(id):

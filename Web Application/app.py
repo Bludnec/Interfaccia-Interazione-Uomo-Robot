@@ -30,3 +30,79 @@ def entity():
         req = request.get_json()
         updateEntityPositionDAOImpl(req['id'], req['x'],req['y'],req['z'])
         return jsonify(req)
+
+@app.route('/entity/status', methods=['POST','DELETE','GET','PATCH'])
+def entityStatus():
+    if request.method == "GET":
+        status = getEntityStatusDAOImpl(request.args.get('id'))
+        return jsonify(status)
+    if request.method == "POST":
+        req = request.get_json()
+        print(req)
+        insertEntityStatusDAOImpl(req['id'],req['status'],req['statusBool'])
+        return jsonify(req)
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteEntityStatusDAOImpl(req['id'])
+        return jsonify(req)
+    if request.method == "PATCH":
+        req = request.get_json()
+        updateEntityStatusDAOImpl(req['id'], req['statusBool'])
+        return jsonify(req)        
+
+@app.route('/entity/ability', methods=['GET'])
+def entityAbility():
+    if request.method == "GET":
+        ability = getEntityAbilitiesDAOImpl(request.args.get('id'))
+        return jsonify(ability)
+
+@app.route('/entity/lexical_references', methods=['GET'])
+def entityLefRef():
+    if request.method == "GET":
+        lexRef = getEntityLexRefDAOImpl(request.args.get('id'))
+        return jsonify(lexRef)
+
+@app.route('/entity/weight', methods=['GET'])
+def entityWeight():
+    if request.method == "GET":
+        weight = getEntityWeightDAOImpl(request.args.get('id'))
+        return jsonify(weight)
+
+@app.route('/get-all-url')
+def getAllUrl():
+    urlList = getAllUrlDAOImpl()
+    return jsonify(urlList)
+
+@app.route('/entity/on-top', methods=['POST','DELETE','GET','PATCH'])
+def entityOnTop():
+    if request.method == "POST":
+        req = request.get_json()
+        insertOnTopDAOImpl(req['idOnTop'],req['idSupport'])
+        return jsonify(req)
+    if request.method == "GET" and request.args.get('pos') == "on-top":
+        id = getOnTopDAOImpl(request.args.get('id'))
+        return jsonify(id)
+    if request.method == "GET" and request.args.get('pos') == "support":
+        id = getSupportEntityDAOImpl(request.args.get('id'))
+        return jsonify(id)
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteOnTopDAOImpl(req['id1'],req['id2'])
+        return jsonify(req)
+
+@app.route('/entity/on-bottom', methods=['POST','DELETE','GET','PATCH'])
+def entityOnBottom():
+    if request.method == "POST":
+        req = request.get_json()
+        insertOnBottomDAOImpl(req['idOnBottom'],req['idTop'])
+        return jsonify(req)
+    if request.method == "GET" and request.args.get('pos') == "on-bottom":
+        id = getOnBottomDAOImpl(request.args.get('id'))
+        return jsonify(id)
+    if request.method == "GET" and request.args.get('pos') == "cover":
+        id = getCoverEntityDAOImpl(request.args.get('id'))
+        return jsonify(id)
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteOnBottomDAOImpl(req['id1'],req['id2'])
+        return jsonify(req)

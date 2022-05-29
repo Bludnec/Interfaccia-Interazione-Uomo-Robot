@@ -42,8 +42,7 @@ function preload() {
   loadedCellMap = loadJSON("static/map/map.json");
   agentImage = loadImage("static/images/robot.png");
 
-  tvOnImage = loadImage("static/images/tvOn.png");
-  tvOffImage = loadImage("static/images/tvOff.png");
+  tvImage = loadImage("static/images/tv.png");
   bedImage = loadImage("static/images/bed.png");
   bookImage = loadImage("static/images/book.png");
   tableImage = loadImage("static/images/table.png");
