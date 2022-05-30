@@ -248,3 +248,58 @@ function deleteOnBottom(id1, id2) {
     }),
   });
 }
+
+function insertInside(idInside, idContainer) {
+  fetch(`entity/inside`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      idInside: idInside,
+      idContainer: idContainer,
+    }),
+  });
+}
+
+function getEntityInside(id) {
+  fetch(`entity/inside?id=${id}&pos=inside`)
+    .then((jsonData) => jsonData.json())
+    .then((data) => {
+      console.log(data);
+      // do something with the data
+    });
+}
+
+function getEntityCover(id) {
+  fetch(`entity/inside?id=${id}&pos=container`)
+    .then((jsonData) => jsonData.json())
+    .then((data) => {
+      console.log(data);
+      // do something with the data
+    });
+}
+
+function deleteInside(id1, id2) {
+  fetch("entity/inside", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id1: id1,
+      id2: id2,
+    }),
+  });
+}
+
+function getSpaceAvailable(id) {
+  fetch(`entity/inside-space-available?id=${id}`)
+    .then((jsonData) => jsonData.json())
+    .then((data) => {
+      console.log(data);
+      // do something with the data
+    });
+}

@@ -90,7 +90,7 @@ def entityOnTop():
         deleteOnTopDAOImpl(req['id1'],req['id2'])
         return jsonify(req)
 
-@app.route('/entity/on-bottom', methods=['POST','DELETE','GET','PATCH'])
+@app.route('/entity/on-bottom', methods=['POST','DELETE','GET'])
 def entityOnBottom():
     if request.method == "POST":
         req = request.get_json()
@@ -106,3 +106,26 @@ def entityOnBottom():
         req = request.get_json()
         deleteOnBottomDAOImpl(req['id1'],req['id2'])
         return jsonify(req)
+
+@app.route('/entity/inside', methods=['POST','DELETE','GET'])
+def entityInside():
+    if request.method == "POST":
+        req = request.get_json()
+        insertInsideDAOImpl(req['idInside'],req['idContainer'])
+        return jsonify(req)   
+    if request.method == "GET" and request.args.get('pos') == "inside":
+        id = getInsideDAOImpl(request.args.get('id'))
+        return jsonify(id)
+    if request.method == "GET" and request.args.get('pos') == "container":
+        id = getContainerEntityDAOImpl(request.args.get('id'))
+        return jsonify(id)
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteInsideDAOImpl(req['id1'],req['id2'])
+        return jsonify(req)
+
+@app.route('/entity/inside-space-available', methods=['POST','DELETE','GET'])
+def entityInsideSpaceAvailable():
+    if request.method == "GET":
+        spaceAvailable = getInsideSpaceAvailableDAOImpl(request.args.get('id'))
+        return jsonify(spaceAvailable)

@@ -7,6 +7,8 @@ prolog.assertz("entity(id7,table,table,1,1,0)")
 prolog.assertz("entity(id6,bed,bed,6,2,0)")
 prolog.assertz("entity_size(id7,big,2,2)")
 prolog.assertz("entity_size(id6,big,2,2)")
+
+prolog.assertz("entity_size(id3,big,2,2)")
 prolog.assertz("entity(id2,tv,tv,3,2,0)")
 prolog.assertz("power_status(id2,true)")
 prolog.assertz("on_top(id2,id7)")
@@ -20,6 +22,10 @@ prolog.assertz("on_top(id2,id7)")
 
 prolog.assertz("inside(id4,id3)")
 prolog.assertz("inside(id5,id3)")
+
+prolog.assertz("entity_size(id5,small,1,1)")
+
+prolog.assertz("entity_size(id4,small,1,1)")
 
 # Return all entities on KB.
 def getAllEntityDAOImpl():
@@ -71,7 +77,7 @@ def deleteEntitySizeDAOImpl(id):
 
 # Restituisce le dimensioni dell'entità istanziata.
 def getEntitySizeDAOImpl(id):
-    return list(prolog.query('entity_size('+id+',_,SizeX,SizeY)'))[0]
+    return list(prolog.query('entity_size('+id+',_,SizeX,SizeY)'))
 
 # Aggiorna la posizione dell'entità
 def updateEntityPositionDAOImpl(id, x, y, z):
@@ -205,7 +211,7 @@ def deleteOnBottomDAOImpl(id1,id2):
 
 # Inserisce il fatto insinde(idInside, idContainer) nel KB.
 def insertInsideDAOImpl(idInside, idContainer):
-    if(not bool(list(prolog.query('on_bottom('+idInside+','+idContainer+')'))) and idInside != idContainer):
+    if(not bool(list(prolog.query('inside('+idInside+','+idContainer+')'))) and idInside != idContainer):
         prolog.assertz('inside('+idInside+','+idContainer+')')
         print('Fatto inserito nel KB.')
     elif(idInside == idContainer):
@@ -230,16 +236,16 @@ def deleteInsideDAOImpl(id1,id2):
 
 # Restistuice lo spazio rimanente dentro un'entità facendo il calcolo con quelle già presenti
 # print('InsideSpaceAvaiable: ',getInsideSpaceDAOImpl('id3'))
-def getInsideSpaceDAOImpl(id):
+def getInsideSpaceAvailableDAOImpl(id):
     if(bool(list(prolog.query('contain_ability('+id+')')))):
-        sizeList = getEntitySizeDAOImpl(id)
+        sizeList = getEntitySizeDAOImpl(id)[0]
         spaceAvailable = sizeList['SizeX']*sizeList['SizeY']
-        print(type(spaceAvailable))
-        listEnt = list(prolog.query("inside(Id,id3)"))
+        listEnt = getInsideDAOImpl(id)
+        print(spaceAvailable, listEnt)
         for x in listEnt:
             entSize = list(prolog.query('entity_size('+x['Id']+',Size,SizeX,SizeY)'))[0]
-            spaceAvailable -= entSize['SizeX'] * entSize['SizeY']        
-            return spaceAvailable
+            spaceAvailable -= (entSize['SizeX'] * entSize['SizeY']) 
+        return spaceAvailable
     else:
         print('L entità non può contenere oggetti.')
         return -1
