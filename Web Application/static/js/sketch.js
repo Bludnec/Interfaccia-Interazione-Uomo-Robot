@@ -41,10 +41,8 @@ var agentImage;
 
 function preload() {
   //var urlList = loadJSON("/get-all-url");
-  var test = getAllUrl();
+  console.log("1");
 
-  console.log(test);
-  console.log(urlList);
   loadedCellMap = loadJSON("static/map/map.json");
   agentImage = loadImage("static/images/robot.png");
 

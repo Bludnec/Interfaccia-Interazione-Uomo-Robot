@@ -151,12 +151,15 @@ function getEntityWeight(id) {
 async function getAllUrl() {
   // legge il nostro JSON
   let response = await fetch("get-all-url");
-  let data = await response.json();
-  console.log(data[0]);
-
-  urlList = data[0];
+  return response.json();
+  console.log(data);
   return data;
 }
+urlList = getAllUrl().then((data) => {
+  return data;
+});
+
+console.log(urlList);
 
 function insertOnTop(idOnTop, idSupport) {
   fetch(`entity/on-top`, {
