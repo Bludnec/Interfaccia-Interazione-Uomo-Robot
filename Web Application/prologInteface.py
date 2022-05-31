@@ -249,6 +249,3 @@ def getInsideSpaceAvailableDAOImpl(id):
     else:
         print('L entità non può contenere oggetti.')
         return -1
-"""
- insert e delete status
-"""

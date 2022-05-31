@@ -3,6 +3,7 @@ var frameRate = 3;
 var cols, rows;
 var cellsList = [];
 var itemsList = [];
+var urlList;
 
 var agentActionsList = [];
 
@@ -39,6 +40,11 @@ var televisionImage, bedImage, bookImage, tableImage;
 var agentImage;
 
 function preload() {
+  //var urlList = loadJSON("/get-all-url");
+  var test = getAllUrl();
+
+  console.log(test);
+  console.log(urlList);
   loadedCellMap = loadJSON("static/map/map.json");
   agentImage = loadImage("static/images/robot.png");
 

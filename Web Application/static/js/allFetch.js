@@ -24,7 +24,6 @@ function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   json_arr["sizeY"] = str(sizeY);
 
   var json_string = JSON.stringify(json_arr);
-  //var url = "http://www.abx.com?" + $.param({foo: "bar", baz: "kuuq"})
   fetch(`entity`, {
     method: "POST",
     headers: {
@@ -149,12 +148,14 @@ function getEntityWeight(id) {
     });
 }
 
-function getAllUrl() {
-  fetch("/get-all-url")
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-    });
+async function getAllUrl() {
+  // legge il nostro JSON
+  let response = await fetch("get-all-url");
+  let data = await response.json();
+  console.log(data[0]);
+
+  urlList = data[0];
+  return data;
 }
 
 function insertOnTop(idOnTop, idSupport) {
