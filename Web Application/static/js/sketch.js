@@ -40,8 +40,9 @@ var televisionImage, bedImage, bookImage, tableImage;
 var agentImage;
 
 function preload() {
-  //var urlList = loadJSON("/get-all-url");
-  console.log("1");
+  getAllUrl().then((data) => {
+    tableImage = loadImage(data[0]["Url"]);
+  });
 
   loadedCellMap = loadJSON("static/map/map.json");
   agentImage = loadImage("static/images/robot.png");
@@ -49,7 +50,7 @@ function preload() {
   tvImage = loadImage("static/images/tv.png");
   bedImage = loadImage("static/images/bed.png");
   bookImage = loadImage("static/images/book.png");
-  tableImage = loadImage("static/images/table.png");
+  //tableImage = loadImage("static/images/table.png");
   rugImage = loadImage("static/images/rug.png");
 }
 
