@@ -1,6 +1,6 @@
 % entity(id,name,class,x,y).
 % status(id, status).   status = on/off - open/closed
-
+:- dynamic class/1.
 :- dynamic power_status/2.      % power_status(id,status). status = true/false (on/off)
 :- dynamic physical_status/2.   % physical_status(id,status). status = true/false (open/closed)
 :- dynamic on_top/2.            % on_top(id1,id2). --> Id1 sta sopra l'Id2
@@ -15,17 +15,23 @@
 class(table).
 class(wardrobe).
 class(sofa).
-clss(chair).
+class(chair).
 class(fridge).
 class(television).
-class(keyboard).
+class(keyboard). 
 class(laptop).
 class(smartphone).
 class(cup).
 class(plate).
+class(microwave). 
+class(book).
+class(key).
+class(bucket).
+class(jar).
+class(lamp).
 
 % Grandezza entità - size(class,size).
-size(table,big).
+size(table,big). 
 size(table,medium).
 size(wardrobe,big).
 size(wardrobe,medium).
@@ -39,6 +45,12 @@ size(laptop,small).
 size(smartphone,small).
 size(cup,small).
 size(plate,small).
+size(microwave,medium).
+size(book,small).
+size(key,small).
+size(bucket,small).
+size(jar,small).
+size(lamp,small).
 
 % Peso - weight(class,weight)
 weight(table,heavy).
@@ -52,6 +64,12 @@ weight(laptop,light).
 weight(smartphone,light).
 weight(cup,light).
 weight(plate,light).
+weight(microwave,medium).
+weight(book,light).
+weight(key,light).
+weight(bucket,light).
+weight(jar,light).
+weight(lamp,light).
 
 % Url delle immagini - img(class,url).
 img(table,'static/images/table.png').
@@ -64,7 +82,13 @@ img(keyboard,'static/images/keyboard.png').
 img(laptop,'static/images/laptop.png').
 img(smartphone,'static/images/smartphone.png').
 img(cup,'static/images/cup.png').
-img(cup,'static/images/plate.png').
+img(plate,'static/images/plate.png').
+img(microwave,'static/images/microwave.png').
+img(book,'static/images/book.png').
+img(key,'static/images/key.png').
+img(bucket,'static/images/bucket.png').
+img(jar,'static/images/jar.png').
+img(lamp,'static/images/lamp.png').
 
 % Lexical references lex_ref(Class,List).
 lex_ref(table,['table','bench','desk']).
@@ -78,8 +102,12 @@ lex_ref(laptop,['laptop','portable computer','pc']).
 lex_ref(smartphone,['smartphone','cellular','cell phone','telephone']).
 lex_ref(cup,['cup','bowl','tome']).
 lex_ref(plate,['plate','dish']).
-
+lex_ref(microwave,['microwave']).
 lex_ref(book,['book','volume','chalice']).
+lex_ref(key,['key']).
+lex_ref(bucket,['bucket','pail']).
+lex_ref(jar,['jar','vase','pot']).
+lex_ref(lamp,['lamp','light','bulb']).
 
 % Grandezza spazio
 space(big,2,2).
@@ -96,12 +124,10 @@ entity_with_power_status(Id):-
     is_class(Id,laptop).
 entity_with_power_status(Id):-
     is_class(Id,smartphone).
-
-% aperto/chiuso
-entity_with_physical_status(Id):-
-    is_class(Id,wardrobe).
-entity_with_physical_status(Id):-
-    is_class(Id,fridge).
+entity_with_power_status(Id):-
+    is_class(Id,microwave).
+entity_with_power_status(Id):-
+    is_class(Id,lamp).
 
 % Abilità: "name"_ability(id).
 % Si possono poggiare oggetti su di esso.
@@ -119,6 +145,12 @@ contain_ability(Id):-
     is_class(Id,fridge).
 contain_ability(Id):-
     is_class(Id,cup).
+contain_ability(Id):-
+    is_class(Id,microwave).
+contain_ability(Id):-
+    is_class(Id,bucket).
+contain_ability(Id):-
+    is_class(Id,jar).
 
 % Un oggetto può essere mosso (es. door/wall non possono essere mossi)
 move_ability(Id):-
@@ -143,11 +175,22 @@ move_ability(Id):-
     is_class(Id,cup).
 move_ability(Id):-
     is_class(Id,plate).
-
+move_ability(Id):-
+    is_class(Id,microwave).
+move_ability(Id):-
+    is_class(Id,book).
+move_ability(Id):-
+    is_class(Id,key).
+move_ability(Id):-
+    is_class(Id,bucket).
+move_ability(Id):-
+    is_class(Id,jar).
+move_ability(Id):-
+    is_class(Id,lamp).
 
 % Si può camminare sopra l'oggetto
 walkable_ability(Id):-
-    is_class(Id,).
+    is_class(Id,rug).
 
 % Si può chiudere/aprire l'oggetto.
 open_ability(Id):-

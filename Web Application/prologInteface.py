@@ -129,6 +129,8 @@ def getEntityStatusDAOImpl(id):
     else:
         print("L'entity non ha uno stato")
 
+print(getEntityStatusDAOImpl('id2'))
+
 # Restituisce la lista di tutte le abilità di un'entità.
 def getEntityAbilitiesDAOImpl(id):
     abilitiesList = [] 
