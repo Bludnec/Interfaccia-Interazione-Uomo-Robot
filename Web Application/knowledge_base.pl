@@ -13,42 +13,59 @@
 
 % Classe - class(name).
 class(table).
-class(rug).
-class(tv).
-class(cup).
-class(door).
 class(wardrobe).
-
+class(sofa).
+clss(chair).
+class(fridge).
+class(television).
+class(keyboard).
+class(laptop).
 
 % Grandezza entità - size(class,size).
 size(table,big).
-size(rug,big).
-size(rug,medium).
-size(rug,small).
-size(tv,medium).
-size(cup,small).
-size(door,medium).
+size(table,medium).
 size(wardrobe,big).
-size(bed,big).
-size(bed,medium).
+size(wardrobe,medium).
+size(sofa,big).
+size(sofa,medium).
+size(chair,medium).
+size(fridge,medium).
+size(television,medium).
+size(keyboard,small).
+size(laptop,small).
 
 % Peso - weight(class,weight)
 weight(table,heavy).
-weight(rug,heavy).
-weight(cup,light).
-weight(rug,medium).
 weight(wardrobe,heavy).
+weight(sofa,heavy).
+weight(chair,medium).
+weight(fridge,heavy).
+weight(television,medium).
+weight(keyboard,light).
+weight(laptop,light).
 
 % Url delle immagini - img(class,url).
-img(table,'static/images/table.png'). 
-img(rug,'static/images/rug.png').
-img(cup,'static/images/cup.png').
+img(table,'static/images/table.png').
+img(wardrobe,'static/images/wardrobe.png').
+img(sofa,'static/images/sofa.png').
+img(chair,'static/images/chair.png').
+img(fridge,'static/images/fridge.png').
+img(television,'static/images/television.png').
+img(keyboard,'static/images/keyboard.png').
+img(laptop,'static/images/laptop.png').
 
 % Lexical references lex_ref(Class,List).
 lex_ref(table,['table','bench','desk']).
+lex_ref(wardrobe,['wardrobe','closet']).
+lex_ref(sofa,['sofa','couch']).
+lex_ref(chair,['chair','seat']).
+lex_ref(fridge,['fridge','refrigerator']).
+lex_ref(television,['television','tv']).
+lex_ref(keyboard,['keyboard','fingerboard']).
+lex_ref(laptop,['laptop','portable computer','pc']).
+
 lex_ref(book,['book','volume','chalice']).
 lex_ref(cup,['cup','bowl','tome']).
-lex_ref(tv,['tv','television']).
 
 % Grandezza spazio
 space(big,2,2).
@@ -60,56 +77,64 @@ space(small,1,1).
 
 % acceso/spento
 entity_with_power_status(Id):-
-    is_class(Id,tv).
+    is_class(Id,television).
 entity_with_power_status(Id):-
-    is_class(Id,pc).
+    is_class(Id,laptop).
 
 % aperto/chiuso
 entity_with_physical_status(Id):-
     is_class(Id,wardrobe).
-
 entity_with_physical_status(Id):-
-    is_class(Id,door).
+    is_class(Id,fridge).
 
 % Abilità: "name"_ability(id).
 % Si possono poggiare oggetti su di esso.
 support_ability(Id):-
     is_class(Id,table).
 support_ability(Id):-
-    is_class(Id,rug).
+    is_class(Id,sofa).
+support_ability(Id):-
+    is_class(Id,chair).
 
 % Un oggetto può contenere altri oggetti
-
 contain_ability(Id):-
     is_class(Id,wardrobe).
 contain_ability(Id):-
-    is_class(Id,cup).
+    is_class(Id,fridge).
 
 % Un oggetto può essere mosso (es. door/wall non possono essere mossi)
 move_ability(Id):-
     is_class(Id,table).
 move_ability(Id):-
-    is_class(Id,rug).
-move_ability(Id):-
-    is_class(Id,tv).
-move_ability(Id):-
-    is_class(Id,cup).
-move_ability(Id):-
     is_class(Id,wardrobe).
+move_ability(Id):-
+    is_class(Id,sofa).
+move_ability(Id):-
+    is_class(Id,chair).
+move_ability(Id):-
+    is_class(Id,fridge).
+move_ability(Id):-
+    is_class(Id,television).
+move_ability(Id):-
+    is_class(Id,keyboard).
+move_ability(Id):-
+    is_class(Id,laptop).
 
 % Si può camminare sopra l'oggetto
 walkable_ability(Id):-
-    is_class(Id,rug).
+    is_class(Id,).
 
 % Si può chiudere/aprire l'oggetto.
 open_ability(Id):-
-    is_class(Id,book).
+    is_class(Id,wardrobe).
 open_ability(Id):-
-    is_class(Id,door).
+    is_class(Id,fridge).
 
 % contenere qualcosa sotto
 putting_under_ability(Id):-
     is_class(Id,table).
+putting_under_ability(Id):-
+    is_class(Id,chair).
 
 %%%%
 is_size(Id,SizeX,SizeY):-

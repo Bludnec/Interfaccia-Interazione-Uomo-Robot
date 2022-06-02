@@ -41,16 +41,23 @@ var agentImage;
 
 function preload() {
   getAllUrl().then((data) => {
-    tableImage = loadImage(data[0]["Url"]);
+    for (i = 0; i < data.length; i++) {
+      switch (data[i]["Class"]) {
+        case "table":
+          tableImage = loadImage(data[i]["Url"]);
+          break;
+        case "tv":
+          televisionImage = loadImage(data[i]["Url"]);
+          break;
+      }
+    }
   });
 
   loadedCellMap = loadJSON("static/map/map.json");
   agentImage = loadImage("static/images/robot.png");
 
-  tvImage = loadImage("static/images/tv.png");
   bedImage = loadImage("static/images/bed.png");
   bookImage = loadImage("static/images/book.png");
-  //tableImage = loadImage("static/images/table.png");
   rugImage = loadImage("static/images/rug.png");
 }
 
