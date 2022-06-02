@@ -11,7 +11,7 @@ class Entity {
     this.mapY = this.position.y * w;
 
     /* Abilities */
-    this.ability = [];
+    //this.ability = getEntityAbility(this.id);
 
     this.lexical_references = [];
   }

@@ -110,7 +110,7 @@ function mouseReleased() {
         insertEntity("bed" + idCounter, "bed", "bed", x, y, z, "big", 2, 2);
         idCounter++;
         break;
-      case "forn-2":
+      case "entity-2":
         console.log("Aggiungo tavolo");
         insertEntity(
           "table" + idCounter,
@@ -125,41 +125,8 @@ function mouseReleased() {
         );
         idCounter++;
         break;
-      case "ornam-0":
-        console.log("Aggiungo tv");
-        var television = new Television(
-          "tv" + idCounter,
-          "television",
-          position
-        );
-        television.status = "on";
-        itemsList.push(television);
-        idCounter++;
-        break;
-      case "ornam-1":
-        console.log("Aggiungo tv");
-        var television = new Television(
-          "tv" + idCounter,
-          "television",
-          position
-        );
-        television.status = "off";
-        itemsList.push(television);
-        idCounter++;
-        break;
-      case "ornam-2":
-        console.log("Aggiungo libro");
-        var book = new Book("bk" + idCounter, "book", position);
-        itemsList.push(book);
-        idCounter++;
-        break;
-      case "ornam-3":
-        console.log("Aggiungo tappeto");
-        var rug = new Rug("rug" + idCounter, "rug", position);
-        itemsList.push(rug);
-        idCounter++;
-        break;
     }
+    getAllEntity();
     indexItemSelected = -1;
   }
 

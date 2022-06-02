@@ -1,9 +1,12 @@
-function getAllEntity() {
-  fetch("get-all-entity")
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      createEl(data);
-    });
+async function getAllEntity() {
+  let response = await fetch("get-all-entity");
+  let data = await response.json();
+  itemsList = [];
+  for (var i = 0; i < data.length; i++) {
+    var position = new Position(data[i].X, data[i].Y, data[i].Z);
+    var entity = new Entity(data[i].Id, data[i].Name, data[i].Class, position);
+    itemsList.push(entity);
+  }
 }
 
 // Funzione per l'inserimento di una nuova entità nel KB
@@ -126,9 +129,9 @@ function getEntityAbility(id) {
     .then((jsonData) => jsonData.json())
     .then((data) => {
       console.log(data);
-      // do something with the data
     });
 }
+getEntityAbility("id2");
 
 function getEntityLefRef(id) {
   fetch(`entity/lexical_references?id=${id}`)

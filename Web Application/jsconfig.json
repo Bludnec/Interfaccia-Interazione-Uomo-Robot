@@ -6,6 +6,6 @@
     "agent/agent.js",
     "static/js/mapEditor.js",
     "static/js/eventListener.js",
-    "static/js/allFetch.js"
+    "static/js/fetch/allFetch.js"
   ]
 }

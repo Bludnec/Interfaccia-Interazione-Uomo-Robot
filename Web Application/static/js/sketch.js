@@ -22,13 +22,13 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 3; i++) {
-  document.getElementById(`forn-${i}`).addEventListener("dragstart", dragItem);
-  document.getElementById(`forn-${i}`).addEventListener("dragend", undragItem);
-}
-for (var i = 0; i < 4; i++) {
-  document.getElementById(`ornam-${i}`).addEventListener("dragstart", dragItem);
-  document.getElementById(`ornam-${i}`).addEventListener("dragend", undragItem);
+for (var i = 0; i < 21; i++) {
+  document
+    .getElementById(`entity-${i}`)
+    .addEventListener("dragstart", dragItem);
+  document
+    .getElementById(`entity-${i}`)
+    .addEventListener("dragend", undragItem);
 }
 
 /**
@@ -36,7 +36,7 @@ for (var i = 0; i < 4; i++) {
  *  asynchronous loading of external files in a blocking way
  */
 var loadedCellMap;
-var televisionImage, bedImage, bookImage, tableImage;
+var televisionImage, bedImage, bookImage, tableImage, televisionImage;
 var agentImage;
 
 function preload() {
@@ -46,7 +46,7 @@ function preload() {
         case "table":
           tableImage = loadImage(data[i]["Url"]);
           break;
-        case "tv":
+        case "television":
           televisionImage = loadImage(data[i]["Url"]);
           break;
       }
@@ -54,7 +54,6 @@ function preload() {
   });
 
   loadedCellMap = loadJSON("static/map/map.json");
-  agentImage = loadImage("static/images/robot.png");
 
   bedImage = loadImage("static/images/bed.png");
   bookImage = loadImage("static/images/book.png");
@@ -136,7 +135,9 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(3);
+  getAllEntity();
+
+  frameRate(5);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     cellsList[i].show();
@@ -147,8 +148,6 @@ function draw() {
   if (agent != null) {
     agent.show();
   }
-
-  getAllEntity();
 }
 
 /* Return the array's index of the cell in position i,j. */
