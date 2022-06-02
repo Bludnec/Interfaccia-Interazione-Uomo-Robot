@@ -20,6 +20,9 @@ class(fridge).
 class(television).
 class(keyboard).
 class(laptop).
+class(smartphone).
+class(cup).
+class(plate).
 
 % Grandezza entità - size(class,size).
 size(table,big).
@@ -33,6 +36,9 @@ size(fridge,medium).
 size(television,medium).
 size(keyboard,small).
 size(laptop,small).
+size(smartphone,small).
+size(cup,small).
+size(plate,small).
 
 % Peso - weight(class,weight)
 weight(table,heavy).
@@ -43,6 +49,9 @@ weight(fridge,heavy).
 weight(television,medium).
 weight(keyboard,light).
 weight(laptop,light).
+weight(smartphone,light).
+weight(cup,light).
+weight(plate,light).
 
 % Url delle immagini - img(class,url).
 img(table,'static/images/table.png').
@@ -53,6 +62,9 @@ img(fridge,'static/images/fridge.png').
 img(television,'static/images/television.png').
 img(keyboard,'static/images/keyboard.png').
 img(laptop,'static/images/laptop.png').
+img(smartphone,'static/images/smartphone.png').
+img(cup,'static/images/cup.png').
+img(cup,'static/images/plate.png').
 
 % Lexical references lex_ref(Class,List).
 lex_ref(table,['table','bench','desk']).
@@ -63,9 +75,11 @@ lex_ref(fridge,['fridge','refrigerator']).
 lex_ref(television,['television','tv']).
 lex_ref(keyboard,['keyboard','fingerboard']).
 lex_ref(laptop,['laptop','portable computer','pc']).
+lex_ref(smartphone,['smartphone','cellular','cell phone','telephone']).
+lex_ref(cup,['cup','bowl','tome']).
+lex_ref(plate,['plate','dish']).
 
 lex_ref(book,['book','volume','chalice']).
-lex_ref(cup,['cup','bowl','tome']).
 
 % Grandezza spazio
 space(big,2,2).
@@ -80,6 +94,8 @@ entity_with_power_status(Id):-
     is_class(Id,television).
 entity_with_power_status(Id):-
     is_class(Id,laptop).
+entity_with_power_status(Id):-
+    is_class(Id,smartphone).
 
 % aperto/chiuso
 entity_with_physical_status(Id):-
@@ -101,6 +117,8 @@ contain_ability(Id):-
     is_class(Id,wardrobe).
 contain_ability(Id):-
     is_class(Id,fridge).
+contain_ability(Id):-
+    is_class(Id,cup).
 
 % Un oggetto può essere mosso (es. door/wall non possono essere mossi)
 move_ability(Id):-
@@ -119,6 +137,13 @@ move_ability(Id):-
     is_class(Id,keyboard).
 move_ability(Id):-
     is_class(Id,laptop).
+move_ability(Id):-
+    is_class(Id,smartphone).
+move_ability(Id):-
+    is_class(Id,cup).
+move_ability(Id):-
+    is_class(Id,plate).
+
 
 % Si può camminare sopra l'oggetto
 walkable_ability(Id):-
