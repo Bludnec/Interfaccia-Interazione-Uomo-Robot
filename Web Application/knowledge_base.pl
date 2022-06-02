@@ -29,6 +29,11 @@ class(key).
 class(bucket).
 class(jar).
 class(lamp).
+class(window).
+class(glass).
+class(door).
+class(rug).
+class(bed).
 
 % Grandezza entità - size(class,size).
 size(table,big). 
@@ -51,6 +56,16 @@ size(key,small).
 size(bucket,small).
 size(jar,small).
 size(lamp,small).
+size(window,small).
+size(window,medium).
+size(window,big).
+size(glass,small).
+size(door,medium).
+size(rug,small).
+size(rug,medium).
+size(rug,big).
+size(bed,big).
+size(bed,medium).
 
 % Peso - weight(class,weight)
 weight(table,heavy).
@@ -70,6 +85,11 @@ weight(key,light).
 weight(bucket,light).
 weight(jar,light).
 weight(lamp,light).
+weight(window,heavy).
+weight(glass,light).
+weight(door,heavy).
+weight(rug,medium).
+weight(bed,heavy).
 
 % Url delle immagini - img(class,url).
 img(table,'static/images/table.png').
@@ -89,6 +109,12 @@ img(key,'static/images/key.png').
 img(bucket,'static/images/bucket.png').
 img(jar,'static/images/jar.png').
 img(lamp,'static/images/lamp.png').
+img(window,'static/images/window.png').
+img(glass,'static/images/glass.png').
+img(door,'static/images/door.png').
+img(rug,'static/images/rug.png').
+img(bed,'static/images/bed.png').
+
 
 % Lexical references lex_ref(Class,List).
 lex_ref(table,['table','bench','desk']).
@@ -108,6 +134,11 @@ lex_ref(key,['key']).
 lex_ref(bucket,['bucket','pail']).
 lex_ref(jar,['jar','vase','pot']).
 lex_ref(lamp,['lamp','light','bulb']).
+lex_ref(window,['window']).
+lex_ref(glass,['glass','goblet']).
+lex_ref(door,['door','gate','port']).
+lex_ref(rug,['rug','carpet','mat']).
+lex_ref(bed,['bed','kip']).
 
 % Grandezza spazio
 space(big,2,2).
@@ -137,6 +168,8 @@ support_ability(Id):-
     is_class(Id,sofa).
 support_ability(Id):-
     is_class(Id,chair).
+support_ability(Id):-
+    is_class(Id,rug).
 
 % Un oggetto può contenere altri oggetti
 contain_ability(Id):-
@@ -151,6 +184,8 @@ contain_ability(Id):-
     is_class(Id,bucket).
 contain_ability(Id):-
     is_class(Id,jar).
+contain_ability(Id):-
+    is_class(Id,glass).
 
 % Un oggetto può essere mosso (es. door/wall non possono essere mossi)
 move_ability(Id):-
@@ -187,16 +222,29 @@ move_ability(Id):-
     is_class(Id,jar).
 move_ability(Id):-
     is_class(Id,lamp).
+move_ability(Id):-
+    is_class(Id,glass).
+move_ability(Id):-
+    is_class(Id,rug).
+move_ability(Id):-
+    is_class(Id,bed).
 
 % Si può camminare sopra l'oggetto
 walkable_ability(Id):-
     is_class(Id,rug).
+walkable_ability(Id):-
+    is_class(Id,door),
+    physical_status(Id,true). % walkable solo se è aperta.
 
 % Si può chiudere/aprire l'oggetto.
 open_ability(Id):-
     is_class(Id,wardrobe).
 open_ability(Id):-
     is_class(Id,fridge).
+open_ability(Id):-
+    is_class(Id,window).
+open_ability(Id):-
+    is_class(Id,door).
 
 % contenere qualcosa sotto
 putting_under_ability(Id):-
