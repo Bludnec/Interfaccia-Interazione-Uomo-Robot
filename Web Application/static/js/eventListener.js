@@ -56,7 +56,7 @@ function addEntity() {
   yReleased = null;
   zReleased = null;
 }
-
+//
 document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
