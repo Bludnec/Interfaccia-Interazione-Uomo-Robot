@@ -66,10 +66,8 @@ function preload() {
       document.getElementById("img-list").appendChild(img);
       document
         .getElementById(`entity-${i}`)
-        .addEventListener("dragstart", dragItem);
-      document
-        .getElementById(`entity-${i}`)
-        .addEventListener("dragend", undragItem);
+        .addEventListener("click", clickEntityImage);
+
       img.alt = data[i]["Class"];
     }
     for (i = 0; i < data.length; i++) {
@@ -238,56 +236,48 @@ function draw() {
   }
 }
 
+/**
+ * Funzione per vedere se nelle coordinate scelte c'è qualcosa
+ * e vede se si può mettere un altro oggetto sopra.
+ * Restituisce true se è possibile posizionare l'oggetto.
+ */
+function possToPutObject(i, j) {}
+
+/**
+ * Funzione che permette all'agente di vedere se è in grado di spostarsi nella
+ * cella i,j, o se può camminare sopra l'oggetto.
+ */
+function possMoveOn(i, j) {}
+
+/* Functions for select an entity */
+function clickEntityImage() {
+  if (this.classList == "selected") {
+    document
+      .getElementById(`entity-${indexItemSelected}`)
+      .classList.remove("selected");
+    idItemSelected = null;
+    indexItemSelected = null;
+    classItemSelected = null;
+  } else if (idItemSelected != this.id && idItemSelected != null) {
+    document
+      .getElementById(`entity-${indexItemSelected}`)
+      .classList.remove("selected");
+    this.classList.add("selected");
+    idItemSelected = this.id;
+    indexItemSelected = idItemSelected.replace(/\D/g, "");
+    classItemSelected = this.alt;
+  } else {
+    this.classList.add("selected");
+    idItemSelected = this.id;
+    indexItemSelected = idItemSelected.replace(/\D/g, "");
+    classItemSelected = this.alt;
+  }
+}
+
 /* Return the array's index of the cell in position i,j. */
 function cellIndex(i, j) {
   if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
     return -1;
   }
   return i + j * cols;
-}
-
-/* Functions for drag & drop of objects on the map */
-function dragItem() {
-  this.classList.add("selected");
-  idItemSelected = this.id;
-  indexItemSelected = idItemSelected.replace(/\D/g, "");
-  classItemSelected = this.alt;
-}
-function undragItem() {
-  document
-    .getElementById(`entity-${indexItemSelected}`)
-    .classList.remove("selected");
-}
-
-/**
- * Funzione per vedere se nelle coordinate scelte c'è qualcosa
- * e vede se si può mettere un altro oggetto sopra.
- * Restituisce true se è possibile posizionare l'oggetto.
- */
-function possToPutObject(i, j) {
-  for (var k = 0; k < itemsList.length; k++) {
-    if (itemsList[k].i == i && itemsList[k].j == j) {
-      if (itemsList[k].support_ability) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-/**
- * Funzione che permette all'agente di vedere se è in grado di spostarsi nella
- * cella i,j, o se può camminare sopra l'oggetto.
- */
-function possMoveOn(i, j) {
-  for (var k = 0; k < itemsList.length; k++) {
-    if (itemsList[k].i == i && itemsList[k].j == j && itemsList[k].walkable) {
-      return true;
-    } else if (itemsList[k].i == i && itemsList[k].j == j) {
-      return false;
-    }
-  }
-  return true;
 }

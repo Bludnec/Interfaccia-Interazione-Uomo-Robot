@@ -13,47 +13,10 @@ var cellZone = document.getElementById("cell-zone");
 
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
-var modal = document.getElementById("myModal");
-
-var xReleased, yReleased, zReleased;
 
 var boolMousePressed = false;
 var indexItemPressed, xItemPressed, yItemPressed;
 
-var saveBtnModal = document
-  .getElementById("save-btn-modal")
-  .addEventListener("click", addEntity);
-var checkColor = document
-  .getElementById("cancel-btn-modal")
-  .addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-function addEntity() {
-  modal.style.display = "none";
-  /* Create a new object on mouse release in mouseX, mouseY coordinates */
-  if (possToPutObject(xReleased, yReleased)) {
-    insertEntity(
-      classItemSelected + idCounter,
-      classItemSelected,
-      classItemSelected,
-      xReleased,
-      yReleased,
-      zReleased,
-      "big",
-      2,
-      2
-    );
-  }
-  getAllEntity();
-  indexItemSelected = -1;
-  classItemSelected = null;
-  idCounter++;
-  xReleased = null;
-  yReleased = null;
-  zReleased = null;
-}
-//
 document
   .getElementById("delete-button")
   .addEventListener("click", deleteItemOnMap);
@@ -127,14 +90,29 @@ function mouseReleased() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
-  var modal = document.getElementById("myModal");
-  // Get the <span> element that closes the modal
-  modal.style.display = "block";
 
   /* Check if the click is done on the cell area. */
-  xReleased = parseInt(mouseX / w);
-  yReleased = parseInt(mouseY / w);
-  zReleased = 0;
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+  var z = 0;
+  /* Create a new object on mouse release in mouseX, mouseY coordinates */
+  if (possToPutObject(x, y)) {
+    insertEntity(
+      classItemSelected + idCounter,
+      classItemSelected,
+      classItemSelected,
+      x,
+      y,
+      z,
+      "big",
+      2,
+      2
+    );
+  }
+  getAllEntity();
+  indexItemSelected = -1;
+  classItemSelected = null;
+  idCounter++;
 
   /* Moves the pressed element after release to the new coordinates */
   if (boolMousePressed && possToPutObject(x, y)) {
