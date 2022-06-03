@@ -33,9 +33,6 @@ function addEntity() {
   modal.style.display = "none";
   /* Create a new object on mouse release in mouseX, mouseY coordinates */
   if (possToPutObject(xReleased, yReleased)) {
-    console.log(xReleased, yReleased, zReleased);
-    console.log("cazz");
-    console.log(classItemSelected);
     insertEntity(
       classItemSelected + idCounter,
       classItemSelected,
