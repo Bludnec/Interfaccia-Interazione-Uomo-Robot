@@ -243,7 +243,7 @@ function possToPutObject(i, j) {}
 
 /**
  * Funzione che permette all'agente di vedere se è in grado di spostarsi nella
- * cella i,j, o se può camminare sopra l'oggetto.
+ * cella i,j o se può camminare sopra l'oggetto.
  */
 function possMoveOn(i, j) {}
 
