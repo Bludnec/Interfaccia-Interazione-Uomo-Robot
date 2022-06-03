@@ -2,9 +2,6 @@
   "include": [
     "*.js",
     "libraries/*.js",
-    "c:\\Users\\colav\\.vscode\\extensions\\samplavigne.p5-vscode-1.2.8\\p5types\\global.d.ts",
-    "static/js/mapEditor.js",
-    "static/js/eventListener.js",
-    "static/js/fetch/allFetch.js"
+    "c:\\Users\\colav\\.vscode\\extensions\\samplavigne.p5-vscode-1.2.8\\p5types\\global.d.ts"
   ]
 }

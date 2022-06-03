@@ -96,7 +96,7 @@ function mouseReleased() {
   var y = parseInt(mouseY / w);
   var z = 0;
   /* Create a new object on mouse release in mouseX, mouseY coordinates */
-  if (possToPutObject(x, y)) {
+  if (true) {
     insertEntity(
       classItemSelected + idCounter,
       classItemSelected,

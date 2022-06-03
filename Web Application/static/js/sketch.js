@@ -221,8 +221,6 @@ function setup() {
  */
 function draw() {
   getAllEntity();
-
-  console.log(itemsList);
   frameRate(5);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
