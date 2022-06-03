@@ -150,7 +150,6 @@ function mouseReleased() {
 }
 
 function mouseDragged() {
-  console.log("drag");
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }

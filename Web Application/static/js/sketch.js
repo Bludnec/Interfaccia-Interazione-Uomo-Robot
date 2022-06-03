@@ -73,7 +73,6 @@ function preload() {
       img.alt = data[i]["Class"];
     }
     for (i = 0; i < data.length; i++) {
-      console.log(i);
       switch (data[i]["Class"]) {
         case "bed":
           bedImage = loadImage(data[i]["Url"]);
