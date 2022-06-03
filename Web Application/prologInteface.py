@@ -37,6 +37,7 @@ def getAllEntityDAOImpl():
 
 # Inserimento di un elemento nella base di conoscenza.
 def insertEntityDAOImpl(entity):
+    print(entity)
     check = insertEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])
     if(check != 0):
         print('Valori delle dimensioni non valide.')
@@ -61,6 +62,7 @@ def deleteEntityDAOImpl(id):
 # Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
 def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
+    print(entClass)
     check = -1
     theSize = list(prolog.query('space(TheSize,'+ sizeX + ',' +sizeY+')'))[0]['TheSize']
     sizeBool = bool(list(prolog.query('size('+entClass+','+theSize+')')))

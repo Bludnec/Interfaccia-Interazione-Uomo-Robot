@@ -250,16 +250,9 @@ function possMoveOn(i, j) {}
 /* Functions for select an entity */
 function clickEntityImage() {
   if (this.classList == "selected") {
-    document
-      .getElementById(`entity-${indexItemSelected}`)
-      .classList.remove("selected");
-    idItemSelected = null;
-    indexItemSelected = null;
-    classItemSelected = null;
+    deselectEntityImage();
   } else if (idItemSelected != this.id && idItemSelected != null) {
-    document
-      .getElementById(`entity-${indexItemSelected}`)
-      .classList.remove("selected");
+    deselectEntityImage();
     this.classList.add("selected");
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
@@ -270,6 +263,15 @@ function clickEntityImage() {
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
   }
+}
+
+function deselectEntityImage() {
+  document
+    .getElementById(`entity-${indexItemSelected}`)
+    .classList.remove("selected");
+  idItemSelected = null;
+  indexItemSelected = null;
+  classItemSelected = null;
 }
 
 /* Return the array's index of the cell in position i,j. */
