@@ -131,7 +131,6 @@ function getEntityAbility(id) {
       console.log(data);
     });
 }
-getEntityAbility("id2");
 
 function getEntityLefRef(id) {
   fetch(`entity/lexical_references?id=${id}`)
@@ -153,7 +152,7 @@ function getEntityWeight(id) {
 async function getAllUrl() {
   let response = await fetch("get-all-url");
   let data = await response.json();
-
+  console.log(data);
   return data;
 }
 function createUrlList(data) {

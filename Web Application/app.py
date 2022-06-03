@@ -70,8 +70,9 @@ def entityWeight():
 
 @app.route('/get-all-url')
 def getAllUrl():
-    urlList = getAllUrlDAOImpl()
-    return jsonify(urlList)
+    urlsList = getAllUrlDAOImpl()
+    print(urlsList)
+    return jsonify(urlsList)
 
 @app.route('/entity/on-top', methods=['POST','DELETE','GET','PATCH'])
 def entityOnTop():

@@ -13,6 +13,20 @@ var cellZone = document.getElementById("cell-zone");
 
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
+var modal = document.getElementById("myModal");
+var boolModal;
+var saveBtnModal = document
+  .getElementById("save-btn-modal")
+  .addEventListener("click", () => {
+    boolModal = true;
+    modal.style.display = "none";
+  });
+var checkColor = document
+  .getElementById("cancel-btn-modal")
+  .addEventListener("click", () => {
+    boolModal = false;
+    modal.style.display = "none";
+  });
 
 var boolMousePressed = false;
 var indexItemPressed, xItemPressed, yItemPressed;
@@ -90,6 +104,9 @@ function mouseReleased() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
+  var modal = document.getElementById("myModal");
+  // Get the <span> element that closes the modal
+  modal.style.display = "block";
 
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
@@ -98,36 +115,22 @@ function mouseReleased() {
 
   /* Create a new object on mouse release in mouseX, mouseY coordinates */
   if (possToPutObject(x, y)) {
-    var position = new Position(x, y, 0);
-    switch (indexItemSelected) {
-      case "forn-0":
-        console.log("Aggiungo agente");
-        agent = new Agent("rob" + idCounter, position);
-        idCounter++;
-        break;
-      case "forn-1":
-        console.log("Aggiungo letto");
-        insertEntity("bed" + idCounter, "bed", "bed", x, y, z, "big", 2, 2);
-        idCounter++;
-        break;
-      case "entity-2":
-        console.log("Aggiungo tavolo");
-        insertEntity(
-          "table" + idCounter,
-          "table",
-          "table",
-          x,
-          y,
-          z,
-          "big",
-          2,
-          2
-        );
-        idCounter++;
-        break;
-    }
+    console.log(classItemSelected);
+    insertEntity(
+      classItemSelected + idCounter,
+      classItemSelected,
+      classItemSelected,
+      x,
+      y,
+      z,
+      "big",
+      2,
+      2
+    );
+
     getAllEntity();
     indexItemSelected = -1;
+    classItemSelected = null;
   }
 
   /* Moves the pressed element after release to the new coordinates */
@@ -144,6 +147,7 @@ function mouseReleased() {
 }
 
 function mouseDragged() {
+  console.log("drag");
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
@@ -151,8 +155,8 @@ function mouseDragged() {
   var y = parseInt(mouseY / w);
 
   if (boolMousePressed) {
-    itemsList[indexItemPressed].x = x * w;
-    itemsList[indexItemPressed].y = y * w;
+    itemsList[indexItemPressed].position.x = x * w;
+    itemsList[indexItemPressed].position.y = y * w;
   }
 }
 
@@ -161,16 +165,6 @@ function keyPressed() {
   /* Press "Escape" for unselect the selected item. */
   if (keyCode === ESCAPE && lastClickedIndex != null) {
     removeInfoPoint();
-  } else if (keyCode === UP_ARROW) {
-    agent.moveUp();
-  } else if (keyCode === DOWN_ARROW) {
-    agent.moveDown();
-  } else if (keyCode === RIGHT_ARROW) {
-    agent.moveRight();
-  } else if (keyCode === LEFT_ARROW) {
-    agent.moveLeft();
-  } else {
-    return;
   }
 }
 

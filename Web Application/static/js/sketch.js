@@ -9,6 +9,8 @@ var agentActionsList = [];
 
 var boolResizeCanvas = false;
 var indexItemSelected;
+var idItemSelected;
+var classItemSelected;
 
 var boolLoadMap = false;
 
@@ -22,42 +24,128 @@ document.getElementById("resizeButton").addEventListener("click", () => {
   setup();
 });
 
-for (var i = 0; i < 21; i++) {
-  document
-    .getElementById(`entity-${i}`)
-    .addEventListener("dragstart", dragItem);
-  document
-    .getElementById(`entity-${i}`)
-    .addEventListener("dragend", undragItem);
-}
+var CellMap;
+var bedImage,
+  bookImage,
+  bucketImage,
+  chairImage,
+  cupImage,
+  doorImage,
+  fridgeImage,
+  glassImage,
+  jarImage,
+  keyImage,
+  keyboardImage,
+  lampImage,
+  laptopImage,
+  microwaveImage,
+  plateImage,
+  rugImage,
+  smartphoneImage,
+  sofaImage,
+  tableImage,
+  televisionImage,
+  wardrobeImage,
+  windowImage;
+var agentImage;
 
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
-var loadedCellMap;
-var televisionImage, bedImage, bookImage, tableImage, televisionImage;
-var agentImage;
-
+var loaded;
 function preload() {
   getAllUrl().then((data) => {
+    /**
+     * Creo la lista delle immagini selezionabili sulla web-app
+     */
+    for (var i = 0; i < data.length; i++) {
+      var img = document.createElement("img");
+      img.src = data[i]["Url"];
+      img.id = `entity-${i}`;
+      document.getElementById("img-list").appendChild(img);
+      document
+        .getElementById(`entity-${i}`)
+        .addEventListener("dragstart", dragItem);
+      document
+        .getElementById(`entity-${i}`)
+        .addEventListener("dragend", undragItem);
+      img.alt = data[i]["Class"];
+    }
     for (i = 0; i < data.length; i++) {
+      console.log(i);
       switch (data[i]["Class"]) {
+        case "bed":
+          bedImage = loadImage(data[i]["Url"]);
+          break;
+        case "book":
+          bookImage = loadImage(data[i]["Url"]);
+          break;
+        case "bucket":
+          bucketImage = loadImage(data[i]["Url"]);
+          break;
+        case "chair":
+          chairImage = loadImage(data[i]["Url"]);
+          break;
+        case "cup":
+          cupImage = loadImage(data[i]["Url"]);
+          break;
+        case "door":
+          doorImage = loadImage(data[i]["Url"]);
+          break;
+        case "fridge":
+          fridgeImage = loadImage(data[i]["Url"]);
+          break;
+        case "glass":
+          glassImage = loadImage(data[i]["Url"]);
+          break;
+        case "jar":
+          jarImage = loadImage(data[i]["Url"]);
+          break;
+        case "key":
+          keyImage = loadImage(data[i]["Url"]);
+          break;
+        case "keyboard":
+          keyboardImage = loadImage(data[i]["Url"]);
+          break;
+        case "lamp":
+          lampImage = loadImage(data[i]["Url"]);
+          break;
+        case "laptop":
+          laptopImage = loadImage(data[i]["Url"]);
+          break;
+        case "microwave":
+          microwaveImage = loadImage(data[i]["Url"]);
+          break;
+        case "plate":
+          plateImage = loadImage(data[i]["Url"]);
+          break;
+        case "rug":
+          rugImage = loadImage(data[i]["Url"]);
+          break;
+        case "smartphone":
+          smartphoneImage = loadImage(data[i]["Url"]);
+          break;
+        case "sofa":
+          sofaImage = loadImage(data[i]["Url"]);
+          break;
         case "table":
           tableImage = loadImage(data[i]["Url"]);
           break;
         case "television":
           televisionImage = loadImage(data[i]["Url"]);
           break;
+        case "wardrobe":
+          wardrobeImage = loadImage(data[i]["Url"]);
+          break;
+        case "window":
+          windowImage = loadImage(data[i]["Url"]);
+          break;
       }
     }
   });
 
   loadedCellMap = loadJSON("static/map/map.json");
-
-  bedImage = loadImage("static/images/bed.png");
-  bookImage = loadImage("static/images/book.png");
-  rugImage = loadImage("static/images/rug.png");
 }
 
 /**
@@ -161,10 +249,14 @@ function cellIndex(i, j) {
 /* Functions for drag & drop of objects on the map */
 function dragItem() {
   this.classList.add("selected");
-  indexItemSelected = this.id;
+  idItemSelected = this.id;
+  indexItemSelected = idItemSelected.replace(/\D/g, "");
+  classItemSelected = this.alt;
 }
 function undragItem() {
-  document.getElementById(`${indexItemSelected}`).classList.remove("selected");
+  document
+    .getElementById(`entity-${indexItemSelected}`)
+    .classList.remove("selected");
 }
 
 /**
