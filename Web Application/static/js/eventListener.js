@@ -14,22 +14,48 @@ var cellZone = document.getElementById("cell-zone");
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 var modal = document.getElementById("myModal");
-var boolModal;
-var saveBtnModal = document
-  .getElementById("save-btn-modal")
-  .addEventListener("click", () => {
-    boolModal = true;
-    modal.style.display = "none";
-  });
-var checkColor = document
-  .getElementById("cancel-btn-modal")
-  .addEventListener("click", () => {
-    boolModal = false;
-    modal.style.display = "none";
-  });
+
+var xReleased, yReleased, zReleased;
 
 var boolMousePressed = false;
 var indexItemPressed, xItemPressed, yItemPressed;
+
+var saveBtnModal = document
+  .getElementById("save-btn-modal")
+  .addEventListener("click", addEntity);
+var checkColor = document
+  .getElementById("cancel-btn-modal")
+  .addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+function addEntity() {
+  modal.style.display = "none";
+  /* Create a new object on mouse release in mouseX, mouseY coordinates */
+  if (possToPutObject(xReleased, yReleased)) {
+    console.log(xReleased, yReleased, zReleased);
+    console.log("cazz");
+    console.log(classItemSelected);
+    insertEntity(
+      classItemSelected + idCounter,
+      classItemSelected,
+      classItemSelected,
+      xReleased,
+      yReleased,
+      zReleased,
+      "big",
+      2,
+      2
+    );
+  }
+  getAllEntity();
+  indexItemSelected = -1;
+  classItemSelected = null;
+  idCounter++;
+  xReleased = null;
+  yReleased = null;
+  zReleased = null;
+}
 
 document
   .getElementById("delete-button")
@@ -109,29 +135,9 @@ function mouseReleased() {
   modal.style.display = "block";
 
   /* Check if the click is done on the cell area. */
-  var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w);
-  var z = 0;
-
-  /* Create a new object on mouse release in mouseX, mouseY coordinates */
-  if (possToPutObject(x, y)) {
-    console.log(classItemSelected);
-    insertEntity(
-      classItemSelected + idCounter,
-      classItemSelected,
-      classItemSelected,
-      x,
-      y,
-      z,
-      "big",
-      2,
-      2
-    );
-
-    getAllEntity();
-    indexItemSelected = -1;
-    classItemSelected = null;
-  }
+  xReleased = parseInt(mouseX / w);
+  yReleased = parseInt(mouseY / w);
+  zReleased = 0;
 
   /* Moves the pressed element after release to the new coordinates */
   if (boolMousePressed && possToPutObject(x, y)) {
