@@ -152,7 +152,6 @@ function getEntityWeight(id) {
 async function getAllUrl() {
   let response = await fetch("get-all-url");
   let data = await response.json();
-  console.log(data);
   return data;
 }
 function createUrlList(data) {

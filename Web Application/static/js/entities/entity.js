@@ -10,20 +10,14 @@ class Entity {
     this.mapX = this.position.x * w;
     this.mapY = this.position.y * w;
 
-    /* Abilities */
+    this.status;
+
     //this.ability = getEntityAbility(this.id);
 
-    this.lexical_references = [];
+    //this.lexical_references = [];
   }
   show() {
     var img = eval(`${this.entClass}Image`);
     image(img, this.mapX, this.mapY, w, w);
-  }
-  hasAbility(name) {
-    for (var i = 0; i < this.ability.length; i++) {
-      if (this.ability[i] == name) {
-        return true;
-      }
-    }
   }
 }

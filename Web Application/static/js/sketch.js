@@ -247,7 +247,7 @@ function possToPutObject(i, j) {}
  */
 function possMoveOn(i, j) {}
 
-/* Functions for select an entity */
+/* Functions for click an entity */
 function clickEntityImage() {
   if (this.classList == "selected") {
     deselectEntityImage();
