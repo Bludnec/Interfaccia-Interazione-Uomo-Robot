@@ -92,12 +92,69 @@
 
       <div id="canvas-zone"></div>
 
-      <div id="list-grid">
-        <div class="row" id="row-list-grid">
+      <div class="row">
+        <div class="col-sm">
           <p>Entità</p>
           <div class="column" id="img-list"></div>
         </div>
+        <div class="col-sm" id="entity-info">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Id</th>
+                <th scope="col">Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="entity-image"><img src="static\images\book.png" /></td>
+                <td id="entity-id">id1</td>
+                <td id="entity-class">Table</td>
+              </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th scope="col">Size</th>
+                <th scope="col">X</th>
+                <th scope="col">Y</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <select name="list" id="entity-size">
+                    <option value="small">small</option>
+                    <option value="medium">medium</option>
+                    <option value="big">big</option>
+                  </select>
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    id="entity-x"
+                    name="entity-x"
+                    min="1"
+                    max="4"
+                    value="1"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    id="entity-y"
+                    name="entity-y"
+                    min="1"
+                    max="4"
+                    value="1"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+      <footer></footer>
     </div>
 
     <script src="static\js\fetch\allFetch.js"></script>

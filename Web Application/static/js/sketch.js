@@ -14,6 +14,15 @@ var classItemSelected;
 
 var boolLoadMap = false;
 
+// Info entity
+var infoImage = document.getElementById("entity-image");
+var infoId = document.getElementById("entity-id");
+var infoClass = document.getElementById("entity-class");
+var infoSize = document.getElementById("entity-size").value;
+var infoX = document.getElementById("entity-x").value;
+var infoY = document.getElementById("entity-y").value;
+// ============
+
 var agent;
 
 var w = document.getElementById("cell-size").value;
