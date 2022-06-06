@@ -257,13 +257,13 @@ function possMoveOn(i, j) {}
 /* Functions for click an entity */
 function clickEntityImage() {
   if (this.classList == "selected") {
-    infoImage.src = "";
     deselectEntityImage();
   } else if (idItemSelected != this.id && idItemSelected != null) {
     deselectEntityImage();
     this.classList.add("selected");
     console.log(this);
     infoImage.src = this.src;
+
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
@@ -281,6 +281,7 @@ function deselectEntityImage() {
   document
     .getElementById(`entity-${indexItemSelected}`)
     .classList.remove("selected");
+  infoImage.src = "";
   idItemSelected = null;
   indexItemSelected = null;
   classItemSelected = null;
