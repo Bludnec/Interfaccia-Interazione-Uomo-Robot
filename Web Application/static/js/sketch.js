@@ -72,12 +72,10 @@ function preload() {
       var img = document.createElement("img");
       img.src = data[i]["Url"];
       img.id = `entity-${i}`;
-      document.getElementById("img-list").appendChild(img);
-      document
-        .getElementById(`entity-${i}`)
-        .addEventListener("click", clickEntityImage);
-
+      img.addEventListener("click", clickEntityImage);
       img.alt = data[i]["Class"];
+
+      document.getElementById("img-list").appendChild(img);
     }
     for (i = 0; i < data.length; i++) {
       switch (data[i]["Class"]) {
@@ -259,14 +257,19 @@ function possMoveOn(i, j) {}
 /* Functions for click an entity */
 function clickEntityImage() {
   if (this.classList == "selected") {
+    infoImage.src = "";
     deselectEntityImage();
   } else if (idItemSelected != this.id && idItemSelected != null) {
     deselectEntityImage();
     this.classList.add("selected");
+    console.log(this);
+    infoImage.src = this.src;
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
   } else {
+    infoImage.src = this.src;
+    idItemSelected = this.id;
     this.classList.add("selected");
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
