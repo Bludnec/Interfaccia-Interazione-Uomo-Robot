@@ -64,9 +64,9 @@ function mouseReleased() {
       x,
       y,
       z,
-      "big",
-      2,
-      2
+      document.getElementById("entity-size").value,
+      document.getElementById("entity-x").value,
+      document.getElementById("entity-y").value
     );
     deselectEntityImage();
   }
