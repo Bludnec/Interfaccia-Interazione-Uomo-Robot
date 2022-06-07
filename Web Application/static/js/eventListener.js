@@ -33,7 +33,7 @@ function mouseClicked() {
       console.log(itemsList[i]);
       infoClass.innerHTML = itemsList[i].entClass;
       infoImage.src = `static/images/${itemsList[i].entClass}.png`;
-      // GETENTITYSIZE DA PROBLEMI SOLO QUA CAZZO PUTTANA
+      // GETENTITYSIZE DA PROBLEMI SOLO QUA
       //getEntitySize("laptop0");
       //se è stato selezionato prima un elemento nella lista, viene deselezionato
       if (indexItemSelected != null) {
