@@ -34,6 +34,7 @@ function mouseClicked() {
       infoClass.innerHTML = itemsList[i].entClass;
       infoImage.src = `static/images/${itemsList[i].entClass}.png`;
       // GETENTITYSIZE DA PROBLEMI SOLO QUA
+      getEntitySize("laptop0");
       //getEntitySize("itemsList[i]");
       //se è stato selezionato prima un elemento nella lista, viene deselezionato
       if (indexItemSelected != null) {
