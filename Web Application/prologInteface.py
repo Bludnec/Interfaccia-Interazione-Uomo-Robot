@@ -157,10 +157,14 @@ def getEntityLexRefDAOImpl(id):
 def getEntityWeightDAOImpl(id):
     return list(prolog.query('is_weight('+id+',Weight)'))[0]['Weight']
 
+def getEntitySizeDAOImpl(id):
+    if(bool(list(prolog.query('entity_size('+id+',Size,X,Y)')))):
+        return list(prolog.query('entity_size('+id+',Size,X,Y)'))[0]['Size']
+    return None
+
 # Restituisce la lista delle url di tutte le entità
 def getAllUrlDAOImpl():
     lista = list(prolog.query('img(Class,Url)'))
-    print(lista)
     return lista
 
 # Inserisce il fatto on_top(id1,id2) nella KB.

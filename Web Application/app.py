@@ -68,6 +68,13 @@ def entityWeight():
         weight = getEntityWeightDAOImpl(request.args.get('id'))
         return jsonify(weight)
 
+@app.route('/entity/size', methods=['GET'])
+def entitySize():
+    if request.method == "GET":
+        print(request.args.get('id'))
+        size = getEntitySizeDAOImpl(request.args.get('id'))
+        return jsonify(size)
+
 @app.route('/get-all-url')
 def getAllUrl():
     urlsList = getAllUrlDAOImpl()

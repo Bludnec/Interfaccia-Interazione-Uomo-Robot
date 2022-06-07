@@ -261,15 +261,17 @@ function clickEntityImage() {
   } else if (idItemSelected != this.id && idItemSelected != null) {
     deselectEntityImage();
     this.classList.add("selected");
-    console.log(this);
+
     infoImage.src = this.src;
+    infoClass.innerHTML = this.alt;
 
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
   } else {
     infoImage.src = this.src;
-    idItemSelected = this.id;
+    infoClass.innerHTML = this.alt;
+
     this.classList.add("selected");
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
@@ -281,7 +283,9 @@ function deselectEntityImage() {
   document
     .getElementById(`entity-${indexItemSelected}`)
     .classList.remove("selected");
-  infoImage.src = "";
+  infoImage.src = "static/images/empty.png";
+  infoClass.innerHTML = "Select an entity";
+
   idItemSelected = null;
   indexItemSelected = null;
   classItemSelected = null;

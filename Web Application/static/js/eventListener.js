@@ -4,8 +4,17 @@ var lastClickedIndex;
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 
+var imgItemSelected = document
+  .getElementById("entity-image")
+  .addEventListener("drag", imgDrag);
+var boolImgItemSelected = false; // serve per vedere se il drag è iniziato dall'img selezionata
+
 var boolMousePressed = false;
-var indexItemPressed, xItemPressed, yItemPressed;
+var indexItemPressed;
+
+function imgDrag() {
+  boolImgItemSelected = true;
+}
 
 function mouseClicked() {
   /* Returns null if the click is done outside the canvas it.  */
@@ -13,11 +22,26 @@ function mouseClicked() {
     return null;
   }
 
-  /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
 
   var thisCell = cellsList[cellIndex(x, y)];
+
+  // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
+  for (var i = 0; i < itemsList.length; i++) {
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
+      console.log(itemsList[i]);
+      infoClass.innerHTML = itemsList[i].entClass;
+      infoImage.src = `static/images/${itemsList[i].entClass}.png`;
+      // GETENTITYSIZE DA PROBLEMI SOLO QUA CAZZO PUTTANA
+      //getEntitySize("laptop0");
+      //se è stato selezionato prima un elemento nella lista, viene deselezionato
+      if (indexItemSelected != null) {
+        deselectEntityImage();
+      }
+      break;
+    }
+  }
 
   /* Color the cell and assign the value "zone" to the cell. */
   if (thisCell != undefined && checkColor.checked == true) {
@@ -42,12 +66,7 @@ function mousePressed() {
 
 function mouseReleased() {
   /* Returns null if the click is done outside the canvas it.  */
-  if (
-    mouseX < 0 ||
-    mouseY < 0 ||
-    mouseX > cols * w ||
-    (mouseY > rows * w && indexItemSelected == null)
-  ) {
+  if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
 
@@ -55,8 +74,8 @@ function mouseReleased() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var z = 0;
-  /* Create a new object on mouse release in mouseX, mouseY coordinates */
-  if (indexItemSelected != null) {
+  /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
+  if (indexItemSelected != null && boolImgItemSelected) {
     insertEntity(
       classItemSelected + idCounter,
       classItemSelected,
@@ -68,10 +87,11 @@ function mouseReleased() {
       document.getElementById("entity-x").value,
       document.getElementById("entity-y").value
     );
+    idCounter++;
+    boolImgItemSelected = false;
     deselectEntityImage();
   }
 
-  idCounter++;
   getAllEntity();
 
   /* Moves the pressed element after release to the new coordinates */
@@ -87,15 +107,4 @@ function mouseReleased() {
   }
 }
 
-function mouseDragged() {
-  if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
-    return null;
-  }
-  var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w);
-
-  if (boolMousePressed) {
-    itemsList[indexItemPressed].position.x = x * w;
-    itemsList[indexItemPressed].position.y = y * w;
-  }
-}
+function mouseDragged() {}

@@ -149,11 +149,19 @@ function getEntityWeight(id) {
     });
 }
 
+async function getEntitySize(id) {
+  let response = await fetch(`entity/size?id=${id}`);
+  let data = await response.json();
+  console.log(data);
+  //return data;
+}
+
 async function getAllUrl() {
   let response = await fetch("get-all-url");
   let data = await response.json();
   return data;
 }
+
 function createUrlList(data) {
   let x = data;
   console.log(x);

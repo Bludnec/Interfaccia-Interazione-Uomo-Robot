@@ -253,7 +253,8 @@ putting_under_ability(Id):-
     is_class(Id,chair).
 
 %%%%
-is_size(Id,SizeX,SizeY):-
+
+is_dimensions(Id,SizeX,SizeY):-
     is_class(Id,Class),
     size(Class,X),
     space(X,SizeX,SizeY).
@@ -275,7 +276,7 @@ is_lex_ref(Id,LFList):-
     lex_ref(Class,LFList).
 
 space_available(Id,List):-
-    is_size(Id,X,Y),
+    is_dimensions(Id,X,Y),
     Sum is X*Y,!,
     calcolo(Sum,List).
 
