@@ -31,25 +31,35 @@ function mousePressed() {
     editWalls(mouseX, mouseY);
   }
   var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w); // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
-  for (var i = 0; i < itemsList.length; i++) {
-    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
-      // GETENTITYSIZE DA PROBLEMI SOLO QUA
-      getEntitySize(itemsList[i].id).then((data) => {
-        infoId.innerText = data;
-        document.getElementById("title-info-id").classList.remove("hidden");
-        document.getElementById("entity-id").classList.remove("hidden");
-        infoClass.innerHTML = itemsList[i].entClass;
-        infoImage.src = `static/images/${itemsList[i].entClass}.png`;
-      });
-      //getEntitySize("itemsList[i]");
-      //se è stato selezionato prima un elemento nella lista, viene deselezionato
-      if (indexItemSelected != null) {
-        deselectEntityImage();
-      }
-      break;
+  var y = parseInt(mouseY / w);
+
+  var indexElement = getElementInPosition(x, y);
+
+  // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
+  if (indexElement != null) {
+    document.getElementById("title-info-id").classList.remove("hidden");
+    document.getElementById("entity-id").classList.remove("hidden");
+
+    getEntitySize(itemsList[indexElement].id).then((data) => {
+      infoSize.value = data;
+    });
+    infoId.innerHTML = itemsList[indexElement].id;
+    infoClass.innerHTML = itemsList[indexElement].entClass;
+    infoImage.src = `static/images/${itemsList[indexElement].entClass}.png`;
+    //getEntitySize("itemsList[i]");
+    //se è stato selezionato prima un elemento nella lista, viene deselezionato
+    if (indexItemSelected != null) {
+      deselectEntityImage();
     }
   }
+}
+function getElementInPosition(x, y) {
+  for (var i = 0; i < itemsList.length; i++) {
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
+      return i;
+    }
+  }
+  return null;
 }
 
 function mouseReleased() {
