@@ -152,8 +152,8 @@ function getEntityWeight(id) {
 async function getEntitySize(id) {
   let response = await fetch(`entity/size?id=${id}`);
   let data = await response.json();
-  console.log(data);
-  //return data;
+
+  return data;
 }
 
 async function getAllUrl() {

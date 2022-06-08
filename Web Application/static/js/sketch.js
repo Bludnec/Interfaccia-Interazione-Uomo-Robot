@@ -269,6 +269,8 @@ function clickEntityImage() {
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
   } else {
+    document.getElementById("title-info-id").classList.add("hidden");
+    document.getElementById("entity-id").classList.add("hidden");
     infoImage.src = this.src;
     infoClass.innerHTML = this.alt;
 
