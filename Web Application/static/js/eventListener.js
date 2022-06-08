@@ -64,20 +64,24 @@ function mouseReleased() {
   var z = 0;
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (indexItemSelected != null && boolImgItemSelected) {
-    insertEntity(
-      classItemSelected + idCounter,
-      classItemSelected,
-      classItemSelected,
-      x,
-      y,
-      z,
-      document.getElementById("entity-size").value,
-      document.getElementById("entity-x").value,
-      document.getElementById("entity-y").value
-    );
-    idCounter++;
-    boolImgItemSelected = false;
-    deselectEntityImage();
+    // controllo se posso metterlo
+    if (true) {
+      insertEntity(
+        classItemSelected + idCounter,
+        classItemSelected,
+        classItemSelected,
+        x,
+        y,
+        z,
+        document.getElementById("entity-size").value,
+        document.getElementById("entity-x").value,
+        document.getElementById("entity-y").value
+      );
+      idCounter++;
+      boolImgItemSelected = false;
+      deselectEntityImage();
+    } else {
+    }
   }
 
   getAllEntity();
