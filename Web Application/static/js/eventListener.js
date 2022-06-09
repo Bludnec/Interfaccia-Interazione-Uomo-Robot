@@ -71,7 +71,6 @@ function mouseReleased() {
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
-  var z = 0;
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (indexItemSelected != null && boolImgItemSelected) {
@@ -85,7 +84,7 @@ function mouseReleased() {
         classItemSelected,
         x,
         y,
-        z,
+        0,
         document.getElementById("entity-size").value,
         document.getElementById("entity-x").value,
         document.getElementById("entity-y").value
