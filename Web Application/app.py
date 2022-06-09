@@ -56,6 +56,12 @@ def entityAbility():
         ability = getEntityAbilitiesDAOImpl(request.args.get('id'))
         return jsonify(ability)
 
+@app.route('/class/ability', methods=['GET'])
+def classAbility():
+    if request.method == "GET":
+        ability = getClassAbilitiesDAOImpl(request.args.get('entClass'), request.args.get('ability'))
+        return jsonify(ability)
+
 @app.route('/entity/lexical_references', methods=['GET'])
 def entityLefRef():
     if request.method == "GET":

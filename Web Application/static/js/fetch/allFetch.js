@@ -132,6 +132,15 @@ function getEntityAbility(id) {
     });
 }
 
+function getClassAbility(entClass, ability) {
+  fetch(`class/ability?entClass=${entClass}&ability=${ability}`)
+    .then((jsonData) => jsonData.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
+console.log(getClassAbility("laptop", "power_status"));
+
 function getEntityLefRef(id) {
   fetch(`entity/lexical_references?id=${id}`)
     .then((jsonData) => jsonData.json())

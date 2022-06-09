@@ -10,7 +10,9 @@
 :- dynamic inside/2.            % inside(id1,id2). --> id1 sta dentro id2.
 :- dynamic entity/6.            % entity(id,name,class,x,y,z).
 :- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
+:- dynamic agent/2.             % agent(x,y).
 
+entity(laptop0,laptop,laptop,1,1,0).
 % Classe - class(name).
 class(table).
 class(wardrobe).
@@ -149,108 +151,102 @@ space(medium,2,1).
 space(small,1,1).
 
 % acceso/spento
-entity_with_power_status(Id):-
-    is_class(Id,television).
-entity_with_power_status(Id):-
-    is_class(Id,laptop).
-entity_with_power_status(Id):-
-    is_class(Id,smartphone).
-entity_with_power_status(Id):-
-    is_class(Id,microwave).
-entity_with_power_status(Id):-
-    is_class(Id,lamp).
+power_status_ability(television).
+power_status_ability(laptop).
+power_status_ability(smartphone).
+power_status_ability(microwave).
+power_status_ability(lamp).
+
+power_status_ability(Id):-
+    is_class(Id,Class),
+    power_status_ability(Class).
+
+physical_status_ability(wardrobe).
+physical_status_ability(fridge).
+physical_status_ability(window).
+physical_status_ability(door).
+
+physical_status_ability(Id):-
+    is_class(Id,Class),
+    physical_status_ability(Class).
 
 % Abilità: "name"_ability(id).
 % Si possono poggiare oggetti su di esso.
-support_ability(Id):-
-    is_class(Id,table).
-support_ability(Id):-
-    is_class(Id,sofa).
-support_ability(Id):-
-    is_class(Id,chair).
-support_ability(Id):-
-    is_class(Id,rug).
 
+support_ability(table).
+support_ability(sofa).
+support_ability(chair).
+support_ability(rug).
+support_ability(Id):-
+    is_class(Id,Class),
+    support_ability(Class).
+
+    
 % Un oggetto può contenere altri oggetti
+contain_ability(wardrobe).
+contain_ability(fridge).
+contain_ability(cup).
+contain_ability(microwave).
+contain_ability(bucket).
+contain_ability(jar).
+contain_ability(glass).
+
 contain_ability(Id):-
-    is_class(Id,wardrobe).
-contain_ability(Id):-
-    is_class(Id,fridge).
-contain_ability(Id):-
-    is_class(Id,cup).
-contain_ability(Id):-
-    is_class(Id,microwave).
-contain_ability(Id):-
-    is_class(Id,bucket).
-contain_ability(Id):-
-    is_class(Id,jar).
-contain_ability(Id):-
-    is_class(Id,glass).
+    is_class(Id,Class),
+    contain_ability(Class).
+
 
 % Un oggetto può essere mosso (es. door/wall non possono essere mossi)
+move_ability(table).
+move_ability(wardrobe).
+move_ability(sofa).
+move_ability(chair).
+move_ability(fridge).
+move_ability(television).
+move_ability(keyboard).
+move_ability(laptop).
+move_ability(smartphone).
+move_ability(cup).
+move_ability(plate).
+move_ability(microwave).
+move_ability(book).
+move_ability(key).
+move_ability(bucket).
+move_ability(jar).
+move_ability(lamp).
+move_ability(glass).
+move_ability(rug).
+move_ability(bed).
+
 move_ability(Id):-
-    is_class(Id,table).
-move_ability(Id):-
-    is_class(Id,wardrobe).
-move_ability(Id):-
-    is_class(Id,sofa).
-move_ability(Id):-
-    is_class(Id,chair).
-move_ability(Id):-
-    is_class(Id,fridge).
-move_ability(Id):-
-    is_class(Id,television).
-move_ability(Id):-
-    is_class(Id,keyboard).
-move_ability(Id):-
-    is_class(Id,laptop).
-move_ability(Id):-
-    is_class(Id,smartphone).
-move_ability(Id):-
-    is_class(Id,cup).
-move_ability(Id):-
-    is_class(Id,plate).
-move_ability(Id):-
-    is_class(Id,microwave).
-move_ability(Id):-
-    is_class(Id,book).
-move_ability(Id):-
-    is_class(Id,key).
-move_ability(Id):-
-    is_class(Id,bucket).
-move_ability(Id):-
-    is_class(Id,jar).
-move_ability(Id):-
-    is_class(Id,lamp).
-move_ability(Id):-
-    is_class(Id,glass).
-move_ability(Id):-
-    is_class(Id,rug).
-move_ability(Id):-
-    is_class(Id,bed).
+    is_class(Id,Class),
+    move_ability(Class).
 
 % Si può camminare sopra l'oggetto
+walkable_ability(rug).
+walkable_ability(door).
+    
 walkable_ability(Id):-
-    is_class(Id,rug).
-walkable_ability(Id):-
-    is_class(Id,door),
-    physical_status(Id,true). % walkable solo se è aperta.
+    is_class(Id,Class),
+    walkable_ability(Class).
 
 % Si può chiudere/aprire l'oggetto.
+open_ability(wardrobe).
+open_ability(fridge).
+open_ability(window).
+open_ability(door).
+
 open_ability(Id):-
-    is_class(Id,wardrobe).
-open_ability(Id):-
-    is_class(Id,fridge).
-open_ability(Id):-
-    is_class(Id,window).
-open_ability(Id):-
-    is_class(Id,door).
+    is_class(Id,Class),
+    open_ability(Class).
 
 % contenere qualcosa sotto
+putting_under_ability(table).
+putting_under_ability(chair).
+
 putting_under_ability(Id):-
-    is_class(Id,table).
-putting_under_ability(Id):-
-    is_class(Id,chair).
+    is_class(Id,Class),
+    putting_under_ability(Class).
 
 %%%%
 

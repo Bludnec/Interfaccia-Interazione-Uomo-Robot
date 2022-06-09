@@ -1,4 +1,5 @@
 from asyncio import constants
+from operator import truediv
 from pyswip import Prolog
 
 prolog = Prolog()
@@ -134,6 +135,10 @@ def getEntityStatusDAOImpl(id):
 # Restituisce la lista di tutte le abilità di un'entità.
 def getEntityAbilitiesDAOImpl(id):
     abilitiesList = [] 
+    if(bool(list(prolog.query('power_status_ability('+id+')')))):
+        abilitiesList.append('power_status_ability')
+    if(bool(list(prolog.query('physical_status_ability('+id+')')))):
+        abilitiesList.append('physical_status_ability')
     if(bool(list(prolog.query('support_ability('+id+')')))):
         abilitiesList.append('supportAbility')
     if(bool(list(prolog.query('contain_ability('+id+')')))):
@@ -147,6 +152,12 @@ def getEntityAbilitiesDAOImpl(id):
     if(bool(list(prolog.query('putting_under_ability('+id+')')))):
         abilitiesList.append('puttingUnderAbility')
     return abilitiesList
+
+def getClassAbilitiesDAOImpl(entClass, ability):
+    if(bool(list(prolog.query(ability+'_ability('+entClass+')')))):
+        return True
+    else:
+        return False
 
 # Restituisce la lista delle lexical references.
 def getEntityLexRefDAOImpl(id):

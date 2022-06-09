@@ -281,6 +281,7 @@ function clickEntityImage() {
   }
 }
 
+/* funzione che deseleziona e toglie il quadrato blu intorno all'img selezionata */
 function deselectEntityImage() {
   document
     .getElementById(`entity-${indexItemSelected}`)

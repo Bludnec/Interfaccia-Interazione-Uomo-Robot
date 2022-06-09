@@ -1,5 +1,4 @@
 var idCounter = 0;
-var lastClickedIndex;
 
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
@@ -7,11 +6,12 @@ var checkColor = document.getElementById("color-checkbox");
 var imgItemSelected = document
   .getElementById("entity-image")
   .addEventListener("drag", imgDrag);
-var boolImgItemSelected = false; // serve per vedere se il drag è iniziato dall'img selezionata
 
 var boolMousePressed = false;
 var indexItemPressed;
 
+/* bool per capire se l'img draggata è quella giusta, ovvero quella nella info-box */
+var boolImgItemSelected = false;
 function imgDrag() {
   boolImgItemSelected = true;
 }
@@ -36,7 +36,10 @@ function mousePressed() {
   var indexElement = getElementInPosition(x, y);
 
   // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
-  if (indexElement != null) {
+  if (true) {
+    if (indexItemSelected != null) {
+      deselectEntityImage();
+    }
     document.getElementById("title-info-id").classList.remove("hidden");
     document.getElementById("entity-id").classList.remove("hidden");
 
@@ -48,9 +51,6 @@ function mousePressed() {
     infoImage.src = `static/images/${itemsList[indexElement].entClass}.png`;
     //getEntitySize("itemsList[i]");
     //se è stato selezionato prima un elemento nella lista, viene deselezionato
-    if (indexItemSelected != null) {
-      deselectEntityImage();
-    }
   }
 }
 function getElementInPosition(x, y) {
@@ -72,10 +72,13 @@ function mouseReleased() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
   var z = 0;
+
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (indexItemSelected != null && boolImgItemSelected) {
-    // controllo se posso metterlo
-    if (true) {
+    // controllo se posso metterloù
+    var el = getElementInPosition(x, y);
+    if (el == null) {
+      console.log("Inserimento");
       insertEntity(
         classItemSelected + idCounter,
         classItemSelected,
@@ -91,6 +94,9 @@ function mouseReleased() {
       boolImgItemSelected = false;
       deselectEntityImage();
     } else {
+      // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+      // se l'oggetto già esistente ha l'abilita putting under allora metto l'oggetto nuovo sotto e asserisco on_bottom
+      // se l'oggetto già esistente ha l'abilità inside e ha spazio lo inserisco dentro e asserisco inside
     }
   }
 
