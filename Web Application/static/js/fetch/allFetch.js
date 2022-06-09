@@ -132,36 +132,30 @@ function getEntityAbility(id) {
     });
 }
 
-function getClassAbility(entClass, ability) {
-  fetch(`class/ability?entClass=${entClass}&ability=${ability}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-    });
+async function getClassAbility(entClass, ability) {
+  let response = await fetch(
+    `class/ability?entClass=${entClass}&ability=${ability}`
+  );
+  let data = await response.json();
+  return data;
 }
 console.log(getClassAbility("laptop", "power_status"));
 
-function getEntityLefRef(id) {
-  fetch(`entity/lexical_references?id=${id}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityLefRef(id) {
+  let response = await fetch(`entity/lexical_references?id=${id}`);
+  let data = await response.json();
+  return data;
 }
 
-function getEntityWeight(id) {
-  fetch(`entity/weight?id=${id}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-    });
+async function getEntityWeight(id) {
+  let response = await fetch(`entity/weight?id=${id}`);
+  let data = await response.json();
+  return data;
 }
 
 async function getEntitySize(id) {
   let response = await fetch(`entity/size?id=${id}`);
   let data = await response.json();
-
   return data;
 }
 
@@ -191,22 +185,16 @@ function insertOnTop(idOnTop, idSupport) {
   });
 }
 
-function getEntityOnTop(id) {
-  fetch(`entity/on-top?id=${id}&pos=on-top`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityOnTop(id) {
+  let response = await fetch(`entity/on-top?id=${id}&pos=on-top`);
+  let data = await response.json();
+  return data;
 }
 
-function getEntitySupport(id) {
-  fetch(`entity/on-top?id=${id}&pos=support`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntitySupport(id) {
+  let response = await fetch(`entity/on-top?id=${id}&pos=support`);
+  let data = await response.json();
+  return data;
 }
 
 function deleteOnTop(id1, id2) {
@@ -237,22 +225,16 @@ function insertOnBottom(idOnBottom, idTop) {
   });
 }
 
-function getEntityOnBottom(id) {
-  fetch(`entity/on-bottom?id=${id}&pos=on-bottom`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityOnBottom(id) {
+  let response = await fetch(`entity/on-bottom?id=${id}&pos=on-bottom`);
+  let data = await response.json();
+  return data;
 }
 
-function getEntityCover(id) {
-  fetch(`entity/on-bottom?id=${id}&pos=cover`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityCover(id) {
+  let response = await fetch(`entity/on-bottom?id=${id}&pos=cover`);
+  let data = await response.json();
+  return data;
 }
 
 function deleteOnBottom(id1, id2) {
@@ -283,22 +265,16 @@ function insertInside(idInside, idContainer) {
   });
 }
 
-function getEntityInside(id) {
-  fetch(`entity/inside?id=${id}&pos=inside`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityInside(id) {
+  let response = await fetch(`entity/inside?id=${id}&pos=inside`);
+  let data = await response.json();
+  return data;
 }
 
-function getEntityCover(id) {
-  fetch(`entity/inside?id=${id}&pos=container`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityCover(id) {
+  let response = await fetch(`entity/inside?id=${id}&pos=container`);
+  let data = await response.json();
+  return data;
 }
 
 function deleteInside(id1, id2) {
@@ -315,11 +291,8 @@ function deleteInside(id1, id2) {
   });
 }
 
-function getSpaceAvailable(id) {
-  fetch(`entity/inside-space-available?id=${id}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getSpaceAvailable(id) {
+  let response = await fetch(`entity/inside-space-available?id=${id}`);
+  let data = await response.json();
+  return data;
 }

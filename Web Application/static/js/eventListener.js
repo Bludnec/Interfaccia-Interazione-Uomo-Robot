@@ -108,10 +108,84 @@ function mouseReleased() {
       idCounter++;
       boolImgItemSelected = false;
       deselectEntityImage();
-    } else {
-      // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-      // se l'oggetto già esistente ha l'abilita putting under allora metto l'oggetto nuovo sotto e asserisco on_bottom
-      // se l'oggetto già esistente ha l'abilità inside e ha spazio lo inserisco dentro e asserisco inside
+    }
+    // se è scelta l'opzione on_top
+    if (el != null) {
+      getClassAbility(itemsList[el].entClass, "support").then((supportBool) => {
+        if (supportBool) {
+          // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+          console.log("entity on top");
+          insertEntity(
+            classItemSelected + idCounter,
+            classItemSelected,
+            classItemSelected,
+            x,
+            y,
+            1,
+            document.getElementById("entity-size").value,
+            document.getElementById("entity-x").value,
+            document.getElementById("entity-y").value
+          );
+          insertOnTop(classItemSelected + idCounter, itemsList[el].id);
+          idCounter++;
+          boolImgItemSelected = false;
+          deselectEntityImage();
+        }
+      });
+    }
+    // se è scelta l'opzione on bottom
+    if (el != null) {
+      getClassAbility(itemsList[el].entClass, "putting_under").then(
+        (puttingUnder) => {
+          if (puttingUnder) {
+            // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+            console.log("entity on bottom");
+            insertEntity(
+              classItemSelected + idCounter,
+              classItemSelected,
+              classItemSelected,
+              x,
+              y,
+              0,
+              document.getElementById("entity-size").value,
+              document.getElementById("entity-x").value,
+              document.getElementById("entity-y").value
+            );
+            insertOnBottom(classItemSelected + idCounter, itemsList[el].id);
+            idCounter++;
+            boolImgItemSelected = false;
+            deselectEntityImage();
+          }
+        }
+      );
+    }
+
+    // se è scelta l'opzione inside
+    if (el != null) {
+      getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
+        if (contain) {
+          // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+          console.log("entity inside");
+          insertEntity(
+            classItemSelected + idCounter,
+            classItemSelected,
+            classItemSelected,
+            x,
+            y,
+            0,
+            document.getElementById("entity-size").value,
+            document.getElementById("entity-x").value,
+            document.getElementById("entity-y").value
+          );
+
+          // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
+
+          insertInside(classItemSelected + idCounter, itemsList[el].id);
+          idCounter++;
+          boolImgItemSelected = false;
+          deselectEntityImage();
+        }
+      });
     }
   }
 
