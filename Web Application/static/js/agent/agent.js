@@ -71,46 +71,5 @@ class Agent {
     this.mapY = this.position.y * w;
   }
 
-  motion(goal, direction, path, manner, area, distance, source) {
-    /* Imposto la velocità del robot in base a manner */
-    switch (manner) {
-      case "quickly":
-        frameRate = 10;
-      case "slowly":
-        frameRate = 0.5;
-    }
-    /**
-     * Faccio partire la ricerca A* e il movimento del robot
-     * per raggiungere il goal e se ha un path richiesto
-     * chiamo A* e lo inserisco
-     */
-    if (goal != null) {
-      var goalObject;
-      for (var i = 0; i < itemsList.length; i++) {
-        if ((itemsList[i].id = goal)) {
-          goalObject = itemsList[i];
-        }
-      }
-      if (path != null) {
-        astarAlg(agent, goal, path);
-      } else {
-        astarAlg(agent, goal);
-      }
-    }
-    /**
-     * Faccio muovere il robot nella "direction" richiesta
-     */
-    if (direction != null) {
-      this.move(direction);
-    }
-    /**
-     * Faccio muovere il robot nell'"area" richiesta
-     */
-    if (area != null) {
-      astar_search(this.position.x, this.position.y, area);
-    }
-
-    /* Reimposto il framerate se è stato modificato */
-    frameRate = 10;
-  }
+  motion() {}
 }
