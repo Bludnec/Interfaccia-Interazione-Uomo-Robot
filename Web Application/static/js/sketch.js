@@ -271,6 +271,9 @@ function clickEntityImage() {
   } else {
     document.getElementById("title-info-id").classList.add("hidden");
     document.getElementById("entity-id").classList.add("hidden");
+    document.getElementById("title-info-delete").classList.add("hidden");
+    document.getElementById("entity-delete").classList.add("hidden");
+
     infoImage.src = this.src;
     infoClass.innerHTML = this.alt;
 

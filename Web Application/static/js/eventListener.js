@@ -3,6 +3,20 @@ var idCounter = 0;
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 
+document.getElementById("delete-entity-btn").addEventListener("click", () => {
+  deleteEntity(infoId.innerHTML);
+
+  document.getElementById("title-info-id").classList.add("hidden");
+  document.getElementById("entity-id").classList.add("hidden");
+  document.getElementById("title-info-delete").classList.add("hidden");
+  document.getElementById("entity-delete").classList.add("hidden");
+  infoImage.src = "static/images/empty.png";
+  infoClass.innerHTML = "Select an entity";
+  idItemSelected = null;
+  indexItemSelected = null;
+  classItemSelected = null;
+});
+
 var imgItemSelected = document
   .getElementById("entity-image")
   .addEventListener("drag", imgDrag);
@@ -42,6 +56,8 @@ function mousePressed() {
     }
     document.getElementById("title-info-id").classList.remove("hidden");
     document.getElementById("entity-id").classList.remove("hidden");
+    document.getElementById("title-info-delete").classList.remove("hidden");
+    document.getElementById("entity-delete").classList.remove("hidden");
 
     getEntitySize(itemsList[indexElement].id).then((data) => {
       infoSize.value = data;
@@ -98,8 +114,6 @@ function mouseReleased() {
       // se l'oggetto già esistente ha l'abilità inside e ha spazio lo inserisco dentro e asserisco inside
     }
   }
-
-  getAllEntity();
 
   /* Moves the pressed element after release to the new coordinates */
   if (boolMousePressed && possToPutObject(x, y)) {
