@@ -24,6 +24,7 @@ function imgDrag() {
 }
 
 function mousePressed() {
+  console.log("Mouse Pressed");
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
@@ -104,6 +105,7 @@ function mouseReleased() {
         idCounter++;
         boolImgItemSelected = false;
       }
+      deselectEntityImage();
     }
     // se è scelta l'opzione on_top
     if (el != null && tilPosition.value == "on-top") {
@@ -128,6 +130,7 @@ function mouseReleased() {
           idCounter++;
           boolImgItemSelected = false;
         }
+        deselectEntityImage();
       });
     }
     // se è scelta l'opzione on bottom
@@ -152,6 +155,7 @@ function mouseReleased() {
             idCounter++;
             boolImgItemSelected = false;
           }
+          deselectEntityImage();
         }
       );
     }
@@ -179,10 +183,9 @@ function mouseReleased() {
           idCounter++;
           boolImgItemSelected = false;
         }
+        deselectEntityImage();
       });
     }
-
-    deselectEntityImage();
   }
 
   /* Moves the pressed element after release to the new coordinates */
