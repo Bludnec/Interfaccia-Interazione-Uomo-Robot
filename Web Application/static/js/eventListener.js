@@ -85,9 +85,10 @@ function mouseReleased() {
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
+    console.log(indexItemSelected, tilPosition.value);
+    var el = getElementInPosition(x, y);
     if (indexItemSelected != null && tilPosition.value == "on-floor") {
       // controllo se posso metterlo
-      var el = getElementInPosition(x, y);
       if (el == null) {
         console.log("Inserimento");
         insertEntity(
@@ -103,69 +104,40 @@ function mouseReleased() {
         );
         idCounter++;
         boolImgItemSelected = false;
-        deselectEntityImage();
       }
-      // se è scelta l'opzione on_top
-      if (el != null && tilPosition.value == "on-top") {
-        console.log("ontop");
-        getClassAbility(itemsList[el].entClass, "support").then(
-          (supportBool) => {
-            console.log(supportBool);
-            if (supportBool) {
-              // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-              console.log("entity on top");
-              insertEntity(
-                classItemSelected + idCounter,
-                classItemSelected,
-                classItemSelected,
-                x,
-                y,
-                1,
-                document.getElementById("til-size").value,
-                document.getElementById("til-x").value,
-                document.getElementById("til-y").value
-              );
-              insertOnTop(classItemSelected + idCounter, itemsList[el].id);
-              idCounter++;
-              boolImgItemSelected = false;
-              deselectEntityImage();
-            }
-          }
-        );
-      }
-      // se è scelta l'opzione on bottom
-      if (el != null && tilPosition.value == "on-bottom") {
-        getClassAbility(itemsList[el].entClass, "putting_under").then(
-          (puttingUnder) => {
-            if (puttingUnder) {
-              // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-              console.log("entity on bottom");
-              insertEntity(
-                classItemSelected + idCounter,
-                classItemSelected,
-                classItemSelected,
-                x,
-                y,
-                0,
-                document.getElementById("til-size").value,
-                document.getElementById("til-x").value,
-                document.getElementById("til-y").value
-              );
-              insertOnBottom(classItemSelected + idCounter, itemsList[el].id);
-              idCounter++;
-              boolImgItemSelected = false;
-              deselectEntityImage();
-            }
-          }
-        );
-      }
-
-      // se è scelta l'opzione inside
-      if (el != null && tilPosition.value == "inside") {
-        getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
-          if (contain) {
+    }
+    // se è scelta l'opzione on_top
+    if (el != null && tilPosition.value == "on-top") {
+      getClassAbility(itemsList[el].entClass, "support").then((supportBool) => {
+        console.log(supportBool);
+        if (supportBool) {
+          // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+          console.log("entity on top");
+          insertEntity(
+            classItemSelected + idCounter,
+            classItemSelected,
+            classItemSelected,
+            x,
+            y,
+            1,
+            document.getElementById("til-size").value,
+            document.getElementById("til-x").value,
+            document.getElementById("til-y").value
+          );
+          console.log("qua");
+          insertOnTop(classItemSelected + idCounter, itemsList[el].id);
+          idCounter++;
+          boolImgItemSelected = false;
+        }
+      });
+    }
+    // se è scelta l'opzione on bottom
+    if (el != null && tilPosition.value == "on-bottom") {
+      getClassAbility(itemsList[el].entClass, "putting_under").then(
+        (puttingUnder) => {
+          if (puttingUnder) {
             // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-            console.log("entity inside");
+            console.log("entity on bottom");
             insertEntity(
               classItemSelected + idCounter,
               classItemSelected,
@@ -177,17 +149,41 @@ function mouseReleased() {
               document.getElementById("til-x").value,
               document.getElementById("til-y").value
             );
-
-            // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
-
-            insertInside(classItemSelected + idCounter, itemsList[el].id);
+            insertOnBottom(classItemSelected + idCounter, itemsList[el].id);
             idCounter++;
             boolImgItemSelected = false;
-            deselectEntityImage();
           }
-        });
-      }
+        }
+      );
     }
+    // se è scelta l'opzione inside
+    if (el != null && tilPosition.value == "inside") {
+      getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
+        if (contain) {
+          // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+          console.log("entity inside");
+          insertEntity(
+            classItemSelected + idCounter,
+            classItemSelected,
+            classItemSelected,
+            x,
+            y,
+            0,
+            document.getElementById("til-size").value,
+            document.getElementById("til-x").value,
+            document.getElementById("til-y").value
+          );
+
+          // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
+
+          insertInside(classItemSelected + idCounter, itemsList[el].id);
+          idCounter++;
+          boolImgItemSelected = false;
+        }
+      });
+    }
+
+    deselectEntityImage();
   }
 
   /* Moves the pressed element after release to the new coordinates */
