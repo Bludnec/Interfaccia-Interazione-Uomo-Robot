@@ -17,6 +17,7 @@ var tilImage = document.getElementById("til-image");
 var tilId = document.getElementById("til-id");
 var tilClass = document.getElementById("til-class");
 var tilSize = document.getElementById("til-size");
+
 var tilPosition = document.getElementById("til-position");
 var tilX = document.getElementById("til-x");
 var tilY = document.getElementById("til-y");

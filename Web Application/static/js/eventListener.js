@@ -132,7 +132,7 @@ function mouseReleased() {
         );
       }
       // se è scelta l'opzione on bottom
-      if (el != null) {
+      if (el != null && tilPosition.value == "on-bottom") {
         getClassAbility(itemsList[el].entClass, "putting_under").then(
           (puttingUnder) => {
             if (puttingUnder) {
@@ -159,7 +159,7 @@ function mouseReleased() {
       }
 
       // se è scelta l'opzione inside
-      if (el != null) {
+      if (el != null && tilPosition.value == "inside") {
         getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
           if (contain) {
             // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top

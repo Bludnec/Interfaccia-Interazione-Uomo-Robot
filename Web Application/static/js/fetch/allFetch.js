@@ -139,7 +139,6 @@ async function getClassAbility(entClass, ability) {
   let data = await response.json();
   return data;
 }
-console.log(getClassAbility("laptop", "power_status"));
 
 async function getEntityLefRef(id) {
   let response = await fetch(`entity/lexical_references?id=${id}`);
