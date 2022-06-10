@@ -12,7 +12,6 @@
 :- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
 :- dynamic agent/2.             % agent(x,y).
 
-entity(laptop0,laptop,laptop,1,1,0).
 % Classe - class(name).
 class(table).
 class(wardrobe).
@@ -101,8 +100,7 @@ img(chair,'static/images/chair.png').
 img(fridge,'static/images/fridge.png').
 img(television,'static/images/television.png').
 img(keyboard,'static/images/keyboard.png').
-img(laptop,'static/images/laptop-on.png').
-img(laptop,'static/images/laptop-off.png').
+img(laptop,'static/images/laptop.png').
 img(smartphone,'static/images/smartphone.png').
 img(cup,'static/images/cup.png').
 img(plate,'static/images/plate.png').

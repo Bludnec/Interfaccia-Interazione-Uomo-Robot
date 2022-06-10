@@ -56,8 +56,7 @@ var bedImage,
   keyImage,
   keyboardImage,
   lampImage,
-  laptopImageOn,
-  laptopImageOff,
+  laptopImage,
   microwaveImage,
   plateImage,
   rugImage,
@@ -127,14 +126,7 @@ function preload() {
           lampImage = loadImage(data[i]["Url"]);
           break;
         case "laptop":
-          var url = data[i]["Url"];
-          var urlSplit = url.split("/");
-          var imgClass = urlSplit[2].split(".")[0];
-          if (imgClass == "laptop-on") {
-            laptopImageOn = loadImage(data[i]["Url"]);
-          } else {
-            laptopImageOff = loadImage(data[i]["Url"]);
-          }
+          laptopImage = loadImage(data[i]["Url"]);
           break;
         case "microwave":
           microwaveImage = loadImage(data[i]["Url"]);
