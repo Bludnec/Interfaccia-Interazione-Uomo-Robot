@@ -12,16 +12,25 @@ var indexItemSelected;
 var idItemSelected;
 var classItemSelected;
 
-var boolLoadMap = false;
+// Table image list
+var tilImage = document.getElementById("til-image");
+var tilId = document.getElementById("til-id");
+var tilClass = document.getElementById("til-class");
+var tilSize = document.getElementById("til-size");
+var tilPosition = document.getElementById("til-position");
+var tilX = document.getElementById("til-x");
+var tilY = document.getElementById("til-y");
+//
+// Table entity on map
+var teomImage = document.getElementById("teom-image");
+var teomId = document.getElementById("teom-id");
+var teomClass = document.getElementById("teom-class");
+var teomSize = document.getElementById("teom-size");
+var teomCoordinates = document.getElementById("teom-coordinates");
+var teomPosition = document.getElementById("teom-position");
+//
 
-// Info entity box
-var infoImage = document.getElementById("entity-image");
-var infoId = document.getElementById("entity-id");
-var infoClass = document.getElementById("entity-class");
-var infoSize = document.getElementById("entity-size");
-var infoX = document.getElementById("entity-x");
-var infoY = document.getElementById("entity-y");
-// ============
+var boolLoadMap = false;
 
 var agent;
 
@@ -256,26 +265,23 @@ function possMoveOn(i, j) {}
 
 /* Functions for click an entity */
 function clickEntityImage() {
+  document.getElementById("table-img-list").classList.remove("hidden");
+  document.getElementById("table-entity-on-map").classList.add("hidden");
   if (this.classList == "selected") {
     deselectEntityImage();
   } else if (idItemSelected != this.id && idItemSelected != null) {
     deselectEntityImage();
     this.classList.add("selected");
 
-    infoImage.src = this.src;
-    infoClass.innerHTML = this.alt;
+    tilImage.src = this.src;
+    tilClass.innerHTML = this.alt;
 
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
   } else {
-    document.getElementById("title-info-id").classList.add("hidden");
-    document.getElementById("entity-id").classList.add("hidden");
-    document.getElementById("title-info-delete").classList.add("hidden");
-    document.getElementById("entity-delete").classList.add("hidden");
-
-    infoImage.src = this.src;
-    infoClass.innerHTML = this.alt;
+    tilImage.src = this.src;
+    tilClass.innerHTML = this.alt;
 
     this.classList.add("selected");
     idItemSelected = this.id;
@@ -289,8 +295,8 @@ function deselectEntityImage() {
   document
     .getElementById(`entity-${indexItemSelected}`)
     .classList.remove("selected");
-  infoImage.src = "static/images/empty.png";
-  infoClass.innerHTML = "Select an entity";
+  tilImage.src = "static/images/empty.png";
+  tilClass.innerHTML = "Select an entity";
 
   idItemSelected = null;
   indexItemSelected = null;

@@ -97,78 +97,108 @@
           <p>Entità</p>
           <div class="column" id="img-list"></div>
         </div>
-        <div class="col-sm" id="entity-info">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Class</th>
-                <th scope="col" id="title-info-position">Position</th>
-                <th scope="col" id="title-info-id" class="hidden">Id</th>
-                <th scope="col" id="title-info-delete" class="hidden">
-                  Delete
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><img id="entity-image" src="static\images\empty.png" /></td>
-                <td id="entity-class">Select an entity</td>
-                <td id="position-class">
-                  <select name="list" id="entity-size">
-                    <option value="on-floor">On the floor</option>
-                    <option value="on-top">On top</option>
-                    <option value="on-bottom">On bottom</option>
-                    <option value="inside">Inside</option>
-                  </select>
-                </td>
-                <td id="entity-id" class="hidden"></td>
-                <td id="entity-delete" class="hidden">
-                  <button id="delete-entity-btn">
-                    <i class="bi bi-trash3-fill"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-            <thead>
-              <tr>
-                <th scope="col">Size</th>
-                <th scope="col">X</th>
-                <th scope="col">Y</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <select name="list" id="entity-size">
-                    <option value="small">small</option>
-                    <option value="medium">medium</option>
-                    <option value="big">big</option>
-                  </select>
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    id="entity-x"
-                    name="entity-x"
-                    min="1"
-                    max="4"
-                    value="1"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    id="entity-y"
-                    name="entity-y"
-                    min="1"
-                    max="4"
-                    value="1"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="col-sm">
+          <div id="table-img-list">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><img id="til-image" src="static\images\empty.png" /></td>
+                  <td id="til-class">Select an entity</td>
+                  <td>
+                    <select name="list" id="til-position">
+                      <option value="on-floor">On the floor</option>
+                      <option value="on-top">On top</option>
+                      <option value="on-bottom">On bottom</option>
+                      <option value="inside">Inside</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <th scope="col">Size</th>
+                  <th scope="col">X</th>
+                  <th scope="col">Y</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <select name="list" id="til-size">
+                      <option value="small">small</option>
+                      <option value="medium">medium</option>
+                      <option value="big">big</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      id="til-x"
+                      name="til-x"
+                      min="1"
+                      max="4"
+                      value="1"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      id="til-y"
+                      name="til-y"
+                      min="1"
+                      max="4"
+                      value="1"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hidden" id="table-entity-on-map">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Image</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Id</th>
+                  <th scope="col">Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><img id="teom-image" src="" /></td>
+                  <td id="teom-class">Class</td>
+                  <td id="teom-id">Id</td>
+                  <td id="teom-position">On the floor</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <th scope="col">Size</th>
+                  <th scope="col">Coordinates</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="teom-size">Small</td>
+                  <td id="teom-coordinates">X:0 Y:0</td>
+                  <td id="teom-delete">
+                    <button id="delete-entity-btn">
+                      <i class="bi bi-trash3-fill"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <footer></footer>

@@ -64,7 +64,8 @@ h2 {
   width: 50px;
 }
 
-#entity-image {
+#til-image,
+#teom-image {
   height: 40px;
   width: 40px;
 }

@@ -4,21 +4,14 @@ var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 
 document.getElementById("delete-entity-btn").addEventListener("click", () => {
-  deleteEntity(infoId.innerHTML);
+  deleteEntity(teomId.innerHTML);
 
-  document.getElementById("title-info-id").classList.add("hidden");
-  document.getElementById("entity-id").classList.add("hidden");
-  document.getElementById("title-info-delete").classList.add("hidden");
-  document.getElementById("entity-delete").classList.add("hidden");
-  infoImage.src = "static/images/empty.png";
-  infoClass.innerHTML = "Select an entity";
-  idItemSelected = null;
-  indexItemSelected = null;
-  classItemSelected = null;
+  document.getElementById("table-img-list").classList.add("hidden");
+  document.getElementById("table-entity-on-map").classList.remove("hidden");
 });
 
 var imgItemSelected = document
-  .getElementById("entity-image")
+  .getElementById("til-image")
   .addEventListener("drag", imgDrag);
 
 var boolMousePressed = false;
@@ -50,24 +43,27 @@ function mousePressed() {
   var indexElement = getElementInPosition(x, y);
 
   // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
-  if (true) {
+  if (indexElement != null) {
+    document.getElementById("table-img-list").classList.add("hidden");
+    document.getElementById("table-entity-on-map").classList.remove("hidden");
     if (indexItemSelected != null) {
       deselectEntityImage();
     }
-    document.getElementById("title-info-id").classList.remove("hidden");
-    document.getElementById("entity-id").classList.remove("hidden");
-    document.getElementById("title-info-delete").classList.remove("hidden");
-    document.getElementById("entity-delete").classList.remove("hidden");
 
     getEntitySize(itemsList[indexElement].id).then((data) => {
-      infoSize.value = data;
+      teomSize.innerHTML = data;
     });
-
-    infoId.innerHTML = itemsList[indexElement].id;
-    infoClass.innerHTML = itemsList[indexElement].entClass;
-    infoImage.src = `static/images/${itemsList[indexElement].entClass}.png`;
+    teomCoordinates.innerHTML =
+      "X:" +
+      itemsList[indexElement].position.x +
+      " Y:" +
+      itemsList[indexElement].position.y;
+    teomId.innerHTML = itemsList[indexElement].id;
+    teomClass.innerHTML = itemsList[indexElement].entClass;
+    teomImage.src = `static/images/${itemsList[indexElement].entClass}.png`;
   }
 }
+// ritorna l'indice dell'elemento nella lista itemList in posizione x,y
 function getElementInPosition(x, y) {
   for (var i = 0; i < itemsList.length; i++) {
     if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
@@ -88,57 +84,86 @@ function mouseReleased() {
   var y = parseInt(mouseY / w);
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
-  if (indexItemSelected != null && boolImgItemSelected) {
-    // controllo se posso metterloù
-    var el = getElementInPosition(x, y);
-    if (el == null) {
-      console.log("Inserimento");
-      insertEntity(
-        classItemSelected + idCounter,
-        classItemSelected,
-        classItemSelected,
-        x,
-        y,
-        0,
-        document.getElementById("entity-size").value,
-        document.getElementById("entity-x").value,
-        document.getElementById("entity-y").value
-      );
-      idCounter++;
-      boolImgItemSelected = false;
-      deselectEntityImage();
-    }
-    // se è scelta l'opzione on_top
-    if (el != null) {
-      getClassAbility(itemsList[el].entClass, "support").then((supportBool) => {
-        if (supportBool) {
-          // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-          console.log("entity on top");
-          insertEntity(
-            classItemSelected + idCounter,
-            classItemSelected,
-            classItemSelected,
-            x,
-            y,
-            1,
-            document.getElementById("entity-size").value,
-            document.getElementById("entity-x").value,
-            document.getElementById("entity-y").value
-          );
-          insertOnTop(classItemSelected + idCounter, itemsList[el].id);
-          idCounter++;
-          boolImgItemSelected = false;
-          deselectEntityImage();
-        }
-      });
-    }
-    // se è scelta l'opzione on bottom
-    if (el != null) {
-      getClassAbility(itemsList[el].entClass, "putting_under").then(
-        (puttingUnder) => {
-          if (puttingUnder) {
+  if (boolImgItemSelected) {
+    if (indexItemSelected != null && tilPosition.value == "on-floor") {
+      // controllo se posso metterloù
+      var el = getElementInPosition(x, y);
+      if (el == null) {
+        console.log("Inserimento");
+        insertEntity(
+          classItemSelected + idCounter,
+          classItemSelected,
+          classItemSelected,
+          x,
+          y,
+          0,
+          document.getElementById("til-size").value,
+          document.getElementById("til-x").value,
+          document.getElementById("til-y").value
+        );
+        idCounter++;
+        boolImgItemSelected = false;
+        deselectEntityImage();
+      }
+      // se è scelta l'opzione on_top
+      if (el != null && tilPosition.value == "on-top") {
+        getClassAbility(itemsList[el].entClass, "support").then(
+          (supportBool) => {
+            if (supportBool) {
+              // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+              console.log("entity on top");
+              insertEntity(
+                classItemSelected + idCounter,
+                classItemSelected,
+                classItemSelected,
+                x,
+                y,
+                1,
+                document.getElementById("til-size").value,
+                document.getElementById("til-x").value,
+                document.getElementById("til-y").value
+              );
+              insertOnTop(classItemSelected + idCounter, itemsList[el].id);
+              idCounter++;
+              boolImgItemSelected = false;
+              deselectEntityImage();
+            }
+          }
+        );
+      }
+      // se è scelta l'opzione on bottom
+      if (el != null) {
+        getClassAbility(itemsList[el].entClass, "putting_under").then(
+          (puttingUnder) => {
+            if (puttingUnder) {
+              // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+              console.log("entity on bottom");
+              insertEntity(
+                classItemSelected + idCounter,
+                classItemSelected,
+                classItemSelected,
+                x,
+                y,
+                0,
+                document.getElementById("til-size").value,
+                document.getElementById("til-x").value,
+                document.getElementById("til-y").value
+              );
+              insertOnBottom(classItemSelected + idCounter, itemsList[el].id);
+              idCounter++;
+              boolImgItemSelected = false;
+              deselectEntityImage();
+            }
+          }
+        );
+      }
+
+      // se è scelta l'opzione inside
+      if (el != null) {
+        getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
+          if (contain) {
             // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-            console.log("entity on bottom");
+            console.log("entity inside");
             insertEntity(
               classItemSelected + idCounter,
               classItemSelected,
@@ -146,45 +171,20 @@ function mouseReleased() {
               x,
               y,
               0,
-              document.getElementById("entity-size").value,
-              document.getElementById("entity-x").value,
-              document.getElementById("entity-y").value
+              document.getElementById("til-size").value,
+              document.getElementById("til-x").value,
+              document.getElementById("til-y").value
             );
-            insertOnBottom(classItemSelected + idCounter, itemsList[el].id);
+
+            // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
+
+            insertInside(classItemSelected + idCounter, itemsList[el].id);
             idCounter++;
             boolImgItemSelected = false;
             deselectEntityImage();
           }
-        }
-      );
-    }
-
-    // se è scelta l'opzione inside
-    if (el != null) {
-      getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
-        if (contain) {
-          // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-          console.log("entity inside");
-          insertEntity(
-            classItemSelected + idCounter,
-            classItemSelected,
-            classItemSelected,
-            x,
-            y,
-            0,
-            document.getElementById("entity-size").value,
-            document.getElementById("entity-x").value,
-            document.getElementById("entity-y").value
-          );
-
-          // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
-
-          insertInside(classItemSelected + idCounter, itemsList[el].id);
-          idCounter++;
-          boolImgItemSelected = false;
-          deselectEntityImage();
-        }
-      });
+        });
+      }
     }
   }
 
