@@ -85,7 +85,6 @@ function mouseReleased() {
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
-    console.log(indexItemSelected, tilPosition.value);
     var el = getElementInPosition(x, y);
     if (indexItemSelected != null && tilPosition.value == "on-floor") {
       // controllo se posso metterlo
@@ -108,6 +107,7 @@ function mouseReleased() {
     }
     // se è scelta l'opzione on_top
     if (el != null && tilPosition.value == "on-top") {
+      console.log(classItemSelected + idCounter);
       getClassAbility(itemsList[el].entClass, "support").then((supportBool) => {
         console.log(supportBool);
         if (supportBool) {
@@ -124,7 +124,6 @@ function mouseReleased() {
             document.getElementById("til-x").value,
             document.getElementById("til-y").value
           );
-          console.log("qua");
           insertOnTop(classItemSelected + idCounter, itemsList[el].id);
           idCounter++;
           boolImgItemSelected = false;
