@@ -62,11 +62,10 @@ function mousePressed() {
     getEntitySize(itemsList[indexElement].id).then((data) => {
       infoSize.value = data;
     });
+
     infoId.innerHTML = itemsList[indexElement].id;
     infoClass.innerHTML = itemsList[indexElement].entClass;
     infoImage.src = `static/images/${itemsList[indexElement].entClass}.png`;
-    //getEntitySize("itemsList[i]");
-    //se è stato selezionato prima un elemento nella lista, viene deselezionato
   }
 }
 function getElementInPosition(x, y) {

@@ -103,6 +103,7 @@
               <tr>
                 <th scope="col">Image</th>
                 <th scope="col">Class</th>
+                <th scope="col" id="title-info-position">Position</th>
                 <th scope="col" id="title-info-id" class="hidden">Id</th>
                 <th scope="col" id="title-info-delete" class="hidden">
                   Delete
@@ -113,6 +114,14 @@
               <tr>
                 <td><img id="entity-image" src="static\images\empty.png" /></td>
                 <td id="entity-class">Select an entity</td>
+                <td id="position-class">
+                  <select name="list" id="entity-size">
+                    <option value="on-floor">On the floor</option>
+                    <option value="on-top">On top</option>
+                    <option value="on-bottom">On bottom</option>
+                    <option value="inside">Inside</option>
+                  </select>
+                </td>
                 <td id="entity-id" class="hidden"></td>
                 <td id="entity-delete" class="hidden">
                   <button id="delete-entity-btn">
