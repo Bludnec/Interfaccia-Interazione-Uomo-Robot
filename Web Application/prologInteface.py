@@ -4,29 +4,6 @@ from pyswip import Prolog
 
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
-#prolog.assertz("entity(id7,table,table,1,1,0)")
-#prolog.assertz("entity(id6,bed,bed,6,2,0)")
-#prolog.assertz("entity_size(id7,big,2,2)")
-#prolog.assertz("entity_size(id6,big,2,2)")
-
-#prolog.assertz("entity_size(id3,big,2,2)")
-#prolog.assertz("entity(id2,television,television,3,2,0)")
-#prolog.assertz("power_status(id2,true)")
-#prolog.assertz("on_top(id2,id7)")
-#prolog.assertz("entity(id3,wardrobe,wardrobe,5,5,0)")
-#prolog.assertz("entity_size(id3,big,2,2)")
-#prolog.assertz("entity(id4,cup,cup,5,5,0)")
-
-#prolog.assertz("entity_size(id4,small,1,1)")
-#prolog.assertz("entity(id5,cup,cup,5,5,0)")
-# prolog.assertz("entity_size(id5,small,1,1)")
-
-prolog.assertz("inside(id4,id3)")
-prolog.assertz("inside(id5,id3)")
-
-prolog.assertz("entity_size(id5,small,1,1)")
-
-prolog.assertz("entity_size(id4,small,1,1)")
 
 # Return all entities on KB.
 def getAllEntityDAOImpl():

@@ -86,7 +86,7 @@ function mouseReleased() {
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
     if (indexItemSelected != null && tilPosition.value == "on-floor") {
-      // controllo se posso metterloù
+      // controllo se posso metterlo
       var el = getElementInPosition(x, y);
       if (el == null) {
         console.log("Inserimento");
@@ -107,8 +107,10 @@ function mouseReleased() {
       }
       // se è scelta l'opzione on_top
       if (el != null && tilPosition.value == "on-top") {
+        console.log("ontop");
         getClassAbility(itemsList[el].entClass, "support").then(
           (supportBool) => {
+            console.log(supportBool);
             if (supportBool) {
               // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
               console.log("entity on top");
