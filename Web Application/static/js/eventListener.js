@@ -24,7 +24,6 @@ function imgDrag() {
 }
 
 function mousePressed() {
-  console.log("Mouse Pressed");
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
