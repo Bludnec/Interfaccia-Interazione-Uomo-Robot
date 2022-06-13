@@ -86,6 +86,7 @@ function mouseReleased() {
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
     var el = getElementInPosition(x, y);
+    // se è l'agente = crea l'agente
     if (indexItemSelected != null && tilPosition.value == "on-floor") {
       // controllo se posso metterlo
       if (el == null) {
@@ -185,18 +186,6 @@ function mouseReleased() {
         deselectEntityImage();
       });
     }
-  }
-
-  /* Moves the pressed element after release to the new coordinates */
-  if (boolMousePressed && possToPutObject(x, y)) {
-    itemsList[indexItemPressed].position.x = x;
-    itemsList[indexItemPressed].position.y = y;
-
-    itemsList[indexItemPressed].mapX = x * w;
-    itemsList[indexItemPressed].mapY = y * w;
-
-    boolMousePressed = false;
-    indexItemPressed = null;
   }
 }
 

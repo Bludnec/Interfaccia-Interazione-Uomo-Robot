@@ -13,6 +13,24 @@ def getAllEntity():
     lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
+@app.route('/agent', methods=['POST','DELETE','GET','PATCH'])
+def agent():
+    if request.method == "POST":
+        req = request.get_json()
+        print(req)
+        insertAgentDAOImpl(req['x'],req['y'])
+        return jsonify(req)
+    if request.method == "GET":
+        agentPosition = getAgentDAOImpl()
+        return jsonify(agentPosition)        
+    if request.method == "DELETE":
+        #deleteEntityDAOImpl(req['id'])
+        return jsonify(req)
+    if request.method == "PATCH":
+        req = request.get_json()
+        #updateEntityPositionDAOImpl(req['id'], req['x'],req['y'],req['z'])
+        return jsonify(req)
+
 @app.route('/entity', methods=['POST','DELETE','GET','PATCH'])
 def entity():
     if request.method == "POST":

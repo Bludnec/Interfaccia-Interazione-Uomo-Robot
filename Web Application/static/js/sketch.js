@@ -89,6 +89,9 @@ function preload() {
     }
     for (i = 0; i < data.length; i++) {
       switch (data[i]["Class"]) {
+        case "agent":
+          agentImage = loadImage(data[i]["Url"]);
+          break;
         case "bed":
           bedImage = loadImage(data[i]["Url"]);
           break;
@@ -157,6 +160,7 @@ function preload() {
           break;
       }
     }
+    //insertAgent("1", "1");
   });
 
   loadedCellMap = loadJSON("static/map/map.json");
@@ -230,6 +234,8 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
+
+  insertAgent("1", "1");
 }
 
 /**

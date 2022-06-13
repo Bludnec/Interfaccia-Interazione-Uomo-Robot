@@ -12,6 +12,8 @@
 :- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
 :- dynamic agent/2.             % agent(x,y).
 
+agent(1,1).
+
 % Classe - class(name).
 class(table).
 class(wardrobe).
@@ -93,6 +95,7 @@ weight(rug,medium).
 weight(bed,heavy).
 
 % Url delle immagini - img(class,url).
+img(agent,'static/images/agent.png').
 img(table,'static/images/table.png').
 img(wardrobe,'static/images/wardrobe.png').
 img(sofa,'static/images/sofa.png').

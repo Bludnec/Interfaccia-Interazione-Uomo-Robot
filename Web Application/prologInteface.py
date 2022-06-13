@@ -13,6 +13,20 @@ def getAllEntityDAOImpl():
         lista = []
     return lista
 
+def insertAgentDAOImpl(x,y):
+    check = bool(list(prolog.query('agent(_,_)')))
+    if(not check):
+        prolog.assertz("agent(" + x + "," + y + ")")
+
+def getAgentDAOImpl():
+    check = bool(list(prolog.query('agent(_,_)')))
+    print(check)
+    if(check):
+        return list(prolog.query('agent(X,Y)'))[0]
+    else:
+        return -1
+
+#insertAgentDAOImpl("1","1")
 # Inserimento di un elemento nella base di conoscenza.
 def insertEntityDAOImpl(entity):
     print(entity)

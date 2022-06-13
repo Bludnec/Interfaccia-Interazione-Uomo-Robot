@@ -9,6 +9,50 @@ async function getAllEntity() {
   }
 }
 
+function insertAgent(x, y) {
+  fetch(`agent`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      x: x,
+      y: y,
+    }),
+  });
+}
+
+function deleteAgent() {
+  fetch("agent", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+function updateAgentPosition(x, y) {
+  fetch("agent", {
+    method: "PATCH",
+    body: JSON.stringify({
+      x: x,
+      y: y,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+}
+
+async function getAgent() {
+  let response = await fetch("/agent");
+  let data = await response.json();
+  var position = new Position(data.X, data.Y, 0);
+  agent = new Agent("robot", position);
+}
+
 // Funzione per l'inserimento di una nuova entità nel KB
 function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   var json_arr = {};
