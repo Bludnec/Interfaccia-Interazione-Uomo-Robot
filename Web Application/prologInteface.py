@@ -1,5 +1,3 @@
-from asyncio import constants
-from operator import truediv
 from pyswip import Prolog
 
 prolog = Prolog()
@@ -9,10 +7,14 @@ prolog.consult('knowledge_base.pl')
 def getAllEntityDAOImpl():
     try:
         lista = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
+        check = bool(list(prolog.query('agent(_,_)')))
+        if(check):
+            lista.append(list(prolog.query('agent(X,Y)'))[0])
     except:
         lista = []
     return lista
 
+# Agent
 def insertAgentDAOImpl(x,y):
     check = bool(list(prolog.query('agent(_,_)')))
     if(not check):
@@ -20,14 +22,23 @@ def insertAgentDAOImpl(x,y):
 
 def getAgentDAOImpl():
     check = bool(list(prolog.query('agent(_,_)')))
-    print(check)
     if(check):
         return list(prolog.query('agent(X,Y)'))[0]
     else:
         return -1
 
-#insertAgentDAOImpl("1","1")
-# Inserimento di un elemento nella base di conoscenza.
+def deleteAgentDAOImpl():
+    try:
+        print(list(prolog.query('agent(X,Y)'))[0])
+        prolog.retract('agent(_,_)')
+    except Exception as e: 
+        print("deleteEntityDAOImpl: ", e)
+
+def updateAgentPositionDAOImpl(x,y):
+    deleteAgentDAOImpl()
+    insertAgentDAOImpl(x,y)
+
+# Entity
 def insertEntityDAOImpl(entity):
     print(entity)
     check = insertEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])

@@ -160,7 +160,6 @@ function preload() {
           break;
       }
     }
-    //insertAgent("1", "1");
   });
 
   loadedCellMap = loadJSON("static/map/map.json");
@@ -209,8 +208,8 @@ function setup() {
         itemsList[k].y = itemsList[k].j * w;
       }
       if (agent != null) {
-        agent.x = agent.i * w;
-        agent.y = agent.j * w;
+        agent.mapX = agent.position.x * w;
+        agent.mapY = agent.position.y * w;
       }
       boolResizeCanvas = false;
     }
@@ -234,8 +233,6 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
-
-  insertAgent("1", "1");
 }
 
 /**

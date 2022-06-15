@@ -12,7 +12,6 @@ class Agent {
 
   show() {
     image(agentImage, this.mapX, this.mapY, w, w);
-    console.log(agent);
   }
   moveUp() {
     if (
