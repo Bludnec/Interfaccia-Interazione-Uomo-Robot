@@ -16,11 +16,12 @@ class Agent {
   moveUp() {
     if (
       this.position.y - 1 >= 0 &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[0] &&
-      possMoveOn(this.position.x, this.position.y - 1) == true
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[0]
     ) {
-      this.position.y -= 1;
-      this.mapY = this.position.y * w;
+      updateAgentPosition(
+        this.position.x.toString(),
+        (this.position.y - 1).toString()
+      );
     } else {
       console.log("Non posso andare su.");
     }
@@ -28,11 +29,12 @@ class Agent {
   moveDown() {
     if (
       this.position.y + 1 < rows &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[2] &&
-      possMoveOn(this.position.x, this.position.y + 1) == true
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[2]
     ) {
-      this.position.y += 1;
-      this.mapY = this.position.y * w;
+      updateAgentPosition(
+        this.position.x.toString(),
+        (this.position.y + 1).toString()
+      );
     } else {
       console.log("Non posso andare giù.");
     }
@@ -41,11 +43,12 @@ class Agent {
   moveRight() {
     if (
       this.position.x + 1 < cols &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[1] &&
-      possMoveOn(this.position.x + 1, this.position.y) == true
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[1]
     ) {
-      this.position.x += 1;
-      this.mapX = this.position.x * w;
+      updateAgentPosition(
+        (this.position.x + 1).toString(),
+        this.position.y.toString()
+      );
     } else {
       console.log("Non posso andare a destra.");
     }
@@ -54,21 +57,33 @@ class Agent {
   moveLeft() {
     if (
       this.position.x - 1 >= 0 &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[3] &&
-      possMoveOn(this.position.x - 1, this.position.y) == true
+      !cellsList[cellIndex(this.position.x, this.position.y)].walls[3]
     ) {
-      this.position.x -= 1;
-      this.mapX = this.position.x * w;
+      updateAgentPosition(
+        (this.position.x - 1).toString(),
+        this.position.y.toString()
+      );
     } else {
       console.log("Non posso andare a destra.");
     }
   }
-  moveTo(toCell) {
-    this.position.x = toCell.i;
-    this.position.y = toCell.j;
-    this.mapX = this.position.x * w;
-    this.mapY = this.position.y * w;
+  /**
+   * Movimento in un punto scelto.
+   */
+  motion(x, y, location) {
+    console.log("prova");
+    if (arguments.length == 2) {
+      // verso un punto
+      var path = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        cellsList[cellIndex(x, y)]
+      );
+      console.log(path);
+    } else if (arguments.length == 1) {
+      //verso una location
+    }
   }
-
-  motion() {}
+  /**
+   * Movimento in una determinata location.
+   */
 }

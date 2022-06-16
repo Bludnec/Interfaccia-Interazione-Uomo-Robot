@@ -65,17 +65,13 @@ async function getAgent() {
 // Funzione per l'inserimento di una nuova entità nel KB
 function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   var json_arr = {};
-
   json_arr["id"] = id;
   json_arr["name"] = name;
   json_arr["class"] = classe;
-
   json_arr["x"] = str(x);
   json_arr["y"] = str(y);
   json_arr["z"] = str(z);
-
   json_arr["size"] = size;
-
   json_arr["sizeX"] = str(sizeX);
   json_arr["sizeY"] = str(sizeY);
 

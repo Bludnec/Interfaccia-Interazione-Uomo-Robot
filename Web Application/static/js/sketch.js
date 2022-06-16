@@ -252,6 +252,10 @@ function draw() {
   if (agent != null) {
     agent.show();
   }
+  if (agent != null) {
+    //agent.moveUp();
+    agent.motion("kitche");
+  }
   //console.log(astarAlg(cellsList[0], cellsList[cellIndex(2, 3)]));
 }
 
