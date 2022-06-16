@@ -252,6 +252,7 @@ function draw() {
   if (agent != null) {
     agent.show();
   }
+  //console.log(astarAlg(cellsList[0], cellsList[cellIndex(2, 3)]));
 }
 
 /**

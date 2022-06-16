@@ -8,12 +8,13 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+# Get all entity from KB.
 @app.route('/get-all-entity')
 def getAllEntity():
     lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
-# Agent
+# Agent.
 @app.route('/agent', methods=['POST','DELETE','GET','PATCH'])
 def agent():
     if request.method == "POST":
@@ -31,7 +32,7 @@ def agent():
         updateAgentPositionDAOImpl(req['x'],req['y'])
         return jsonify(req)
 
-# Entity
+# Entity.
 @app.route('/entity', methods=['POST','DELETE','GET','PATCH'])
 def entity():
     if request.method == "POST":
@@ -50,6 +51,7 @@ def entity():
         updateEntityPositionDAOImpl(req['id'], req['x'],req['y'],req['z'])
         return jsonify(req)
 
+# Entity status.
 @app.route('/entity/status', methods=['POST','DELETE','GET','PATCH'])
 def entityStatus():
     if request.method == "GET":
@@ -69,30 +71,35 @@ def entityStatus():
         updateEntityStatusDAOImpl(req['id'], req['statusBool'])
         return jsonify(req)        
 
+# Get entity's ability.
 @app.route('/entity/ability', methods=['GET'])
 def entityAbility():
     if request.method == "GET":
         ability = getEntityAbilitiesDAOImpl(request.args.get('id'))
         return jsonify(ability)
 
+# Get class's ability.
 @app.route('/class/ability', methods=['GET'])
 def classAbility():
     if request.method == "GET":
         ability = getClassAbilitiesDAOImpl(request.args.get('entClass'), request.args.get('ability'))
         return jsonify(ability)
 
+# Get lexical references' enitity.
 @app.route('/entity/lexical_references', methods=['GET'])
 def entityLefRef():
     if request.method == "GET":
         lexRef = getEntityLexRefDAOImpl(request.args.get('id'))
         return jsonify(lexRef)
 
+# Get entity's weight.
 @app.route('/entity/weight', methods=['GET'])
 def entityWeight():
     if request.method == "GET":
         weight = getEntityWeightDAOImpl(request.args.get('id'))
         return jsonify(weight)
 
+# Get entity's size.
 @app.route('/entity/size', methods=['GET'])
 def entitySize():
     if request.method == "GET":
@@ -100,12 +107,14 @@ def entitySize():
         size = getEntitySizeDAOImpl(request.args.get('id'))
         return jsonify(size)
 
+# Get all urls of the entity in KB.
 @app.route('/get-all-url')
 def getAllUrl():
     urlsList = getAllUrlDAOImpl()
     print(urlsList)
     return jsonify(urlsList)
 
+# On top.
 @app.route('/entity/on-top', methods=['POST','DELETE','GET','PATCH'])
 def entityOnTop():
     if request.method == "POST":
@@ -123,6 +132,7 @@ def entityOnTop():
         deleteOnTopDAOImpl(req['id1'],req['id2'])
         return jsonify(req)
 
+# On bottom.
 @app.route('/entity/on-bottom', methods=['POST','DELETE','GET'])
 def entityOnBottom():
     if request.method == "POST":
@@ -140,6 +150,7 @@ def entityOnBottom():
         deleteOnBottomDAOImpl(req['id1'],req['id2'])
         return jsonify(req)
 
+# Inside.
 @app.route('/entity/inside', methods=['POST','DELETE','GET'])
 def entityInside():
     if request.method == "POST":
@@ -157,6 +168,7 @@ def entityInside():
         deleteInsideDAOImpl(req['id1'],req['id2'])
         return jsonify(req)
 
+# Get the space available of an entity.
 @app.route('/entity/inside-space-available', methods=['POST','DELETE','GET'])
 def entityInsideSpaceAvailable():
     if request.method == "GET":
