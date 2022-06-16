@@ -10,13 +10,12 @@ function nearestCell(agentI, agentJ, area) {
 }
 
 /**
- *
  * @param {Cell} start
  * @param {Cell} end
  * @returns path = list of Cells
  */
 function astarAlg(start, end) {
-  console.log("Calcolo il percorso con A*");
+  console.log("Calcolo il percorso con A*.");
   for (var x = 0; x < cols; x++) {
     for (var y = 0; y < rows; y++) {
       cellsList[cellIndex(x, y)].f = 0;

@@ -5,6 +5,8 @@ var cellsList = [];
 var itemsList = [];
 var urlList;
 
+var cellPath = [];
+
 var agentActionsList = [];
 
 var boolResizeCanvas = false;
@@ -72,7 +74,6 @@ var agentImage;
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
  */
-var loaded;
 function preload() {
   getAllUrl().then((data) => {
     /**
@@ -249,28 +250,16 @@ function draw() {
   for (var i = 0; i < itemsList.length; i++) {
     itemsList[i].show();
   }
+  // Se è stato istanziato l'agente, lo mostra sulla mappa.
   if (agent != null) {
     agent.show();
   }
-  if (agent != null) {
-    //agent.moveUp();
-    agent.motion("kitche");
+  // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi)
+  if (cellPath.length != 0) {
+    agent.moveTo(cellPath[0].i, cellPath[0].j);
+    cellPath.shift();
   }
-  //console.log(astarAlg(cellsList[0], cellsList[cellIndex(2, 3)]));
 }
-
-/**
- * Funzione per vedere se nelle coordinate scelte c'è qualcosa
- * e vede se si può mettere un altro oggetto sopra.
- * Restituisce true se è possibile posizionare l'oggetto.
- */
-function possToPutObject(i, j) {}
-
-/**
- * Funzione che permette all'agente di vedere se è in grado di spostarsi nella
- * cella i,j o se può camminare sopra l'oggetto.
- */
-function possMoveOn(i, j) {}
 
 /* Functions for click an entity */
 function clickEntityImage() {

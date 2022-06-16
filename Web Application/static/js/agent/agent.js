@@ -68,22 +68,23 @@ class Agent {
     }
   }
   /**
-   * Movimento in un punto scelto.
+   * Movimento verso le coordinate scelte o
+   * in una location scelta.
    */
   motion(x, y, location) {
-    console.log("prova");
     if (arguments.length == 2) {
       // verso un punto
-      var path = astarAlg(
+      cellPath = astarAlg(
         cellsList[cellIndex(this.position.x, this.position.y)],
         cellsList[cellIndex(x, y)]
       );
-      console.log(path);
+      console.log(cellPath);
     } else if (arguments.length == 1) {
       //verso una location
     }
   }
-  /**
-   * Movimento in una determinata location.
-   */
+
+  moveTo(x, y) {
+    updateAgentPosition(x.toString(), y.toString());
+  }
 }
