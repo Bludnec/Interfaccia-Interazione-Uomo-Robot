@@ -1,5 +1,3 @@
-var frameRate = 3;
-
 var cols, rows;
 var cellsList = [];
 var itemsList = [];

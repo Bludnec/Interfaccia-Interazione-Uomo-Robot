@@ -5,5 +5,11 @@ var translateButton = document
 function lexicalMap() {
   var inputText = document.getElementById("input-text").value;
   var listInputText = inputText.split(" ");
-  console.log(listInputText);
+  for (var i = 0; i < itemsList.length; i++) {
+    getEntityLefRef(itemsList[i].id).then((data) => {
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i]);
+      }
+    });
+  }
 }
