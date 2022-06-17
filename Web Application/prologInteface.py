@@ -166,6 +166,14 @@ def getEntityLexRefDAOImpl(id):
     lexRef = list(prolog.query('is_lex_ref('+id+',List)'))
     return lexRef[0]['List']
 
+def getEntityLexRefOnMapDAOImpl():
+    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
+    allLexRef = []
+    for x in lista:
+        lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
+        allLexRef.append(lexRef[0]['List'])
+    return allLexRef
+
 # Restituisce il peso dell'entità.
 def getEntityWeightDAOImpl(id):
     return list(prolog.query('is_weight('+id+',Weight)'))[0]['Weight']

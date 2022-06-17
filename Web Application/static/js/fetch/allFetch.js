@@ -344,3 +344,9 @@ async function getSpaceAvailable(id) {
   let data = await response.json();
   return data;
 }
+
+async function getEntityLexRefOnMap() {
+  let response = await fetch("entity/lexical_references/all");
+  let data = await response.json();
+  return data;
+}

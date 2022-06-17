@@ -85,11 +85,18 @@ def classAbility():
         ability = getClassAbilitiesDAOImpl(request.args.get('entClass'), request.args.get('ability'))
         return jsonify(ability)
 
-# Get lexical references' enitity.
+# Get lexical references' entity.
 @app.route('/entity/lexical_references', methods=['GET'])
 def entityLefRef():
     if request.method == "GET":
         lexRef = getEntityLexRefDAOImpl(request.args.get('id'))
+        return jsonify(lexRef)
+
+# Get lexical references' enitity.
+@app.route('/entity/lexical_references/all', methods=['GET'])
+def allEntityLexRefOnMap():
+    if request.method == "GET":
+        lexRef = getEntityLexRefOnMapDAOImpl()
         return jsonify(lexRef)
 
 # Get entity's weight.
