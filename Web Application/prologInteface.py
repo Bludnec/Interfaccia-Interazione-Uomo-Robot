@@ -171,7 +171,8 @@ def getEntityLexRefOnMapDAOImpl():
     allLexRef = []
     for x in lista:
         lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
-        allLexRef.append(lexRef[0]['List'])
+        lexRef.insert(0,x['Id'])
+        allLexRef.append(lexRef)
     return allLexRef
 
 # Restituisce il peso dell'entità.
