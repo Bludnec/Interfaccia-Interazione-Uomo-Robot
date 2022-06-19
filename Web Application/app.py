@@ -15,10 +15,15 @@ def getAllEntity():
     return jsonify(lista)
 
 # Get all cells from KB.
-@app.route('/get-all-cell')
-def getAllCell():
-    lista = getAllCellDAOImpl()
-    return jsonify(lista)
+@app.route('/map', methods=['POST','DELETE','GET'])
+def map():
+    if request.method == "GET":
+        lista = getMapDAOImpl()
+        return jsonify(lista)
+    if request.method == "POST":
+        req = request.get_json()
+        insertMapDAOImpl(req['i'],req['j'])
+        return jsonify(req)
 
 # Cell.
 @app.route('/cell', methods=['POST','DELETE','GET','PATCH'])

@@ -1,4 +1,6 @@
+from itertools import count
 from pyswip import Prolog
+import json
 
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
@@ -15,21 +17,35 @@ def getAllEntityDAOImpl():
     return lista
 
 # Return all cells on KB.
-def getAllCellDAOImpl():
+def getMapDAOImpl():
     try:
         lista = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
     except Exception as e: 
-        print("getAllCellDAOImpl: ", e)
+        print("getMapDAOImpl: ", e)
         lista = []
-
-    print(lista)
     return lista
+
+def insertMapDAOImpl(i,j):
+    counter = 0
+    for c in range(int(j)):
+        for r in range(int(i)):
+            x = {"id": counter,
+            "x": r,
+            "y": c,
+            "zone": "null",
+            "walls": ["true","true","true","true"]
+            }
+            insertCellDAOImpl(x)
+            counter+=1
+    
 
 # Cell
 def insertCellDAOImpl(cell):
-    check = bool(list(prolog.query("cell(" + cell['id'] + "," + cell['x']  + "," + cell['y']  + ",_,_)")))
+    check = bool(list(prolog.query("cell(" + str(cell['id']) + "," + str(cell['x'])  
+    + "," + str(cell['y'])  + ",_,_)")))
+
     if(not check):
-        prolog.assertz("cell(" + cell['id'] + "," + cell['x']  + "," + cell['y']  + "," + 
+        prolog.assertz("cell(" + str(cell['id']) + "," + str(cell['x'])  + "," + str(cell['y'])  + "," + 
         cell['zone']  + ",[" + str(cell['walls'][0]).lower()+"," + str(cell['walls'][1]).lower()+"," + 
         str(cell['walls'][2]).lower()+","+ str(cell["walls"][3]).lower()+"])")
         
