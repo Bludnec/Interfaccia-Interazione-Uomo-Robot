@@ -31,6 +31,9 @@ function mousePressed() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
+  var x = parseInt(mouseX / w);
+  var y = parseInt(mouseY / w);
+
   var thisCell = cellsList[cellIndex(x, y)];
 
   /* Color the cell and assign the value "zone" to the cell. */
@@ -39,10 +42,9 @@ function mousePressed() {
   }
   /* Modifica dei muri */
   if (thisCell != undefined && checkWalls.checked == true) {
+    console.log("cazzo");
     editWalls(mouseX, mouseY);
   }
-  var x = parseInt(mouseX / w);
-  var y = parseInt(mouseY / w);
 
   var indexElement = getElementInPosition(x, y);
 

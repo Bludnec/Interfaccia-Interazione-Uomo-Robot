@@ -21,7 +21,7 @@ var tilSize = document.getElementById("til-size");
 var tilPosition = document.getElementById("til-position");
 var tilX = document.getElementById("til-x");
 var tilY = document.getElementById("til-y");
-//
+
 // Table entity on map
 var teomImage = document.getElementById("teom-image");
 var teomId = document.getElementById("teom-id");
@@ -184,6 +184,7 @@ function setup() {
       /* Create a new canvas with new cellsList */
       cellsList = [];
       itemsList = [];
+      // POST ixj cell map
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
           var cell = new Cell(i, j);
@@ -195,17 +196,19 @@ function setup() {
        * Resize canvas with old cell list and object list
        * by changing x, y coordinates.
        */
+      // GET
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
-          cellsList[cellIndex(i, j)].x = i * w;
-          cellsList[cellIndex(i, j)].y = j * w;
+          cellsList[cellIndex(i, j)].mapX = i * w;
+          cellsList[cellIndex(i, j)].mapY = j * w;
         }
       }
-
+      // Resize delle entità
       for (var k = 0; k < itemsList.length; k++) {
         itemsList[k].x = itemsList[k].i * w;
         itemsList[k].y = itemsList[k].j * w;
       }
+      // Resize dell'agente
       if (agent != null) {
         agent.mapX = agent.position.x * w;
         agent.mapY = agent.position.y * w;
@@ -216,6 +219,7 @@ function setup() {
     cellsList = [];
     itemsList = [];
     /* Load the saved map */
+    // POST della nuova mappa
     for (var k = 0; k < 100; k++) {
       /* Create the cells with the coordinates taken from the json. */
       var cell = new Cell(loadedCellMap[k].i, loadedCellMap[k].j);
@@ -232,6 +236,7 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
+  //getAllCell();
 }
 
 /**

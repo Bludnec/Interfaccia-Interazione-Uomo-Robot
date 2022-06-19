@@ -11,9 +11,15 @@
 :- dynamic entity/6.            % entity(id,name,class,x,y,z).
 :- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
 :- dynamic agent/2.             % agent(x,y).
+:- dynamic cell/5.              % cell(id,x,y,zone,[walls])
+% zone(nome_zona)
 
 entity(table1,table,table,2,2,0).
 entity(keyboard0,keyboard,keyboard,1,1,0).
+
+zone(kitchen).
+zone(bedroom).
+zone(living_room).
 
 % Classe - class(name).
 class(table).

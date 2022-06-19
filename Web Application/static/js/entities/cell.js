@@ -1,16 +1,17 @@
 class Cell {
-  constructor(i, j) {
-    this.i = i;
-    this.j = j;
+  constructor(id, x, y, zone, walls) {
+    this.id = id;
+    this.x = x;
+    this.y = y;
     /* Zona della casa della cella */
-    this.zone = "";
+    this.zone = zone;
     /* Boolean per i muri  [top,right,bottom,left] */
-    this.walls = [true, true, true, true];
+    this.walls = walls;
     /* Colore della cella */
     this.cellColor = 51;
     /* Coordinate della cella */
-    this.x = this.i * w;
-    this.y = this.j * w;
+    this.mapX = this.x * w;
+    this.mapY = this.y * w;
 
     this.g = 0;
     this.f = 0;
@@ -25,7 +26,7 @@ class Cell {
     /*Creo il rettangolo della cella */
     fill(this.cellColor);
     noStroke();
-    rect(this.x, this.y, w, w);
+    rect(this.mapX, this.mapY, w, w);
 
     /**
      * Creo un bordo intorno alle
@@ -34,23 +35,23 @@ class Cell {
     noFill();
     stroke(0);
     strokeWeight(0.1);
-    rect(this.x, this.y, w, w);
+    rect(this.mapX, this.mapY, w, w);
 
     /* Creo le linee (up,right,left,down) intorno alle celle per creare i muri */
     strokeWeight(3);
     stroke(0);
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
     if (this.walls[0]) {
-      line(this.x, this.y, wInt + this.x, this.y);
+      line(this.mapX, this.mapY, wInt + this.mapX, this.mapY);
     }
     if (this.walls[1]) {
-      line(this.x + wInt, this.y, this.x + wInt, this.y + wInt);
+      line(this.mapX + wInt, this.mapY, this.mapX + wInt, this.mapY + wInt);
     }
     if (this.walls[2]) {
-      line(this.x + wInt, this.y + wInt, this.x, this.y + wInt);
+      line(this.mapX + wInt, this.mapY + wInt, this.mapX, this.mapY + wInt);
     }
     if (this.walls[3]) {
-      line(this.x, this.y + wInt, this.x, this.y);
+      line(this.mapX, this.mapY + wInt, this.mapX, this.mapY);
     }
   }
 }

@@ -17,7 +17,6 @@ function lexicalMap() {
         for (var k = 0; k < listInputText.length; k++) {
           if (listInputText[k] == data[i][1]["List"][j]) {
             if (lexMapString.length > 0) {
-              console.log("cazzo");
               lexMapString = lexMapString + "|";
             }
             lexMapString =

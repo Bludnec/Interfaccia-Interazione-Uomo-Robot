@@ -18,6 +18,16 @@ async function getAllEntity() {
   }
 }
 
+async function getAllCell() {
+  let response = await fetch("get-all-cell");
+  let data = await response.json();
+  cellList = [];
+  for (var i = 0; i < data.length; i++) {
+    var cell = new Cell(data[i].Id, data[i].Name, data[i].Class, position);
+    cellList.push(cell);
+  }
+}
+
 function insertAgent(x, y) {
   fetch(`agent`, {
     method: "POST",

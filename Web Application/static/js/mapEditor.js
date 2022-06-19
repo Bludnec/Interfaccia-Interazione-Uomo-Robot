@@ -63,8 +63,8 @@ function loadMap() {
 
 /* Delete the walls if adjacent cells have the same "zone" value. */
 function deleteWalls(i) {
-  var x = cellsList[i].i;
-  var y = cellsList[i].j;
+  var x = cellsList[i].x;
+  var y = cellsList[i].y;
   // right check
   if (
     x + 1 < cols &&
