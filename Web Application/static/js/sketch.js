@@ -185,8 +185,13 @@ function setup() {
       cellsList = [];
       itemsList = [];
       // POST i x j cell map
-
-      insertMap(rows, cols);
+      var idCounter = 0;
+      for (var j = 0; j < rows; j++) {
+        for (var i = 0; i < cols; i++) {
+          insertCell(idCounter, i, j, "null", [true, true, true, true]);
+          idCounter++;
+        }
+      }
     } else {
       /**
        * Resize canvas with old cell list and object list
@@ -232,6 +237,7 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
+  getAllCell();
 }
 
 /**
@@ -240,7 +246,6 @@ function setup() {
  */
 function draw() {
   getAllEntity();
-  getMap();
   frameRate(5);
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {

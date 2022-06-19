@@ -18,11 +18,12 @@ async function getAllEntity() {
   }
 }
 
-async function getMap() {
-  let response = await fetch("map");
+async function getAllCell() {
+  let response = await fetch("get-all-cell");
   let data = await response.json();
   cellsList = [];
   for (var i = 0; i < data.length; i++) {
+    console.log(data[i]);
     var cell = new Cell(
       data[i].Id,
       data[i].X,
@@ -32,21 +33,7 @@ async function getMap() {
     );
     cellsList.push(cell);
   }
-}
-
-function insertMap(i, j) {
-  fetch(`map`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      i: i,
-      j: j,
-    }),
-  });
-  getMap();
+  console.log(cellsList);
 }
 
 function insertCell(id, x, y, zone, walls) {
