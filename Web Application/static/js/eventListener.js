@@ -43,6 +43,7 @@ function mousePressed() {
   /* Modifica dei muri */
   if (thisCell != undefined && checkWalls.checked == true) {
     console.log("cazzo");
+
     editWalls(mouseX, mouseY);
   }
 
