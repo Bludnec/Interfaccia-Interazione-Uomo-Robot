@@ -14,28 +14,6 @@ def getAllEntityDAOImpl():
         lista = []
     return lista
 
-# Return all cells on KB.
-def getAllCellDAOImpl():
-    try:
-        lista = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
-    except Exception as e: 
-        print("getAllCellDAOImpl: ", e)
-        lista = []
-
-    print(lista)
-    return lista
-
-# Cell
-def insertCellDAOImpl(cell):
-    check = bool(list(prolog.query("cell(" + cell['id'] + "," + cell['x']  + "," + cell['y']  + ",_,_)")))
-    if(not check):
-        prolog.assertz("cell(" + cell['id'] + "," + cell['x']  + "," + cell['y']  + "," + 
-        cell['zone']  + ",[" + str(cell['walls'][0]).lower()+"," + str(cell['walls'][1]).lower()+"," + 
-        str(cell['walls'][2]).lower()+","+ str(cell["walls"][3]).lower()+"])")
-        
-def getCellDAOImpl(id):
-    prolog.assertz("cell(" +id+",X,Y,Zone,Walls)")
-
 # Agent
 def insertAgentDAOImpl(x,y):
     check = bool(list(prolog.query('agent(_,_)')))

@@ -13,9 +13,9 @@
 :- dynamic agent/2.             % agent(x,y).
 :- dynamic cell/5.              % cell(id,x,y,zone,[walls])
 % zone(nome_zona)
+
 entity(table1,table,table,2,2,0).
 entity(keyboard0,keyboard,keyboard,1,1,0).
-
 
 zone(kitchen).
 zone(bedroom).

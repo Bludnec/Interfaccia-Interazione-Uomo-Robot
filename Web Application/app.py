@@ -14,24 +14,6 @@ def getAllEntity():
     lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
-# Get all cells from KB.
-@app.route('/get-all-cell')
-def getAllCell():
-    lista = getAllCellDAOImpl()
-    return jsonify(lista)
-
-# Cell.
-@app.route('/cell', methods=['POST','DELETE','GET','PATCH'])
-def cell():
-    if request.method == "POST":
-        req = request.get_json()
-        insertCellDAOImpl(req)
-        return jsonify(req)
-    if request.method == "GET":
-        cell = getAgentDAOImpl(req['id'])
-        return jsonify(cell)        
-
-
 # Agent.
 @app.route('/agent', methods=['POST','DELETE','GET','PATCH'])
 def agent():

@@ -184,12 +184,11 @@ function setup() {
       /* Create a new canvas with new cellsList */
       cellsList = [];
       itemsList = [];
-      // POST i x j cell map
-      var idCounter = 0;
+      // POST ixj cell map
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
-          insertCell(idCounter, i, j, "null", [true, true, true, true]);
-          idCounter++;
+          var cell = new Cell(i, j);
+          cellsList.push(cell);
         }
       }
     } else {
@@ -238,12 +237,16 @@ function setup() {
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
 <<<<<<< HEAD
+<<<<<<< HEAD
   setTimeout(function () {
     getAllCell();
   }, 2000);
 =======
   getAllCell();
 >>>>>>> parent of 094a592 (.)
+=======
+  //getAllCell();
+>>>>>>> parent of 4177444 (Ora le celle sono salvate nel KB.)
 }
 
 /**
