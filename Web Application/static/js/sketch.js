@@ -236,17 +236,10 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   setTimeout(function () {
     getAllCell();
   }, 2000);
-=======
-  getAllCell();
->>>>>>> parent of 094a592 (.)
-=======
-  //getAllCell();
->>>>>>> parent of 4177444 (Ora le celle sono salvate nel KB.)
 }
 
 /**
