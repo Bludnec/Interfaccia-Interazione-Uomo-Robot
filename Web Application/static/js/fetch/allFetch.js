@@ -23,42 +23,9 @@ async function getAllCell() {
   let data = await response.json();
   cellList = [];
   for (var i = 0; i < data.length; i++) {
-<<<<<<< HEAD
     var cell = new Cell(data[i].Id, data[i].Name, data[i].Class, position);
     cellList.push(cell);
   }
-=======
-    console.log(data[i]);
-    var cell = new Cell(
-      data[i].Id,
-      data[i].X,
-      data[i].Y,
-      data[i].Zone,
-      data[i].Walls
-    );
-    cellsList.push(cell);
-  }
-  console.log(cellsList);
-}
-
-function insertCell(id, x, y, zone, walls) {
-  var json_arr = {};
-  json_arr["id"] = str(id);
-  json_arr["x"] = str(x);
-  json_arr["y"] = str(y);
-  json_arr["zone"] = zone;
-  json_arr["walls"] = walls;
-
-  var json_string = JSON.stringify(json_arr);
-  fetch(`cell`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: json_string,
-  });
->>>>>>> parent of 094a592 (.)
 }
 
 function insertAgent(x, y) {
