@@ -31,6 +31,7 @@ async function getMap() {
       data[i].Walls
     );
     cellsList.push(cell);
+    
   }
 }
 
