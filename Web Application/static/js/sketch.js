@@ -237,7 +237,9 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
-  getAllCell();
+  setTimeout(function () {
+    getAllCell();
+  }, 2000);
 }
 
 /**

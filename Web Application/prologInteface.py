@@ -21,8 +21,6 @@ def getAllCellDAOImpl():
     except Exception as e: 
         print("getAllCellDAOImpl: ", e)
         lista = []
-
-    print(lista)
     return lista
 
 # Cell
