@@ -185,13 +185,9 @@ function setup() {
       cellsList = [];
       itemsList = [];
       // POST i x j cell map
-      var idCounter = 0;
-      for (var j = 0; j < rows; j++) {
-        for (var i = 0; i < cols; i++) {
-          insertCell(idCounter, i, j, "null", [true, true, true, true]);
-          idCounter++;
-        }
-      }
+
+      insertMap(rows, cols);
+      console.log(cellsList);
     } else {
       /**
        * Resize canvas with old cell list and object list
@@ -237,7 +233,7 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
-  getAllCell();
+  // getMap();
 }
 
 /**
