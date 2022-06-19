@@ -187,7 +187,6 @@ function setup() {
       // POST i x j cell map
 
       insertMap(rows, cols);
-      console.log(cellsList);
     } else {
       /**
        * Resize canvas with old cell list and object list
