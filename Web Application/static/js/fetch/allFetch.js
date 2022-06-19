@@ -31,7 +31,6 @@ async function getMap() {
       data[i].Walls
     );
     cellsList.push(cell);
-    
   }
 }
 
@@ -47,7 +46,16 @@ function insertMap(i, j) {
       j: j,
     }),
   });
-  getMap();
+}
+
+function deleteMap() {
+  fetch("map", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 function insertCell(id, x, y, zone, walls) {

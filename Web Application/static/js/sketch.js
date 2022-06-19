@@ -179,13 +179,15 @@ function setup() {
    * If boolResizeCanvas = true => resize canvas and use old cellList.
    * If boolLoadMap and boolResizeCanvas = false => create a new canvas and new cellsList.
    */
+
   if (!boolLoadMap) {
+    console.log(cellsList);
     if (!boolResizeCanvas) {
       /* Create a new canvas with new cellsList */
-      cellsList = [];
-      itemsList = [];
-      // POST i x j cell map
 
+      console.log(cols);
+      console.log(rows);
+      // POST i x j cell map
       insertMap(rows, cols);
     } else {
       /**
@@ -211,7 +213,8 @@ function setup() {
       }
       boolResizeCanvas = false;
     }
-  } else if (boolLoadMap) {
+  }
+  if (boolLoadMap) {
     cellsList = [];
     itemsList = [];
     /* Load the saved map */
@@ -232,7 +235,10 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
-  // getMap();
+
+  setTimeout(function () {
+    getMap();
+  }, 1000);
 }
 
 /**
@@ -240,8 +246,8 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  getAllEntity();
   frameRate(5);
+  getAllEntity();
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     cellsList[i].show();

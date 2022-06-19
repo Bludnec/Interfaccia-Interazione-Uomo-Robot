@@ -27,8 +27,12 @@ def getMapDAOImpl():
 
 def insertMapDAOImpl(i,j):
     counter = 0
+    deleteMapDAOImpl()
+
     for c in range(int(j)):
+        print(c)
         for r in range(int(i)):
+            print(r)
             x = {"id": counter,
             "x": r,
             "y": c,
@@ -37,7 +41,12 @@ def insertMapDAOImpl(i,j):
             }
             insertCellDAOImpl(x)
             counter+=1
-    
+
+def deleteMapDAOImpl():
+    try:
+        prolog.retractall('cell(_,_,_,_,_)')
+    except Exception as e: 
+        print("deleteMapDAOImpl: ", e)
 
 # Cell
 def insertCellDAOImpl(cell):

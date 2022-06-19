@@ -24,6 +24,9 @@ def map():
         req = request.get_json()
         insertMapDAOImpl(req['i'],req['j'])
         return jsonify(req)
+    if request.method == "DELETE":
+        deleteMapDAOImpl()
+        return jsonify("")
 
 # Cell.
 @app.route('/cell', methods=['POST','DELETE','GET','PATCH'])

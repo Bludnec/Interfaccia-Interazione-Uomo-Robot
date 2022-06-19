@@ -4,6 +4,7 @@ document.getElementById("load-map-button").addEventListener("click", loadMap);
 /* Color the cells of map and assign the value to "zone". */
 function colorCellMap(x, y) {
   var thisCell = cellsList[cellIndex(x, y)];
+  console.log(thisCell);
 
   thisCell.zone = document.getElementById("zone").value;
   thisCell.cellColor = document.getElementById("cell-color").value;
