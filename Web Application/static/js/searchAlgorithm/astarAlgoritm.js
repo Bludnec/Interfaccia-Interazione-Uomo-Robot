@@ -1,7 +1,7 @@
 /**
  * Funzione che restituisce la cella
  * dell'area richiesta più vicina all'agente
- * ex. area= cucina, restiuisce la cella più vicino all'agente
+ * ex. area = cucina, restiuisce la cella più vicino all'agente
  * che ha zona = cucina,
  */
 function nearestCell(agentI, agentJ, area) {
@@ -29,7 +29,6 @@ function astarAlg(start, end) {
 
   var openList = [];
   openList.push(start);
-
   while (openList.length > 0) {
     var lowInd = 0;
     // Grab the lowest f(x) to process next
@@ -40,7 +39,6 @@ function astarAlg(start, end) {
     }
 
     var currentNode = openList[lowInd];
-
     if (currentNode == end) {
       var curr = currentNode;
       var ret = [];
@@ -59,6 +57,7 @@ function astarAlg(start, end) {
     var neighborsList = neighbors(currentNode);
     for (var i = 0; i < neighborsList.length; i++) {
       var neighbor = neighborsList[i];
+
       if (neighbor.closed) {
         // not a valid node to process, skip to next neighbor
         continue;
@@ -98,8 +97,9 @@ function astarAlg(start, end) {
  */
 function neighbors(node) {
   var ret = [];
-  var x = node.i;
-  var y = node.j;
+  console.log(node);
+  var x = node.x;
+  var y = node.y;
   if (x - 1 >= 0 && !node.walls[3]) {
     ret.push(cellsList[cellIndex(x - 1, y)]);
   }

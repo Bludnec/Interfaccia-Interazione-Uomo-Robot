@@ -212,17 +212,18 @@ function setup() {
     }
   }
   if (boolLoadMap) {
-    cellsList = [];
     itemsList = [];
     /* Load the saved map */
     // POST della nuova mappa
-    for (var k = 0; k < 100; k++) {
-      /* Create the cells with the coordinates taken from the json. */
-      var cell = new Cell(loadedCellMap[k].i, loadedCellMap[k].j);
-      /* Assign the values ​​taken from the json to the cells just created. */
-      cell.zone = loadedCellMap[k].zone;
-      cell.cellColor = loadedCellMap[k].cellColor;
-      cellsList.push(cell);
+    for (var k = 0; k < 48; k++) {
+      deleteMap();
+      insertCell(
+        loadedCellMap[k].id,
+        loadedCellMap[k].x,
+        loadedCellMap[k].y,
+        loadedCellMap[k].zone,
+        loadedCellMap[k].walls
+      );
     }
     for (var i = 0; i < cellsList.length; i++) {
       deleteWalls(i);
@@ -244,6 +245,7 @@ function setup() {
 function draw() {
   frameRate(5);
   getAllEntity();
+
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     cellsList[i].show();

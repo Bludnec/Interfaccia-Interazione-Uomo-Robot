@@ -2,6 +2,7 @@ var idCounter = 0;
 
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
+var checkMoveAgent = document.getElementById("move-agent");
 
 document.getElementById("delete-entity-btn").addEventListener("click", () => {
   if (teomClass.innerHTML == "Agent") {
@@ -36,8 +37,17 @@ function mousePressed() {
 
   var thisCell = cellsList[cellIndex(x, y)];
 
-  /* Color the cell and assign the value "zone" to the cell. */
+  if (agent != null && checkMoveAgent.checked == true) {
+    console.log("muovi");
+    var start = cellsList[cellIndex(agent.position.x, agent.position.y)];
+    var end = thisCell;
+    var path = astarAlg(start, end);
+
+    console.log(path);
+  }
+
   if (thisCell != undefined && checkColor.checked == true) {
+    /* Color the cell and assign the value "zone" to the cell. */
     colorCellMap(x, y);
   }
   /* Modifica dei muri */
