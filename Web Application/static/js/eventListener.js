@@ -38,12 +38,9 @@ function mousePressed() {
   var thisCell = cellsList[cellIndex(x, y)];
 
   if (agent != null && checkMoveAgent.checked == true) {
-    console.log("muovi");
     var start = cellsList[cellIndex(agent.position.x, agent.position.y)];
     var end = thisCell;
-    var path = astarAlg(start, end);
-
-    console.log(path);
+    cellPath = astarAlg(start, end);
   }
 
   if (thisCell != undefined && checkColor.checked == true) {

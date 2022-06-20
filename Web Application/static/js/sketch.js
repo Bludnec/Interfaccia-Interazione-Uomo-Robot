@@ -259,7 +259,9 @@ function draw() {
   }
   // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi)
   if (cellPath.length != 0) {
-    agent.moveTo(cellPath[0].i, cellPath[0].j);
+    console.log("cazzo");
+    console.log(cellPath);
+    agent.moveTo(cellPath[0].x, cellPath[0].y);
     cellPath.shift();
   }
 }
