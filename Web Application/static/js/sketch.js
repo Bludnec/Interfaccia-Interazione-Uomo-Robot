@@ -37,7 +37,10 @@ var agent;
 
 var w = document.getElementById("cell-size").value;
 
-document.getElementById("drawButton").addEventListener("click", setup);
+document.getElementById("drawButton").addEventListener("click", () => {
+  cellsList = [];
+  setup();
+});
 document.getElementById("resizeButton").addEventListener("click", () => {
   boolResizeCanvas = true;
   setup();
@@ -172,23 +175,17 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
-
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
    * If boolResizeCanvas = true => resize canvas and use old cellList.
    * If boolLoadMap and boolResizeCanvas = false => create a new canvas and new cellsList.
    */
-
   if (!boolLoadMap) {
-    console.log(cellsList);
     if (!boolResizeCanvas) {
       /* Create a new canvas with new cellsList */
-
-      console.log(cols);
-      console.log(rows);
       // POST i x j cell map
-      insertMap(rows, cols);
+      insertMap(cols, rows);
     } else {
       /**
        * Resize canvas with old cell list and object list
@@ -235,10 +232,9 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
-
   setTimeout(function () {
     getMap();
-  }, 1000);
+  }, 700);
 }
 
 /**

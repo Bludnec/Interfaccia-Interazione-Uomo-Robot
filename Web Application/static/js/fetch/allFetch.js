@@ -21,7 +21,9 @@ async function getAllEntity() {
 async function getMap() {
   let response = await fetch("map");
   let data = await response.json();
+  console.log(cellsList);
   cellsList = [];
+  console.log(data.length);
   for (var i = 0; i < data.length; i++) {
     var cell = new Cell(
       data[i].Id,
@@ -274,7 +276,6 @@ async function getAllUrl() {
 
 function createUrlList(data) {
   let x = data;
-  console.log(x);
   return x;
 }
 

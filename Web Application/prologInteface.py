@@ -26,13 +26,13 @@ def getMapDAOImpl():
     return lista
 
 def insertMapDAOImpl(i,j):
+    prolog.retractall('cell(_,_,_,_,_)')
+    len(list(prolog.query('cell(Id,X,Y,Zone,Walls)')))
     counter = 0
-    deleteMapDAOImpl()
-
+    print(i)
+    print(j)
     for c in range(int(j)):
-        print(c)
         for r in range(int(i)):
-            print(r)
             x = {"id": counter,
             "x": r,
             "y": c,
@@ -44,19 +44,15 @@ def insertMapDAOImpl(i,j):
 
 def deleteMapDAOImpl():
     try:
-        prolog.retractall('cell(_,_,_,_,_)')
+        prolog.retract('cell(_,_,_,_,_)')
     except Exception as e: 
         print("deleteMapDAOImpl: ", e)
 
 # Cell
 def insertCellDAOImpl(cell):
-    check = bool(list(prolog.query("cell(" + str(cell['id']) + "," + str(cell['x'])  
-    + "," + str(cell['y'])  + ",_,_)")))
-
-    if(not check):
-        prolog.assertz("cell(" + str(cell['id']) + "," + str(cell['x'])  + "," + str(cell['y'])  + "," + 
-        cell['zone']  + ",[" + str(cell['walls'][0]).lower()+"," + str(cell['walls'][1]).lower()+"," + 
-        str(cell['walls'][2]).lower()+","+ str(cell["walls"][3]).lower()+"])")
+    prolog.assertz("cell(" + str(cell['id']) + "," + str(cell['x'])  + "," + str(cell['y'])  + "," + 
+    cell['zone']  + ",[" + str(cell['walls'][0]).lower()+"," + str(cell['walls'][1]).lower()+"," + 
+    str(cell['walls'][2]).lower()+","+ str(cell["walls"][3]).lower()+"])")
         
 def getCellDAOImpl(id):
     prolog.assertz("cell(" +id+",X,Y,Zone,Walls)")
