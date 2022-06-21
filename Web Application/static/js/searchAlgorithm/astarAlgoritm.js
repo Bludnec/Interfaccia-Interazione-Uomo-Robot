@@ -93,15 +93,53 @@ function astarAlg(start, end) {
 }
 
 /**
- * Return list of neighbors's node.
+ * Ritorna la lista dei vicini dove l'agente può andare,
+ * quindi esclude quelli dove ci sono oggetti dove non ci si
+ * può camminare sopra oppure hanno il muro.
  */
 function neighbors(node) {
   var ret = [];
-  console.log(node);
   var x = node.x;
   var y = node.y;
+  var nodeUp, nodeDown, nodeLeft, nodeRight;
+  /**
+   * Prendo in riferimento le celle adiacenti per vedere se c'è un'entità
+   * sopra di essi per poi vedere dopo se ha walkable_ability per
+   * poter far passare l'agente sopra.
+   */
+  for (var i = 0; i < itemsList.length; i++) {
+    if (itemsList[i].position.x + 1 == x && itemsList[i].position.y == y) {
+      nodeRight = itemsList[i];
+    } else {
+      nodeRight = -1;
+    }
+    if (itemsList[i].position.x - 1 == x && itemsList[i].position.y == y) {
+      nodeLeft = itemsList[i];
+    } else {
+      nodeLeft = -1;
+    }
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
+      nodeDown = itemsList[i];
+    } else {
+      nodeDown = -1;
+    }
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
+      nodeUp = itemsList[i];
+    } else {
+      nodeUp = -1;
+    }
+  }
+  // getClassAbility(entClass, ability)
+  /**
+   * Controllo se possiamo considerare le celle adiacenti per il path in base
+   * al muro e l'oggetto sopra.
+   */
   if (x - 1 >= 0 && !node.walls[3]) {
-    ret.push(cellsList[cellIndex(x - 1, y)]);
+    if (nodeLeft == -1) {
+      ret.push(cellsList[cellIndex(x - 1, y)]);
+    } else {
+      console.log(getClassAbility(nodeLeft.entClass, "walkable"));
+    }
   }
   if (x + 1 < cols && !node.walls[1]) {
     ret.push(cellsList[cellIndex(x + 1, y)]);
