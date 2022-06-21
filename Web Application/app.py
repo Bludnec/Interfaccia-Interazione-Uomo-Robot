@@ -118,13 +118,6 @@ def entityLefRef():
         lexRef = getEntityLexRefDAOImpl(request.args.get('id'))
         return jsonify(lexRef)
 
-# Get lexical references' enitity.
-@app.route('/entity/lexical_references/all', methods=['GET'])
-def allEntityLexRefOnMap():
-    if request.method == "GET":
-        lexRef = getEntityLexRefOnMapDAOImpl()
-        return jsonify(lexRef)
-
 # Get entity's weight.
 @app.route('/entity/weight', methods=['GET'])
 def entityWeight():
@@ -207,3 +200,17 @@ def entityInsideSpaceAvailable():
     if request.method == "GET":
         spaceAvailable = getInsideSpaceAvailableDAOImpl(request.args.get('id'))
         return jsonify(spaceAvailable)
+
+# Get lexical references' enitity.
+@app.route('/entity/lexical_references/all', methods=['GET'])
+def allEntityLexRefOnMap():
+    if request.method == "GET":
+        lexRef = getEntityLexRefOnMapDAOImpl()
+        return jsonify(lexRef)
+
+# Get lexical references' enitity.
+@app.route('/entity/ability/all', methods=['GET'])
+def allEntityAbilityOnMap():
+    if request.method == "GET":
+        lexRef = getEntityAbilityMapDAOImpl()
+        return jsonify(lexRef)

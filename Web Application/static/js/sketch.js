@@ -264,7 +264,6 @@ function draw() {
   // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) - timout perché sennò va ad influire con le altre query nel backend
   setTimeout(function () {
     if (cellPath.length != 0) {
-      console.log(cellPath.length);
       agent.moveTo(cellPath[0].x, cellPath[0].y);
       cellPath.shift();
     }

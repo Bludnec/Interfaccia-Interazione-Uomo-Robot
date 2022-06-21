@@ -135,11 +135,7 @@ function neighbors(node) {
    * al muro e l'oggetto sopra.
    */
   if (x - 1 >= 0 && !node.walls[3]) {
-    if (nodeLeft == -1) {
-      ret.push(cellsList[cellIndex(x - 1, y)]);
-    } else {
-      console.log(getClassAbility(nodeLeft.entClass, "walkable"));
-    }
+    ret.push(cellsList[cellIndex(x - 1, y)]);
   }
   if (x + 1 < cols && !node.walls[1]) {
     ret.push(cellsList[cellIndex(x + 1, y)]);

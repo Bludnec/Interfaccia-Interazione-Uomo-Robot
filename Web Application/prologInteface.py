@@ -209,15 +209,6 @@ def getEntityLexRefDAOImpl(id):
     lexRef = list(prolog.query('is_lex_ref('+id+',List)'))
     return lexRef[0]['List']
 
-def getEntityLexRefOnMapDAOImpl():
-    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
-    allLexRef = []
-    for x in lista:
-        lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
-        lexRef.insert(0,x['Id'])
-        allLexRef.append(lexRef)
-    return allLexRef
-
 # Restituisce il peso dell'entità.
 def getEntityWeightDAOImpl(id):
     return list(prolog.query('is_weight('+id+',Weight)'))[0]['Weight']
@@ -322,3 +313,23 @@ def getInsideSpaceAvailableDAOImpl(id):
     else:
         print('L entità non può contenere oggetti.')
         return -1
+
+def getEntityLexRefOnMapDAOImpl():
+    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
+    allLexRef = []
+    for x in lista:
+        lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
+        lexRef.insert(0,x['Id'])
+        allLexRef.append(lexRef)
+    return allLexRef
+
+def getEntityAbilityMapDAOImpl():
+    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
+    allAbility = []
+    for x in lista:
+        abilityList = []
+        if(bool(prolog.query('support_ability('+x['Id']+')'))):
+            allAbility = ["True"]
+        abil = bool(prolog.query('contain_ability('+x['Id']+',Bool)'))
+        #allAbibility.append(abil)
+    return allAbility
