@@ -143,6 +143,7 @@ function neighbors(node) {
   return ret;
 }
 
+for (var i = 0; i < abilityList.length; i++) {}
 /**
  * Heuristic = Manhattan heuristic
  */
