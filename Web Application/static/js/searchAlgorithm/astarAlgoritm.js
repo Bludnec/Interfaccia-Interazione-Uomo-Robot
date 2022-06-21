@@ -101,49 +101,43 @@ function neighbors(node) {
   var ret = [];
   var x = node.x;
   var y = node.y;
-  var nodeUp, nodeDown, nodeLeft, nodeRight;
+  var nodeUp = 0,
+    nodeDown = 0,
+    nodeLeft = 0,
+    nodeRight = 0;
   /**
    * Prendo in riferimento le celle adiacenti per vedere se c'è un'entità
    * sopra di essi per poi vedere dopo se ha walkable_ability per
    * poter far passare l'agente sopra.
    */
   for (var i = 0; i < itemsList.length; i++) {
-    if (itemsList[i].position.x + 1 == x && itemsList[i].position.y == y) {
+    if (itemsList[i].position.x == x + 1 && itemsList[i].position.y == y) {
       nodeRight = itemsList[i];
-    } else {
-      nodeRight = -1;
     }
-    if (itemsList[i].position.x - 1 == x && itemsList[i].position.y == y) {
+    if (itemsList[i].position.x == x - 1 && itemsList[i].position.y == y) {
       nodeLeft = itemsList[i];
-    } else {
-      nodeLeft = -1;
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
       nodeDown = itemsList[i];
-    } else {
-      nodeDown = -1;
     }
-    if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y - 1) {
       nodeUp = itemsList[i];
-    } else {
-      nodeUp = -1;
     }
   }
-  // getClassAbility(entClass, ability)
   /**
    * Controllo se possiamo considerare le celle adiacenti per il path in base
    * al muro e l'oggetto sopra.
    */
-  if (x - 1 >= 0 && !node.walls[3]) {
+  if (x - 1 >= 0 && !node.walls[3] && nodeLeft == 0) {
     ret.push(cellsList[cellIndex(x - 1, y)]);
   }
-  if (x + 1 < cols && !node.walls[1]) {
+  if (x + 1 < cols && !node.walls[1] && nodeRight == 0) {
     ret.push(cellsList[cellIndex(x + 1, y)]);
   }
-  if (y - 1 >= 0 && !node.walls[0]) {
+  if (y - 1 >= 0 && !node.walls[0] && nodeUp == 0) {
     ret.push(cellsList[cellIndex(x, y - 1)]);
   }
-  if (y + 1 < rows && !node.walls[2]) {
+  if (y + 1 < rows && !node.walls[2] && nodeDown == 0) {
     ret.push(cellsList[cellIndex(x, y + 1)]);
   }
   return ret;

@@ -410,6 +410,5 @@ async function getEntityLexRefOnMap() {
 async function getEntityAbilityOnMap() {
   let response = await fetch("entity/ability/all");
   let data = await response.json();
-  console.log(data);
   abilityList = data;
 }
