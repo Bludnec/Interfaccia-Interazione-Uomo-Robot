@@ -9,7 +9,6 @@ function lexicalMap() {
 
   // data = [[id,List[...]], [id,List[...]], [id,List[...]]]
   getEntityLexRefOnMap().then((data) => {
-    console.log(data[0][0]);
     for (var i = 0; i < data.length; i++) {
       for (var j = 0; j < data[i][1]["List"].length; j++) {
         // controllo le relazioni tra lexical reference entità istanziate e parole

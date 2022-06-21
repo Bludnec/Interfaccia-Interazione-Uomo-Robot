@@ -103,6 +103,7 @@ function mouseReleased() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
+
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
@@ -223,6 +224,13 @@ function mouseReleased() {
       }
     }
   }
+  /**
+   * Aspetto che venga inserito l'entità nel db per poi prendere la nuova lista
+   * di abilità delle entità nella mappa
+   */
+  setTimeout(function () {
+    getEntityAbilityOnMap();
+  }, 700);
 }
 
 function mouseDragged() {}

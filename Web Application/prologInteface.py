@@ -328,8 +328,22 @@ def getEntityAbilityMapDAOImpl():
     allAbility = []
     for x in lista:
         abilityList = []
-        if(bool(prolog.query('support_ability('+x['Id']+')'))):
-            allAbility = ["True"]
-        abil = bool(prolog.query('contain_ability('+x['Id']+',Bool)'))
-        #allAbibility.append(abil)
+        if(bool(list(prolog.query('power_status_ability('+x['Id']+')')))):
+            abilityList.append("power_status_ability")
+        if(bool(list(prolog.query('physical_status_ability('+x['Id']+')')))):
+            abilityList.append("physical_status_ability")            
+        if(bool(list(prolog.query('support_ability('+x['Id']+')')))):
+            abilityList.append("support_ability")  
+        if(bool(list(prolog.query('contain_ability('+x['Id']+')')))):
+            abilityList.append("contain_ability")   
+        if(bool(list(prolog.query('move_ability('+x['Id']+')')))):
+            abilityList.append("move_ability")                     
+        if(bool(list(prolog.query('walkable_ability('+x['Id']+')')))):
+            abilityList.append("walkable_ability")
+        if(bool(list(prolog.query('open_ability('+x['Id']+')')))):
+            abilityList.append("open_ability")                     
+        if(bool(list(prolog.query('putting_under_ability('+x['Id']+')')))):
+            abilityList.append("putting_under_ability")  
+        abilityList.insert(0,x['Id'])
+        allAbility.append(abilityList)
     return allAbility

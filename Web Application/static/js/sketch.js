@@ -1,6 +1,7 @@
 var cols, rows;
 var cellsList = [];
 var itemsList = [];
+var abilityList = [];
 var urlList;
 var modifica = false;
 
@@ -261,7 +262,7 @@ function draw() {
   if (agent != null) {
     agent.show();
   }
-  // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) - timout perché sennò va ad influire con le altre query nel backend
+  // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) - timeout perché sennò va ad influire con le altre query nel backend
   setTimeout(function () {
     if (cellPath.length != 0) {
       agent.moveTo(cellPath[0].x, cellPath[0].y);
