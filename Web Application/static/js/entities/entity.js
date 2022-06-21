@@ -6,6 +6,8 @@ class Entity {
 
     this.position = position;
 
+    this.ability = [];
+
     /* Real coordinates on the canvas */
     this.mapX = this.position.x * w;
     this.mapY = this.position.y * w;

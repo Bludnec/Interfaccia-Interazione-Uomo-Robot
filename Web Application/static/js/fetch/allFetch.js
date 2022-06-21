@@ -22,7 +22,6 @@ async function getMap() {
   let response = await fetch("map");
   let data = await response.json();
   cellsList = [];
-  console.log(data.length);
   for (var i = 0; i < data.length; i++) {
     var cell = new Cell(
       data[i].Id,
@@ -233,12 +232,10 @@ function updateEntityStatus(id, statusBool) {
   });
 }
 
-function getEntityAbility(id) {
-  fetch(`entity/ability?id=${id}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-    });
+async function getEntityAbility(id) {
+  let response = await fetch(`entity/ability?id=${id}`);
+  let data = await response.json();
+  return data;
 }
 
 async function getClassAbility(entClass, ability) {

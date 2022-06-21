@@ -2,6 +2,7 @@ var cols, rows;
 var cellsList = [];
 var itemsList = [];
 var urlList;
+var modifica = false;
 
 var cellPath = [];
 
@@ -242,10 +243,13 @@ function setup() {
  * The draw() function continuously executes the lines of code
  * contained inside its block until the program is stopped.
  */
+
 function draw() {
   frameRate(5);
-  getAllEntity();
-
+  if (itemsList.length == 0 || modifica) {
+    getAllEntity();
+    modifica = false;
+  }
   /* Disegno la mappa e la lista degli items */
   for (var i = 0; i < cellsList.length; i++) {
     cellsList[i].show();

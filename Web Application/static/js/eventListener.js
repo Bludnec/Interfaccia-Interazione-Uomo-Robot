@@ -103,10 +103,11 @@ function mouseReleased() {
   if (mouseX < 0 || mouseY < 0 || mouseX > cols * w || mouseY > rows * w) {
     return null;
   }
-
   /* Check if the click is done on the cell area. */
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
+
+  modifica = true;
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
