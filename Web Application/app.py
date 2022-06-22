@@ -45,6 +45,7 @@ def cell():
 def cellP(id):
     if request.method == "GET":
         cell = getCellDAOImpl(id)
+        print(cell)
         return jsonify(cell) 
 
 # Agent.
@@ -92,7 +93,6 @@ def entityStatus():
         return jsonify(status)
     if request.method == "POST":
         req = request.get_json()
-        print(req)
         insertEntityStatusDAOImpl(req['id'],req['status'],req['statusBool'])
         return jsonify(req)
     if request.method == "DELETE":
@@ -136,7 +136,6 @@ def entityWeight():
 @app.route('/entity/size', methods=['GET'])
 def entitySize():
     if request.method == "GET":
-        print(request.args.get('id'))
         size = getEntitySizeDAOImpl(request.args.get('id'))
         return jsonify(size)
 
@@ -144,7 +143,6 @@ def entitySize():
 @app.route('/get-all-url')
 def getAllUrl():
     urlsList = getAllUrlDAOImpl()
-    print(urlsList)
     return jsonify(urlsList)
 
 # On top.

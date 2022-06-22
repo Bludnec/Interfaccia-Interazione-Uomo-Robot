@@ -14,8 +14,8 @@ function colorCellMap(x, y) {
     thisCell.walls[1] = false;
     cellsList[cellIndex(x + 1, y)].walls[3] = false;
   } else if (cellsList[cellIndex(x + 1, y)] != null) {
-    thisCell.walls[1] = true;
-    cellsList[cellIndex(x + 1, y)].walls[3] = true;
+    thisCell.walls[1] = "true";
+    cellsList[cellIndex(x + 1, y)].walls[3] = "true";
   }
   if (
     cellsList[cellIndex(x - 1, y)] != null &&
@@ -24,8 +24,8 @@ function colorCellMap(x, y) {
     thisCell.walls[3] = false;
     cellsList[cellIndex(x - 1, y)].walls[1] = false;
   } else if (cellsList[cellIndex(x - 1, y)] != null) {
-    thisCell.walls[3] = true;
-    cellsList[cellIndex(x - 1, y)].walls[1] = true;
+    thisCell.walls[3] = "true";
+    cellsList[cellIndex(x - 1, y)].walls[1] = "true";
   }
   if (
     cellsList[cellIndex(x, y + 1)] != null &&
@@ -34,8 +34,8 @@ function colorCellMap(x, y) {
     thisCell.walls[2] = false;
     cellsList[cellIndex(x, y + 1)].walls[0] = false;
   } else if (cellsList[cellIndex(x, y + 1)] != null) {
-    thisCell.walls[2] = true;
-    cellsList[cellIndex(x, y + 1)].walls[0] = true;
+    thisCell.walls[2] = "true";
+    cellsList[cellIndex(x, y + 1)].walls[0] = "true";
   }
   if (
     cellsList[cellIndex(x, y - 1)] != null &&
@@ -44,9 +44,63 @@ function colorCellMap(x, y) {
     thisCell.walls[0] = false;
     cellsList[cellIndex(x, y - 1)].walls[2] = false;
   } else if (cellsList[cellIndex(x, y - 1)] != null) {
-    thisCell.walls[0] = true;
-    cellsList[cellIndex(x, y - 1)].walls[2] = true;
+    thisCell.walls[0] = "true";
+    cellsList[cellIndex(x, y - 1)].walls[2] = "true";
   }
+
+  // aggiorno dal db le celle
+  console.log(thisCell);
+  updateCell(
+    thisCell.id,
+    thisCell.x,
+    thisCell.y,
+    thisCell.zone,
+    thisCell.walls
+  );
+  setTimeout(function () {
+    if (cellsList[cellIndex(x + 1, y)] != null) {
+      updateCell(
+        cellsList[cellIndex(x + 1, y)].id,
+        cellsList[cellIndex(x + 1, y)].x,
+        cellsList[cellIndex(x + 1, y)].y,
+        cellsList[cellIndex(x + 1, y)].zone,
+        cellsList[cellIndex(x + 1, y)].walls
+      );
+    }
+  }, 200);
+  setTimeout(function () {
+    if (cellsList[cellIndex(x - 1, y)] != null) {
+      updateCell(
+        cellsList[cellIndex(x - 1, y)].id,
+        cellsList[cellIndex(x - 1, y)].x,
+        cellsList[cellIndex(x - 1, y)].y,
+        cellsList[cellIndex(x - 1, y)].zone,
+        cellsList[cellIndex(x - 1, y)].walls
+      );
+    }
+  }, 400);
+  setTimeout(function () {
+    if (cellsList[cellIndex(x, y - 1)] != null) {
+      updateCell(
+        cellsList[cellIndex(x, y - 1)].id,
+        cellsList[cellIndex(x, y - 1)].x,
+        cellsList[cellIndex(x, y - 1)].y,
+        cellsList[cellIndex(x, y - 1)].zone,
+        cellsList[cellIndex(x, y - 1)].walls
+      );
+    }
+  }, 600);
+  setTimeout(function () {
+    if (cellsList[cellIndex(x, y + 1)] != null) {
+      updateCell(
+        cellsList[cellIndex(x, y + 1)].id,
+        cellsList[cellIndex(x, y + 1)].x,
+        cellsList[cellIndex(x, y + 1)].y,
+        cellsList[cellIndex(x, y + 1)].zone,
+        cellsList[cellIndex(x, y + 1)].walls
+      );
+    }
+  }, 800);
 }
 
 /* Save the map into a json file */

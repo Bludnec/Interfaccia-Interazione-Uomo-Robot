@@ -22,7 +22,7 @@ def getMapDAOImpl():
         lista = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
     except Exception as e: 
         print("getMapDAOImpl: ", e)
-        lista = []
+    print(lista)
     return lista
 
 def insertMapDAOImpl(i,j):
