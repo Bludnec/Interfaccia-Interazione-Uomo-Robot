@@ -143,11 +143,10 @@ function neighbors(node) {
       }
     }
     if (abilityList[i][0] == nodeUp.id) {
-      var found = abilityList[i].find((element) => {
-        element == "walkable_ability";
-      });
+      var found = abilityList[i].find(
+        (element) => element == "walkable_ability"
+      );
       if (found != undefined) {
-        console.log(" found up: " + found);
         nodeUp = 0;
       }
     }
