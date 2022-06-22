@@ -6,7 +6,6 @@ function colorCellMap(x, y) {
   var thisCell = cellsList[cellIndex(x, y)];
 
   thisCell.zone = document.getElementById("zone").value;
-  thisCell.cellColor = document.getElementById("cell-color").value;
   if (
     cellsList[cellIndex(x + 1, y)] != null &&
     thisCell.zone == cellsList[cellIndex(x + 1, y)].zone

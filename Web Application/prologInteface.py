@@ -16,7 +16,7 @@ def getAllEntityDAOImpl():
         lista = []
     return lista
 
-# Return all cells on KB.
+# Map
 def getMapDAOImpl():
     try:
         lista = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))

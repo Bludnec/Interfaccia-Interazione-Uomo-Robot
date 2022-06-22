@@ -24,7 +24,23 @@ class Cell {
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
     /*Creo il rettangolo della cella */
-    fill(this.cellColor);
+    switch (this.zone) {
+      case "kitchen":
+        fill(30);
+        break;
+      case "bathroom":
+        fill(25);
+        break;
+      case "bedroom":
+        fill(60);
+        break;
+      case "livingRoom":
+        fill(130);
+        break;
+      default:
+        fill(51);
+      // code block
+    }
     noStroke();
     rect(this.mapX, this.mapY, w, w);
 

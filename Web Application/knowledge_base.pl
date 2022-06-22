@@ -16,7 +16,9 @@
 
 zone(kitchen).
 zone(bedroom).
-zone(living_room).
+zone(livingRoom).
+zone(balcony).
+zone(bathroom). 
 
 % Classe - class(name).
 class(table).
