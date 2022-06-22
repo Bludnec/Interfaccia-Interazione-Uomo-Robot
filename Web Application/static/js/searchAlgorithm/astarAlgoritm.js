@@ -124,6 +124,43 @@ function neighbors(node) {
       nodeUp = itemsList[i];
     }
   }
+
+  for (var i = 0; i < abilityList.length; i++) {
+    if (abilityList[i][0] == nodeRight.id) {
+      var found = abilityList[i].find(
+        (element) => element == "walkable_ability"
+      );
+      if (found != undefined) {
+        nodeRight = 0;
+      }
+    }
+    if (abilityList[i][0] == nodeLeft.id) {
+      var found = abilityList[i].find(
+        (element) => element == "walkable_ability"
+      );
+      if (found != undefined) {
+        nodeLeft = 0;
+      }
+    }
+    if (abilityList[i][0] == nodeUp.id) {
+      var found = abilityList[i].find((element) => {
+        element == "walkable_ability";
+      });
+      if (found != undefined) {
+        console.log(" found up: " + found);
+        nodeUp = 0;
+      }
+    }
+    if (abilityList[i][0] == nodeDown.id) {
+      var found = abilityList[i].find(
+        (element) => element == "walkable_ability"
+      );
+      if (found != undefined) {
+        nodeDown = 0;
+      }
+    }
+  }
+
   /**
    * Controllo se possiamo considerare le celle adiacenti per il path in base
    * al muro e l'oggetto sopra.
