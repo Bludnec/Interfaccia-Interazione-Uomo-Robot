@@ -28,9 +28,9 @@
       <form id="map-setting-form">
         <legend>Impostazioni mappa</legend>
         <label for="fname">Numero righe </label><br />
-        <input type="number" id="height" name="height" value="4" /><br />
+        <input type="number" id="height" name="height" value="10" /><br />
         <label for="lname">Numero colonne</label><br />
-        <input type="number" id="width" name="width" value="6" /><br /><br />
+        <input type="number" id="width" name="width" value="10" /><br /><br />
 
         <button type="button" id="drawButton">Redraw canvas</button>
       </form>
@@ -38,7 +38,6 @@
         <legend>Ridimensiona celle</legend>
         <label for="cname">Dimensione celle</label><br />
         <select name="list" id="cell-size">
-          <option value="40">40</option>
           <option value="50">50</option>
           <option value="60">60</option></select
         ><br />
@@ -53,6 +52,8 @@
           <option value="Kitchen">Kitchen</option>
           <option value="Bathroom">Bathroom</option>
           <option value="Living Room">Living Room</option>
+          <option value="Bedroom">Bedroom</option>
+          <option value="Balcony">Balcony</option>
         </select>
         <label for="fname">Colore </label><br />
         <input type="color" id="cell-color" name="cell-color" /><br />
