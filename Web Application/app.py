@@ -29,16 +29,23 @@ def map():
         return jsonify("DELETE")
 
 # Cell.
-@app.route('/cell', methods=['POST','DELETE','GET','PATCH'])
+@app.route('/cell', methods=['POST','PATCH'])
 def cell():
     if request.method == "POST":
         req = request.get_json()
         insertCellDAOImpl(req)
         return jsonify(req)
-    if request.method == "GET":
-        cell = getAgentDAOImpl(req['id'])
-        return jsonify(cell)        
+    if request.method == "PATCH":
+        req = request.get_json()
+        updateCellDAOImpl(req['id'],req['x'],req['y'],req['zone'],req['walls'])
+        return jsonify(req)
 
+# Cell.
+@app.route('/cell/<id>', methods=['GET'])
+def cellP(id):
+    if request.method == "GET":
+        cell = getCellDAOImpl(id)
+        return jsonify(cell) 
 
 # Agent.
 @app.route('/agent', methods=['POST','DELETE','GET','PATCH'])

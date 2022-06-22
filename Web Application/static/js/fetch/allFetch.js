@@ -77,6 +77,28 @@ function insertCell(id, x, y, zone, walls) {
   });
 }
 
+async function getCell(id) {
+  let response = await fetch(`cell/${id}`);
+  let data = await response.json();
+  return data;
+}
+
+function updateCell(id, x, y, zone, walls) {
+  fetch("cell", {
+    method: "PATCH",
+    body: JSON.stringify({
+      id: id,
+      x: x,
+      y: y,
+      zone: zone,
+      walls: walls,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+}
+
 function insertAgent(x, y) {
   fetch(`agent`, {
     method: "POST",

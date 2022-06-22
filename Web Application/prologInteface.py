@@ -55,7 +55,12 @@ def insertCellDAOImpl(cell):
     str(cell['walls'][2]).lower()+","+ str(cell["walls"][3]).lower()+"])")
         
 def getCellDAOImpl(id):
-    prolog.assertz("cell(" +id+",X,Y,Zone,Walls)")
+    return list(prolog.query("cell(" +id+",X,Y,Zone,Walls)"))
+
+def updateCellDAOImpl(id,x,y,zone,walls):
+    prolog.retract('cell('+str(id)+',_,_,_,_)')
+    prolog.assertz('cell('+str(id)+','+str(x)+','+str(y)+','+zone+",[" + str(walls[0]).lower()+"," + str(walls[1]).lower()+"," + 
+    str(walls[2]).lower()+","+ str(walls[3]).lower()+"])")
 
 # Agent
 def insertAgentDAOImpl(x,y):
