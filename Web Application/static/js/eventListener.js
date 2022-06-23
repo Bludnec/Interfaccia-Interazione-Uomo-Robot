@@ -85,18 +85,6 @@ function mousePressed() {
     }
   }
 }
-// ritorna l'indice dell'elemento nella lista itemList in posizione x,y
-function getElementInPosition(x, y) {
-  if (agent != null && agent.position.x == x && agent.position.y == y) {
-    return -1;
-  }
-  for (var i = 0; i < itemsList.length; i++) {
-    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
-      return i;
-    }
-  }
-  return null;
-}
 
 function mouseReleased() {
   /* Returns null if the click is done outside the canvas it.  */
@@ -120,6 +108,7 @@ function mouseReleased() {
       } else {
         updateAgentPosition(x.toString(), y.toString());
       }
+      deselectEntityImage();
     } else {
       if (indexItemSelected != null && tilPosition.value == "on-floor") {
         // controllo se posso metterlo
@@ -231,6 +220,22 @@ function mouseReleased() {
   setTimeout(function () {
     getEntityAbilityOnMap();
   }, 700);
+  setTimeout(function () {
+    getEntityPositioningOnMap();
+  }, 900);
 }
 
 function mouseDragged() {}
+
+// ritorna l'indice dell'elemento nella lista itemList in posizione x,y
+function getElementInPosition(x, y) {
+  if (agent != null && agent.position.x == x && agent.position.y == y) {
+    return -1;
+  }
+  for (var i = 0; i < itemsList.length; i++) {
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
+      return i;
+    }
+  }
+  return null;
+}

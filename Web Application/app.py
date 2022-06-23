@@ -51,8 +51,16 @@ def cellP(id):
 @app.route('/lexical-map', methods=['GET'])
 def lexicalMap():
     if request.method == "GET":
-        lexMap = getLexicalMap()
+        lexMap = getLexicalMapDAOImpl()
         return jsonify(lexMap) 
+
+# Entity positioning.
+@app.route('/entity/positioning', methods=['GET'])
+def entityPositioning():
+    if request.method == "GET":
+        lexMap = getEntityPositioningOnMapDAOImpl()
+        return jsonify(lexMap) 
+
 
 # Agent.
 @app.route('/agent', methods=['POST','DELETE','GET','PATCH'])

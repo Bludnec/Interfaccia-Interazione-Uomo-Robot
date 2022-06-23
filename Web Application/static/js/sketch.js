@@ -2,6 +2,7 @@ var cols, rows;
 var cellsList = [];
 var itemsList = [];
 var abilityList = [];
+var positioningList;
 var urlList;
 var modifica = false;
 
@@ -235,16 +236,19 @@ function setup() {
   /* Create canvas */
   var canvas = createCanvas(cols * w, rows * w);
   canvas.parent("canvas-zone");
+
   setTimeout(function () {
     getMap();
-  }, 700);
+  }, 200);
+  setTimeout(function () {
+    getEntityPositioningOnMap();
+  }, 400);
 }
 
 /**
  * The draw() function continuously executes the lines of code
  * contained inside its block until the program is stopped.
  */
-
 function draw() {
   frameRate(5);
   if (itemsList.length == 0 || modifica) {

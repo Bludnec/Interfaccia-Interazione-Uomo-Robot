@@ -440,3 +440,9 @@ async function getEntityAbilityOnMap() {
   let data = await response.json();
   abilityList = data;
 }
+
+async function getEntityPositioningOnMap() {
+  let response = await fetch("entity/positioning");
+  let data = await response.json();
+  positioningList = data;
+}

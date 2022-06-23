@@ -9,12 +9,12 @@ var listOfZone = [];
 function lexicalMap() {
   var inputText = document.getElementById("input-text").value;
   var listInputText = inputText.split(" ");
-  var lexMapString = "";
+  var lexMapString = ""; // Stringa della Lexical Map
+  var entityLexMap = []; // Lista degli id dell'entità citate nell'input text
   var counter = 0;
 
   getLexicalMap().then((data) => {
     listOfZone = [];
-    var dataLengt = data.length;
     for (var i = 0; i < data.length; i++) {
       if (data[i][1]["List"] != null) {
         for (var j = 0; j < data[i][1]["List"].length; j++) {
@@ -22,6 +22,7 @@ function lexicalMap() {
           // nell'input text
           for (var k = 0; k < listInputText.length; k++) {
             if (listInputText[k] == data[i][1]["List"][j]) {
+              entityLexMap.push(data[i][0]);
               if (lexMapString.length > 0) {
                 lexMapString = lexMapString + "|";
               }
@@ -62,6 +63,39 @@ function lexicalMap() {
         }
       }
     }
+    // relazioni tra entità
+    lexMapString = lexMapString + " # ";
+
+    for (var i = 0; i < entityLexMap.length; i++) {
+      for (var j = 0; j < positioningList[0].length; j++) {
+        if (entityLexMap[i] == positioningList[0][j][0]) {
+          var found = entityLexMap.find(
+            (element) => element == positioningList[0][j][0]
+          );
+          if (found != undefined) {
+            console.log(positioningList[0][j][0], positioningList[0][j][1]);
+            lexMapString =
+              lexMapString +
+              positioningList[0][j][0] +
+              " ON TOP " +
+              positioningList[0][j][1];
+          }
+        }
+        if (entityLexMap[i] == positioningList[0][j][1]) {
+          var found = entityLexMap.find(
+            (element) => element == positioningList[0][j][1]
+          );
+          if (found != undefined) {
+            lexMapString =
+              lexMapString +
+              positioningList[0][j][0] +
+              " ON TOP " +
+              positioningList[0][j][1];
+          }
+        }
+      }
+    }
+
     console.log(lexMapString);
   });
 }

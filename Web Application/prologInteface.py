@@ -61,9 +61,10 @@ def updateCellDAOImpl(id,x,y,zone,walls):
     prolog.assertz('cell('+str(id)+','+str(x)+','+str(y)+','+zone+",[" + str(walls[0]).lower()+"," + str(walls[1]).lower()+"," + 
     str(walls[2]).lower()+","+ str(walls[3]).lower()+"])")
 
-def getLexicalMap():
+def getLexicalMapDAOImpl():
     lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
     allLexRef = []
+    
     for x in lista:
         lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
         lexRef.insert(0,x['Id'])
@@ -78,6 +79,36 @@ def getLexicalMap():
             allLexRef.append(zoneMap)
 
     return allLexRef
+
+def getEntityPositioningOnMapDAOImpl():
+    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
+    allPositioning = []
+
+    # on_top
+    ontopList=[]
+    for x in lista:
+        app = list(prolog.query('on_top('+x['Id']+',Id)'))
+        if app != []:
+            ontopList.append([x['Id'],app[0]['Id']])
+    allPositioning.append(ontopList)
+
+    # on_bottom
+    onBottomList=[]
+    for x in lista:
+        app = list(prolog.query('on_bottom('+x['Id']+',Id)'))
+        if app != []:
+            onBottomList.append([x['Id'],app[0]['Id']])
+    allPositioning.append(onBottomList)
+
+    # inside
+    insideList=[]
+    for x in lista:
+        app = list(prolog.query('inside('+x['Id']+',Id)'))
+        if app != []:
+            insideList.append([x['Id'],app[0]['Id']])
+    allPositioning.append(insideList)      
+
+    return allPositioning
 
 
 # Agent
