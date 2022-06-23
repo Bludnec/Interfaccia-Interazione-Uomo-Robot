@@ -65,20 +65,24 @@ function lexicalMap() {
     }
     // relazioni tra entità
     lexMapString = lexMapString + " # ";
-
+    var b = false;
     for (var i = 0; i < entityLexMap.length; i++) {
       for (var j = 0; j < positioningList[0].length; j++) {
+        if (b) {
+          lexMapString = lexMapString + " | ";
+          b = false;
+        }
         if (entityLexMap[i] == positioningList[0][j][0]) {
           var found = entityLexMap.find(
             (element) => element == positioningList[0][j][0]
           );
           if (found != undefined) {
-            console.log(positioningList[0][j][0], positioningList[0][j][1]);
             lexMapString =
               lexMapString +
               positioningList[0][j][0] +
               " ON TOP " +
               positioningList[0][j][1];
+            b = true;
           }
         }
         if (entityLexMap[i] == positioningList[0][j][1]) {
@@ -91,6 +95,87 @@ function lexicalMap() {
               positioningList[0][j][0] +
               " ON TOP " +
               positioningList[0][j][1];
+            b = true;
+          }
+        }
+      }
+    }
+
+    if (b) {
+      lexMapString = lexMapString + " | ";
+      b = false;
+    }
+
+    for (var i = 0; i < entityLexMap.length; i++) {
+      for (var j = 0; j < positioningList[1].length; j++) {
+        if (b) {
+          lexMapString = lexMapString + " | ";
+          b = false;
+        }
+        if (entityLexMap[i] == positioningList[1][j][0]) {
+          var found = entityLexMap.find(
+            (element) => element == positioningList[1][j][0]
+          );
+          if (found != undefined) {
+            lexMapString =
+              lexMapString +
+              positioningList[1][j][0] +
+              " ON BOTTOM " +
+              positioningList[1][j][1];
+            b = true;
+          }
+        }
+        if (entityLexMap[i] == positioningList[1][j][1]) {
+          var found = entityLexMap.find(
+            (element) => element == positioningList[1][j][1]
+          );
+          if (found != undefined) {
+            lexMapString =
+              lexMapString +
+              positioningList[1][j][0] +
+              " ON BOTTOM " +
+              positioningList[1][j][1];
+            b = true;
+          }
+        }
+      }
+    }
+
+    if (b) {
+      lexMapString = lexMapString + " | ";
+      b = false;
+    }
+
+    for (var i = 0; i < entityLexMap.length; i++) {
+      for (var j = 0; j < positioningList[2].length; j++) {
+        if (b) {
+          lexMapString = lexMapString + " | ";
+          b = false;
+        }
+        if (entityLexMap[i] == positioningList[2][j][0]) {
+          var found = entityLexMap.find(
+            (element) => element == positioningList[2][j][0]
+          );
+          if (found != undefined) {
+            lexMapString =
+              lexMapString +
+              positioningList[2][j][0] +
+              " INSIDE " +
+              positioningList[2][j][1];
+            b = true;
+          }
+        }
+        if (entityLexMap[i] == positioningList[2][j][1]) {
+          var found = entityLexMap.find(
+            (element) => element == positioningList[2][j][1]
+          );
+          if (found != undefined) {
+            lexMapString =
+              lexMapString +
+              positioningList[2][j][0] +
+              " INSIDE " +
+              positioningList[2][j][1];
+            b = true;
           }
         }
       }
