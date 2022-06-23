@@ -162,6 +162,8 @@ def deleteEntityDAOImpl(id):
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
 def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
     check = -1
+    if not bool(list(prolog.query('space(TheSize,'+ sizeX + ',' +sizeY+')'))):
+        return -1
     theSize = list(prolog.query('space(TheSize,'+ sizeX + ',' +sizeY+')'))[0]['TheSize']
     sizeBool = bool(list(prolog.query('size('+entClass+','+theSize+')')))
     if(sizeBool):
