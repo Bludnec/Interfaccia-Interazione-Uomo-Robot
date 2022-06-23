@@ -1,5 +1,5 @@
-document.getElementById("save-map-button").addEventListener("click", saveMap);
-document.getElementById("load-map-button").addEventListener("click", loadMap);
+//document.getElementById("save-map-button").addEventListener("click", saveMap);
+//document.getElementById("load-map-button").addEventListener("click", loadMap);
 
 /* Color the cells of map and assign the value to "zone". */
 function colorCellMap(x, y) {

@@ -99,6 +99,12 @@ function updateCell(id, x, y, zone, walls) {
   });
 }
 
+async function getCellInZone(zone) {
+  let response = await fetch(`cell/zone/${zone}`);
+  let data = await response.json();
+  return data;
+}
+
 function insertAgent(x, y) {
   fetch(`agent`, {
     method: "POST",

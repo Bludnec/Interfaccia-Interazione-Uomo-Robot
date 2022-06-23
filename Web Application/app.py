@@ -45,7 +45,12 @@ def cell():
 def cellP(id):
     if request.method == "GET":
         cell = getCellDAOImpl(id)
-        print(cell)
+        return jsonify(cell) 
+
+@app.route('/cell/zone/<zone>', methods=['GET'])
+def cellZone(zone):
+    if request.method == "GET":
+        cell = getCellInZoneDAOImpl(zone)
         return jsonify(cell) 
 
 # Agent.

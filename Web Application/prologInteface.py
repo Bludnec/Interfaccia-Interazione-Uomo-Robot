@@ -22,7 +22,6 @@ def getMapDAOImpl():
         lista = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
     except Exception as e: 
         print("getMapDAOImpl: ", e)
-    print(lista)
     return lista
 
 def insertMapDAOImpl(i,j):
@@ -56,6 +55,9 @@ def insertCellDAOImpl(cell):
         
 def getCellDAOImpl(id):
     return list(prolog.query("cell(" +id+",X,Y,Zone,Walls)"))
+
+def getCellInZoneDAOImpl(zone):
+    return list(prolog.query("cell(Id,X,Y,"+zone+",Walls)"))
 
 def updateCellDAOImpl(id,x,y,zone,walls):
     prolog.retract('cell('+str(id)+',_,_,_,_)')
