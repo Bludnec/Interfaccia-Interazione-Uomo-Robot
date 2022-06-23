@@ -9,7 +9,7 @@
 % che ha l'abilità putting_under = true.
 :- dynamic inside/2.            % inside(id1,id2). --> id1 sta dentro id2.
 :- dynamic entity/6.            % entity(id,name,class,x,y,z).
-:- dynamic entity_size/4.       % entity_size(id,size,x,y).   es. assert entity_size(rug4,medium,2,1).
+:- dynamic entity_size/3.       % entity_size(id,x,y).   es. assert entity_size(rug4,medium,2,1).
 :- dynamic agent/2.             % agent(x,y).
 :- dynamic cell/5.              % cell(id,x,y,zone,[walls])
 % zone(nome_zona)

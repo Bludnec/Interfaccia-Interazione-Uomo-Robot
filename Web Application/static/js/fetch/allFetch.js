@@ -150,7 +150,7 @@ async function getAgent() {
 }
 
 // Funzione per l'inserimento di una nuova entità nel KB
-function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
+function insertEntity(id, name, classe, x, y, z, sizeX, sizeY) {
   var json_arr = {};
   json_arr["id"] = id;
   json_arr["name"] = name;
@@ -158,7 +158,6 @@ function insertEntity(id, name, classe, x, y, z, size, sizeX, sizeY) {
   json_arr["x"] = str(x);
   json_arr["y"] = str(y);
   json_arr["z"] = str(z);
-  json_arr["size"] = size;
   json_arr["sizeX"] = str(sizeX);
   json_arr["sizeY"] = str(sizeY);
 
@@ -282,12 +281,6 @@ async function getEntityLefRef(id) {
 
 async function getEntityWeight(id) {
   let response = await fetch(`entity/weight?id=${id}`);
-  let data = await response.json();
-  return data;
-}
-
-async function getEntitySize(id) {
-  let response = await fetch(`entity/size?id=${id}`);
   let data = await response.json();
   return data;
 }

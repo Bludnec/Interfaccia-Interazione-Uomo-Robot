@@ -121,7 +121,6 @@ function mouseReleased() {
             x,
             y,
             0,
-            document.getElementById("til-size").value,
             document.getElementById("til-x").value,
             document.getElementById("til-y").value
           );
@@ -146,7 +145,6 @@ function mouseReleased() {
                 x,
                 y,
                 1,
-                document.getElementById("til-size").value,
                 document.getElementById("til-x").value,
                 document.getElementById("til-y").value
               );
@@ -172,7 +170,6 @@ function mouseReleased() {
                 x,
                 y,
                 0,
-                document.getElementById("til-size").value,
                 document.getElementById("til-x").value,
                 document.getElementById("til-y").value
               );
@@ -197,7 +194,6 @@ function mouseReleased() {
               x,
               y,
               0,
-              document.getElementById("til-size").value,
               document.getElementById("til-x").value,
               document.getElementById("til-y").value
             );

@@ -143,7 +143,7 @@ def insertEntityDAOImpl(entity):
     else:
         prolog.assertz("entity(" + entity["id"] + "," + entity["name"] + "," +
                     entity["class"]+","+entity["x"] + "," + entity["y"] + "," + entity["z"] + ")")
-        prolog.assertz('entity_size('+entity['id']+','+entity['size']+','+entity['sizeX']+','+entity['sizeY']+')')
+        prolog.assertz('entity_size('+entity['id']+','+entity['sizeX']+','+entity['sizeY']+')')
 
 # Return i valori Name,Class,X,Y,Z di un entity.
 def getEntityDAOImpl(id):
@@ -171,13 +171,13 @@ def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
 # Cancella le dimensioni dell'entità con id in input
 def deleteEntitySizeDAOImpl(id):
     try:
-        prolog.retract("entity_size("+id+",_,_,_)")
+        prolog.retract("entity_size("+id+",_,_)")
     except Exception as e: 
         print(e)
 
 # Restituisce le dimensioni dell'entità istanziata.
 def getEntitySizeDAOImpl(id):
-    return list(prolog.query('entity_size('+id+',_,SizeX,SizeY)'))
+    return list(prolog.query('entity_size('+id+',SizeX,SizeY)'))
 
 # Aggiorna la posizione dell'entità
 def updateEntityPositionDAOImpl(id, x, y, z):
@@ -264,11 +264,6 @@ def getEntityLexRefDAOImpl(id):
 # Restituisce il peso dell'entità.
 def getEntityWeightDAOImpl(id):
     return list(prolog.query('is_weight('+id+',Weight)'))[0]['Weight']
-
-def getEntitySizeDAOImpl(id):
-    if(bool(list(prolog.query('entity_size('+id+',Size,X,Y)')))):
-        return list(prolog.query('entity_size('+id+',Size,X,Y)'))[0]['Size']
-    return None
 
 # Restituisce la lista delle url di tutte le entità
 def getAllUrlDAOImpl():
@@ -359,7 +354,7 @@ def getInsideSpaceAvailableDAOImpl(id):
         listEnt = getInsideDAOImpl(id)
         print(spaceAvailable, listEnt)
         for x in listEnt:
-            entSize = list(prolog.query('entity_size('+x['Id']+',Size,SizeX,SizeY)'))[0]
+            entSize = list(prolog.query('entity_size('+x['Id']+',SizeX,SizeY)'))[0]
             spaceAvailable -= (entSize['SizeX'] * entSize['SizeY']) 
         return spaceAvailable
     else:
