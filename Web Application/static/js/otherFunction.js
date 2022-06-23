@@ -2,6 +2,8 @@ var translateButton = document
   .getElementById("translate-button")
   .addEventListener("click", lexicalMap);
 
+var kit;
+
 function lexicalMap() {
   var inputText = document.getElementById("input-text").value;
   var listInputText = inputText.split(" ");
@@ -9,7 +11,8 @@ function lexicalMap() {
   var zoneMap;
 
   // data = [[id,List[...]], [id,List[...]], [id,List[...]]]
-  getLexicalMap("kitchen").then((data) => {
+  getLexicalMap().then((data) => {
+    var dataLengt = data.length;
     for (var i = 0; i < data.length - 1; i++) {
       for (var j = 0; j < data[i][1]["List"].length; j++) {
         // controllo le relazioni tra lexical reference entità istanziate e parole
@@ -30,6 +33,7 @@ function lexicalMap() {
         }
       }
     }
+    console.log(data[dataLengt - 1]);
     console.log(lexMapString);
   });
 }

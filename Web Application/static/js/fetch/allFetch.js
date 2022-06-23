@@ -429,8 +429,8 @@ async function getSpaceAvailable(id) {
   return data;
 }
 
-async function getLexicalMap(zone) {
-  let response = await fetch(`lexical-map/${zone}`);
+async function getLexicalMap() {
+  let response = await fetch(`lexical-map`);
   let data = await response.json();
   return data;
 }

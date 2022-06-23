@@ -48,10 +48,10 @@ def cellP(id):
         return jsonify(cell) 
 
 # Lexical Map.
-@app.route('/lexical-map/<zone>', methods=['GET'])
-def lexicalMap(zone):
+@app.route('/lexical-map', methods=['GET'])
+def lexicalMap():
     if request.method == "GET":
-        lexMap = getLexicalMap(zone)
+        lexMap = getLexicalMap()
         return jsonify(lexMap) 
 
 # Agent.

@@ -61,15 +61,22 @@ def updateCellDAOImpl(id,x,y,zone,walls):
     prolog.assertz('cell('+str(id)+','+str(x)+','+str(y)+','+zone+",[" + str(walls[0]).lower()+"," + str(walls[1]).lower()+"," + 
     str(walls[2]).lower()+","+ str(walls[3]).lower()+"])")
 
-def getLexicalMap(zone):
+def getLexicalMap():
     lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
     allLexRef = []
-    zoneMap = list(prolog.query("cell(Id,X,Y,"+zone+",Walls)"))
     for x in lista:
         lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
         lexRef.insert(0,x['Id'])
         allLexRef.append(lexRef)
-    allLexRef.append(zoneMap)
+
+    zone = list(prolog.query("zone(Zone)"))
+
+    for x in zone:
+        zoneMap = list(prolog.query("cell(Id,X,Y,"+x['Zone']+",Walls)"))
+        if zoneMap != []:
+            zoneMap.insert(0,x['Zone'])
+            allLexRef.append(zoneMap)
+
     return allLexRef
 
 
