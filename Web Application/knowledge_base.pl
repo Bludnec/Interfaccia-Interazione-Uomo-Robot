@@ -47,6 +47,7 @@ class(bed).
 % Grandezza entità - size(class,size).
 size(table,big). 
 size(table,medium).
+size(table,small).
 size(wardrobe,big).
 size(wardrobe,medium).
 size(sofa,big).
