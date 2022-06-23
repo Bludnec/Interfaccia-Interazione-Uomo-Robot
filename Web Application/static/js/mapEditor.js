@@ -48,7 +48,6 @@ function colorCellMap(x, y) {
   }
 
   // aggiorno dal db le celle
-  console.log(thisCell);
   updateCell(
     thisCell.id,
     thisCell.x,

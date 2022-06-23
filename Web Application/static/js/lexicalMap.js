@@ -2,17 +2,18 @@ var translateButton = document
   .getElementById("translate-button")
   .addEventListener("click", lexicalMap);
 
-var k0, k1, k2, k3, k4, k5, k6;
+// se mi viene restituito z2 vuol dire che la stanza presa in questione è quella in
+// listOfZone[2]
+var listOfZone = [];
 
 function lexicalMap() {
   var inputText = document.getElementById("input-text").value;
   var listInputText = inputText.split(" ");
   var lexMapString = "";
   var counter = 0;
-  var zoneMap;
 
-  // data = [[id,List[...]], [id,List[...]], [id,List[...]]]
   getLexicalMap().then((data) => {
+    listOfZone = [];
     var dataLengt = data.length;
     for (var i = 0; i < data.length; i++) {
       if (data[i][1]["List"] != null) {
@@ -37,12 +38,30 @@ function lexicalMap() {
       } else {
         // codice per il riconoscimento delle stanze stanze
         var cellLenght = data[i].length;
+        var app = [];
         for (var j = 1; j < cellLenght; j++) {
-          console.log(data[i][j]);
+          app.push(data[i][j]);
+        }
+        listOfZone.push(app);
+        counter++;
+
+        for (var k = 0; k < listInputText.length; k++) {
+          if (listInputText[k] == data[i][0]) {
+            if (lexMapString.length > 0) {
+              lexMapString = lexMapString + "|";
+            }
+            lexMapString =
+              lexMapString +
+              data[i][0] +
+              "|" +
+              data[i][0].toUpperCase() +
+              "|" +
+              "z" +
+              counter;
+          }
         }
       }
     }
-    console.log(k0);
     console.log(lexMapString);
   });
 }
