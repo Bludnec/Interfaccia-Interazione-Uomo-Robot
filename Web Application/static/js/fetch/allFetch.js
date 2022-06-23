@@ -429,8 +429,8 @@ async function getSpaceAvailable(id) {
   return data;
 }
 
-async function getEntityLexRefOnMap() {
-  let response = await fetch("entity/lexical_references/all");
+async function getLexicalMap(zone) {
+  let response = await fetch(`lexical-map/${zone}`);
   let data = await response.json();
   return data;
 }

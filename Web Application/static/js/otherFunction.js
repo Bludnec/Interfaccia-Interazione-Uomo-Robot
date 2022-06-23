@@ -9,13 +9,12 @@ function lexicalMap() {
   var zoneMap;
 
   // data = [[id,List[...]], [id,List[...]], [id,List[...]]]
-  getEntityLexRefOnMap().then((data) => {
-    for (var i = 0; i < data.length; i++) {
+  getLexicalMap("kitchen").then((data) => {
+    for (var i = 0; i < data.length - 1; i++) {
       for (var j = 0; j < data[i][1]["List"].length; j++) {
         // controllo le relazioni tra lexical reference entità istanziate e parole
         // nell'input text
         for (var k = 0; k < listInputText.length; k++) {
-          zoneList("kitchen");
           if (listInputText[k] == data[i][1]["List"][j]) {
             if (lexMapString.length > 0) {
               lexMapString = lexMapString + "|";
@@ -32,15 +31,5 @@ function lexicalMap() {
       }
     }
     console.log(lexMapString);
-  });
-}
-
-/**
- * DEVO ANCHE CAPIRE DOVE STANNO LE ZONE DELLA CASA PER INSERIRLE NELLA LEXICAL MAP
- */
-
-function zoneList(zone) {
-  getCellInZone(zone).then((data) => {
-    zoneMap = data;
   });
 }

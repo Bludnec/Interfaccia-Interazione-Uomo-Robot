@@ -47,11 +47,12 @@ def cellP(id):
         cell = getCellDAOImpl(id)
         return jsonify(cell) 
 
-@app.route('/cell/zone/<zone>', methods=['GET'])
-def cellZone(zone):
+# Lexical Map.
+@app.route('/lexical-map/<zone>', methods=['GET'])
+def lexicalMap(zone):
     if request.method == "GET":
-        cell = getCellInZoneDAOImpl(zone)
-        return jsonify(cell) 
+        lexMap = getLexicalMap(zone)
+        return jsonify(lexMap) 
 
 # Agent.
 @app.route('/agent', methods=['POST','DELETE','GET','PATCH'])
@@ -211,12 +212,6 @@ def entityInsideSpaceAvailable():
         spaceAvailable = getInsideSpaceAvailableDAOImpl(request.args.get('id'))
         return jsonify(spaceAvailable)
 
-# Get lexical references' enitity.
-@app.route('/entity/lexical_references/all', methods=['GET'])
-def allEntityLexRefOnMap():
-    if request.method == "GET":
-        lexRef = getEntityLexRefOnMapDAOImpl()
-        return jsonify(lexRef)
 
 # Get lexical references' enitity.
 @app.route('/entity/ability/all', methods=['GET'])

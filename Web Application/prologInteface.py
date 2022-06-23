@@ -56,13 +56,22 @@ def insertCellDAOImpl(cell):
 def getCellDAOImpl(id):
     return list(prolog.query("cell(" +id+",X,Y,Zone,Walls)"))
 
-def getCellInZoneDAOImpl(zone):
-    return list(prolog.query("cell(Id,X,Y,"+zone+",Walls)"))
-
 def updateCellDAOImpl(id,x,y,zone,walls):
     prolog.retract('cell('+str(id)+',_,_,_,_)')
     prolog.assertz('cell('+str(id)+','+str(x)+','+str(y)+','+zone+",[" + str(walls[0]).lower()+"," + str(walls[1]).lower()+"," + 
     str(walls[2]).lower()+","+ str(walls[3]).lower()+"])")
+
+def getLexicalMap(zone):
+    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
+    allLexRef = []
+    zoneMap = list(prolog.query("cell(Id,X,Y,"+zone+",Walls)"))
+    for x in lista:
+        lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
+        lexRef.insert(0,x['Id'])
+        allLexRef.append(lexRef)
+    allLexRef.append(zoneMap)
+    return allLexRef
+
 
 # Agent
 def insertAgentDAOImpl(x,y):
@@ -321,14 +330,6 @@ def getInsideSpaceAvailableDAOImpl(id):
         print('L entità non può contenere oggetti.')
         return -1
 
-def getEntityLexRefOnMapDAOImpl():
-    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
-    allLexRef = []
-    for x in lista:
-        lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
-        lexRef.insert(0,x['Id'])
-        allLexRef.append(lexRef)
-    return allLexRef
 
 def getEntityAbilityMapDAOImpl():
     lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
