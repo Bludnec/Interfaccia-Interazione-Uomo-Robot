@@ -64,9 +64,6 @@ function mousePressed() {
 
     // controllo se clicco un elemento o l'agente
     if (indexElement != -1) {
-      getEntitySize(itemsList[indexElement].id).then((data) => {
-        teomSize.innerHTML = data;
-      });
       teomCoordinates.innerHTML =
         "X:" +
         itemsList[indexElement].position.x +
@@ -110,6 +107,8 @@ function mouseReleased() {
       }
       deselectEntityImage();
     } else {
+      // varie possibilità di inserimento delle entità
+
       if (indexItemSelected != null && tilPosition.value == "on-floor") {
         // controllo se posso metterlo
         if (el == null) {

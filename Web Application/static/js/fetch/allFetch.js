@@ -2,16 +2,18 @@ async function getAllEntity() {
   let response = await fetch("get-all-entity");
   let data = await response.json();
   itemsList = [];
-  for (var i = 0; i < data.length; i++) {
-    var position = new Position(data[i].X, data[i].Y, data[i].Z);
-    if (data[i].Id != null) {
+  for (var i = 0; i < data[0].length; i++) {
+    var position = new Position(data[0][i].X, data[0][i].Y, data[0][i].Z);
+    if (data[0][i].Id != null) {
       var entity = new Entity(
-        data[i].Id,
-        data[i].Name,
-        data[i].Class,
-        position
+        data[0][i].Id,
+        data[0][i].Name,
+        data[0][i].Class,
+        position,
+        data[1][i].SizeX,
+        data[1][i].SizeY
       );
-      itemsList.push(entity);
+      entity = itemsList.push(entity);
     } else {
       agent = new Agent("robot", position);
     }

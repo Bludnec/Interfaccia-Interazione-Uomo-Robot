@@ -1,5 +1,5 @@
 class Entity {
-  constructor(id, name, entClass, position) {
+  constructor(id, name, entClass, position, sizeX, sizeY) {
     this.id = id;
     this.name = name;
     this.entClass = entClass;
@@ -7,8 +7,8 @@ class Entity {
     this.position = position;
 
     this.ability = [];
-    this.sizeX;
-    this.sizeY;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
 
     /* Real coordinates on the canvas */
     this.mapX = this.position.x * w;
@@ -18,6 +18,6 @@ class Entity {
   }
   show() {
     var img = eval(`${this.entClass}Image`);
-    image(img, this.mapX, this.mapY, w, w);
+    image(img, this.mapX, this.mapY, w * this.sizeX, w * this.sizeY);
   }
 }

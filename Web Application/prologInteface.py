@@ -7,14 +7,18 @@ prolog.consult('knowledge_base.pl')
 
 # Return all entities on KB.
 def getAllEntityDAOImpl():
+    finalList = []
     try:
-        lista = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
+        entityList = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
+        sizeList = list(prolog.query('entity_size(Id,SizeX,SizeY)'))
         check = bool(list(prolog.query('agent(_,_)')))
         if(check):
-            lista.append(list(prolog.query('agent(X,Y)'))[0])
+            entityList.append(list(prolog.query('agent(X,Y)'))[0])
+        finalList.append(entityList)
+        finalList.append(sizeList)
     except:
-        lista = []
-    return lista
+        finalList = []
+    return finalList
 
 # Map
 def getMapDAOImpl():
