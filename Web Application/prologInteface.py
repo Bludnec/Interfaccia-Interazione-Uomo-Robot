@@ -328,8 +328,8 @@ def deleteOnBottomDAOImpl(id1,id2):
 
 # Inserisce il fatto insinde(idInside, idContainer) nel KB.
 def insertInsideDAOImpl(idInside, idContainer):
-    if(not bool(list(prolog.query('inside('+idInside+','+idContainer+')'))) and idInside != idContainer):
-        prolog.assertz('inside('+idInside+','+idContainer+')')
+    if(not bool(list(prolog.query('inside('+str(idInside)+','+str(idContainer)+')'))) and idInside != idContainer):
+        prolog.assertz('inside('+str(idInside)+','+str(idContainer)+')')
         print('Fatto inserito nel KB.')
     elif(idInside == idContainer):
         print('I due id inseriti sono uguali.')
@@ -358,9 +358,9 @@ def getInsideSpaceAvailableDAOImpl(id):
         sizeList = getEntitySizeDAOImpl(id)[0]
         spaceAvailable = sizeList['SizeX']*sizeList['SizeY']
         listEnt = getInsideDAOImpl(id)
-        print(spaceAvailable, listEnt)
         for x in listEnt:
-            entSize = list(prolog.query('entity_size('+x['Id']+',SizeX,SizeY)'))[0]
+            print("x:" ,x['Id'])
+            entSize = list(prolog.query('entity_size('+str(x['Id'])+',SizeX,SizeY)'))[0]
             spaceAvailable -= (entSize['SizeX'] * entSize['SizeY']) 
         return spaceAvailable
     else:

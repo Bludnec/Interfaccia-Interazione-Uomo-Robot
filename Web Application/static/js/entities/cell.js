@@ -13,6 +13,8 @@ class Cell {
     this.mapX = this.x * w;
     this.mapY = this.y * w;
 
+    this.occupied = null;
+
     this.g = 0;
     this.f = 0;
     this.h = 0;

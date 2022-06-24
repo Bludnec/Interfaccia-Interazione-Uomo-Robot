@@ -107,15 +107,19 @@ function mouseReleased() {
       }
       deselectEntityImage();
     } else {
-      // varie possibilità di inserimento delle entità
-      if (indexItemSelected != null && tilPosition.value == "on-floor") {
-        // controllo se posso metterlo
-        if (
-          (document.getElementById("til-x").value == 1 &&
-            document.getElementById("til-y").value == 1) ||
-          (parseInt(document.getElementById("til-x").value) + x - 1 < cols &&
-            parseInt(document.getElementById("til-y").value) + y - 1 < rows)
-        ) {
+      /**
+       * Controllo prima se l'oggetto esce di fuori dalla zona per via delle sue dimensioni
+       */
+      if (
+        (document.getElementById("til-x").value == 1 &&
+          document.getElementById("til-y").value == 1) ||
+        (parseInt(document.getElementById("til-x").value) + x - 1 < cols &&
+          parseInt(document.getElementById("til-y").value) + y - 1 < rows)
+      ) {
+        // varie possibilità di inserimento delle entità
+        if (indexItemSelected != null && tilPosition.value == "on-floor") {
+          // controllo se posso metterlo
+
           if (el == null) {
             console.log("Inserimento dell'entità.");
             insertEntity(
@@ -131,86 +135,120 @@ function mouseReleased() {
             idCounter++;
             boolImgItemSelected = false;
           }
-        }
-        deselectEntityImage();
-      }
-      // se è scelta l'opzione on_top
-      if (el != null && tilPosition.value == "on-top") {
-        console.log(classItemSelected + idCounter);
-        getClassAbility(itemsList[el].entClass, "support").then(
-          (supportBool) => {
-            console.log(supportBool);
-            if (supportBool) {
-              // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-              console.log("entity on top");
-              insertEntity(
-                classItemSelected + idCounter,
-                classItemSelected,
-                classItemSelected,
-                x,
-                y,
-                1,
-                document.getElementById("til-x").value,
-                document.getElementById("til-y").value
-              );
-              insertOnTop(classItemSelected + idCounter, itemsList[el].id);
-              idCounter++;
-              boolImgItemSelected = false;
-            }
-            deselectEntityImage();
-          }
-        );
-      }
-      // se è scelta l'opzione on bottom
-      if (el != null && tilPosition.value == "on-bottom") {
-        getClassAbility(itemsList[el].entClass, "putting_under").then(
-          (puttingUnder) => {
-            if (puttingUnder) {
-              // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-              console.log("entity on bottom");
-              insertEntity(
-                classItemSelected + idCounter,
-                classItemSelected,
-                classItemSelected,
-                x,
-                y,
-                0,
-                document.getElementById("til-x").value,
-                document.getElementById("til-y").value
-              );
-              insertOnBottom(classItemSelected + idCounter, itemsList[el].id);
-              idCounter++;
-              boolImgItemSelected = false;
-            }
-            deselectEntityImage();
-          }
-        );
-      }
-      // se è scelta l'opzione inside
-      if (el != null && tilPosition.value == "inside") {
-        getClassAbility(itemsList[el].entClass, "contain").then((contain) => {
-          if (contain) {
-            // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-            console.log("entity inside");
-            insertEntity(
-              classItemSelected + idCounter,
-              classItemSelected,
-              classItemSelected,
-              x,
-              y,
-              0,
-              document.getElementById("til-x").value,
-              document.getElementById("til-y").value
-            );
 
-            // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
-
-            insertInside(classItemSelected + idCounter, itemsList[el].id);
-            idCounter++;
-            boolImgItemSelected = false;
-          }
           deselectEntityImage();
-        });
+        }
+        /**
+         *  Se è stata scelta l'opzione on_top.
+         */
+        if (el != null && tilPosition.value == "on-top") {
+          if (
+            document.getElementById("til-x").value >= itemsList[el].sizeX &&
+            document.getElementById("til-y").value >= itemsList[el].sizeY
+          ) {
+            getClassAbility(itemsList[el].entClass, "support").then(
+              (supportBool) => {
+                console.log(supportBool);
+                if (supportBool) {
+                  /**
+                   * Se l'oggetto già esistente ha l'abilita support allora metto
+                   * l'oggetto nuovo sopra e asserisco on_top.
+                   */
+                  console.log("entity on top");
+                  insertEntity(
+                    classItemSelected + idCounter,
+                    classItemSelected,
+                    classItemSelected,
+                    x,
+                    y,
+                    1,
+                    document.getElementById("til-x").value,
+                    document.getElementById("til-y").value
+                  );
+                  setTimeout(function () {
+                    insertOnTop(
+                      classItemSelected + idCounter,
+                      itemsList[el].id
+                    );
+                    idCounter++;
+                    deselectEntityImage();
+                  }, 200);
+
+                  boolImgItemSelected = false;
+                }
+              }
+            );
+          }
+        }
+        // se è scelta l'opzione on bottom
+        if (el != null && tilPosition.value == "on-bottom") {
+          getClassAbility(itemsList[el].entClass, "putting_under").then(
+            (puttingUnder) => {
+              if (puttingUnder) {
+                // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+                console.log("entity on bottom");
+                insertEntity(
+                  classItemSelected + idCounter,
+                  classItemSelected,
+                  classItemSelected,
+                  x,
+                  y,
+                  0,
+                  document.getElementById("til-x").value,
+                  document.getElementById("til-y").value
+                );
+
+                setTimeout(function () {
+                  insertOnBottom(
+                    classItemSelected + idCounter,
+                    itemsList[el].id
+                  );
+                  deselectEntityImage();
+                  idCounter++;
+                }, 200);
+
+                boolImgItemSelected = false;
+              }
+            }
+          );
+        }
+        // se è scelta l'opzione inside
+        if (el != null && tilPosition.value == "inside") {
+          getSpaceAvailable(itemsList[el].id).then((data) => {
+            console.log(data);
+          });
+          setTimeout(function () {
+            getClassAbility(itemsList[el].entClass, "contain").then(
+              (contain) => {
+                if (contain) {
+                  // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+                  console.log("entity inside");
+                  insertEntity(
+                    classItemSelected + idCounter,
+                    classItemSelected,
+                    classItemSelected,
+                    x,
+                    y,
+                    0,
+                    document.getElementById("til-x").value,
+                    document.getElementById("til-y").value
+                  );
+
+                  // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
+                  setTimeout(function () {
+                    insertInside(
+                      classItemSelected + idCounter.toString(),
+                      itemsList[el].id
+                    );
+                    idCounter++;
+                    deselectEntityImage();
+                  }, 200);
+                  boolImgItemSelected = false;
+                }
+              }
+            );
+          }, 300);
+        }
       }
     }
   }
