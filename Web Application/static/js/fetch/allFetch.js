@@ -2,24 +2,68 @@ async function getAllEntity() {
   let response = await fetch("get-all-entity");
   let data = await response.json();
   itemsList = [];
-  for (var i = 0; i < data[0].length; i++) {
-    var position = new Position(data[0][i].X, data[0][i].Y, data[0][i].Z);
-    if (data[0][i].Id != null) {
-      var entity = new Entity(
-        data[0][i].Id,
-        data[0][i].Name,
-        data[0][i].Class,
-        position,
-        data[1][i].SizeX,
-        data[1][i].SizeY
-      );
-      entity = itemsList.push(entity);
-    } else {
-      agent = new Agent("robot", position);
+  if (cellsList.length > 0) {
+    for (var i = 0; i < data[0].length; i++) {
+      var position = new Position(data[0][i].X, data[0][i].Y, data[0][i].Z);
+      if (data[0][i].Id != null) {
+        var entity = new Entity(
+          data[0][i].Id,
+          data[0][i].Name,
+          data[0][i].Class,
+          position,
+          data[1][i].SizeX,
+          data[1][i].SizeY
+        );
+        sX = data[1][i].SizeX - 1;
+        sY = data[1][i].SizeY - 1;
+        /**
+         * Verifico se l'entità è più grande di una cella,
+         * allora metto la variabile occupied delle
+         * celle che occupa = id dell'entità.
+         */
+        while (sX > 0) {
+          insertCellOccupied(data[0][i].X + sX, data[0][i].Y, data[0][i].Id);
+          sX--;
+        }
+        while (sY > 0) {
+          insertCellOccupied(data[0][i].X, data[0][i].Y + sY, data[0][i].Id);
+          sY--;
+        }
+        entity = itemsList.push(entity);
+      } else {
+        agent = new Agent("robot", position);
+      }
     }
   }
 }
 
+function insertCellOccupied(x, y, id) {
+  fetch(`/cell-occupied`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      x: x,
+      y: y,
+      id: id,
+    }),
+  });
+}
+
+function deleteCellOccupied(id) {
+  fetch("/cell-occupied", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: id,
+    }),
+  });
+}
 async function getMap() {
   let response = await fetch("map");
   let data = await response.json();

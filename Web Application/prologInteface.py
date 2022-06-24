@@ -20,6 +20,17 @@ def getAllEntityDAOImpl():
         finalList = []
     return finalList
 
+# Inserisce il fatto cell_occupied(id).
+def insertCellOccupiedDAOImpl(x,y,id):
+    prolog.query('cell_occupied('+str(x)+','+str(y)+','+str(id)+')')
+
+# Cancella il fatto cell_occupied(id)
+def deleteCellOccupiedDAOImpl(id):
+    try:
+        prolog.retract("cell_occupied("+id+",_,_)")
+    except Exception as e: 
+        print("deleteEntitySizeDAOImpl: ",e)
+
 # Map
 def getMapDAOImpl():
     try:
@@ -48,6 +59,7 @@ def insertMapDAOImpl(i,j):
 def deleteMapDAOImpl():
     try:
         prolog.retract('cell(_,_,_,_,_)')
+        prolog.retract('cell_occupied(_,_,_)')
     except Exception as e: 
         print("deleteMapDAOImpl: ", e)
 

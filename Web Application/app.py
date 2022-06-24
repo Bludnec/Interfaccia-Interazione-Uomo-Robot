@@ -28,6 +28,18 @@ def map():
         deleteMapDAOImpl()
         return jsonify("DELETE")
 
+# Cell Occupied.
+@app.route('/cell-occupied', methods=['POST','DELETE'])
+def cellOccupied():
+    if request.method == "POST":
+        req = request.get_json()
+        insertCellOccupiedDAOImpl(req['x'],req['y'],req['id'])
+        return jsonify(req)
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteCellOccupiedDAOImpl(req['id'])
+        return jsonify(req)
+
 # Cell.
 @app.route('/cell', methods=['POST','PATCH'])
 def cell():
