@@ -108,23 +108,29 @@ function mouseReleased() {
       deselectEntityImage();
     } else {
       // varie possibilità di inserimento delle entità
-
       if (indexItemSelected != null && tilPosition.value == "on-floor") {
         // controllo se posso metterlo
-        if (el == null) {
-          console.log("Inserimento dell'entità.");
-          insertEntity(
-            classItemSelected + idCounter,
-            classItemSelected,
-            classItemSelected,
-            x,
-            y,
-            0,
-            document.getElementById("til-x").value,
-            document.getElementById("til-y").value
-          );
-          idCounter++;
-          boolImgItemSelected = false;
+        if (
+          (document.getElementById("til-x").value == 1 &&
+            document.getElementById("til-y").value == 1) ||
+          (parseInt(document.getElementById("til-x").value) + x - 1 < cols &&
+            parseInt(document.getElementById("til-y").value) + y - 1 < rows)
+        ) {
+          if (el == null) {
+            console.log("Inserimento dell'entità.");
+            insertEntity(
+              classItemSelected + idCounter,
+              classItemSelected,
+              classItemSelected,
+              x,
+              y,
+              0,
+              document.getElementById("til-x").value,
+              document.getElementById("til-y").value
+            );
+            idCounter++;
+            boolImgItemSelected = false;
+          }
         }
         deselectEntityImage();
       }
