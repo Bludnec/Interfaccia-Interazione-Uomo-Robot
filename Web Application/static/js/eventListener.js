@@ -296,12 +296,12 @@ function getElementInPosition(x, y) {
 function checkWallNeighbor(cell, x, y) {
   check = false;
   for (var i = 0; i < x - 1; i++) {
-    if (cellsList[cellIndex(cell.x + i, cell.y)].walls[1]) {
+    if (cellsList[cellIndex(cell.x + i, cell.y)].walls[1] == "true") {
       check = true;
     }
   }
   for (var i = 0; i < y - 1; i++) {
-    if (cellsList[cellIndex(cell.x, cell.y + 1)].walls[2]) {
+    if (cellsList[cellIndex(cell.x, cell.y + 1)].walls[2] == "true") {
       check = true;
     }
   }
