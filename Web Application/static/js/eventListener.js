@@ -258,9 +258,12 @@ function mouseReleased() {
      */
     setTimeout(function () {
       getEntityAbilityOnMap();
-    }, 700);
+    }, 500);
     setTimeout(function () {
       getEntityPositioningOnMap();
+    }, 700);
+    setTimeout(function () {
+      getMap();
     }, 900);
   }
 }

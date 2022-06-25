@@ -129,6 +129,7 @@ function neighbors(node) {
    * fare controllo di occupied
    * assegnare a noderight quell'id
    */
+  console.log(cellsList);
   if (x + 1 < cols && !(cellsList[cellIndex(x + 1, y)].occupied == null)) {
     console.log("cella occupata");
     nodeRight = cellsList[cellIndex(x + 1, y)].occupied;

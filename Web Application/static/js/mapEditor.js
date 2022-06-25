@@ -72,6 +72,7 @@ function loadMap() {
 
 /* Delete the walls if adjacent cells have the same "zone" value. */
 function deleteWalls(i) {
+  var thisCell = cellsList[i];
   var x = cellsList[i].x;
   var y = cellsList[i].y;
   // right check

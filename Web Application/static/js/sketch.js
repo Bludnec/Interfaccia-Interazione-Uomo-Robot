@@ -8,6 +8,8 @@ var modifica = false;
 
 var cellPath = [];
 
+var firstLaunch = true;
+
 var agentActionsList = [];
 
 var boolResizeCanvas = false;
@@ -178,6 +180,10 @@ function setup() {
   w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
+  if (firstLaunch) {
+    insertMap(cols, rows);
+    firstLaunch = false;
+  }
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
@@ -188,6 +194,7 @@ function setup() {
     if (!boolResizeCanvas) {
       /* Create a new canvas with new cellsList */
       // POST i x j cell map
+      deleteMap();
       insertMap(cols, rows);
     } else {
       /**
@@ -197,6 +204,8 @@ function setup() {
       // GET
       for (var j = 0; j < rows; j++) {
         for (var i = 0; i < cols; i++) {
+          cellsList[cellIndex(i, j)].x = i;
+          cellsList[cellIndex(i, j)].x = j;
           cellsList[cellIndex(i, j)].mapX = i * w;
           cellsList[cellIndex(i, j)].mapY = j * w;
         }
@@ -251,7 +260,10 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(5);
+  if (cellsList.length == 0) {
+    getMap();
+  }
+  frameRate(3);
   if (itemsList.length == 0 || modifica) {
     getAllEntity();
     modifica = false;
@@ -269,8 +281,9 @@ function draw() {
   }
   // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) -
   // timeout perché sennò va ad influire con le altre query nel backend
-  getAllEntity();
+
   setTimeout(function () {
+    getAgent();
     if (cellPath.length != 0) {
       agent.moveTo(cellPath[0].x, cellPath[0].y);
       cellPath.shift();
