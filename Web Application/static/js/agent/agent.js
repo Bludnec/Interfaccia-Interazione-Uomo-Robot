@@ -14,58 +14,31 @@ class Agent {
     image(agentImage, this.mapX, this.mapY, w, w);
   }
   moveUp() {
-    if (
-      this.position.y - 1 >= 0 &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[0]
-    ) {
-      updateAgentPosition(
-        this.position.x.toString(),
-        (this.position.y - 1).toString()
-      );
-    } else {
-      console.log("Non posso andare su.");
-    }
+    updateAgentPosition(
+      this.position.x.toString(),
+      (this.position.y - 1).toString()
+    );
   }
+
   moveDown() {
-    if (
-      this.position.y + 1 < rows &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[2]
-    ) {
-      updateAgentPosition(
-        this.position.x.toString(),
-        (this.position.y + 1).toString()
-      );
-    } else {
-      console.log("Non posso andare giù.");
-    }
+    updateAgentPosition(
+      this.position.x.toString(),
+      (this.position.y + 1).toString()
+    );
   }
 
   moveRight() {
-    if (
-      this.position.x + 1 < cols &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[1]
-    ) {
-      updateAgentPosition(
-        (this.position.x + 1).toString(),
-        this.position.y.toString()
-      );
-    } else {
-      console.log("Non posso andare a destra.");
-    }
+    updateAgentPosition(
+      (this.position.x + 1).toString(),
+      this.position.y.toString()
+    );
   }
 
   moveLeft() {
-    if (
-      this.position.x - 1 >= 0 &&
-      !cellsList[cellIndex(this.position.x, this.position.y)].walls[3]
-    ) {
-      updateAgentPosition(
-        (this.position.x - 1).toString(),
-        this.position.y.toString()
-      );
-    } else {
-      console.log("Non posso andare a destra.");
-    }
+    updateAgentPosition(
+      (this.position.x - 1).toString(),
+      this.position.y.toString()
+    );
   }
   /**
    * Movimento verso le coordinate scelte o
