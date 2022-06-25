@@ -59,16 +59,16 @@ class Cell {
     strokeWeight(3);
     stroke(0);
     var wInt = parseInt(w); // w parsato perché lo prende come stringa e line non disegna bene
-    if (this.walls[0]) {
+    if (this.walls[0] == "true") {
       line(this.mapX, this.mapY, wInt + this.mapX, this.mapY);
     }
-    if (this.walls[1]) {
+    if (this.walls[1] == "true") {
       line(this.mapX + wInt, this.mapY, this.mapX + wInt, this.mapY + wInt);
     }
-    if (this.walls[2]) {
+    if (this.walls[2] == "true") {
       line(this.mapX + wInt, this.mapY + wInt, this.mapX, this.mapY + wInt);
     }
-    if (this.walls[3]) {
+    if (this.walls[3] == "true") {
       line(this.mapX, this.mapY + wInt, this.mapX, this.mapY);
     }
   }

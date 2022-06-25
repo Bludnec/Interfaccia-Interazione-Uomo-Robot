@@ -186,16 +186,16 @@ function neighbors(node) {
    * Controllo se possiamo considerare le celle adiacenti per il path in base
    * al muro e l'oggetto sopra.
    */
-  if (x - 1 >= 0 && !node.walls[3] && nodeLeft == 0) {
+  if (x - 1 >= 0 && node.walls[3] == "false" && nodeLeft == 0) {
     ret.push(cellsList[cellIndex(x - 1, y)]);
   }
-  if (x + 1 < cols && !node.walls[1] && nodeRight == 0) {
+  if (x + 1 < cols && node.walls[1] == "false" && nodeRight == 0) {
     ret.push(cellsList[cellIndex(x + 1, y)]);
   }
-  if (y - 1 >= 0 && !node.walls[0] && nodeUp == 0) {
+  if (y - 1 >= 0 && node.walls[0] == "false" && nodeUp == 0) {
     ret.push(cellsList[cellIndex(x, y - 1)]);
   }
-  if (y + 1 < rows && !node.walls[2] && nodeDown == 0) {
+  if (y + 1 < rows && node.walls[2] == "false" && nodeDown == 0) {
     ret.push(cellsList[cellIndex(x, y + 1)]);
   }
   return ret;

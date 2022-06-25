@@ -10,8 +10,8 @@ function colorCellMap(x, y) {
     cellsList[cellIndex(x + 1, y)] != null &&
     thisCell.zone == cellsList[cellIndex(x + 1, y)].zone
   ) {
-    thisCell.walls[1] = false;
-    cellsList[cellIndex(x + 1, y)].walls[3] = false;
+    thisCell.walls[1] = "false";
+    cellsList[cellIndex(x + 1, y)].walls[3] = "false";
   } else if (cellsList[cellIndex(x + 1, y)] != null) {
     thisCell.walls[1] = "true";
     cellsList[cellIndex(x + 1, y)].walls[3] = "true";
@@ -20,8 +20,8 @@ function colorCellMap(x, y) {
     cellsList[cellIndex(x - 1, y)] != null &&
     thisCell.zone == cellsList[cellIndex(x - 1, y)].zone
   ) {
-    thisCell.walls[3] = false;
-    cellsList[cellIndex(x - 1, y)].walls[1] = false;
+    thisCell.walls[3] = "false";
+    cellsList[cellIndex(x - 1, y)].walls[1] = "false";
   } else if (cellsList[cellIndex(x - 1, y)] != null) {
     thisCell.walls[3] = "true";
     cellsList[cellIndex(x - 1, y)].walls[1] = "true";
@@ -30,8 +30,8 @@ function colorCellMap(x, y) {
     cellsList[cellIndex(x, y + 1)] != null &&
     thisCell.zone == cellsList[cellIndex(x, y + 1)].zone
   ) {
-    thisCell.walls[2] = false;
-    cellsList[cellIndex(x, y + 1)].walls[0] = false;
+    thisCell.walls[2] = "false";
+    cellsList[cellIndex(x, y + 1)].walls[0] = "false";
   } else if (cellsList[cellIndex(x, y + 1)] != null) {
     thisCell.walls[2] = "true";
     cellsList[cellIndex(x, y + 1)].walls[0] = "true";
@@ -40,8 +40,8 @@ function colorCellMap(x, y) {
     cellsList[cellIndex(x, y - 1)] != null &&
     thisCell.zone == cellsList[cellIndex(x, y - 1)].zone
   ) {
-    thisCell.walls[0] = false;
-    cellsList[cellIndex(x, y - 1)].walls[2] = false;
+    thisCell.walls[0] = "false";
+    cellsList[cellIndex(x, y - 1)].walls[2] = "false";
   } else if (cellsList[cellIndex(x, y - 1)] != null) {
     thisCell.walls[0] = "true";
     cellsList[cellIndex(x, y - 1)].walls[2] = "true";
@@ -66,7 +66,7 @@ function saveMap() {
 
 /* Load the existing map. */
 function loadMap() {
-  boolLoadMap = true;
+  boolLoadMap = "true";
   setup();
 }
 
@@ -81,11 +81,11 @@ function deleteWalls(i) {
     i < cellsList.length &&
     cellsList[cellIndex(x + 1, y)].zone == cellsList[i].zone
   ) {
-    cellsList[cellIndex(x + 1, y)].walls[3] = false;
-    cellsList[i].walls[1] = false;
+    cellsList[cellIndex(x + 1, y)].walls[3] = "false";
+    cellsList[i].walls[1] = "false";
   } else if (x + 1 < cols && i < cellsList.length) {
-    cellsList[i].walls[1] = true;
-    cellsList[cellIndex(x + 1, y)].walls[3] = true;
+    cellsList[i].walls[1] = "true";
+    cellsList[cellIndex(x + 1, y)].walls[3] = "true";
   }
   // left check
   if (
@@ -94,11 +94,11 @@ function deleteWalls(i) {
     i < cellsList.length &&
     cellsList[cellIndex(x - 1, y)].zone == cellsList[i].zone
   ) {
-    cellsList[cellIndex(x - 1, y)].walls[1] = false;
-    cellsList[i].walls[3] = false;
+    cellsList[cellIndex(x - 1, y)].walls[1] = "false";
+    cellsList[i].walls[3] = "false";
   } else if (x - 1 < cols && i < 0 && i < cellsList.length) {
-    cellsList[i].walls[3] = true;
-    cellsList[cellIndex(x - 1, y)].walls[1] = true;
+    cellsList[i].walls[3] = "true";
+    cellsList[cellIndex(x - 1, y)].walls[1] = "true";
   }
   // up check
   if (
@@ -107,11 +107,11 @@ function deleteWalls(i) {
     i < cellsList.length &&
     cellsList[cellIndex(x, y - 1)].zone == cellsList[i].zone
   ) {
-    cellsList[cellIndex(x, y - 1)].walls[2] = false;
-    cellsList[i].walls[0] = false;
+    cellsList[cellIndex(x, y - 1)].walls[2] = "false";
+    cellsList[i].walls[0] = "false";
   } else if (y - 1 < 0 && i < 0 && i < cellsList.length) {
-    cellsList[i].walls[0] = true;
-    cellsList[cellIndex(x, y - 1)].walls[2] = true;
+    cellsList[i].walls[0] = "true";
+    cellsList[cellIndex(x, y - 1)].walls[2] = "true";
   }
   // down check
   if (
@@ -119,11 +119,11 @@ function deleteWalls(i) {
     i < cellsList.length &&
     cellsList[cellIndex(x, y + 1)].zone == cellsList[i].zone
   ) {
-    cellsList[cellIndex(x, y + 1)].walls[0] = false;
-    cellsList[i].walls[2] = false;
+    cellsList[cellIndex(x, y + 1)].walls[0] = "false";
+    cellsList[i].walls[2] = "false";
   } else if (y + 1 < rows && i < cellsList.length) {
-    cellsList[i].walls[2] = true;
-    cellsList[cellIndex(x, y + 1)].walls[0] = true;
+    cellsList[i].walls[2] = "true";
+    cellsList[cellIndex(x, y + 1)].walls[0] = "true";
   }
   updateCell(
     thisCell.id,
@@ -156,11 +156,11 @@ function editWalls(mX, mY) {
     cellsList[cellIndex(x + 1, y)] != null
   ) {
     if (!thisCell.walls[1]) {
-      thisCell.walls[1] = true;
-      cellsList[cellIndex(x + 1, y)].walls[3] = true;
+      thisCell.walls[1] = "true";
+      cellsList[cellIndex(x + 1, y)].walls[3] = "true";
     } else {
-      thisCell.walls[1] = false;
-      cellsList[cellIndex(x + 1, y)].walls[3] = false;
+      thisCell.walls[1] = "false";
+      cellsList[cellIndex(x + 1, y)].walls[3] = "false";
     }
   }
   if (
@@ -170,11 +170,11 @@ function editWalls(mX, mY) {
     cellsList[cellIndex(x - 1, y)] != null
   ) {
     if (!thisCell.walls[3]) {
-      thisCell.walls[3] = true;
-      cellsList[cellIndex(x - 1, y)].walls[1] = true;
+      thisCell.walls[3] = "true";
+      cellsList[cellIndex(x - 1, y)].walls[1] = "true";
     } else {
-      thisCell.walls[3] = false;
-      cellsList[cellIndex(x - 1, y)].walls[1] = false;
+      thisCell.walls[3] = "false";
+      cellsList[cellIndex(x - 1, y)].walls[1] = "false";
     }
   }
 
@@ -185,11 +185,11 @@ function editWalls(mX, mY) {
     cellsList[cellIndex(x, y + 1)] != null
   ) {
     if (!thisCell.walls[2]) {
-      thisCell.walls[2] = true;
-      cellsList[cellIndex(x, y + 1)].walls[0] = true;
+      thisCell.walls[2] = "true";
+      cellsList[cellIndex(x, y + 1)].walls[0] = "true";
     } else {
-      thisCell.walls[2] = false;
-      cellsList[cellIndex(x, y + 1)].walls[0] = false;
+      thisCell.walls[2] = "false";
+      cellsList[cellIndex(x, y + 1)].walls[0] = "false";
     }
   }
   if (
@@ -199,11 +199,11 @@ function editWalls(mX, mY) {
     cellsList[cellIndex(x, y - 1)] != null
   ) {
     if (!thisCell.walls[0]) {
-      thisCell.walls[0] = true;
-      cellsList[cellIndex(x, y - 1)].walls[2] = true;
+      thisCell.walls[0] = "true";
+      cellsList[cellIndex(x, y - 1)].walls[2] = "true";
     } else {
-      thisCell.walls[0] = false;
-      cellsList[cellIndex(x, y - 1)].walls[2] = false;
+      thisCell.walls[0] = "false";
+      cellsList[cellIndex(x, y - 1)].walls[2] = "false";
     }
   }
   updateCell(
