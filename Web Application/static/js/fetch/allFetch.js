@@ -64,19 +64,31 @@ function deleteCellOccupied(id) {
     }),
   });
 }
+
 async function getMap() {
   let response = await fetch("map");
   let data = await response.json();
   cellsList = [];
-  for (var i = 0; i < data.length; i++) {
+  /**
+   * Creazione delle celle con i dati in arrivo
+   * dalla base di conoscenza.
+   */
+  for (var i = 0; i < data[0].length; i++) {
     var cell = new Cell(
-      data[i].Id,
-      data[i].X,
-      data[i].Y,
-      data[i].Zone,
-      data[i].Walls
+      data[0][i].Id,
+      data[0][i].X,
+      data[0][i].Y,
+      data[0][i].Zone,
+      data[0][i].Walls
     );
     cellsList.push(cell);
+  }
+  /**
+   * Controlla la lista delle celle occupate e cambia il valore
+   * di cell.occupied con l'id dell'entità che la occupa.
+   */
+  for (var i = 0; i < data[1].length; i++) {
+    cellsList[cellIndex(data[1][i].X, data[1][i].Y)].occupied = data[1][i].Id;
   }
 }
 

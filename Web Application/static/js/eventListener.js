@@ -94,6 +94,7 @@ function mouseReleased() {
   var y = parseInt(mouseY / w);
 
   modifica = true;
+  checkWallNeighbor(cellsList[cellIndex(0, 0)], 2, 1);
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
@@ -114,7 +115,12 @@ function mouseReleased() {
         (document.getElementById("til-x").value == 1 &&
           document.getElementById("til-y").value == 1) ||
         (parseInt(document.getElementById("til-x").value) + x - 1 < cols &&
-          parseInt(document.getElementById("til-y").value) + y - 1 < rows)
+          parseInt(document.getElementById("til-y").value) + y - 1 < rows &&
+          !checkWallNeighbor(
+            cellsList[cellIndex(x, y)],
+            document.getElementById("til-x").value,
+            document.getElementById("til-y").value
+          ))
       ) {
         // varie possibilità di inserimento delle entità
         if (indexItemSelected != null && tilPosition.value == "on-floor") {
@@ -266,7 +272,11 @@ function mouseReleased() {
 
 function mouseDragged() {}
 
-// ritorna l'indice dell'elemento nella lista itemList in posizione x,y
+/**
+ * @param {int} x
+ * @param {int} y
+ * @returns indice dell'elemento nella itemsList in posizione x,y
+ */
 function getElementInPosition(x, y) {
   if (agent != null && agent.position.x == x && agent.position.y == y) {
     return -1;
@@ -277,4 +287,26 @@ function getElementInPosition(x, y) {
     }
   }
   return null;
+}
+
+/**
+ * @param {cell} cell
+ * @param {int} x
+ * @param {int} y
+ * @returns true se l'oggetto con sizeX o sizeY > 1 viene messo sopra dei muri
+ */
+function checkWallNeighbor(cell, x, y) {
+  check = false;
+  console.log(cell, x, y);
+  for (var i = 0; i < x - 1; i++) {
+    if (cellsList[cellIndex(cell.x + i, cell.y)].walls[1]) {
+      check = true;
+    }
+  }
+  for (var i = 0; i < y - 1; i++) {
+    if (cellsList[cellIndex(cell.x, cell.y + 1)].walls[2]) {
+      check = true;
+    }
+  }
+  return check;
 }

@@ -5,7 +5,8 @@ import json
 prolog = Prolog()
 prolog.consult('knowledge_base.pl')
 
-# Return all entities on KB.
+# Restituisce una lista contenente una lista di tutte le entità 
+# salvate nel KB e un'altra lista con le dimensioni delle entità.
 def getAllEntityDAOImpl():
     finalList = []
     try:
@@ -33,11 +34,15 @@ def deleteCellOccupiedDAOImpl(id):
 
 # Map
 def getMapDAOImpl():
+    finalList = []
     try:
-        lista = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
+        cellList = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
+        statusList = list(prolog.query('cell_occupied(X,Y,Id)'))
+        finalList.append(cellList)
+        finalList.append(statusList)
     except Exception as e: 
         print("getMapDAOImpl: ", e)
-    return lista
+    return finalList
 
 def insertMapDAOImpl(i,j):
     prolog.retractall('cell(_,_,_,_,_)')

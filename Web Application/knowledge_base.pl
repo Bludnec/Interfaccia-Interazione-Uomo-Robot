@@ -12,7 +12,7 @@
 :- dynamic entity_size/3.       % entity_size(id,x,y).   es. assert entity_size(rug4,medium,2,1).
 :- dynamic agent/2.             % agent(x,y).
 :- dynamic cell/5.              % cell(id,x,y,zone,[walls]).
-:- dynamic cell_occupied/1.     % cell_occupied(x,y,id).
+:- dynamic cell_occupied/3.     % cell_occupied(x,y,id).
 
 zone(kitchen).
 zone(bedroom).
