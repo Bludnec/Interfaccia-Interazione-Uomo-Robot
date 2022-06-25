@@ -98,7 +98,6 @@ function mouseReleased() {
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
-    console.log("Rilascio");
     var el = getElementInPosition(x, y);
     // se è l'agente = crea l'agente
     if (classItemSelected == "agent") {
@@ -140,6 +139,7 @@ function mouseReleased() {
               document.getElementById("til-y").value
             );
             idCounter++;
+            boolImgItemSelected = false;
           }
 
           deselectEntityImage();
@@ -179,6 +179,8 @@ function mouseReleased() {
                     idCounter++;
                     deselectEntityImage();
                   }, 200);
+
+                  boolImgItemSelected = false;
                 }
               }
             );
@@ -210,6 +212,8 @@ function mouseReleased() {
                   deselectEntityImage();
                   idCounter++;
                 }, 200);
+
+                boolImgItemSelected = false;
               }
             }
           );
@@ -245,6 +249,7 @@ function mouseReleased() {
                     idCounter++;
                     deselectEntityImage();
                   }, 200);
+                  boolImgItemSelected = false;
                 }
               }
             );
@@ -252,18 +257,17 @@ function mouseReleased() {
         }
       }
     }
-    boolImgItemSelected = false;
-    /**
-     * Aspetto che venga inserito l'entità nel db per poi prendere la nuova lista
-     * di abilità delle entità nella mappa
-     */
-    setTimeout(function () {
-      getEntityAbilityOnMap();
-    }, 700);
-    setTimeout(function () {
-      getEntityPositioningOnMap();
-    }, 900);
   }
+  /**
+   * Aspetto che venga inserito l'entità nel db per poi prendere la nuova lista
+   * di abilità delle entità nella mappa
+   */
+  setTimeout(function () {
+    getEntityAbilityOnMap();
+  }, 700);
+  setTimeout(function () {
+    getEntityPositioningOnMap();
+  }, 900);
 }
 
 function mouseDragged() {}
