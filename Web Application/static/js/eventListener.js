@@ -297,7 +297,6 @@ function getElementInPosition(x, y) {
  */
 function checkWallNeighbor(cell, x, y) {
   check = false;
-  console.log(cell, x, y);
   for (var i = 0; i < x - 1; i++) {
     if (cellsList[cellIndex(cell.x + i, cell.y)].walls[1]) {
       check = true;

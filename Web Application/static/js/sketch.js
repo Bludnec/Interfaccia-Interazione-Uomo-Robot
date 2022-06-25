@@ -240,6 +240,7 @@ function setup() {
   setTimeout(function () {
     getMap();
   }, 200);
+
   setTimeout(function () {
     getEntityPositioningOnMap();
   }, 400);

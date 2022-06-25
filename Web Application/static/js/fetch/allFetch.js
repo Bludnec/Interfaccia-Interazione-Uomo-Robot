@@ -64,15 +64,11 @@ function deleteCellOccupied(id) {
     }),
   });
 }
-
 async function getMap() {
   let response = await fetch("map");
   let data = await response.json();
   cellsList = [];
-  /**
-   * Creazione delle celle con i dati in arrivo
-   * dalla base di conoscenza.
-   */
+  console.log("getMap: ", data);
   for (var i = 0; i < data[0].length; i++) {
     var cell = new Cell(
       data[0][i].Id,

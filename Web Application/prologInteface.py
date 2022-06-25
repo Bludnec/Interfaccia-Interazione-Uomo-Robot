@@ -1,3 +1,4 @@
+from cmath import e
 from itertools import count
 from pyswip import Prolog
 import json
@@ -23,7 +24,8 @@ def getAllEntityDAOImpl():
 
 # Inserisce il fatto cell_occupied(id).
 def insertCellOccupiedDAOImpl(x,y,id):
-    prolog.query('cell_occupied('+str(x)+','+str(y)+','+str(id)+')')
+    if not bool(list(prolog.query('cell_occupied('+str(x)+','+str(y)+','+str(id)+')'))):
+        prolog.assertz('cell_occupied('+str(x)+','+str(y)+','+str(id)+')')
 
 # Cancella il fatto cell_occupied(id)
 def deleteCellOccupiedDAOImpl(id):
@@ -38,6 +40,7 @@ def getMapDAOImpl():
     try:
         cellList = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
         statusList = list(prolog.query('cell_occupied(X,Y,Id)'))
+        print(statusList)
         finalList.append(cellList)
         finalList.append(statusList)
     except Exception as e: 

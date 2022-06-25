@@ -55,50 +55,7 @@ function colorCellMap(x, y) {
     thisCell.zone,
     thisCell.walls
   );
-  setTimeout(function () {
-    if (cellsList[cellIndex(x + 1, y)] != null) {
-      updateCell(
-        cellsList[cellIndex(x + 1, y)].id,
-        cellsList[cellIndex(x + 1, y)].x,
-        cellsList[cellIndex(x + 1, y)].y,
-        cellsList[cellIndex(x + 1, y)].zone,
-        cellsList[cellIndex(x + 1, y)].walls
-      );
-    }
-  }, 200);
-  setTimeout(function () {
-    if (cellsList[cellIndex(x - 1, y)] != null) {
-      updateCell(
-        cellsList[cellIndex(x - 1, y)].id,
-        cellsList[cellIndex(x - 1, y)].x,
-        cellsList[cellIndex(x - 1, y)].y,
-        cellsList[cellIndex(x - 1, y)].zone,
-        cellsList[cellIndex(x - 1, y)].walls
-      );
-    }
-  }, 400);
-  setTimeout(function () {
-    if (cellsList[cellIndex(x, y - 1)] != null) {
-      updateCell(
-        cellsList[cellIndex(x, y - 1)].id,
-        cellsList[cellIndex(x, y - 1)].x,
-        cellsList[cellIndex(x, y - 1)].y,
-        cellsList[cellIndex(x, y - 1)].zone,
-        cellsList[cellIndex(x, y - 1)].walls
-      );
-    }
-  }, 600);
-  setTimeout(function () {
-    if (cellsList[cellIndex(x, y + 1)] != null) {
-      updateCell(
-        cellsList[cellIndex(x, y + 1)].id,
-        cellsList[cellIndex(x, y + 1)].x,
-        cellsList[cellIndex(x, y + 1)].y,
-        cellsList[cellIndex(x, y + 1)].zone,
-        cellsList[cellIndex(x, y + 1)].walls
-      );
-    }
-  }, 800);
+  updateNeighborsCells(x, y);
 }
 
 /* Save the map into a json file */
@@ -167,6 +124,14 @@ function deleteWalls(i) {
     cellsList[i].walls[2] = true;
     cellsList[cellIndex(x, y + 1)].walls[0] = true;
   }
+  updateCell(
+    thisCell.id,
+    thisCell.x,
+    thisCell.y,
+    thisCell.zone,
+    thisCell.walls
+  );
+  updateNeighborsCells(x, y);
 }
 
 function editWalls(mX, mY) {
@@ -240,4 +205,59 @@ function editWalls(mX, mY) {
       cellsList[cellIndex(x, y - 1)].walls[2] = false;
     }
   }
+  updateCell(
+    thisCell.id,
+    thisCell.x,
+    thisCell.y,
+    thisCell.zone,
+    thisCell.walls
+  );
+  updateNeighborsCells(x, y);
+}
+
+function updateNeighborsCells(x, y) {
+  setTimeout(function () {
+    if (cellsList[cellIndex(x + 1, y)] != null) {
+      updateCell(
+        cellsList[cellIndex(x + 1, y)].id,
+        cellsList[cellIndex(x + 1, y)].x,
+        cellsList[cellIndex(x + 1, y)].y,
+        cellsList[cellIndex(x + 1, y)].zone,
+        cellsList[cellIndex(x + 1, y)].walls
+      );
+    }
+  }, 200);
+  setTimeout(function () {
+    if (cellsList[cellIndex(x - 1, y)] != null) {
+      updateCell(
+        cellsList[cellIndex(x - 1, y)].id,
+        cellsList[cellIndex(x - 1, y)].x,
+        cellsList[cellIndex(x - 1, y)].y,
+        cellsList[cellIndex(x - 1, y)].zone,
+        cellsList[cellIndex(x - 1, y)].walls
+      );
+    }
+  }, 400);
+  setTimeout(function () {
+    if (cellsList[cellIndex(x, y - 1)] != null) {
+      updateCell(
+        cellsList[cellIndex(x, y - 1)].id,
+        cellsList[cellIndex(x, y - 1)].x,
+        cellsList[cellIndex(x, y - 1)].y,
+        cellsList[cellIndex(x, y - 1)].zone,
+        cellsList[cellIndex(x, y - 1)].walls
+      );
+    }
+  }, 600);
+  setTimeout(function () {
+    if (cellsList[cellIndex(x, y + 1)] != null) {
+      updateCell(
+        cellsList[cellIndex(x, y + 1)].id,
+        cellsList[cellIndex(x, y + 1)].x,
+        cellsList[cellIndex(x, y + 1)].y,
+        cellsList[cellIndex(x, y + 1)].zone,
+        cellsList[cellIndex(x, y + 1)].walls
+      );
+    }
+  }, 800);
 }

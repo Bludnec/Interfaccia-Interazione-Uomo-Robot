@@ -14,6 +14,7 @@
 :- dynamic cell/5.              % cell(id,x,y,zone,[walls]).
 :- dynamic cell_occupied/3.     % cell_occupied(x,y,id).
 
+
 zone(kitchen).
 zone(bedroom).
 zone(livingRoom).

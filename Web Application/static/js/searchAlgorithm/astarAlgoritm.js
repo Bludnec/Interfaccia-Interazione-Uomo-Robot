@@ -125,6 +125,26 @@ function neighbors(node) {
       nodeUp = itemsList[i];
     }
   }
+  /**
+   * fare controllo di occupied
+   * assegnare a noderight quell'id
+   */
+  if (x + 1 < cols && !(cellsList[cellIndex(x + 1, y)].occupied == null)) {
+    console.log("cella occupata");
+    nodeRight = cellsList[cellIndex(x + 1, y)].occupied;
+  }
+  if (x - 1 >= 0 && !(cellsList[cellIndex(x - 1, y)].occupied == null)) {
+    console.log("cella occupata");
+    nodeLeft = cellsList[cellIndex(x - 1, y)].occupied;
+  }
+  if (y + 1 > rows && !(cellsList[cellIndex(x, y + 1)].occupied == null)) {
+    console.log("cella occupata");
+    nodeDown = cellsList[cellIndex(x, y + 1)].occupied;
+  }
+  if (y - 1 >= 0 && !(cellsList[cellIndex(x, y - 1)].occupied == null)) {
+    console.log("cella occupata");
+    nodeUp = cellsList[cellIndex(x, y - 1)].occupied;
+  }
 
   for (var i = 0; i < abilityList.length; i++) {
     if (abilityList[i][0] == nodeRight.id) {
