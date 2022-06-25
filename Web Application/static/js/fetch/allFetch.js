@@ -67,8 +67,6 @@ function deleteCellOccupied(id) {
 async function getMap() {
   let response = await fetch("map");
   let data = await response.json();
-  console.log("getMap: ", data);
-  console.log(data[0][0].Walls);
   cellsList = [];
   for (var i = 0; i < data[0].length; i++) {
     var cell = new Cell(

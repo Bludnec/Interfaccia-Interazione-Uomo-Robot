@@ -175,7 +175,6 @@ function setup() {
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
   if (firstLaunch) {
-    deleteMap();
     insertMap(cols, rows);
     firstLaunch = false;
   }
@@ -215,11 +214,11 @@ function setup() {
 
   setTimeout(function () {
     getMap();
-  }, 200);
+  }, 800);
 
   setTimeout(function () {
     getEntityPositioningOnMap();
-  }, 400);
+  }, 900);
 }
 
 /**
@@ -227,8 +226,8 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  frameRate(3);
   console.log(cellsList);
+  frameRate(3);
   if (itemsList.length == 0 || modifica) {
     getAllEntity();
     modifica = false;
@@ -243,17 +242,16 @@ function draw() {
   // Se è stato istanziato l'agente, lo mostra sulla mappa.
   if (agent != null) {
     agent.show();
+    setTimeout(function () {
+      getAgent();
+      if (cellPath.length != 0) {
+        agent.moveTo(cellPath[0].x, cellPath[0].y);
+        cellPath.shift();
+      }
+    }, 500);
   }
   // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) -
   // timeout perché sennò va ad influire con le altre query nel backend
-
-  setTimeout(function () {
-    getAgent();
-    if (cellPath.length != 0) {
-      agent.moveTo(cellPath[0].x, cellPath[0].y);
-      cellPath.shift();
-    }
-  }, 500);
 }
 
 /* Functions for click an entity */
