@@ -67,8 +67,9 @@ function deleteCellOccupied(id) {
 async function getMap() {
   let response = await fetch("map");
   let data = await response.json();
-  cellsList = [];
   console.log("getMap: ", data);
+  console.log(data[0][0].Walls);
+  cellsList = [];
   for (var i = 0; i < data[0].length; i++) {
     var cell = new Cell(
       data[0][i].Id,
@@ -86,6 +87,15 @@ async function getMap() {
   for (var i = 0; i < data[1].length; i++) {
     cellsList[cellIndex(data[1][i].X, data[1][i].Y)].occupied = data[1][i].Id;
   }
+  /**
+   * All'update di una cella (es. cambio di zone) l'ordine viene
+   * sballato perché c'è un retract + assertz, quindi la nuova
+   * cella viene messa in fondo -> riordino cellsList in base all'id
+   * per avere un cellIndex giusto.
+   */
+  cellsList.sort(function (a, b) {
+    return a.id - b.id;
+  });
 }
 
 function insertMap(i, j) {

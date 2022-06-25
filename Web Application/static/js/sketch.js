@@ -12,7 +12,6 @@ var firstLaunch = true;
 
 var agentActionsList = [];
 
-var boolResizeCanvas = false;
 var indexItemSelected;
 var idItemSelected;
 var classItemSelected;
@@ -40,14 +39,10 @@ var boolLoadMap = false;
 
 var agent;
 
-var w = document.getElementById("cell-size").value;
+var w = 60;
 
 document.getElementById("drawButton").addEventListener("click", () => {
   cellsList = [];
-  setup();
-});
-document.getElementById("resizeButton").addEventListener("click", () => {
-  boolResizeCanvas = true;
   setup();
 });
 
@@ -177,51 +172,23 @@ function preload() {
  * It's used to define initial environment properties.
  */
 function setup() {
-  w = document.getElementById("cell-size").value;
   rows = document.getElementById("height").value;
   cols = document.getElementById("width").value;
   if (firstLaunch) {
+    deleteMap();
     insertMap(cols, rows);
     firstLaunch = false;
   }
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
-   * If boolResizeCanvas = true => resize canvas and use old cellList.
-   * If boolLoadMap and boolResizeCanvas = false => create a new canvas and new cellsList.
+   * If boolLoadMap = true => create a new canvas and new cellsList loading che old map.
    */
   if (!boolLoadMap) {
-    if (!boolResizeCanvas) {
-      /* Create a new canvas with new cellsList */
-      // POST i x j cell map
-      deleteMap();
-      insertMap(cols, rows);
-    } else {
-      /**
-       * Resize canvas with old cell list and object list
-       * by changing x, y coordinates.
-       */
-      // GET
-      for (var j = 0; j < rows; j++) {
-        for (var i = 0; i < cols; i++) {
-          cellsList[cellIndex(i, j)].x = i;
-          cellsList[cellIndex(i, j)].x = j;
-          cellsList[cellIndex(i, j)].mapX = i * w;
-          cellsList[cellIndex(i, j)].mapY = j * w;
-        }
-      }
-      // Resize delle entità
-      for (var k = 0; k < itemsList.length; k++) {
-        itemsList[k].x = itemsList[k].i * w;
-        itemsList[k].y = itemsList[k].j * w;
-      }
-      // Resize dell'agente
-      if (agent != null) {
-        agent.mapX = agent.position.x * w;
-        agent.mapY = agent.position.y * w;
-      }
-      boolResizeCanvas = false;
-    }
+    /* Create a new canvas with new cellsList */
+    // POST i x j cell map
+    deleteMap();
+    insertMap(cols, rows);
   }
   if (boolLoadMap) {
     itemsList = [];
@@ -260,10 +227,8 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  if (cellsList.length == 0) {
-    getMap();
-  }
   frameRate(3);
+  console.log(cellsList);
   if (itemsList.length == 0 || modifica) {
     getAllEntity();
     modifica = false;

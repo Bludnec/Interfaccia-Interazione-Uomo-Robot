@@ -40,7 +40,6 @@ def getMapDAOImpl():
     try:
         cellList = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
         statusList = list(prolog.query('cell_occupied(X,Y,Id)'))
-        print(statusList)
         finalList.append(cellList)
         finalList.append(statusList)
     except Exception as e: 
@@ -51,8 +50,6 @@ def insertMapDAOImpl(i,j):
     prolog.retractall('cell(_,_,_,_,_)')
     len(list(prolog.query('cell(Id,X,Y,Zone,Walls)')))
     counter = 0
-    print(i)
-    print(j)
     for c in range(int(j)):
         for r in range(int(i)):
             x = {"id": counter,
@@ -66,8 +63,8 @@ def insertMapDAOImpl(i,j):
 
 def deleteMapDAOImpl():
     try:
-        prolog.retract('cell(_,_,_,_,_)')
-        prolog.retract('cell_occupied(_,_,_)')
+        prolog.retractall('cell(_,_,_,_,_)')
+        prolog.retractall('cell_occupied(_,_,_)')
     except Exception as e: 
         print("deleteMapDAOImpl: ", e)
 
@@ -379,7 +376,6 @@ def getInsideSpaceAvailableDAOImpl(id):
         spaceAvailable = sizeList['SizeX']*sizeList['SizeY']
         listEnt = getInsideDAOImpl(id)
         for x in listEnt:
-            print("x:" ,x['Id'])
             entSize = list(prolog.query('entity_size('+str(x['Id'])+',SizeX,SizeY)'))[0]
             spaceAvailable -= (entSize['SizeX'] * entSize['SizeY']) 
         return spaceAvailable
