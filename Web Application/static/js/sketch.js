@@ -20,7 +20,6 @@ var classItemSelected;
 var tilImage = document.getElementById("til-image");
 var tilId = document.getElementById("til-id");
 var tilClass = document.getElementById("til-class");
-var tilSize = document.getElementById("til-size");
 
 var tilPosition = document.getElementById("til-position");
 var tilX = document.getElementById("til-x");
@@ -30,7 +29,6 @@ var tilY = document.getElementById("til-y");
 var teomImage = document.getElementById("teom-image");
 var teomId = document.getElementById("teom-id");
 var teomClass = document.getElementById("teom-class");
-var teomSize = document.getElementById("teom-size");
 var teomCoordinates = document.getElementById("teom-coordinates");
 var teomPosition = document.getElementById("teom-position");
 //

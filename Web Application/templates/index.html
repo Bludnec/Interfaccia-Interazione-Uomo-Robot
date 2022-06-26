@@ -10,7 +10,7 @@
 
     <link
       rel="stylesheet"
-      href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"
+      href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css"
     />
     <link
       rel="stylesheet"
@@ -23,14 +23,26 @@
 
   <body>
     <div id="container">
-      <h1 id="title">Test</h1>
+      <h1 id="title"></h1>
 
       <form id="map-setting-form">
         <legend>Impostazioni mappa</legend>
         <label for="fname">Numero righe </label><br />
-        <input type="number" id="height" name="height" value="6" /><br />
+        <input
+          type="number"
+          id="height"
+          name="height"
+          value="6"
+          min="1"
+        /><br />
         <label for="lname">Numero colonne</label><br />
-        <input type="number" id="width" name="width" value="8" /><br /><br />
+        <input
+          type="number"
+          id="width"
+          name="width"
+          value="8"
+          min="1"
+        /><br /><br />
 
         <button type="button" id="drawButton">Redraw canvas</button>
       </form>
@@ -76,126 +88,137 @@
         </div>
         <div class="io-grid-element" id="io-button">
           <button id="translate-button">
-            <i class="bi bi-arrow-right-circle-fill"></i>
+            <p>Avvia comando</p>
           </button>
-        </div>
-        <div class="io-grid-element">
-          <textarea
-            id="output-text"
-            placeholder="Output text"
-            readonly
-          ></textarea>
         </div>
       </div>
 
+      <!-- Tab per modifica -->
+      <div id="tab-list">
+        <ul
+          data-cls-tabs="flex-justify-start"
+          data-role="tabs"
+          data-expand="true"
+        >
+          <li><a href="#_target_1">Home</a></li>
+          <li><a href="#_target_2">Profile</a></li>
+          <li><a href="#_target_3">Links</a></li>
+        </ul>
+
+        <div class="border bd-default no-border-top p-2">
+          <div id="_target_1">A falsis, calceus altus racana.</div>
+          <div id="_target_2">
+            The shield is a post-apocalyptic nanomachine.
+          </div>
+          <div id="_target_3">
+            Cream soup is just not the same without basil
+          </div>
+        </div>
+      </div>
+      <!---->
+
       <div id="canvas-zone"></div>
 
-      <div class="row">
-        <div class="col-sm">
-          <p>Entità</p>
-          <div class="column" id="img-list"></div>
-        </div>
-        <div class="col-sm">
-          <div id="table-img-list">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Position</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><img id="til-image" src="static\images\empty.png" /></td>
-                  <td id="til-class">Select an entity</td>
-                  <td>
-                    <select name="list" id="til-position">
-                      <option value="on-floor">On the floor</option>
-                      <option value="on-top">On top</option>
-                      <option value="on-bottom">On bottom</option>
-                      <option value="inside">Inside</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Size</th>
-                  <th scope="col">X</th>
-                  <th scope="col">Y</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <select name="list" id="til-size">
-                      <option value="small">small</option>
-                      <option value="medium">medium</option>
-                      <option value="big">big</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      id="til-x"
-                      name="til-x"
-                      min="1"
-                      max="4"
-                      value="1"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      id="til-y"
-                      name="til-y"
-                      min="1"
-                      max="4"
-                      value="1"
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <div id="entities-list">
+        <div class="row">
+          <div class="col-sm">
+            <p>Entità</p>
+            <div class="column" id="img-list"></div>
           </div>
-          <div class="hidden" id="table-entity-on-map">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Id</th>
-                  <th scope="col">Position</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><img id="teom-image" src="" /></td>
-                  <td id="teom-class">Class</td>
-                  <td id="teom-id">Id</td>
-                  <td id="teom-position">On the floor</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Size</th>
-                  <th scope="col">Coordinates</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="teom-size">Small</td>
-                  <td id="teom-coordinates">X:0 Y:0</td>
-                  <td id="teom-delete">
-                    <button id="delete-entity-btn">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-sm">
+            <div id="table-img-list">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Position</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img id="til-image" src="static\images\empty.png" />
+                    </td>
+                    <td id="til-class">Select an entity</td>
+                    <td>
+                      <select name="list" id="til-position">
+                        <option value="on-floor">On the floor</option>
+                        <option value="on-top">On top</option>
+                        <option value="on-bottom">On bottom</option>
+                        <option value="inside">Inside</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th scope="col">X</th>
+                    <th scope="col">Y</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input
+                        type="number"
+                        id="til-x"
+                        name="til-x"
+                        min="1"
+                        max="4"
+                        value="1"
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        id="til-y"
+                        name="til-y"
+                        min="1"
+                        max="4"
+                        value="1"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="hidden" id="table-entity-on-map">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img id="teom-image" src="" /></td>
+                    <td id="teom-class">Class</td>
+                    <td id="teom-id">Id</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">Coordinates</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="teom-position">On the floor</td>
+                    <td id="teom-coordinates">X:0 Y:0</td>
+                    <td id="teom-delete">
+                      <button id="delete-entity-btn">
+                        <i class="bi bi-trash3-fill"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -220,5 +243,7 @@
     <script src="static\js\mapEditor.js"></script>
 
     <script src="static\js\sketch.js"></script>
+
+    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
   </body>
 </html>

@@ -24,8 +24,7 @@
 }
 
 #map-setting-form legend,
-#zone-form legend,
-#resize-canvas-form legend {
+#zone-form legend {
   font-size: 1.3em;
   padding-bottom: 3px;
   font-weight: bold;
@@ -73,8 +72,7 @@ h2 {
 }
 
 /* Zona inserimento comandi */
-#input-text,
-#output-text {
+#input-text {
   overflow: hidden;
   resize: none;
   min-height: 60px;
@@ -83,17 +81,11 @@ h2 {
   height: 100%;
 }
 
-#io-button {
-  margin: auto auto;
-  font-size: 1.5em;
-}
-
-#input-output-grid {
-  display: grid;
-  grid-template-columns: 45% auto 45%;
-  margin-bottom: 30px;
-}
-
 footer {
   height: 100px;
+}
+
+#tab-list {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
