@@ -88,6 +88,10 @@ async function getMap() {
   for (var i = 0; i < data[1].length; i++) {
     cellsList[cellIndex(data[1][i].X, data[1][i].Y)].occupied = data[1][i].Id;
   }
+  cellsList.sort(function (a, b) {
+    return a.id - b.id;
+  });
+  console.log(cellsList);
   /**
    * All'update di una cella (es. cambio di zone) l'ordine viene
    * sballato perché c'è un retract + assertz, quindi la nuova

@@ -138,7 +138,7 @@ function neighbors(node) {
     console.log("cella occupata");
     nodeLeft = cellsList[cellIndex(x - 1, y)].occupied;
   }
-  if (y + 1 > rows && !(cellsList[cellIndex(x, y + 1)].occupied == null)) {
+  if (y + 1 < rows && !(cellsList[cellIndex(x, y + 1)].occupied == null)) {
     console.log("cella occupata");
     nodeDown = cellsList[cellIndex(x, y + 1)].occupied;
   }

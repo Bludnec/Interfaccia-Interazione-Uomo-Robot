@@ -85,7 +85,21 @@ footer {
   height: 100px;
 }
 
+#colonne-label,
+#righe-label {
+  width: 15%;
+  float: left;
+}
+
+#height,
+#width {
+  width: 50%;
+}
+#drawButton {
+  margin-top: 25px;
+}
+
 #tab-list {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
