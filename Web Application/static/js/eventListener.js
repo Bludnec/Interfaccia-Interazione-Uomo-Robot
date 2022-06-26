@@ -11,8 +11,9 @@ document.getElementById("delete-entity-btn").addEventListener("click", () => {
   } else {
     deleteEntity(teomId.innerHTML);
   }
-  document.getElementById("table-img-list").classList.add("hidden");
-  document.getElementById("table-entity-on-map").classList.remove("hidden");
+  document.getElementById("table-img-list").classList.remove("hidden");
+  document.getElementById("table-entity-on-map").classList.add("hidden");
+  getAllEntity();
 });
 
 var imgItemSelected = document
