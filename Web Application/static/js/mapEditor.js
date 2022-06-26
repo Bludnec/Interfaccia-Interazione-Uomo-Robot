@@ -70,7 +70,10 @@ function loadMap() {
   setup();
 }
 
-/* Delete the walls if adjacent cells have the same "zone" value. */
+/**
+ * Cancella i muri se la cella adiacente ha lo stesso valore "zone"
+ * @param {index of cell} i
+ */
 function deleteWalls(i) {
   var thisCell = cellsList[i];
   var x = cellsList[i].x;
@@ -155,7 +158,7 @@ function editWalls(mX, mY) {
     mY > w / 4 &&
     cellsList[cellIndex(x + 1, y)] != null
   ) {
-    if (!thisCell.walls[1]) {
+    if (thisCell.walls[1] == "false") {
       thisCell.walls[1] = "true";
       cellsList[cellIndex(x + 1, y)].walls[3] = "true";
     } else {
@@ -169,7 +172,7 @@ function editWalls(mX, mY) {
     mY > w / 4 &&
     cellsList[cellIndex(x - 1, y)] != null
   ) {
-    if (!thisCell.walls[3]) {
+    if (thisCell.walls[3] == "false") {
       thisCell.walls[3] = "true";
       cellsList[cellIndex(x - 1, y)].walls[1] = "true";
     } else {
@@ -184,7 +187,7 @@ function editWalls(mX, mY) {
     mX > w / 4 &&
     cellsList[cellIndex(x, y + 1)] != null
   ) {
-    if (!thisCell.walls[2]) {
+    if (thisCell.walls[2] == "false") {
       thisCell.walls[2] = "true";
       cellsList[cellIndex(x, y + 1)].walls[0] = "true";
     } else {
@@ -198,7 +201,7 @@ function editWalls(mX, mY) {
     mX > w / 4 &&
     cellsList[cellIndex(x, y - 1)] != null
   ) {
-    if (!thisCell.walls[0]) {
+    if (thisCell.walls[0] == "false") {
       thisCell.walls[0] = "true";
       cellsList[cellIndex(x, y - 1)].walls[2] = "true";
     } else {
