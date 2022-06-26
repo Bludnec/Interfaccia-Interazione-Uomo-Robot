@@ -43,7 +43,23 @@ var w = 60;
 
 document.getElementById("drawButton").addEventListener("click", () => {
   cellsList = [];
-  setup();
+  /* Create a new canvas with new cellsList */
+  // POST i x j cell map
+  rows = document.getElementById("height").value;
+  cols = document.getElementById("width").value;
+
+  var canvas = createCanvas(cols * w, rows * w);
+  canvas.parent("canvas-zone");
+
+  deleteMap();
+
+  setTimeout(function () {
+    insertMap(cols, rows);
+  }, 200);
+
+  setTimeout(function () {
+    getMap();
+  }, 500);
 });
 
 var CellMap;
@@ -172,23 +188,12 @@ function preload() {
  * It's used to define initial environment properties.
  */
 function setup() {
-  rows = document.getElementById("height").value;
-  cols = document.getElementById("width").value;
-  if (firstLaunch) {
-    insertMap(cols, rows);
-    firstLaunch = false;
-  }
   /**
    * Creating canvas.
    * If boolLoadMap = true => load the saved map, else create a new one.
    * If boolLoadMap = true => create a new canvas and new cellsList loading che old map.
    */
-  if (!boolLoadMap) {
-    /* Create a new canvas with new cellsList */
-    // POST i x j cell map
-    deleteMap();
-    insertMap(cols, rows);
-  }
+
   if (boolLoadMap) {
     itemsList = [];
     /* Load the saved map */
@@ -209,16 +214,6 @@ function setup() {
     boolLoadMap = false;
   }
   /* Create canvas */
-  var canvas = createCanvas(cols * w, rows * w);
-  canvas.parent("canvas-zone");
-
-  setTimeout(function () {
-    getMap();
-  }, 800);
-
-  setTimeout(function () {
-    getEntityPositioningOnMap();
-  }, 900);
 }
 
 /**
@@ -243,6 +238,11 @@ function draw() {
     agent.show();
     setTimeout(function () {
       getAgent();
+      /**
+       * Se la lista spostamenti è diversa da 0 (ovvero c'è un
+       * path che l'agente deve percorrere) fa muovere l'agente
+       * celle per cella ogni giro di draw().
+       */
       if (cellPath.length != 0) {
         agent.moveTo(cellPath[0].x, cellPath[0].y);
         cellPath.shift();

@@ -75,6 +75,7 @@ def insertCellDAOImpl(cell):
     str(cell['walls'][2]).lower()+","+ str(cell["walls"][3]).lower()+"])")
         
 def getCellDAOImpl(id):
+    print(list(prolog.query("cell_occupied(X,Y," +id+")")))
     return list(prolog.query("cell(" +id+",X,Y,Zone,Walls)"))
 
 def updateCellDAOImpl(id,x,y,zone,walls):

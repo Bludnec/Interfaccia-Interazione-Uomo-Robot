@@ -301,7 +301,7 @@ function checkWallNeighbor(cell, x, y) {
     }
   }
   for (var i = 0; i < y - 1; i++) {
-    if (cellsList[cellIndex(cell.x, cell.y + 1)].walls[2] == "true") {
+    if (cellsList[cellIndex(cell.x, cell.y + i)].walls[2] == "true") {
       check = true;
     }
   }

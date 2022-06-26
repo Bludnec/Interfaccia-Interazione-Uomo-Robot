@@ -82,6 +82,9 @@ async function getMap() {
    * Controlla la lista delle celle occupate e cambia il valore
    * di cell.occupied con l'id dell'entità che la occupa.
    */
+  cellsList.sort(function (a, b) {
+    return a.id - b.id;
+  });
   for (var i = 0; i < data[1].length; i++) {
     cellsList[cellIndex(data[1][i].X, data[1][i].Y)].occupied = data[1][i].Id;
   }
@@ -91,9 +94,6 @@ async function getMap() {
    * cella viene messa in fondo -> riordino cellsList in base all'id
    * per avere un cellIndex giusto.
    */
-  cellsList.sort(function (a, b) {
-    return a.id - b.id;
-  });
 }
 
 function insertMap(i, j) {
