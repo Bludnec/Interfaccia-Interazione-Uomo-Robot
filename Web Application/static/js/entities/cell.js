@@ -28,17 +28,21 @@ class Cell {
     /*Creo il rettangolo della cella */
     switch (this.zone) {
       case "kitchen":
-        fill(30);
+        fill("red");
         break;
       case "bathroom":
-        fill(25);
+        fill("blue");
         break;
       case "bedroom":
-        fill(60);
+        fill("yellow");
         break;
       case "livingRoom":
-        fill(130);
+        fill("brown");
         break;
+      case "balcony":
+        fill("green");
+        break;
+
       default:
         fill(51);
       // code block
