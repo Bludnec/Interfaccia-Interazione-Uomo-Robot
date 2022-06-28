@@ -28,9 +28,9 @@ def insertCellOccupiedDAOImpl(x,y,id):
         prolog.assertz('cell_occupied('+str(x)+','+str(y)+','+str(id)+')')
 
 # Cancella il fatto cell_occupied(id)
-def deleteCellOccupiedDAOImpl(id):
+def deleteCellOccupiedDAOImpl():
     try:
-        prolog.retract("cell_occupied("+id+",_,_)")
+        prolog.retractall("cell_occupied(_,_,_)")
     except Exception as e: 
         print("deleteEntitySizeDAOImpl: ",e)
 

@@ -9,12 +9,17 @@ document.getElementById("delete-entity-btn").addEventListener("click", () => {
     agent = null;
     deleteAgent();
   } else {
+    deleteCellOccupied(teomId.innerHTML);
     deleteEntity(teomId.innerHTML);
-    // DELETE CELL OCCUPIED
   }
   document.getElementById("table-img-list").classList.remove("hidden");
   document.getElementById("table-entity-on-map").classList.add("hidden");
-  getAllEntity();
+  setTimeout(function () {
+    getMap();
+  }, 300);
+  setTimeout(function () {
+    getAllEntity();
+  }, 600);
 });
 
 var imgItemSelected = document
@@ -108,7 +113,14 @@ function mouseReleased() {
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected) {
-    var el = getElementInPosition(x, y);
+    var indexEl = getElementInPosition(x, y);
+    if (!(cellsList[cellIndex(x, y)].occupied == null)) {
+      for (var i = 0; i < itemsList.length; i++) {
+        if (cellsList[cellIndex(x, y)].occupied == itemsList[i].id) {
+          indexEl = i;
+        }
+      }
+    }
     // se è l'agente = crea l'agente
     if (classItemSelected == "agent") {
       if (agent == null) {
@@ -120,6 +132,7 @@ function mouseReleased() {
     } else {
       /**
        * Controllo prima se l'oggetto esce di fuori dalla zona per via delle sue dimensioni
+       * oppure se viene messo sopra ad un muro.
        */
       if (
         (document.getElementById("til-x").value == 1 &&
@@ -132,11 +145,13 @@ function mouseReleased() {
             document.getElementById("til-y").value
           ))
       ) {
-        // varie possibilità di inserimento delle entità
-        if (indexItemSelected != null && tilPosition.value == "on-floor") {
+        if (
+          indexItemSelected != null &&
+          tilPosition.value == "on-floor" &&
+          cellsList[cellIndex(x, y)].occupied == null
+        ) {
           // controllo se posso metterlo
-
-          if (el == null) {
+          if (indexEl == null) {
             console.log("Inserimento dell'entità.");
             insertEntity(
               classItemSelected + idCounter,
@@ -156,12 +171,13 @@ function mouseReleased() {
         /**
          *  Se è stata scelta l'opzione on_top.
          */
-        if (el != null && tilPosition.value == "on-top") {
+        if (indexEl != null && tilPosition.value == "on-top") {
           if (
-            document.getElementById("til-x").value >= itemsList[el].sizeX &&
-            document.getElementById("til-y").value >= itemsList[el].sizeY
+            document.getElementById("til-x").value <=
+              itemsList[indexEl].sizeX &&
+            document.getElementById("til-y").value <= itemsList[indexEl].sizeY
           ) {
-            getClassAbility(itemsList[el].entClass, "support").then(
+            getClassAbility(itemsList[indexEl].entClass, "support").then(
               (supportBool) => {
                 console.log(supportBool);
                 if (supportBool) {
@@ -183,7 +199,7 @@ function mouseReleased() {
                   setTimeout(function () {
                     insertOnTop(
                       classItemSelected + idCounter,
-                      itemsList[el].id
+                      itemsList[indexEl].id
                     );
                     idCounter++;
                     deselectEntityImage();
@@ -194,8 +210,8 @@ function mouseReleased() {
           }
         }
         // se è scelta l'opzione on bottom
-        if (el != null && tilPosition.value == "on-bottom") {
-          getClassAbility(itemsList[el].entClass, "putting_under").then(
+        if (indexEl != null && tilPosition.value == "on-bottom") {
+          getClassAbility(itemsList[indexEl].entClass, "putting_under").then(
             (puttingUnder) => {
               if (puttingUnder) {
                 // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
@@ -214,7 +230,7 @@ function mouseReleased() {
                 setTimeout(function () {
                   insertOnBottom(
                     classItemSelected + idCounter,
-                    itemsList[el].id
+                    itemsList[indexEl].id
                   );
                   deselectEntityImage();
                   idCounter++;
@@ -224,12 +240,12 @@ function mouseReleased() {
           );
         }
         // se è scelta l'opzione inside
-        if (el != null && tilPosition.value == "inside") {
-          getSpaceAvailable(itemsList[el].id).then((data) => {
+        if (indexEl != null && tilPosition.value == "inside") {
+          getSpaceAvailable(itemsList[indexEl].id).then((data) => {
             console.log(data);
           });
           setTimeout(function () {
-            getClassAbility(itemsList[el].entClass, "contain").then(
+            getClassAbility(itemsList[indexEl].entClass, "contain").then(
               (contain) => {
                 if (contain) {
                   // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
@@ -249,7 +265,7 @@ function mouseReleased() {
                   setTimeout(function () {
                     insertInside(
                       classItemSelected + idCounter.toString(),
-                      itemsList[el].id
+                      itemsList[indexEl].id
                     );
                     idCounter++;
                     deselectEntityImage();

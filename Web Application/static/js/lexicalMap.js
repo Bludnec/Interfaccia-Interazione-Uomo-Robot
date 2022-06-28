@@ -14,6 +14,8 @@ function lexicalMap() {
   var counter = 0;
 
   getLexicalMap().then((data) => {
+    console.log(data);
+    console.log(positioningList);
     listOfZone = [];
     for (var i = 0; i < data.length; i++) {
       if (data[i][1]["List"] != null) {
@@ -63,55 +65,61 @@ function lexicalMap() {
         }
       }
     }
-    // relazioni tra entità
     lexMapString = lexMapString + " # ";
-    var b = false;
+    /**
+     * Relazione tra entità: ON TOP
+     */
     for (var i = 0; i < entityLexMap.length; i++) {
       for (var j = 0; j < positioningList[0].length; j++) {
-        if (b) {
-          lexMapString = lexMapString + " | ";
-          b = false;
-        }
         if (entityLexMap[i] == positioningList[0][j][0]) {
           var found = entityLexMap.find(
             (element) => element == positioningList[0][j][0]
           );
-          if (found != undefined) {
+          if (
+            found != undefined &&
+            !lexMapString.includes(
+              positioningList[0][j][0] +
+                " ON TOP " +
+                positioningList[0][j][1] +
+                " | "
+            )
+          ) {
             lexMapString =
               lexMapString +
               positioningList[0][j][0] +
               " ON TOP " +
-              positioningList[0][j][1];
-            b = true;
+              positioningList[0][j][1] +
+              " | ";
           }
         }
         if (entityLexMap[i] == positioningList[0][j][1]) {
           var found = entityLexMap.find(
             (element) => element == positioningList[0][j][1]
           );
-          if (found != undefined) {
+          if (
+            found != undefined &&
+            !lexMapString.includes(
+              positioningList[0][j][0] +
+                " ON TOP " +
+                positioningList[0][j][1] +
+                " | "
+            )
+          ) {
             lexMapString =
               lexMapString +
               positioningList[0][j][0] +
               " ON TOP " +
-              positioningList[0][j][1];
-            b = true;
+              positioningList[0][j][1] +
+              " | ";
           }
         }
       }
     }
-
-    if (b) {
-      lexMapString = lexMapString + " | ";
-      b = false;
-    }
-
+    /**
+     * Relazione tra entità: ON BOTTOM
+     */
     for (var i = 0; i < entityLexMap.length; i++) {
       for (var j = 0; j < positioningList[1].length; j++) {
-        if (b) {
-          lexMapString = lexMapString + " | ";
-          b = false;
-        }
         if (entityLexMap[i] == positioningList[1][j][0]) {
           var found = entityLexMap.find(
             (element) => element == positioningList[1][j][0]
@@ -121,8 +129,8 @@ function lexicalMap() {
               lexMapString +
               positioningList[1][j][0] +
               " ON BOTTOM " +
-              positioningList[1][j][1];
-            b = true;
+              positioningList[1][j][1] +
+              " | ";
           }
         }
         if (entityLexMap[i] == positioningList[1][j][1]) {
@@ -134,24 +142,17 @@ function lexicalMap() {
               lexMapString +
               positioningList[1][j][0] +
               " ON BOTTOM " +
-              positioningList[1][j][1];
-            b = true;
+              positioningList[1][j][1] +
+              " | ";
           }
         }
       }
     }
-
-    if (b) {
-      lexMapString = lexMapString + " | ";
-      b = false;
-    }
-
+    /**
+     * Relazione tra entità: INSIDE
+     */
     for (var i = 0; i < entityLexMap.length; i++) {
       for (var j = 0; j < positioningList[2].length; j++) {
-        if (b) {
-          lexMapString = lexMapString + " | ";
-          b = false;
-        }
         if (entityLexMap[i] == positioningList[2][j][0]) {
           var found = entityLexMap.find(
             (element) => element == positioningList[2][j][0]
@@ -161,8 +162,8 @@ function lexicalMap() {
               lexMapString +
               positioningList[2][j][0] +
               " INSIDE " +
-              positioningList[2][j][1];
-            b = true;
+              positioningList[2][j][1] +
+              " | ";
           }
         }
         if (entityLexMap[i] == positioningList[2][j][1]) {
@@ -174,16 +175,19 @@ function lexicalMap() {
               lexMapString +
               positioningList[2][j][0] +
               " INSIDE " +
-              positioningList[2][j][1];
-            b = true;
+              positioningList[2][j][1] +
+              " | ";
           }
         }
       }
     }
-
+    /**
+     * Relazione tra entità: NEAR / FAR
+     * Oggetti vicini se distanza < 2 celle
+     */
+    console.log(entityLexMap);
     console.log(lexMapString);
   });
 
-  //console.log(findNearestCell(inputText));
-  agent.motion(inputText);
+  //agent.motion(inputText);
 }

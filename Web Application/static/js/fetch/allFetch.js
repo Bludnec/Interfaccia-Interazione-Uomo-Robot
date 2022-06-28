@@ -52,16 +52,13 @@ function insertCellOccupied(x, y, id) {
   });
 }
 
-function deleteCellOccupied(id) {
+function deleteCellOccupied() {
   fetch("/cell-occupied", {
     method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      id: id,
-    }),
   });
 }
 async function getMap() {
