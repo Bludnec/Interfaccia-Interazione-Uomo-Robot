@@ -232,7 +232,7 @@ function lexicalMap() {
     }
 
     console.log(positioningList.length);
-    // non funziona
+    // non funziona il confronto
     for (var i = 0; i < entityInfoList.length; i++) {
       for (var k = 0; k < positioningList[k].length; k++) {
         console.log(
