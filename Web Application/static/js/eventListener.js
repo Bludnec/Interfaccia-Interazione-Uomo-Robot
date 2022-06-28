@@ -55,6 +55,14 @@ function mousePressed() {
 
   var indexElement = getElementInPosition(x, y);
 
+  if (cellsList[cellIndex(x, y)].occupied != null) {
+    for (var i = 0; i < itemsList.length; i++) {
+      if (itemsList[i].id == cellsList[cellIndex(x, y)].occupied) {
+        indexElement = i;
+      }
+    }
+  }
+
   // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
   if (indexElement != null) {
     document.getElementById("table-img-list").classList.add("hidden");

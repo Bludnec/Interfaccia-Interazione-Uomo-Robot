@@ -79,25 +79,24 @@ async function getMap() {
     cellsList.push(cell);
   }
   /**
-   * Controlla la lista delle celle occupate e cambia il valore
-   * di cell.occupied con l'id dell'entità che la occupa.
+   * All'update di una cella (es. cambio di zone) l'ordine viene
+   * sballato perché c'è un retract + assertz, quindi la nuova
+   * cella viene messa in fondo -> riordino cellsList in base all'id
+   * per avere un cellIndex giusto.
    */
   cellsList.sort(function (a, b) {
     return a.id - b.id;
   });
+  /**
+   * Controlla la lista delle celle occupate e cambia il valore
+   * di cell.occupied con l'id dell'entità che la occupa.
+   */
   for (var i = 0; i < data[1].length; i++) {
     cellsList[cellIndex(data[1][i].X, data[1][i].Y)].occupied = data[1][i].Id;
   }
   cellsList.sort(function (a, b) {
     return a.id - b.id;
   });
-  console.log(cellsList);
-  /**
-   * All'update di una cella (es. cambio di zone) l'ordine viene
-   * sballato perché c'è un retract + assertz, quindi la nuova
-   * cella viene messa in fondo -> riordino cellsList in base all'id
-   * per avere un cellIndex giusto.
-   */
 }
 
 function insertMap(i, j) {
