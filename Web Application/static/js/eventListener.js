@@ -10,6 +10,7 @@ document.getElementById("delete-entity-btn").addEventListener("click", () => {
     deleteAgent();
   } else {
     deleteEntity(teomId.innerHTML);
+    // DELETE CELL OCCUPIED
   }
   document.getElementById("table-img-list").classList.remove("hidden");
   document.getElementById("table-entity-on-map").classList.add("hidden");

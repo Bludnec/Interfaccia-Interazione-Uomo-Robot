@@ -113,16 +113,16 @@ function neighbors(node) {
    */
   for (var i = 0; i < itemsList.length; i++) {
     if (itemsList[i].position.x == x + 1 && itemsList[i].position.y == y) {
-      nodeRight = itemsList[i];
+      nodeRight = itemsList[i].id;
     }
     if (itemsList[i].position.x == x - 1 && itemsList[i].position.y == y) {
-      nodeLeft = itemsList[i];
+      nodeLeft = itemsList[i].id;
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
-      nodeDown = itemsList[i];
+      nodeDown = itemsList[i].id;
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y - 1) {
-      nodeUp = itemsList[i];
+      nodeUp = itemsList[i].id;
     }
   }
   /**
@@ -131,24 +131,20 @@ function neighbors(node) {
    */
 
   if (x + 1 < cols && !(cellsList[cellIndex(x + 1, y)].occupied == null)) {
-    console.log("cella occupata");
     nodeRight = cellsList[cellIndex(x + 1, y)].occupied;
   }
   if (x - 1 >= 0 && !(cellsList[cellIndex(x - 1, y)].occupied == null)) {
-    console.log("cella occupata");
     nodeLeft = cellsList[cellIndex(x - 1, y)].occupied;
   }
   if (y + 1 < rows && !(cellsList[cellIndex(x, y + 1)].occupied == null)) {
-    console.log("cella occupata");
     nodeDown = cellsList[cellIndex(x, y + 1)].occupied;
   }
   if (y - 1 >= 0 && !(cellsList[cellIndex(x, y - 1)].occupied == null)) {
-    console.log("cella occupata");
     nodeUp = cellsList[cellIndex(x, y - 1)].occupied;
   }
 
   for (var i = 0; i < abilityList.length; i++) {
-    if (abilityList[i][0] == nodeRight.id) {
+    if (abilityList[i][0] == nodeRight) {
       var found = abilityList[i].find(
         (element) => element == "walkable_ability"
       );
@@ -156,7 +152,7 @@ function neighbors(node) {
         nodeRight = 0;
       }
     }
-    if (abilityList[i][0] == nodeLeft.id) {
+    if (abilityList[i][0] == nodeLeft) {
       var found = abilityList[i].find(
         (element) => element == "walkable_ability"
       );
@@ -164,7 +160,7 @@ function neighbors(node) {
         nodeLeft = 0;
       }
     }
-    if (abilityList[i][0] == nodeUp.id) {
+    if (abilityList[i][0] == nodeUp) {
       var found = abilityList[i].find(
         (element) => element == "walkable_ability"
       );
@@ -172,7 +168,7 @@ function neighbors(node) {
         nodeUp = 0;
       }
     }
-    if (abilityList[i][0] == nodeDown.id) {
+    if (abilityList[i][0] == nodeDown) {
       var found = abilityList[i].find(
         (element) => element == "walkable_ability"
       );

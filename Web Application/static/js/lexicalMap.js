@@ -183,4 +183,7 @@ function lexicalMap() {
 
     console.log(lexMapString);
   });
+
+  //console.log(findNearestCell(inputText));
+  agent.motion(inputText);
 }

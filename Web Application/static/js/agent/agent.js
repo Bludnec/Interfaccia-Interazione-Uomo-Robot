@@ -71,20 +71,46 @@ class Agent {
    * Movimento verso le coordinate scelte o
    * in una location scelta.
    */
-  motion(x, y, location) {
+  motion(x, y) {
     if (arguments.length == 2) {
       // verso un punto
       cellPath = astarAlg(
         cellsList[cellIndex(this.position.x, this.position.y)],
         cellsList[cellIndex(x, y)]
       );
-      console.log(cellPath);
     } else if (arguments.length == 1) {
       //verso una location
+      var nearestCell = findNearestCell(x);
+      if (!(nearestCell == -1)) {
+        cellPath = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          nearestCell
+        );
+      } else {
+        console.log("Non posso arrivare in quella zona.");
+      }
     }
   }
 
   moveTo(x, y) {
     updateAgentPosition(x.toString(), y.toString());
   }
+}
+
+function findNearestCell(location) {
+  var cellCounter = 100000000;
+  var tempCell = -1;
+  for (var i = 0; i < cellsList.length; i++) {
+    if (cellsList[i].zone == location) {
+      var path = astarAlg(
+        cellsList[cellIndex(agent.position.x, agent.position.y)],
+        cellsList[i]
+      );
+      if (path.length < cellCounter) {
+        cellCounter = path.length;
+        tempCell = cellsList[i];
+      }
+    }
+  }
+  return tempCell;
 }

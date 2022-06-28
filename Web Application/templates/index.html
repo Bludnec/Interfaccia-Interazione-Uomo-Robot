@@ -25,21 +25,8 @@
     <div id="container">
       <h1 id="title"></h1>
 
-      <div class="clear-float"></div>
-
       <!--<button id="save-map-button">Save Map</button>
       <button id="load-map-button">Load Map</button>-->
-
-      <div id="input-output-grid">
-        <div class="io-grid-element">
-          <textarea id="input-text" placeholder="Input text"></textarea>
-        </div>
-        <div class="io-grid-element" id="io-button">
-          <button id="translate-button">
-            <p>Avvia comando</p>
-          </button>
-        </div>
-      </div>
 
       <!-- Tab per modifica -->
       <div id="tab-list">
@@ -50,7 +37,7 @@
         >
           <li><a href="#_target_1">Impostazioni mappa</a></li>
           <li><a href="#_target_2">Modifica celle</a></li>
-          <li><a href="#_target_3">null</a></li>
+          <li><a href="#_target_3">Comandi</a></li>
         </ul>
 
         <div class="border bd-default no-border-top p-2">
@@ -94,13 +81,26 @@
             />
           </div>
           <div id="_target_3">
-            <label for="checkBox">Muovi agente</label><br />
-            <input
-              type="checkbox"
-              id="move-agent"
-              title="Abilita per muovere l'agente"
-            />
+            <div id="input-output-grid">
+              <div class="io-grid-element">
+                <textarea id="input-text" placeholder="Input text"></textarea>
+              </div>
+              <div class="io-grid-element" id="io-button">
+                <button id="translate-button">
+                  <p>Avvia comando</p>
+                </button>
+              </div>
+            </div>
+            <div id="motion-agent">
+              <label for="checkBox">Muovi agente</label><br />
+              <input
+                type="checkbox"
+                id="move-agent"
+                title="Abilita per muovere l'agente"
+              />
+            </div>
           </div>
+          <div class="clear-float"></div>
         </div>
       </div>
       <!---->
