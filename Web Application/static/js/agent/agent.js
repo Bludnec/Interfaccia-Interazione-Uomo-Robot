@@ -101,6 +101,7 @@ class Agent {
       // Abbiamo informazioni della zona e dell'entità.
     } else {
       // Abbiamo solo informazioni sull'entità da prendere.
+      // Check se possiamo muovere l'oggetto.
       var entSel;
       for (var i = 0; i < itemsList.length; i++) {
         if (itemsList[i].id == info["Theme"]) {
@@ -118,11 +119,19 @@ class Agent {
 function findNearestCellToEntity(entity) {
   var tempCell = -1;
   var cellCounter = 1000000;
-  var path = astarAlg(
-    cellsList[cellIndex(agent.position.x, agent.position.y)],
-    cellsList[cellIndex(entity.position.x - 1, entity.position.y)]
-  );
-  if (path != -1) {
+  if (
+    cellsList[cellIndex(entity.position.x - 1, entity.position.y)] != undefined
+  ) {
+    var path = astarAlg(
+      cellsList[cellIndex(agent.position.x, agent.position.y)],
+      cellsList[cellIndex(entity.position.x - 1, entity.position.y)]
+    );
+  }
+  if (
+    path != -1 &&
+    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[3] ==
+      "false"
+  ) {
     cellCounter = path.length;
     tempCell = cellsList[cellIndex(entity.position.x - 1, entity.position.y)];
   }
@@ -130,7 +139,12 @@ function findNearestCellToEntity(entity) {
     cellsList[cellIndex(agent.position.x, agent.position.y)],
     cellsList[cellIndex(entity.position.x + 1, entity.position.y)]
   );
-  if (path != -1 && path.length < cellCounter) {
+  if (
+    path != -1 &&
+    path.length < cellCounter &&
+    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[1] ==
+      "false"
+  ) {
     cellCounter = path.length;
     tempCell = cellsList[cellIndex(entity.position.x + 1, entity.position.y)];
   }
@@ -138,7 +152,12 @@ function findNearestCellToEntity(entity) {
     cellsList[cellIndex(agent.position.x, agent.position.y)],
     cellsList[cellIndex(entity.position.x, entity.position.y - 1)]
   );
-  if (path != -1 && path.length < cellCounter) {
+  if (
+    path != -1 &&
+    path.length < cellCounter &&
+    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[0] ==
+      "false"
+  ) {
     cellCounter = path.length;
     tempCell = cellsList[cellIndex(entity.position.x, entity.position.y - 1)];
   }
@@ -146,9 +165,56 @@ function findNearestCellToEntity(entity) {
     cellsList[cellIndex(agent.position.x, agent.position.y)],
     cellsList[cellIndex(entity.position.x, entity.position.y + 1)]
   );
-  if (path != -1 && path.length < cellCounter) {
+  if (
+    path != -1 &&
+    path.length < cellCounter &&
+    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[2] ==
+      "false"
+  ) {
     cellCounter = path.length;
     tempCell = cellsList[cellIndex(entity.position.x, entity.position.y + 1)];
+  }
+
+  for (
+    var i = 0;
+    i < cellsList[cellIndex(entity.position.x, entity.position.y)].sizeX - 1;
+    i++
+  ) {
+    if (
+      path != -1 &&
+      path.length < cellCounter &&
+      cellsList[cellIndex(entity.position.x + i, entity.position.y)].walls[2] ==
+        "false"
+    ) {
+      cellCounter = path.length;
+      tempCell =
+        cellsList[cellIndex(entity.position.x + i, entity.position.y + 1)];
+    }
+    if (
+      path != -1 &&
+      path.length < cellCounter &&
+      cellsList[cellIndex(entity.position.x + i, entity.position.y)].walls[0] ==
+        "false"
+    ) {
+      cellCounter = path.length;
+      tempCell =
+        cellsList[cellIndex(entity.position.x + i, entity.position.y - 1)];
+    }
+    if (
+      i ==
+      cellsList[cellIndex(entity.position.x + i, entity.position.y)].sizeX - 1
+    ) {
+      if (
+        path != -1 &&
+        path.length < cellCounter &&
+        cellsList[cellIndex(entity.position.x + i, entity.position.y)]
+          .walls[1] == "false"
+      ) {
+        cellCounter = path.length;
+        tempCell =
+          cellsList[cellIndex(entity.position.x + i, entity.position.y)];
+      }
+    }
   }
 
   return tempCell;
