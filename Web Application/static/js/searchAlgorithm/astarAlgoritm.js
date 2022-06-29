@@ -12,7 +12,7 @@ function nearestCell(agentI, agentJ, area) {
 /**
  * @param {Cell} start
  * @param {Cell} end
- * @returns path = list of Cells
+ * @returns Se l'agente può arrivare alla cella ritorna un path:lista di celle, altrimenti -1.
  */
 function astarAlg(start, end) {
   console.log("Calcolo il percorso con A*.");
@@ -90,7 +90,7 @@ function astarAlg(start, end) {
     }
   }
   console.log("Non ci posso arrivare");
-  return [];
+  return -1;
 }
 
 /**

@@ -74,7 +74,7 @@ class Agent {
    */
   motion(info) {
     if (info["Goal"] != undefined) {
-      var nearestCell = findNearestCell(info["Goal"]);
+      var nearestCell = findNearestCellToLocation(info["Goal"]);
       if (!(nearestCell == -1)) {
         cellPath = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
@@ -101,6 +101,12 @@ class Agent {
       // Abbiamo informazioni della zona e dell'entità.
     } else {
       // Abbiamo solo informazioni sull'entità da prendere.
+      var entSel;
+      for (var i = 0; i < itemsList.length; i++) {
+        if (itemsList[i].id == info["Theme"]) {
+          entSel = itemsList[i];
+        }
+      }
     }
   }
 
@@ -109,7 +115,46 @@ class Agent {
   }
 }
 
-function findNearestCell(location) {
+function findNearestCellToEntity(entity) {
+  var tempCell = -1;
+  var cellCounter = 1000000;
+  var path = astarAlg(
+    cellsList[cellIndex(agent.position.x, agent.position.y)],
+    cellsList[cellIndex(entity.position.x - 1, entity.position.y)]
+  );
+  if (path != -1) {
+    cellCounter = path.length;
+    tempCell = cellsList[cellIndex(entity.position.x - 1, entity.position.y)];
+  }
+  path = astarAlg(
+    cellsList[cellIndex(agent.position.x, agent.position.y)],
+    cellsList[cellIndex(entity.position.x + 1, entity.position.y)]
+  );
+  if (path != -1 && path.length < cellCounter) {
+    cellCounter = path.length;
+    tempCell = cellsList[cellIndex(entity.position.x + 1, entity.position.y)];
+  }
+  path = astarAlg(
+    cellsList[cellIndex(agent.position.x, agent.position.y)],
+    cellsList[cellIndex(entity.position.x, entity.position.y - 1)]
+  );
+  if (path != -1 && path.length < cellCounter) {
+    cellCounter = path.length;
+    tempCell = cellsList[cellIndex(entity.position.x, entity.position.y - 1)];
+  }
+  path = astarAlg(
+    cellsList[cellIndex(agent.position.x, agent.position.y)],
+    cellsList[cellIndex(entity.position.x, entity.position.y + 1)]
+  );
+  if (path != -1 && path.length < cellCounter) {
+    cellCounter = path.length;
+    tempCell = cellsList[cellIndex(entity.position.x, entity.position.y + 1)];
+  }
+
+  return tempCell;
+}
+
+function findNearestCellToLocation(location) {
   var cellCounter = 100000000;
   var tempCell = -1;
   for (var i = 0; i < cellsList.length; i++) {

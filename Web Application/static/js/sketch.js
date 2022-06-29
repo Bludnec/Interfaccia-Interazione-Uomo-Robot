@@ -242,7 +242,7 @@ function draw() {
        * path che l'agente deve percorrere) fa muovere l'agente
        * celle per cella ogni giro di draw().
        */
-      if (cellPath.length != 0) {
+      if (cellPath != -1 && cellPath.length != 0) {
         agent.moveTo(cellPath[0].x, cellPath[0].y);
         cellPath.shift();
       }
