@@ -177,8 +177,10 @@ function mouseReleased() {
               itemsList[indexEl].sizeX &&
             document.getElementById("til-y").value <=
               itemsList[indexEl].sizeY &&
-            x <= itemsList[indexEl].position.x <= x &&
-            y <= itemsList[indexEl].position.y <= y
+            parseInt(x) +
+              parseInt(document.getElementById("til-x").value) -
+              1 <=
+              itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
           ) {
             getClassAbility(itemsList[indexEl].entClass, "support").then(
               (supportBool) => {

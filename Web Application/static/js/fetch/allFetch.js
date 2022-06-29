@@ -21,6 +21,7 @@ async function getAllEntity() {
          * allora metto la variabile occupied delle
          * celle che occupa = id dell'entità.
          */
+
         while (sX > 0) {
           insertCellOccupied(data[0][i].X + sX, data[0][i].Y, data[0][i].Id);
           sX--;
@@ -52,13 +53,16 @@ function insertCellOccupied(x, y, id) {
   });
 }
 
-function deleteCellOccupied() {
+function deleteCellOccupied(id) {
   fetch("/cell-occupied", {
     method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      id: id,
+    }),
   });
 }
 async function getMap() {

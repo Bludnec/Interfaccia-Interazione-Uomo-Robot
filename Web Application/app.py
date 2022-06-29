@@ -36,7 +36,8 @@ def cellOccupied():
         insertCellOccupiedDAOImpl(req['x'],req['y'],req['id'])
         return jsonify(req)
     if request.method == "DELETE":
-        deleteCellOccupiedDAOImpl()
+        req = request.get_json()
+        deleteCellOccupiedDAOImpl(req['id'])
         return jsonify("Delete cell occupied")
 
 # Cell.
