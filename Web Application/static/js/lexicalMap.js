@@ -273,5 +273,7 @@ function lexicalMap() {
     console.log(lexMapString);
   });
 
-  //agent.motion(inputText);
+  var test = { X: 2, Y: 2 };
+  console.log(test);
+  agent.motion(test);
 }

@@ -67,20 +67,14 @@ class Agent {
       console.log("Non posso andare a destra.");
     }
   }
+
   /**
-   * Movimento verso le coordinate scelte o
-   * in una location scelta.
+   *
+   * @param {dict} info Dizionario dove può essere presente Goal, X, Y.
    */
-  motion(x, y) {
-    if (arguments.length == 2) {
-      // verso un punto
-      cellPath = astarAlg(
-        cellsList[cellIndex(this.position.x, this.position.y)],
-        cellsList[cellIndex(x, y)]
-      );
-    } else if (arguments.length == 1) {
-      //verso una location
-      var nearestCell = findNearestCell(x);
+  motion(info) {
+    if (info["Goal"] != undefined) {
+      var nearestCell = findNearestCell(info["Goal"]);
       if (!(nearestCell == -1)) {
         cellPath = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
@@ -89,6 +83,24 @@ class Agent {
       } else {
         console.log("Non posso arrivare in quella zona.");
       }
+    }
+
+    if (info["X"] != undefined && info["Y"] != undefined) {
+      cellPath = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        cellsList[cellIndex(info["X"], info["Y"])]
+      );
+    }
+  }
+
+  /**
+   * @param {dict} info Dizionario che può contenere Source (zone) e Theme(entity)
+   */
+  taking(info) {
+    if (info["Source"] != undefined) {
+      // Abbiamo informazioni della zona e dell'entità.
+    } else {
+      // Abbiamo solo informazioni sull'entità da prendere.
     }
   }
 

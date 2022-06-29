@@ -6,10 +6,11 @@ var positioningList;
 var urlList;
 var modifica = false;
 
+var takenEntity;
+
 var cellPath = [];
 
 var firstLaunch = true;
-
 var agentActionsList = [];
 
 var indexItemSelected;
