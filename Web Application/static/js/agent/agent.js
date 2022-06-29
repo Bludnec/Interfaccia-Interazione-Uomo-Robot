@@ -121,7 +121,6 @@ function findNearestCellToEntity(entity) {
   var cellCounter = 1000000;
   var listNearCell = [];
   var cellOfEntity = cellsList[cellIndex(entity.position.x, entity.position.y)];
-  console.log(cellOfEntity);
 
   if (entity.sizeX == 1 && entity.sizeY == 1) {
     if (cellOfEntity.walls[0] == "false") {
@@ -152,13 +151,11 @@ function findNearestCellToEntity(entity) {
       );
     }
     for (var i = 0; i < entity.sizeX; i++) {
-      console.log("for");
       //prende quello sopra alla cella a dx
       if (
         cellsList[cellIndex(entity.position.x + i, entity.position.y)]
           .walls[0] == "false"
       ) {
-        console.log("if1");
         listNearCell.push(
           cellsList[cellIndex(entity.position.x + i, entity.position.y - 1)]
         );
@@ -168,7 +165,6 @@ function findNearestCellToEntity(entity) {
         cellsList[cellIndex(entity.position.x + i, entity.position.y)]
           .walls[2] == "false"
       ) {
-        console.log("if2");
         listNearCell.push(
           cellsList[cellIndex(entity.position.x + i, entity.position.y + 1)]
         );
@@ -179,7 +175,6 @@ function findNearestCellToEntity(entity) {
         cellIndex(entity.position.x + entity.sizeX - 1, entity.position.y)
       ].walls[1] == "false"
     ) {
-      console.log("if3");
       listNearCell.push(
         cellsList[
           cellIndex(entity.position.x + entity.sizeX, entity.position.y)
@@ -194,13 +189,11 @@ function findNearestCellToEntity(entity) {
       );
     }
     for (var i = 0; i < entity.sizeY; i++) {
-      console.log("for");
       //prende quello dx alla cella sotto
       if (
         cellsList[cellIndex(entity.position.x, entity.position.y + i)]
           .walls[1] == "false"
       ) {
-        console.log("if1");
         listNearCell.push(
           cellsList[cellIndex(entity.position.x + 1, entity.position.y + i)]
         );
@@ -210,7 +203,6 @@ function findNearestCellToEntity(entity) {
         cellsList[cellIndex(entity.position.x, entity.position.y + i)]
           .walls[3] == "false"
       ) {
-        console.log("if2");
         listNearCell.push(
           cellsList[cellIndex(entity.position.x - 1, entity.position.y + i)]
         );
@@ -221,7 +213,6 @@ function findNearestCellToEntity(entity) {
         cellIndex(entity.position.x, entity.position.y + entity.sizeY - 1)
       ].walls[2] == "false"
     ) {
-      console.log("if3");
       listNearCell.push(
         cellsList[
           cellIndex(entity.position.x, entity.position.y + entity.sizeY)
