@@ -14,7 +14,6 @@ function lexicalMap() {
   var counter = 0;
 
   getLexicalMap().then((data) => {
-    console.log("data: ", data);
     listOfZone = [];
     for (var i = 0; i < data.length; i++) {
       if (data[i][1]["List"] != null) {
@@ -235,9 +234,6 @@ function lexicalMap() {
      * Se è stata già descritta la posizione un'entità (top,botto,inside),
      * non inserisce il valore near/far
      */
-
-    console.log(entityInfoList);
-
     for (var i = 0; i < entityInfoList.length; i++) {
       for (var k = 0; k < positioningList[k].length; k++) {
         if (

@@ -119,101 +119,125 @@ class Agent {
 function findNearestCellToEntity(entity) {
   var tempCell = -1;
   var cellCounter = 1000000;
-  if (
-    cellsList[cellIndex(entity.position.x - 1, entity.position.y)] != undefined
-  ) {
-    var path = astarAlg(
-      cellsList[cellIndex(agent.position.x, agent.position.y)],
-      cellsList[cellIndex(entity.position.x - 1, entity.position.y)]
-    );
-  }
-  if (
-    path != -1 &&
-    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[3] ==
-      "false"
-  ) {
-    cellCounter = path.length;
-    tempCell = cellsList[cellIndex(entity.position.x - 1, entity.position.y)];
-  }
-  path = astarAlg(
-    cellsList[cellIndex(agent.position.x, agent.position.y)],
-    cellsList[cellIndex(entity.position.x + 1, entity.position.y)]
-  );
-  if (
-    path != -1 &&
-    path.length < cellCounter &&
-    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[1] ==
-      "false"
-  ) {
-    cellCounter = path.length;
-    tempCell = cellsList[cellIndex(entity.position.x + 1, entity.position.y)];
-  }
-  path = astarAlg(
-    cellsList[cellIndex(agent.position.x, agent.position.y)],
-    cellsList[cellIndex(entity.position.x, entity.position.y - 1)]
-  );
-  if (
-    path != -1 &&
-    path.length < cellCounter &&
-    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[0] ==
-      "false"
-  ) {
-    cellCounter = path.length;
-    tempCell = cellsList[cellIndex(entity.position.x, entity.position.y - 1)];
-  }
-  path = astarAlg(
-    cellsList[cellIndex(agent.position.x, agent.position.y)],
-    cellsList[cellIndex(entity.position.x, entity.position.y + 1)]
-  );
-  if (
-    path != -1 &&
-    path.length < cellCounter &&
-    cellsList[cellIndex(entity.position.x, entity.position.y)].walls[2] ==
-      "false"
-  ) {
-    cellCounter = path.length;
-    tempCell = cellsList[cellIndex(entity.position.x, entity.position.y + 1)];
-  }
+  var listNearCell = [];
+  var cellOfEntity = cellsList[cellIndex(entity.position.x, entity.position.y)];
+  console.log(cellOfEntity);
 
-  for (
-    var i = 0;
-    i < cellsList[cellIndex(entity.position.x, entity.position.y)].sizeX - 1;
-    i++
-  ) {
-    if (
-      path != -1 &&
-      path.length < cellCounter &&
-      cellsList[cellIndex(entity.position.x + i, entity.position.y)].walls[2] ==
-        "false"
-    ) {
-      cellCounter = path.length;
-      tempCell =
-        cellsList[cellIndex(entity.position.x + i, entity.position.y + 1)];
+  if (entity.sizeX == 1 && entity.sizeY == 1) {
+    if (cellOfEntity.walls[0] == "false") {
+      listNearCell.push(
+        cellsList[cellIndex(entity.position.x, entity.position.y - 1)]
+      );
     }
-    if (
-      path != -1 &&
-      path.length < cellCounter &&
-      cellsList[cellIndex(entity.position.x + i, entity.position.y)].walls[0] ==
-        "false"
-    ) {
-      cellCounter = path.length;
-      tempCell =
-        cellsList[cellIndex(entity.position.x + i, entity.position.y - 1)];
+    if (cellOfEntity.walls[1] == "false") {
+      listNearCell.push(
+        cellsList[cellIndex(entity.position.x + 1, entity.position.y)]
+      );
     }
-    if (
-      i ==
-      cellsList[cellIndex(entity.position.x + i, entity.position.y)].sizeX - 1
-    ) {
+    if (cellOfEntity.walls[2] == "false") {
+      listNearCell.push(
+        cellsList[cellIndex(entity.position.x, entity.position.y + 1)]
+      );
+    }
+    if (cellOfEntity.walls[3] == "false") {
+      listNearCell.push(
+        cellsList[cellIndex(entity.position.x - 1, entity.position.y)]
+      );
+    }
+  }
+  if (entity.sizeX > 1) {
+    if (cellOfEntity.walls[3] == "false") {
+      listNearCell.push(
+        cellsList[cellIndex(entity.position.x - 1, entity.position.y)]
+      );
+    }
+    for (var i = 0; i < entity.sizeX; i++) {
+      console.log("for");
+      //prende quello sopra alla cella a dx
       if (
-        path != -1 &&
-        path.length < cellCounter &&
         cellsList[cellIndex(entity.position.x + i, entity.position.y)]
+          .walls[0] == "false"
+      ) {
+        console.log("if1");
+        listNearCell.push(
+          cellsList[cellIndex(entity.position.x + i, entity.position.y - 1)]
+        );
+      }
+      //prende sotto sopra alla cella a dx
+      if (
+        cellsList[cellIndex(entity.position.x + i, entity.position.y)]
+          .walls[2] == "false"
+      ) {
+        console.log("if2");
+        listNearCell.push(
+          cellsList[cellIndex(entity.position.x + i, entity.position.y + 1)]
+        );
+      }
+    }
+    if (
+      cellsList[
+        cellIndex(entity.position.x + entity.sizeX - 1, entity.position.y)
+      ].walls[1] == "false"
+    ) {
+      console.log("if3");
+      listNearCell.push(
+        cellsList[
+          cellIndex(entity.position.x + entity.sizeX, entity.position.y)
+        ]
+      );
+    }
+  }
+  if (entity.sizeY > 1) {
+    if (cellOfEntity.walls[0] == "false") {
+      listNearCell.push(
+        cellsList[cellIndex(entity.position.x, entity.position.y - 1)]
+      );
+    }
+    for (var i = 0; i < entity.sizeY; i++) {
+      console.log("for");
+      //prende quello dx alla cella sotto
+      if (
+        cellsList[cellIndex(entity.position.x, entity.position.y + i)]
           .walls[1] == "false"
       ) {
-        cellCounter = path.length;
-        tempCell =
-          cellsList[cellIndex(entity.position.x + i, entity.position.y)];
+        console.log("if1");
+        listNearCell.push(
+          cellsList[cellIndex(entity.position.x + 1, entity.position.y + i)]
+        );
       }
+      //prende sotto sx alla cella sotto
+      if (
+        cellsList[cellIndex(entity.position.x, entity.position.y + i)]
+          .walls[3] == "false"
+      ) {
+        console.log("if2");
+        listNearCell.push(
+          cellsList[cellIndex(entity.position.x - 1, entity.position.y + i)]
+        );
+      }
+    }
+    if (
+      cellsList[
+        cellIndex(entity.position.x, entity.position.y + entity.sizeY - 1)
+      ].walls[2] == "false"
+    ) {
+      console.log("if3");
+      listNearCell.push(
+        cellsList[
+          cellIndex(entity.position.x, entity.position.y + entity.sizeY)
+        ]
+      );
+    }
+  }
+
+  for (var i = 0; i < listNearCell.length; i++) {
+    var path = astarAlg(
+      cellsList[cellIndex(agent.position.x, agent.position.y)],
+      listNearCell[i]
+    );
+    if (path != -1 && path.length < cellCounter) {
+      tempCell = listNearCell[i];
+      cellCounter = path.length;
     }
   }
 
