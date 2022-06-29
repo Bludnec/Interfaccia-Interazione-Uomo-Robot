@@ -284,13 +284,13 @@ function mouseReleased() {
      */
     setTimeout(function () {
       getEntityAbilityOnMap();
-    }, 200);
+    }, 400);
     setTimeout(function () {
       getEntityPositioningOnMap();
-    }, 300);
+    }, 500);
     setTimeout(function () {
       getMap();
-    }, 400);
+    }, 600);
   }
 }
 

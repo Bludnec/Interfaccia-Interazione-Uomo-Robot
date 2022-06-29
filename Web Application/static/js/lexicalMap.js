@@ -231,27 +231,23 @@ function lexicalMap() {
       }
     }
 
-    console.log(positioningList.length);
-    // non funziona il confronto
+    /**
+     * Se è stata già descritta la posizione un'entità (top,botto,inside),
+     * non inserisce il valore near/far
+     */
+
+    console.log(entityInfoList);
+
     for (var i = 0; i < entityInfoList.length; i++) {
       for (var k = 0; k < positioningList[k].length; k++) {
-        console.log(
-          entityInfoList[i].id,
-          positioningList[k][0],
-          positioningList[k][1]
-        );
         if (
-          entityInfoList[i].id == positioningList[k][0] ||
-          entityInfoList[i].id == positioningList[k][1]
+          entityInfoList[i].id == positioningList[k][0][0] ||
+          entityInfoList[i].id == positioningList[k][0][1]
         ) {
-          console.log("splice");
           entityInfoList.splice(i, 1);
         }
       }
     }
-    // ----
-
-    console.log(entityInfoList);
 
     for (var i = 0; i < entityInfoList.length; i++) {
       for (var j = i + 1; j < entityInfoList.length; j++) {
