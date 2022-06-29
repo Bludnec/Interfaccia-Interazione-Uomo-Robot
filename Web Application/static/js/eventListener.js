@@ -175,17 +175,18 @@ function mouseReleased() {
           if (
             document.getElementById("til-x").value <=
               itemsList[indexEl].sizeX &&
-            document.getElementById("til-y").value <= itemsList[indexEl].sizeY
+            document.getElementById("til-y").value <=
+              itemsList[indexEl].sizeY &&
+            x <= itemsList[indexEl].position.x <= x &&
+            y <= itemsList[indexEl].position.y <= y
           ) {
             getClassAbility(itemsList[indexEl].entClass, "support").then(
               (supportBool) => {
-                console.log(supportBool);
                 if (supportBool) {
                   /**
                    * Se l'oggetto già esistente ha l'abilita support allora metto
                    * l'oggetto nuovo sopra e asserisco on_top.
                    */
-                  console.log("entity on top");
                   insertEntity(
                     classItemSelected + idCounter,
                     classItemSelected,
@@ -215,7 +216,6 @@ function mouseReleased() {
             (puttingUnder) => {
               if (puttingUnder) {
                 // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-                console.log("entity on bottom");
                 insertEntity(
                   classItemSelected + idCounter,
                   classItemSelected,
@@ -242,38 +242,45 @@ function mouseReleased() {
         // se è scelta l'opzione inside
         if (indexEl != null && tilPosition.value == "inside") {
           getSpaceAvailable(itemsList[indexEl].id).then((data) => {
-            console.log(data);
-          });
-          setTimeout(function () {
-            getClassAbility(itemsList[indexEl].entClass, "contain").then(
-              (contain) => {
-                if (contain) {
-                  // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-                  console.log("entity inside");
-                  insertEntity(
-                    classItemSelected + idCounter,
-                    classItemSelected,
-                    classItemSelected,
-                    x,
-                    y,
-                    0,
-                    document.getElementById("til-x").value,
-                    document.getElementById("til-y").value
-                  );
+            if (
+              data >=
+              document.getElementById("til-x").value *
+                document.getElementById("til-y").value
+            ) {
+              setTimeout(function () {
+                getClassAbility(itemsList[indexEl].entClass, "contain").then(
+                  (contain) => {
+                    if (contain) {
+                      // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
+                      console.log("entity inside");
+                      insertEntity(
+                        classItemSelected + idCounter,
+                        classItemSelected,
+                        classItemSelected,
+                        x,
+                        y,
+                        0,
+                        document.getElementById("til-x").value,
+                        document.getElementById("til-y").value
+                      );
 
-                  // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
-                  setTimeout(function () {
-                    insertInside(
-                      classItemSelected + idCounter.toString(),
-                      itemsList[indexEl].id
-                    );
-                    idCounter++;
-                    deselectEntityImage();
-                  }, 200);
-                }
-              }
-            );
-          }, 300);
+                      // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
+                      setTimeout(function () {
+                        insertInside(
+                          classItemSelected + idCounter.toString(),
+                          itemsList[indexEl].id
+                        );
+                        idCounter++;
+                        deselectEntityImage();
+                      }, 200);
+                    }
+                  }
+                );
+              }, 300);
+            } else {
+              console.log("Non c'è spazio disponibile per quest'entità.");
+            }
+          });
         }
       }
     }
