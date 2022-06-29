@@ -248,12 +248,11 @@ function draw() {
        * celle per cella ogni giro di draw().
        */
       if (cellPath != -1 && cellPath.length != 0) {
-        agent.moveTo(cellPath[0].x, cellPath[0].y);
-        cellPath.shift();
-      } else if (agentActionList.length != 0) {
-        /*console.log(agentActionList);
-        agent.agentActionList[0][0](agentActionList[0][0]);
-        agentActionList.shift();*/
+        if (cellPath[0].id != undefined) {
+          agent.moveTo(cellPath[0].x, cellPath[0].y);
+          cellPath.shift();
+        }
+        //switch case con le azioni
       }
     }, 200);
   }

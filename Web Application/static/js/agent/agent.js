@@ -114,7 +114,7 @@ class Agent {
         cellsList[cellIndex(this.position.x, this.position.y)],
         nearCell
       );
-      //agentActionList([this.manipulation, info]);
+      cellPath.push(["manipulation", info]);
     }
   }
   /**
