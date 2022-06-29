@@ -97,6 +97,7 @@ class Agent {
    * @param {dict} info Dizionario che può contenere Source (zone) e Theme(entity)
    */
   taking(info) {
+    // Taking = Motion + Manupulation
     if (info["Source"] != undefined) {
       // Abbiamo informazioni della zona e dell'entità.
     } else {
@@ -108,8 +109,52 @@ class Agent {
           entSel = itemsList[i];
         }
       }
+      var nearCell = findNearestCellToEntity(entSel);
+      cellPath = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        nearCell
+      );
+      //agentActionList([this.manipulation, info]);
     }
   }
+  /**
+   * @param {*} info  Dizionario che può contenere Theme (entità)
+   */
+  manipulation(info) {
+    if (info["Theme"] != undefined) {
+      if (entityTakenByAgent == undefined) {
+        var entity;
+
+        for (var i = 0; i < itemsList.length; i++) {
+          if (itemsList[i].id == info["Theme"]) {
+            entity = itemsList[i];
+          }
+        }
+        console.log(entity);
+        if (
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[0] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y - 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[1] == "false" &&
+            this.position.x == entity.position.x + 1 &&
+            this.position.y == entity.position.y) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[2] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y + 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[3] == "false" &&
+            this.position.x == entity.position.x - 1 &&
+            this.position.y == entity.position.y)
+        ) {
+          entityTakenByAgent = entity;
+        }
+      }
+    }
+  }
+  releasing(info) {}
 
   moveTo(x, y) {
     updateAgentPosition(x.toString(), y.toString());

@@ -269,9 +269,9 @@ function lexicalMap() {
     console.log(lexMapString);
   });
   /*
-  var test = { X: 2, Y: 2 };
+  
   console.log(test);
   agent.motion(test);*/
-
-  console.log(findNearestCellToEntity(itemsList[0]));
+  var test = { Theme: inputText };
+  agent.taking(test);
 }

@@ -6,9 +6,10 @@ var positioningList;
 var urlList;
 var modifica = false;
 
-var takenEntity;
+var entityTakenByAgent;
 
 var cellPath = [];
+var agentActionList = [];
 
 var firstLaunch = true;
 var agentActionsList = [];
@@ -230,7 +231,11 @@ function draw() {
     cellsList[i].show();
   }
   for (var i = 0; i < itemsList.length; i++) {
-    itemsList[i].show();
+    if (entityTakenByAgent == undefined) {
+      itemsList[i].show();
+    } else if (entityTakenByAgent.id != itemsList[i].id) {
+      itemsList[i].show();
+    }
   }
   // Se è stato istanziato l'agente, lo mostra sulla mappa.
   if (agent != null) {
@@ -245,8 +250,12 @@ function draw() {
       if (cellPath != -1 && cellPath.length != 0) {
         agent.moveTo(cellPath[0].x, cellPath[0].y);
         cellPath.shift();
+      } else if (agentActionList.length != 0) {
+        /*console.log(agentActionList);
+        agent.agentActionList[0][0](agentActionList[0][0]);
+        agentActionList.shift();*/
       }
-    }, 500);
+    }, 200);
   }
   // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) -
   // timeout perché sennò va ad influire con le altre query nel backend
