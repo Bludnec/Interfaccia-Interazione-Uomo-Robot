@@ -130,7 +130,6 @@ class Agent {
             entity = itemsList[i];
           }
         }
-        console.log(entity);
         if (
           (cellsList[cellIndex(entity.position.x, entity.position.y)]
             .walls[0] == "false" &&
@@ -158,6 +157,9 @@ class Agent {
 
   moveTo(x, y) {
     updateAgentPosition(x.toString(), y.toString());
+    setTimeout(function () {
+      getAgent();
+    }, 100);
   }
 }
 

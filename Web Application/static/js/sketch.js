@@ -237,11 +237,11 @@ function draw() {
       itemsList[i].show();
     }
   }
+  console.log(cellPath);
   // Se è stato istanziato l'agente, lo mostra sulla mappa.
   if (agent != null) {
     agent.show();
     setTimeout(function () {
-      getAgent();
       /**
        * Se la lista spostamenti è diversa da 0 (ovvero c'è un
        * path che l'agente deve percorrere) fa muovere l'agente
@@ -251,13 +251,30 @@ function draw() {
         if (cellPath[0].id != undefined) {
           agent.moveTo(cellPath[0].x, cellPath[0].y);
           cellPath.shift();
+          console.log("1");
+        } else {
+          console.log("2");
+          console.log(agent);
+          actionFounder();
+          cellPath.splice(0, 1);
         }
-        //switch case con le azioni
       }
     }, 200);
   }
   // se la lista spostamenti è diversa da 0 (ovvero l'agente deve spostarsi) -
   // timeout perché sennò va ad influire con le altre query nel backend
+}
+
+function actionFounder() {
+  //switch case con le azioni
+  switch (cellPath[0][0]) {
+    case "manipulation":
+      agent.manipulation(cellPath[0][1]);
+      break;
+    default:
+      console.log("default");
+    // code block
+  }
 }
 
 /* Functions for click an entity */
