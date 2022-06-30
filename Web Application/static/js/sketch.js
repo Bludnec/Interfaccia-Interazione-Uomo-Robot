@@ -237,7 +237,6 @@ function draw() {
       itemsList[i].show();
     }
   }
-  console.log(cellPath);
   // Se è stato istanziato l'agente, lo mostra sulla mappa.
   if (agent != null) {
     agent.show();

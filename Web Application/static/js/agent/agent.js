@@ -148,12 +148,15 @@ class Agent {
             this.position.x == entity.position.x - 1 &&
             this.position.y == entity.position.y)
         ) {
+          // TO DO: cambiare posizione dell'entità presa in -1
           entityTakenByAgent = entity;
         }
       }
     }
   }
-  releasing(info) {}
+  releasing(info) {
+    // alla fine -> update della posizione dell'oggetto rilasciato (che prima era stato messo a -1 perché afferrato)
+  }
 
   moveTo(x, y) {
     updateAgentPosition(x.toString(), y.toString());
