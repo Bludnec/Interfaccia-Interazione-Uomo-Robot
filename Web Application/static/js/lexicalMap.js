@@ -57,6 +57,7 @@ function inputGenerator() {
     console.log(JSON.stringify(inputText));
   });
 
+  translator(output);
   /*
   console.log(test);
   agent.motion(test);*/

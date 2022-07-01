@@ -1,19 +1,11 @@
 var output = {
   frames: [
     {
-      name: "BRINGING",
+      name: "TAKING",
       arguments: [
         {
-          name: "BENEFICIARY",
-          value: "p1",
-        },
-        {
           name: "THEME",
-          value: "l1",
-        },
-        {
-          name: "SOURCE",
-          value: "c1",
+          value: "plate0",
         },
       ],
     },
@@ -33,7 +25,5 @@ function translator(output) {
       infoAzione[name] = value;
     }
   }
-  console.log(infoAzione);
+  cellPath.push([infoAzione.azione, infoAzione]);
 }
-
-translator(output);

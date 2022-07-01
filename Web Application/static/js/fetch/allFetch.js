@@ -2,10 +2,18 @@ async function getAllEntity() {
   let response = await fetch("get-all-entity");
   let data = await response.json();
   itemsList = [];
+  data[0].sort(function (a, b) {
+    return a.id - b.id;
+  });
+  data[1].sort(function (a, b) {
+    return a.id - b.id;
+  });
   if (!(data.length == 0)) {
     for (var i = 0; i < data[0].length; i++) {
       var position = new Position(data[0][i].X, data[0][i].Y, data[0][i].Z);
+
       if (data[0][i].Id != null) {
+        console.log(data[1][i]);
         var entity = new Entity(
           data[0][i].Id,
           data[0][i].Name,

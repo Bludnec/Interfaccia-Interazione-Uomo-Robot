@@ -68,13 +68,13 @@ class Agent {
     }
   }
 
+  // FRAME
   /**
-   *
-   * @param {dict} info Dizionario dove può essere presente Goal, X, Y.
+   * @param {dict} info Il robot si muove verso un GOAL.
    */
-  motion(info) {
-    if (info["Goal"] != undefined) {
-      var nearestCell = findNearestCellToLocation(info["Goal"]);
+  arriving(info) {
+    if (info["GOAL"] != undefined) {
+      var nearestCell = findNearestCellToLocation(info["GOAL"]);
       if (!(nearestCell == -1)) {
         cellPath = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
@@ -84,49 +84,28 @@ class Agent {
         console.log("Non posso arrivare in quella zona.");
       }
     }
-
-    if (info["X"] != undefined && info["Y"] != undefined) {
-      cellPath = astarAlg(
-        cellsList[cellIndex(this.position.x, this.position.y)],
-        cellsList[cellIndex(info["X"], info["Y"])]
-      );
-    }
   }
 
+  attaching(info) {}
+
+  bringing(info) {}
+
+  change_direction(info) {}
+
+  change_operational_state(info) {}
+
+  closure(info) {}
+
   /**
-   * @param {dict} info Dizionario che può contenere Source (zone) e Theme(entity)
-   */
-  taking(info) {
-    // Taking = Motion + Manupulation
-    if (info["Source"] != undefined) {
-      // Abbiamo informazioni della zona e dell'entità.
-    } else {
-      // Abbiamo solo informazioni sull'entità da prendere.
-      // Check se possiamo muovere l'oggetto.
-      var entSel;
-      for (var i = 0; i < itemsList.length; i++) {
-        if (itemsList[i].id == info["Theme"]) {
-          entSel = itemsList[i];
-        }
-      }
-      var nearCell = findNearestCellToEntity(entSel);
-      cellPath = astarAlg(
-        cellsList[cellIndex(this.position.x, this.position.y)],
-        nearCell
-      );
-      cellPath.push(["manipulation", info]);
-    }
-  }
-  /**
-   * @param {*} info  Dizionario che può contenere Theme (entità)
+   * @param {*} info  Dizionario che può contenere THEME (entità)
    */
   manipulation(info) {
-    if (info["Theme"] != undefined) {
+    if (info["THEME"] != undefined) {
       if (entityTakenByAgent == undefined) {
         var entity;
 
         for (var i = 0; i < itemsList.length; i++) {
-          if (itemsList[i].id == info["Theme"]) {
+          if (itemsList[i].id == info["THEME"]) {
             entity = itemsList[i];
           }
         }
@@ -150,12 +129,68 @@ class Agent {
         ) {
           // TO DO: cambiare posizione dell'entità presa in -1
           entityTakenByAgent = entity;
+          updateEntityPosition(entity.id, -1, -1, 0);
         }
       }
     }
   }
+
+  /**
+   *
+   * @param {dict} info Dizionario dove può essere presente GOAL, X, Y.
+   */
+  motion(info) {
+    if (info["GOAL"] != undefined) {
+      var nearestCell = findNearestCellToLocation(info["GOAL"]);
+      if (!(nearestCell == -1)) {
+        cellPath = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          nearestCell
+        );
+      } else {
+        console.log("Non posso arrivare in quella zona.");
+      }
+    }
+
+    if (info["X"] != undefined && info["Y"] != undefined) {
+      cellPath = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        cellsList[cellIndex(info["X"], info["Y"])]
+      );
+    }
+  }
+
   releasing(info) {
-    // alla fine -> update della posizione dell'oggetto rilasciato (che prima era stato messo a -1 perché afferrato)
+    if (entityTakenByAgent != undefined) {
+      // alla fine -> update della posizione dell'oggetto rilasciato (che prima era stato messo a -1 perché afferrato)
+    } else {
+      console.log("Non ho niente in mano.");
+    }
+  }
+
+  /**
+   * @param {dict} info Dizionario che può contenere Source (zone) e THEME(entity)
+   */
+  taking(info) {
+    // Taking = Motion + Manupulation
+    if (info["SOURCE"] != undefined) {
+      // Abbiamo informazioni della zona e dell'entità.
+    } else {
+      // Abbiamo solo informazioni sull'entità da prendere.
+      // Check se possiamo muovere l'oggetto.
+      var entSel;
+      for (var i = 0; i < itemsList.length; i++) {
+        if (itemsList[i].id == info["THEME"]) {
+          entSel = itemsList[i];
+        }
+      }
+      var nearCell = findNearestCellToEntity(entSel);
+      cellPath = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        nearCell
+      );
+      cellPath.push(["MANIPULATION", info]);
+    }
   }
 
   moveTo(x, y) {

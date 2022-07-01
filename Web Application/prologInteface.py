@@ -205,15 +205,17 @@ def deleteEntitySizeDAOImpl(id):
 
 # Restituisce le dimensioni dell'entità istanziata.
 def getEntitySizeDAOImpl(id):
-    return list(prolog.query('entity_size('+id+',SizeX,SizeY)'))
+    return list(prolog.query('entity_size('+id+',SizeX,SizeY)'))[0]
 
 # Aggiorna la posizione dell'entità
 def updateEntityPositionDAOImpl(id, x, y, z):
     entityValues = getEntityDAOImpl(id)
-    print(entityValues)
+    entitySize = getEntitySizeDAOImpl(id)
+    print(entitySize)
     deleteEntityDAOImpl(id)
     prolog.assertz("entity(" + id + "," + entityValues["Name"] + "," +
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
+    prolog.assertz("entity_size(" + id + "," + str(entitySize['SizeX']) + "," + str(entitySize['SizeY']) + ")")
 
 # Inserisce lo status di un'entità
 def insertEntityStatusDAOImpl(id,status,statusBool):

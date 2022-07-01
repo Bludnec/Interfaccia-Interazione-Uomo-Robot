@@ -264,12 +264,38 @@ function draw() {
 function actionFounder() {
   //switch case con le azioni
   switch (cellPath[0][0]) {
-    case "manipulation":
+    case "ARRIVING":
+      agent.arriving(cellPath[0][1]);
+      break;
+    case "ATTACHING":
+      agent.attaching(cellPath[0][1]);
+      break;
+    case "BRINGING":
+      agent.bringing(cellPath[0][1]);
+      break;
+    case "CHANGE_DIRECTION":
+      agent.change_direction(cellPath[0][1]);
+      break;
+    case "CHANGE_OPERATIONAL_STATE":
+      agent.change_operational_state(cellPath[0][1]);
+      break;
+    case "CLOSURE":
+      agent.closure(cellPath[0][1]);
+      break;
+    case "MANIPULATION":
       agent.manipulation(cellPath[0][1]);
       break;
+    case "MOTION":
+      agent.motion(cellPath[0][1]);
+      break;
+    case "RELEASING":
+      agent.releasing(cellPath[0][1]);
+      break;
+    case "TAKING":
+      agent.taking(cellPath[0][1]);
+      break;
     default:
-      console.log("default");
-    // code block
+      console.log("Non sono riuscito a capire il comando.");
   }
 }
 
