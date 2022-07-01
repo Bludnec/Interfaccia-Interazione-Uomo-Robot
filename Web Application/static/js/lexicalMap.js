@@ -1,12 +1,12 @@
 var translateButton = document
   .getElementById("translate-button")
-  .addEventListener("click", lexicalMap);
+  .addEventListener("click", inputGenerator);
 
 // se mi viene restituito z2 vuol dire che la stanza presa in questione è quella in
 // listOfZone[2]
 var listOfZone = [];
 
-function lexicalMap() {
+function inputGenerator() {
   var inputText = {};
   var sentence = document.getElementById("input-text").value;
   inputText.sentence = sentence;
@@ -14,18 +14,15 @@ function lexicalMap() {
   inputText.language = language;
   var entities = [];
   inputText.entities = entities;
-  //var entity = { name,class,position,properties,lexical_references};
 
   var listInputText = document.getElementById("input-text").value.split(" ");
   var entitySelected = [];
 
   getLexicalMap().then((data) => {
-    /**
-     * data = [[],[]]
+    /* data = [[],[]]
      * prima lista di elementi = [[id, classe,,x,y lista delle lex_ref],[...]]
      * seconda lista delle zone = [[nomeZona,  lista delle celle appartenenti alla stessa zona], [...]]
      */
-    console.log(data);
 
     for (var i = 0; i < data[0].length; i++) {
       for (var j = 0; j < data[0][i][5]["List"].length; j++) {
@@ -37,23 +34,22 @@ function lexicalMap() {
       }
     }
 
-    console.log(entitySelected);
-    // TO DO: CAMBIARE I FOR SOTTO, PRENDERE LE INFO NON DA DATA MA ENTITY SELECTED
     /**
      * Fare il confronto sentence e entità nella mappa e
      * fare lo data[0].splice delle informazioni che non ci servono
+     * ovvero quelle citate nella sentence.
      */
-    for (var i = 0; i < data[0].length; i++) {
+    for (var i = 0; i < entitySelected.length; i++) {
       var entity = {
-        name: data[0][i][0],
-        class: data[0][i][1],
+        name: entitySelected[i][0],
+        class: entitySelected[i][1],
         position: {
-          x: data[0][i][2],
-          y: data[0][i][3],
-          z: data[0][i][4],
+          x: entitySelected[i][2],
+          y: entitySelected[i][3],
+          z: entitySelected[i][4],
         },
         properties: "",
-        lexical_references: data[0][i][5]["List"],
+        lexical_references: entitySelected[i][5]["List"],
       };
       inputText.entities.push(entity);
     }

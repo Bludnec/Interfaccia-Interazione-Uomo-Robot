@@ -250,10 +250,7 @@ function draw() {
         if (cellPath[0].id != undefined) {
           agent.moveTo(cellPath[0].x, cellPath[0].y);
           cellPath.shift();
-          console.log("1");
         } else {
-          console.log("2");
-          console.log(agent);
           actionFounder();
           cellPath.splice(0, 1);
         }
