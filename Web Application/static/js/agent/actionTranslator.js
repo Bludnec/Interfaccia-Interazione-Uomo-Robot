@@ -1,11 +1,15 @@
 var output = {
   frames: [
     {
-      name: "TAKING",
+      name: "RELEASING",
       arguments: [
         {
-          name: "THEME",
+          name: "GOAL",
           value: "plate0",
+        },
+        {
+          name: "LOCATION_OF_CONFINEMENT",
+          value: "key0",
         },
       ],
     },
@@ -13,6 +17,7 @@ var output = {
 };
 
 function translator(output) {
+  entityTakenByAgent = itemsList[0];
   // Scansiono tutti i frame presenti dentro "framses"
   var infoAzione = {};
   for (var i = 0; i < output.frames.length; i++) {

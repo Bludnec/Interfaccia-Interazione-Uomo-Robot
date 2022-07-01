@@ -13,7 +13,6 @@ async function getAllEntity() {
       var position = new Position(data[0][i].X, data[0][i].Y, data[0][i].Z);
 
       if (data[0][i].Id != null) {
-        console.log(data[1][i]);
         var entity = new Entity(
           data[0][i].Id,
           data[0][i].Name,

@@ -137,7 +137,7 @@ class Agent {
 
   /**
    *
-   * @param {dict} info Dizionario dove può essere presente GOAL, X, Y.
+   * @param {dict} info Dizionario dove può essere presente GOAL
    */
   motion(info) {
     if (info["GOAL"] != undefined) {
@@ -151,18 +151,73 @@ class Agent {
         console.log("Non posso arrivare in quella zona.");
       }
     }
-
-    if (info["X"] != undefined && info["Y"] != undefined) {
-      cellPath = astarAlg(
-        cellsList[cellIndex(this.position.x, this.position.y)],
-        cellsList[cellIndex(info["X"], info["Y"])]
-      );
-    }
   }
 
+  /**
+   * @param {dict} info Dizionario che può contenere THEME e LOCATION_OF_CONFINEMENT
+   */
   releasing(info) {
     if (entityTakenByAgent != undefined) {
-      // alla fine -> update della posizione dell'oggetto rilasciato (che prima era stato messo a -1 perché afferrato)
+      if (entityTakenByAgent.id != info["GOAL"]) {
+        if (info["LOCATION_OF_CONFINEMENT"] != undefined) {
+          // L'agente sa dove deve lasciare l'entità che ha in mano.
+          var entityZoneToRelease;
+          for (var i = 0; i < itemsList.length; i++) {
+            if ((itemsList[i].id = info["LOCATION_OF_CONFINEMENT"])) {
+              entityZoneToRelease = itemsList[i];
+            }
+          }
+          if (entityZoneToRelease != undefined) {
+            // L'agente deve portarlo vicino ad un'entità.
+            var cellaVicinoEntità =
+              findNearestCellToEntity(entityZoneToRelease);
+            var path = astarAlg(
+              cellsList[cellIndex(this.position.x, this.position.y)],
+              cellaVicinoEntità
+            );
+            if (path.length == 1) {
+              updateEntityPosition(
+                entityTakenByAgent.id,
+                path[0].x,
+                path[0].y,
+                0
+              );
+            } else {
+              path.pop();
+              cellPath.push(path);
+              cellPath.push("RELEASING", info);
+            }
+          } else {
+            // L'agente deve portarlo in una zona.
+            var nearestCell = findNearestCellToLocation(
+              info["LOCATION_OF_CONFINEMENT"]
+            );
+            if (!(nearestCell == -1)) {
+              var path = astarAlg(
+                cellsList[cellIndex(this.position.x, this.position.y)],
+                nearestCell
+              );
+            }
+            if (path.length == 1) {
+              updateEntityPosition(
+                entityTakenByAgent.id,
+                path[0].x,
+                path[0].y,
+                0
+              );
+            } else {
+              path.pop();
+              cellPath.push(path);
+              cellPath.push("RELEASING", info);
+            }
+          }
+        } else {
+          // L'agente non ha una location dove lasciare l'entità.
+          // TO DO: LASCIARE L'OGGETTO IN UNA CELLA ADIACENTE POSSIBILE.
+        }
+      } else {
+        console.log("Non ho quell'entità in mano.");
+      }
     } else {
       console.log("Non ho niente in mano.");
     }
@@ -177,7 +232,7 @@ class Agent {
       // Abbiamo informazioni della zona e dell'entità.
     } else {
       // Abbiamo solo informazioni sull'entità da prendere.
-      // Check se possiamo muovere l'oggetto.
+      // TO DO: check se possiamo muovere l'oggetto.
       var entSel;
       for (var i = 0; i < itemsList.length; i++) {
         if (itemsList[i].id == info["THEME"]) {
@@ -201,6 +256,10 @@ class Agent {
   }
 }
 
+/**
+ * @param {Entity} entity
+ * @returns la Cell più vicina all'entità.
+ */
 function findNearestCellToEntity(entity) {
   var tempCell = -1;
   var cellCounter = 1000000;
