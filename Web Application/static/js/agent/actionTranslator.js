@@ -17,7 +17,6 @@ var output = {
 };
 
 function translator(output) {
-  entityTakenByAgent = itemsList[0];
   // Scansiono tutti i frame presenti dentro "framses"
   var infoAzione = {};
   for (var i = 0; i < output.frames.length; i++) {

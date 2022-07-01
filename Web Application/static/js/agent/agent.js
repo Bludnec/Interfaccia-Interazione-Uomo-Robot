@@ -136,7 +136,7 @@ class Agent {
   }
 
   /**
-   *
+   * DA CAMBIARE
    * @param {dict} info Dizionario dove può essere presente GOAL
    */
   motion(info) {
