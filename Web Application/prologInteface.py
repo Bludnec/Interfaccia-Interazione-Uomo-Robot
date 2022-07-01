@@ -84,13 +84,17 @@ def updateCellDAOImpl(id,x,y,zone,walls):
     str(walls[2]).lower()+","+ str(walls[3]).lower()+"])")
 
 def getLexicalMapDAOImpl():
-    lista = list(prolog.query('entity(Id,_,_,_,_,_)'))
-    allLexRef = []
+    lista = list(prolog.query('entity(Id,_,Class,X,Y,Z)'))
+    allLexRef = [[],[]]
     
     for x in lista:
         lexRef = list(prolog.query('is_lex_ref('+x['Id']+',List)'))
         lexRef.insert(0,x['Id'])
-        allLexRef.append(lexRef)
+        lexRef.insert(1,x['Class'])
+        lexRef.insert(2,x['X'])
+        lexRef.insert(3,x['Y'])
+        lexRef.insert(4,x['Z'])
+        allLexRef[0].append(lexRef)
 
     zone = list(prolog.query("zone(Zone)"))
 
@@ -98,7 +102,7 @@ def getLexicalMapDAOImpl():
         zoneMap = list(prolog.query("cell(Id,X,Y,"+x['Zone']+",Walls)"))
         if zoneMap != []:
             zoneMap.insert(0,x['Zone'])
-            allLexRef.append(zoneMap)
+            allLexRef[1].append(zoneMap)
 
     return allLexRef
 
