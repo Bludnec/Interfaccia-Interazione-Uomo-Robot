@@ -245,13 +245,10 @@ function insertEntity(id, name, classe, x, y, z, sizeX, sizeY) {
   });
 }
 
-function getEntity(id) {
-  fetch(`entity?id=${id}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntity(id) {
+  let response = await fetch(`entity?id=${id}`);
+  let data = await response.json();
+  return data;
 }
 
 function deleteEntity(id) {
@@ -282,13 +279,10 @@ function updateEntityPosition(id, x, y, z) {
   });
 }
 
-function getEntityStatus(id) {
-  fetch(`entity/status?id=${id}`)
-    .then((jsonData) => jsonData.json())
-    .then((data) => {
-      console.log(data);
-      // do something with the data
-    });
+async function getEntityStatus(id) {
+  let response = await fetch(`entity/status?id=${id}`);
+  let data = await response.json();
+  return data;
 }
 
 function insertEntityStatus(id, status, statusBool) {
@@ -362,11 +356,6 @@ async function getAllUrl() {
   let response = await fetch("get-all-url");
   let data = await response.json();
   return data;
-}
-
-function createUrlList(data) {
-  let x = data;
-  return x;
 }
 
 function insertOnTop(idOnTop, idSupport) {
