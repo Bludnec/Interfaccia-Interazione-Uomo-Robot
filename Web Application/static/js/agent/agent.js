@@ -145,10 +145,17 @@ class Agent {
         // se path è una zona
         var nearestCell = findNearestCellToLocation(info["PATH"]);
         if (!(nearestCell == -1)) {
-          cellPath = astarAlg(
+          var path = astarAlg(
             cellsList[cellIndex(this.position.x, this.position.y)],
             nearestCell
           );
+          for (var i = 0; i < path.length; i++) {
+            cellPath.push(path[i]);
+          }
+          if (path.length > 1) {
+            this.position.x = path[path.length - 1].x;
+            this.position.y = path[path.length - 1].y;
+          }
         }
         // se path è un oggetto
         var entityZoneToRelease;
@@ -160,34 +167,47 @@ class Agent {
         if (entityZoneToRelease != undefined) {
           // L'agente deve portarlo vicino ad un'entità.
           var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
-          cellPath = astarAlg(
+          var path = astarAlg(
             cellsList[cellIndex(this.position.x, this.position.y)],
             cellaVicinoEntità
           );
+          for (var i = 0; i < path.length; i++) {
+            cellPath.push(path[i]);
+          }
+          if (path.length > 1) {
+            this.position.x = path[path.length - 1].x;
+            this.position.y = path[path.length - 1].y;
+          }
         }
       }
-      // se path è una zona
       var nearestCell = findNearestCellToLocation(info["GOAL"]);
       if (!(nearestCell == -1)) {
-        cellPath = astarAlg(
+        var path = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
           nearestCell
         );
+        for (var i = 0; i < path.length; i++) {
+          cellPath.push(path[i]);
+        }
       }
-      // se path è un oggetto
       var entityZoneToRelease;
       for (var i = 0; i < itemsList.length; i++) {
         if ((itemsList[i].id = info["GOAL"])) {
           entityZoneToRelease = itemsList[i];
+          break;
         }
       }
       if (entityZoneToRelease != undefined) {
-        // L'agente deve portarlo vicino ad un'entità.
+        // L'agente arrivare vicino ad un'entità.
         var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
-        cellPath = astarAlg(
+        var path = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
           cellaVicinoEntità
         );
+        console.log(path);
+        for (var i = 0; i < path.length; i++) {
+          cellPath.push(path[i]);
+        }
       }
     }
   }

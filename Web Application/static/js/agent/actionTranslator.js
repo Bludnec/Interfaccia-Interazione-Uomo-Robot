@@ -1,10 +1,14 @@
 var output = {
   frames: [
     {
-      name: "MOTION",
+      name: "TAKING",
       arguments: [
         {
           name: "GOAL",
+          value: "plate0",
+        },
+        {
+          name: "PATH",
           value: "kitchen",
         },
       ],
@@ -14,6 +18,7 @@ var output = {
 
 function translator(output) {
   // Scansiono tutti i frame presenti dentro "framses"
+  console.log(output);
   var infoAzione = {};
   for (var i = 0; i < output.frames.length; i++) {
     var azione = output.frames[i].name;

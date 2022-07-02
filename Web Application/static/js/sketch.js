@@ -221,6 +221,7 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
+  console.log(cellPath);
   frameRate(3);
   if (itemsList.length == 0 || modifica) {
     getAllEntity();
