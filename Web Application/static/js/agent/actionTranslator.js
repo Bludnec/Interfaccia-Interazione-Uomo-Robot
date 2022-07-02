@@ -1,15 +1,11 @@
 var output = {
   frames: [
     {
-      name: "RELEASING",
+      name: "MOTION",
       arguments: [
         {
           name: "GOAL",
-          value: "plate0",
-        },
-        {
-          name: "LOCATION_OF_CONFINEMENT",
-          value: "key0",
+          value: "kitchen",
         },
       ],
     },

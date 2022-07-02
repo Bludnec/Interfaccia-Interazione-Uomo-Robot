@@ -137,18 +137,57 @@ class Agent {
 
   /**
    * DA CAMBIARE
-   * @param {dict} info Dizionario dove può essere presente GOAL
+   * @param {dict} info Dizionario dove può essere presente AREA, GOAL, PATH, SOURCE E THEME(?)
    */
   motion(info) {
     if (info["GOAL"] != undefined) {
+      if (info["PATH"] != undefined) {
+        // se path è una zona
+        var nearestCell = findNearestCellToLocation(info["PATH"]);
+        if (!(nearestCell == -1)) {
+          cellPath = astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            nearestCell
+          );
+        }
+        // se path è un oggetto
+        var entityZoneToRelease;
+        for (var i = 0; i < itemsList.length; i++) {
+          if ((itemsList[i].id = info["PATH"])) {
+            entityZoneToRelease = itemsList[i];
+          }
+        }
+        if (entityZoneToRelease != undefined) {
+          // L'agente deve portarlo vicino ad un'entità.
+          var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
+          cellPath = astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            cellaVicinoEntità
+          );
+        }
+      }
+      // se path è una zona
       var nearestCell = findNearestCellToLocation(info["GOAL"]);
       if (!(nearestCell == -1)) {
         cellPath = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
           nearestCell
         );
-      } else {
-        console.log("Non posso arrivare in quella zona.");
+      }
+      // se path è un oggetto
+      var entityZoneToRelease;
+      for (var i = 0; i < itemsList.length; i++) {
+        if ((itemsList[i].id = info["GOAL"])) {
+          entityZoneToRelease = itemsList[i];
+        }
+      }
+      if (entityZoneToRelease != undefined) {
+        // L'agente deve portarlo vicino ad un'entità.
+        var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
+        cellPath = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          cellaVicinoEntità
+        );
       }
     }
   }
