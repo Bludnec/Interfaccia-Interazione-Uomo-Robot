@@ -87,8 +87,44 @@ class Agent {
   }
 
   attaching(info) {}
+  /**
+   * @param {info} info Dizionario dove può essere presente GOAL (endpoint), PATH,
+   * SOURCE (start) e THEME.
+   */
+  bringing(info) {
+    /**
+     * se c'è motion ci spostiamo in quella zona e poi facciamo
+     * taking (source theme) e releasing(loc = goal, theme)
+     */
+    if (info["PATH"] != undefined) {
+    }
+    // TAKING
+    var entSel;
+    for (var i = 0; i < itemsList.length; i++) {
+      if (itemsList[i].id == info["THEME"]) {
+        entSel = itemsList[i];
+      }
+    }
+    var nearCell = findNearestCellToEntity(entSel);
+    var path = astarAlg(
+      cellsList[cellIndex(this.position.x, this.position.y)],
+      nearCell
+    );
+    for (var i = 0; i < path.length; i++) {
+      cellPath.push(path[i]);
+    }
+    // MANIPULATION
+    var newInfo = {
+      THEME: info["THEME"],
+    };
+    cellPath.push(["MANIPULATION", newInfo]);
 
-  bringing(info) {}
+    newInfo = {
+      LOCATION_OF_CONFINEMENT: info["GOAL"],
+      THEME: info["THEME"],
+    };
+    cellPath.push(["RELEASING", newInfo]);
+  }
 
   change_direction(info) {}
 
@@ -103,7 +139,6 @@ class Agent {
     if (info["THEME"] != undefined) {
       if (entityTakenByAgent == undefined) {
         var entity;
-
         for (var i = 0; i < itemsList.length; i++) {
           if (itemsList[i].id == info["THEME"]) {
             entity = itemsList[i];
@@ -128,16 +163,20 @@ class Agent {
             this.position.y == entity.position.y)
         ) {
           // TO DO: cambiare posizione dell'entità presa in -1
-          entityTakenByAgent = entity;
           updateEntityPosition(entity.id, -1, -1, 0);
+          setTimeout(function () {
+            entityTakenByAgent = entity;
+            getAllEntity();
+          }, 200);
         }
       }
     }
+    console.log("Manip: ", entityTakenByAgent);
   }
 
   /**
    * DA CAMBIARE
-   * @param {dict} info Dizionario dove può essere presente AREA, GOAL, PATH, SOURCE E THEME(?)
+   * @param {dict} info Dizionario dove può essere presente GOAL, PATH E THEME(?)
    */
   motion(info) {
     if (info["GOAL"] != undefined) {
@@ -216,13 +255,16 @@ class Agent {
    * @param {dict} info Dizionario che può contenere THEME e LOCATION_OF_CONFINEMENT
    */
   releasing(info) {
+    console.log("Releas: ", entityTakenByAgent);
+    console.log(info);
+    console.log(entityTakenByAgent.id, info["THEME"]);
     if (entityTakenByAgent != undefined) {
-      if (entityTakenByAgent.id != info["GOAL"]) {
+      if (entityTakenByAgent.id == info["THEME"]) {
         if (info["LOCATION_OF_CONFINEMENT"] != undefined) {
           // L'agente sa dove deve lasciare l'entità che ha in mano.
           var entityZoneToRelease;
           for (var i = 0; i < itemsList.length; i++) {
-            if ((itemsList[i].id = info["LOCATION_OF_CONFINEMENT"])) {
+            if (itemsList[i].id == info["LOCATION_OF_CONFINEMENT"]) {
               entityZoneToRelease = itemsList[i];
             }
           }
@@ -243,16 +285,19 @@ class Agent {
               );
             } else {
               path.pop();
-              cellPath.push(path);
-              cellPath.push("RELEASING", info);
+              for (var i = 0; i < path.length; i++) {
+                cellPath.push(path[i]);
+              }
+              cellPath.push(["RELEASING", info]);
             }
           } else {
             // L'agente deve portarlo in una zona.
             var nearestCell = findNearestCellToLocation(
               info["LOCATION_OF_CONFINEMENT"]
             );
+            var path;
             if (!(nearestCell == -1)) {
-              var path = astarAlg(
+              path = astarAlg(
                 cellsList[cellIndex(this.position.x, this.position.y)],
                 nearestCell
               );
@@ -264,10 +309,16 @@ class Agent {
                 path[0].y,
                 0
               );
+              setTimeout(function () {
+                entityTakenByAgent = undefined;
+                getAllEntity();
+              }, 200);
             } else {
               path.pop();
-              cellPath.push(path);
-              cellPath.push("RELEASING", info);
+              for (var i = 0; i < path.length; i++) {
+                cellPath.push(path[i]);
+              }
+              cellPath.push(["RELEASING", info]);
             }
           }
         } else {
@@ -283,28 +334,32 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Dizionario che può contenere Source (zone) e THEME(entity)
+   * @param {dict} info Dizionario che può contenere Source (zone) e THEME (entity)
+   * SOURCE poco utile perché se sappiamo l'id del THEME allora sappiamo già dov'è.
    */
   taking(info) {
-    // Taking = Motion + Manupulation
-    if (info["SOURCE"] != undefined) {
+    console.log("Tak: ", entityTakenByAgent);
+
+    /*if (info["SOURCE"] != undefined) {
       // Abbiamo informazioni della zona e dell'entità.
-    } else {
-      // Abbiamo solo informazioni sull'entità da prendere.
-      // TO DO: check se possiamo muovere l'oggetto.
-      var entSel;
-      for (var i = 0; i < itemsList.length; i++) {
-        if (itemsList[i].id == info["THEME"]) {
-          entSel = itemsList[i];
-        }
+    }*/
+    // Abbiamo solo informazioni sull'entità da prendere.
+    // TO DO: check se possiamo muovere l'oggetto.
+    var entSel;
+    for (var i = 0; i < itemsList.length; i++) {
+      if (itemsList[i].id == info["THEME"]) {
+        entSel = itemsList[i];
       }
-      var nearCell = findNearestCellToEntity(entSel);
-      cellPath = astarAlg(
-        cellsList[cellIndex(this.position.x, this.position.y)],
-        nearCell
-      );
-      cellPath.push(["MANIPULATION", info]);
     }
+    var nearCell = findNearestCellToEntity(entSel);
+    var path = astarAlg(
+      cellsList[cellIndex(this.position.x, this.position.y)],
+      nearCell
+    );
+    for (var i = 0; i < path.length; i++) {
+      cellPath.push(path[i]);
+    }
+    cellPath.push(["MANIPULATION", info]);
   }
 
   moveTo(x, y) {

@@ -221,7 +221,6 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  console.log(cellPath);
   frameRate(3);
   if (itemsList.length == 0 || modifica) {
     getAllEntity();
@@ -264,6 +263,7 @@ function draw() {
 
 function actionFounder() {
   //switch case con le azioni
+  console.log(cellPath[0][0]);
   switch (cellPath[0][0]) {
     case "ARRIVING":
       agent.arriving(cellPath[0][1]);
