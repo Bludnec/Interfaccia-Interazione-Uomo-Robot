@@ -1,19 +1,52 @@
 var idCounter = 0;
 
+var lastCoordinates = [];
+
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 var checkMoveAgent = document.getElementById("move-agent");
 
-document.getElementById("delete-entity-btn").addEventListener("click", () => {
-  if (teomClass.innerHTML == "Agent") {
+document.getElementById("delete-entity-btn0").addEventListener("click", () => {
+  if (document.getElementById("teom-class0").innerHTML == "Agent") {
     agent = null;
     deleteAgent();
   } else {
-    deleteCellOccupied(teomId.innerHTML);
-    deleteEntity(teomId.innerHTML);
+    deleteCellOccupied(document.getElementById("teom-id0").innerHTML);
+    deleteEntity(document.getElementById("teom-id0").innerHTML);
   }
-  document.getElementById("table-img-list").classList.remove("hidden");
-  document.getElementById("table-entity-on-map").classList.add("hidden");
+  showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+  setTimeout(function () {
+    getMap();
+  }, 300);
+  setTimeout(function () {
+    getAllEntity();
+  }, 600);
+});
+document.getElementById("delete-entity-btn1").addEventListener("click", () => {
+  if (document.getElementById("teom-class1").innerHTML == "Agent") {
+    agent = null;
+    deleteAgent();
+  } else {
+    deleteCellOccupied(document.getElementById("teom-id1").innerHTML);
+    deleteEntity(document.getElementById("teom-id1").innerHTML);
+  }
+  showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+  setTimeout(function () {
+    getMap();
+  }, 300);
+  setTimeout(function () {
+    getAllEntity();
+  }, 600);
+});
+document.getElementById("delete-entity-btn2").addEventListener("click", () => {
+  if (document.getElementById("teom-class2").innerHTML == "Agent") {
+    agent = null;
+    deleteAgent();
+  } else {
+    deleteCellOccupied(document.getElementById("teom-id2").innerHTML);
+    deleteEntity(document.getElementById("teom-id2").innerHTML);
+  }
+  showInfoTable(lastCoordinates[0], lastCoordinates[1]);
   setTimeout(function () {
     getMap();
   }, 300);
@@ -42,6 +75,8 @@ function mousePressed() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
 
+  lastCoordinates = [x, y];
+
   var thisCell = cellsList[cellIndex(x, y)];
 
   if (agent != null && checkMoveAgent.checked == true) {
@@ -59,43 +94,7 @@ function mousePressed() {
     editWalls(mouseX, mouseY);
   }
 
-  var indexElement = getElementInPosition(x, y);
-
-  if (cellsList[cellIndex(x, y)].occupied != null) {
-    for (var i = 0; i < itemsList.length; i++) {
-      if (itemsList[i].id == cellsList[cellIndex(x, y)].occupied) {
-        indexElement = i;
-      }
-    }
-  }
-
-  // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
-  if (indexElement != null) {
-    document.getElementById("table-img-list").classList.add("hidden");
-    document.getElementById("table-entity-on-map").classList.remove("hidden");
-    if (indexItemSelected != null) {
-      deselectEntityImage();
-    }
-
-    // controllo se clicco un elemento o l'agente
-    if (indexElement != -1) {
-      teomCoordinates.innerHTML =
-        "X:" +
-        itemsList[indexElement].position.x +
-        " Y:" +
-        itemsList[indexElement].position.y;
-      teomId.innerHTML = itemsList[indexElement].id;
-      teomClass.innerHTML = itemsList[indexElement].entClass;
-      teomImage.src = `static/images/${itemsList[indexElement].entClass}.png`;
-    } else {
-      teomSize.innerHTML = "";
-      teomCoordinates.innerHTML =
-        "X:" + agent.position.x + " Y:" + agent.position.y;
-      teomId.innerHTML = "";
-      teomClass.innerHTML = "Agent";
-      teomImage.src = `static/images/agent.png`;
-    }
-  }
+  showInfoTable(x, y);
 }
 
 function mouseReleased() {
@@ -341,4 +340,76 @@ function checkWallNeighbor(cell, x, y) {
     }
   }
   return check;
+}
+
+function showInfoTable(x, y) {
+  // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
+  var showItem = [];
+  for (var i = 0; i < itemsList.length; i++) {
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
+      showItem.push(itemsList[i]);
+    }
+  }
+
+  if (cellsList[cellIndex(x, y)].occupied != null) {
+    for (var i = 0; i < itemsList.length; i++) {
+      if (itemsList[i].id == cellsList[cellIndex(x, y)].occupied) {
+        showItem.push(itemsList[i]);
+      }
+    }
+  }
+  document.getElementById("table-entity-on-map1").classList.add("hidden");
+  document.getElementById("table-entity-on-map2").classList.add("hidden");
+  console.log(showItem);
+  // CONTROLLARE SE IL CLICK VIENE FATTO SULL'AGENTE
+  if (showItem.length > 0) {
+    if (indexItemSelected != null) {
+      deselectEntityImage();
+    }
+    for (var i = 0; i < showItem.length; i++) {
+      // controllo se clicco un elemento o l'agente
+      document
+        .getElementById(`table-entity-on-map${i}`)
+        .classList.remove("hidden");
+
+      document.getElementById(`teom-coordinates${i}`).innerHTML =
+        "X:" + showItem[i].position.x + " Y:" + showItem[i].position.y;
+
+      document.getElementById(`teom-id${i}`).innerHTML = showItem[i].id;
+
+      document.getElementById(`teom-position${i}`).innerHTML = "On the floor";
+
+      for (var k = 0; k < positioningList[0].length; k++) {
+        if (
+          positioningList[0][k][0] ==
+          document.getElementById(`teom-id${i}`).innerHTML
+        ) {
+          document.getElementById(`teom-position${i}`).innerHTML = "On top";
+        }
+      }
+      for (var k = 0; k < positioningList[1].length; k++) {
+        if (
+          positioningList[1][k][0] ==
+          document.getElementById(`teom-id${i}`).innerHTML
+        ) {
+          document.getElementById(`teom-position${i}`).innerHTML = "On bottom";
+        }
+      }
+      for (var k = 0; k < positioningList[2].length; k++) {
+        if (
+          positioningList[2][k][0] ==
+          document.getElementById(`teom-id${i}`).innerHTML
+        ) {
+          document.getElementById(`teom-position${i}`).innerHTML = "Inside";
+        }
+      }
+
+      document.getElementById(`teom-class${i}`).innerHTML =
+        showItem[i].entClass;
+
+      document.getElementById(
+        `teom-image${i}`
+      ).src = `static/images/${showItem[i].entClass}.png`;
+    }
+  }
 }

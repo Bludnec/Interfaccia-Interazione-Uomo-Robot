@@ -62,7 +62,9 @@ h2 {
 }
 
 #til-image,
-#teom-image {
+#teom-image0,
+#teom-image1,
+#teom-image1 {
   height: 40px;
   width: 40px;
 }
@@ -113,4 +115,25 @@ footer {
   float: left;
   margin-left: 10px;
   margin-top: 7px;
+}
+
+#entita {
+  float: left;
+  width: 60%;
+}
+#table-img-list {
+  margin-top: -10px;
+  float: left;
+  width: 40%;
+}
+
+#table-entity-on-map {
+  float: left;
+}
+.width_33 {
+  width: 33%;
+}
+
+.width_50 {
+  width: 50%;
 }

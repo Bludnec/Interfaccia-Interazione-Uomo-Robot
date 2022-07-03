@@ -109,14 +109,21 @@
       <!---->
 
       <div id="canvas-zone"></div>
+      <div id="tab-list">
+        <ul
+          data-cls-tabs="flex-justify-start"
+          data-role="tabs"
+          data-expand="true"
+        >
+          <li><a href="#_target_4">Entità</a></li>
+          <li><a href="#_target_5">Tabella informazioni</a></li>
+        </ul>
 
-      <div id="entities-list">
-        <div class="row">
-          <div class="col-sm">
-            <p>Entità</p>
-            <div class="column" id="img-list"></div>
-          </div>
-          <div class="col-sm">
+        <div class="border bd-default no-border-top p-2">
+          <div id="_target_4">
+            <div id="entita" >
+              <div class="column" id="img-list"></div>
+            </div>          
             <div id="table-img-list">
               <table class="table">
                 <thead>
@@ -174,7 +181,10 @@
                 </tbody>
               </table>
             </div>
-            <div class="hidden" id="table-entity-on-map">
+          </div>
+
+          <div id="_target_5">
+            <div class="width_50" id="table-entity-on-map0" >
               <table class="table">
                 <thead>
                   <tr>
@@ -185,9 +195,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><img id="teom-image" src="" /></td>
-                    <td id="teom-class">Class</td>
-                    <td id="teom-id">Id</td>
+                    <td><img id="teom-image0" src="static\images\empty.png" /></td>
+                    <td id="teom-class0">Class</td>
+                    <td id="teom-id0">Id</td>
                   </tr>
                 </tbody>
                 <thead>
@@ -199,10 +209,82 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td id="teom-position">On the floor</td>
-                    <td id="teom-coordinates">X:0 Y:0</td>
-                    <td id="teom-delete">
-                      <button id="delete-entity-btn">
+                    <td id="teom-position0">On the floor</td>
+                    <td id="teom-coordinates0">X:0 Y:0</td>
+                    <td id="teom-delete0">
+                      <button id="delete-entity-btn0">
+                        <i class="bi bi-trash3-fill"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="width_50 hidden" id="table-entity-on-map1" >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img id="teom-image1" src="static\images\empty.png" /></td>
+                    <td id="teom-class1">Class</td>
+                    <td id="teom-id1">Id</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">Coordinates</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="teom-position1">On the floor</td>
+                    <td id="teom-coordinates1">X:0 Y:0</td>
+                    <td id="teom-delete1">
+                      <button id="delete-entity-btn1">
+                        <i class="bi bi-trash3-fill"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="width_50 hidden" id="table-entity-on-map2" >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img id="teom-image2" src="static\images\empty.png" /></td>
+                    <td id="teom-class2">Class</td>
+                    <td id="teom-id2">Id</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">Coordinates</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="teom-position2">On the floor</td>
+                    <td id="teom-coordinates2">X:0 Y:0</td>
+                    <td id="teom-delete2">
+                      <button id="delete-entity-btn2">
                         <i class="bi bi-trash3-fill"></i>
                       </button>
                     </td>
@@ -211,8 +293,11 @@
               </table>
             </div>
           </div>
+          
+          <div class="clear-float"></div>
         </div>
       </div>
+      
       <footer></footer>
     </div>
 

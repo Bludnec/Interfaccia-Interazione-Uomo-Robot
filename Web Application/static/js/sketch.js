@@ -27,14 +27,6 @@ var tilPosition = document.getElementById("til-position");
 var tilX = document.getElementById("til-x");
 var tilY = document.getElementById("til-y");
 
-// Table entity on map
-var teomImage = document.getElementById("teom-image");
-var teomId = document.getElementById("teom-id");
-var teomClass = document.getElementById("teom-class");
-var teomCoordinates = document.getElementById("teom-coordinates");
-var teomPosition = document.getElementById("teom-position");
-//
-
 var boolLoadMap = false;
 
 var agent;
@@ -305,8 +297,6 @@ function actionFounder() {
 
 /* Functions for click an entity */
 function clickEntityImage() {
-  document.getElementById("table-img-list").classList.remove("hidden");
-  document.getElementById("table-entity-on-map").classList.add("hidden");
   if (this.classList == "selected") {
     deselectEntityImage();
   } else if (idItemSelected != this.id && idItemSelected != null) {
