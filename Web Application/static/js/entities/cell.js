@@ -36,7 +36,7 @@ class Cell {
       case "bedroom":
         fill("yellow");
         break;
-      case "livingRoom":
+      case "livingroom":
         fill("brown");
         break;
       case "balcony":

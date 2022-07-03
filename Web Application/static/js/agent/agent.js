@@ -97,6 +97,30 @@ class Agent {
      * taking (source theme) e releasing(loc = goal, theme)
      */
     if (info["PATH"] != undefined) {
+      // MOTION
+      var entityZoneToRelease;
+      for (var i = 0; i < itemsList.length; i++) {
+        if (itemsList[i].id == info["PATH"]) {
+          entityZoneToRelease = itemsList[i];
+          break;
+        }
+      }
+      if (entityZoneToRelease != undefined) {
+        // L'agente arrivare vicino ad un'entità.
+        var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
+        cellPath = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          cellaVicinoEntità
+        );
+      } else {
+        var nearestCell = findNearestCellToLocation(info["PATH"]);
+        if (!(nearestCell == -1)) {
+          cellPath = astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            nearestCell
+          );
+        }
+      }
     }
     // TAKING
     var entSel;
@@ -204,7 +228,7 @@ class Agent {
           }
         }
         if (entityZoneToRelease != undefined) {
-          // L'agente deve portarlo vicino ad un'entità.
+          // L'agente deve spostarsi vicino ad un'entità.
           var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
           var path = astarAlg(
             cellsList[cellIndex(this.position.x, this.position.y)],
@@ -243,7 +267,6 @@ class Agent {
           cellsList[cellIndex(this.position.x, this.position.y)],
           cellaVicinoEntità
         );
-        console.log(path);
         for (var i = 0; i < path.length; i++) {
           cellPath.push(path[i]);
         }
@@ -256,8 +279,6 @@ class Agent {
    */
   releasing(info) {
     console.log("Releas: ", entityTakenByAgent);
-    console.log(info);
-    console.log(entityTakenByAgent.id, info["THEME"]);
     if (entityTakenByAgent != undefined) {
       if (entityTakenByAgent.id == info["THEME"]) {
         if (info["LOCATION_OF_CONFINEMENT"] != undefined) {

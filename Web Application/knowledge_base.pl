@@ -17,7 +17,7 @@
 
 zone(kitchen).
 zone(bedroom).
-zone(livingRoom).
+zone(livingroom).
 zone(balcony).
 zone(bathroom). 
 

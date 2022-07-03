@@ -11,6 +11,10 @@ var output = {
           name: "THEME",
           value: "plate0",
         },
+        {
+          name: "PATH",
+          value: "bathroom",
+        },
       ],
     },
   ],
