@@ -3,7 +3,7 @@ var cellsList = [];
 var itemsList = [];
 var abilityList = [];
 var positioningList = [];
-var statusList = [];
+var powerStatusList = [];
 var urlList;
 var modifica = false;
 

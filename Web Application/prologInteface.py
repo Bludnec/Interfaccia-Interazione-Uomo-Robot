@@ -103,7 +103,7 @@ def getLexicalMapDAOImpl():
         zoneMap = list(prolog.query("cell(Id,X,Y,"+x['Zone']+",Walls)"))
         if zoneMap != []:
             zoneMap.insert(0,x['Zone'])
-            allLexRef[1].append(zoneMap)
+        allLexRef[1].append(zoneMap)
 
     return allLexRef
 
@@ -212,7 +212,6 @@ def getEntitySizeDAOImpl(id):
 def updateEntityPositionDAOImpl(id, x, y, z):
     entityValues = getEntityDAOImpl(id)
     entitySize = getEntitySizeDAOImpl(id)
-    print(entitySize)
     deleteEntityDAOImpl(id)
     prolog.assertz("entity(" + id + "," + entityValues["Name"] + "," +
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
@@ -416,7 +415,7 @@ def getEntityAbilityMapDAOImpl():
         allAbility.append(abilityList)
     return allAbility
 
-def getEntityStatusOnMapDAOImpl():
+def getEntityPowerStatusOnMapDAOImpl():
     allStatus = []
     powerStatusList = list(prolog.query('power_status(Id,Status)'))
     physicalStatusList = list(prolog.query('physical_status(Id,Status)'))

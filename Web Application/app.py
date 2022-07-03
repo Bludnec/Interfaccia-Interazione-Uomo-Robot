@@ -234,8 +234,8 @@ def allEntityAbilityOnMap():
         return jsonify(lexRef)
 
 # Get status' enitity.
-@app.route('/entity/status/all', methods=['GET'])
-def allEntityStatusOnMap():
+@app.route('/entity/power-status/all', methods=['GET'])
+def allEntityPowerStatusOnMap():
     if request.method == "GET":
-        lexRef = getEntityStatusOnMapDAOImpl()
+        lexRef = getEntityPowerStatusOnMapDAOImpl()
         return jsonify(lexRef)

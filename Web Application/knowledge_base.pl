@@ -61,6 +61,7 @@ size(laptop,small).
 size(smartphone,small).
 size(cup,small).
 size(plate,small).
+size(microwave,small).
 size(microwave,medium).
 size(book,small).
 size(key,small).

@@ -336,8 +336,14 @@ function mouseReleased() {
       getEntityPositioningOnMap();
     }, 500);
     setTimeout(function () {
-      getMap();
+      getEntityPowerStatusOnMap();
     }, 600);
+    setTimeout(function () {
+      getAllEntity();
+    }, 700);
+    setTimeout(function () {
+      getMap();
+    }, 900);
   }
 }
 

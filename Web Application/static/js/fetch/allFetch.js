@@ -8,6 +8,7 @@ async function getAllEntity() {
   data[1].sort(function (a, b) {
     return a.id - b.id;
   });
+
   if (!(data.length == 0)) {
     for (var i = 0; i < data[0].length; i++) {
       var position = new Position(data[0][i].X, data[0][i].Y, data[0][i].Z);
@@ -21,6 +22,11 @@ async function getAllEntity() {
           data[1][i].SizeX,
           data[1][i].SizeY
         );
+        for (var k = 0; k < powerStatusList.length; k++) {
+          if (powerStatusList[k].Id == data[0][i].Id) {
+            entity.status = powerStatusList[k].Status;
+          }
+        }
         sX = data[1][i].SizeX - 1;
         sY = data[1][i].SizeY - 1;
         /**
@@ -502,8 +508,8 @@ async function getEntityPositioningOnMap() {
   positioningList = data;
 }
 
-async function getEntityStatusOnMap() {
-  let response = await fetch("entity/status/all");
+async function getEntityPowerStatusOnMap() {
+  let response = await fetch("entity/power-status/all");
   let data = await response.json();
-  statusList = data;
+  powerStatusList = data[0];
 }
