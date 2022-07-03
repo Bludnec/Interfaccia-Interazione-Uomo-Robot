@@ -58,9 +58,4 @@ function inputGenerator() {
   });
 
   translator(output);
-  /*
-  console.log(test);
-  agent.motion(test);*/
-  //var test = { Theme: inputText };
-  //agent.taking(test);
 }

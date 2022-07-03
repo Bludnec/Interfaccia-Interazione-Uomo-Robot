@@ -289,6 +289,9 @@ function actionFounder() {
     case "MOTION":
       agent.motion(cellPath[0][1]);
       break;
+    case "PLACING":
+      agent.bringing(cellPath[0][1]);
+      break;
     case "RELEASING":
       agent.releasing(cellPath[0][1]);
       break;

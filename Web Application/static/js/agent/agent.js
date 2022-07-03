@@ -88,14 +88,10 @@ class Agent {
 
   attaching(info) {}
   /**
-   * @param {info} info Dizionario dove può essere presente GOAL (endpoint), PATH,
-   * SOURCE (start) e THEME.
+   * @param {Dict} info Il robot porta un oggetto (THEME) ad una destinazione (GOAL), facendo un determirnato percorso (PATH) e
+   * partendo da un determinato punto (SOURCE)
    */
   bringing(info) {
-    /**
-     * se c'è motion ci spostiamo in quella zona e poi facciamo
-     * taking (source theme) e releasing(loc = goal, theme)
-     */
     if (info["PATH"] != undefined) {
       // MOTION
       var entityZoneToRelease;
@@ -150,57 +146,72 @@ class Agent {
     cellPath.push(["RELEASING", newInfo]);
   }
 
+  /**
+   * @param {Dict} info Il robot va verso una direzione (DIRECTION).
+   */
   change_direction(info) {}
 
+  /**
+   * @param {Dict} info Il orobot cambia lo stato di un oggetto (DEVICE).
+   */
   change_operational_state(info) {}
 
+  /**
+   * @param {Dict} info Il robot apre/chiude un'entità (CONTAINING_OBJECT).
+   */
   closure(info) {}
 
   /**
-   * @param {*} info  Dizionario che può contenere THEME (entità)
+   * @param {*} info  Un robot afferra un'entità (THEME).
    */
   manipulation(info) {
-    if (info["THEME"] != undefined) {
-      if (entityTakenByAgent == undefined) {
-        var entity;
-        for (var i = 0; i < itemsList.length; i++) {
-          if (itemsList[i].id == info["THEME"]) {
-            entity = itemsList[i];
+    var listaAbilita = [];
+    for (var i = 0; i < abilityList.length; i++) {
+      if (info["THEME"] == abilityList[i][0]) {
+        listaAbilita = abilityList[i];
+      }
+    }
+    if (listaAbilita.includes("move_ability")) {
+      if (info["THEME"] != undefined) {
+        if (entityTakenByAgent == undefined) {
+          var entity;
+          for (var i = 0; i < itemsList.length; i++) {
+            if (itemsList[i].id == info["THEME"]) {
+              entity = itemsList[i];
+            }
           }
-        }
-        if (
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[0] == "false" &&
-            this.position.x == entity.position.x &&
-            this.position.y == entity.position.y - 1) ||
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[1] == "false" &&
-            this.position.x == entity.position.x + 1 &&
-            this.position.y == entity.position.y) ||
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[2] == "false" &&
-            this.position.x == entity.position.x &&
-            this.position.y == entity.position.y + 1) ||
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[3] == "false" &&
-            this.position.x == entity.position.x - 1 &&
-            this.position.y == entity.position.y)
-        ) {
-          // TO DO: cambiare posizione dell'entità presa in -1
-          updateEntityPosition(entity.id, -1, -1, 0);
-          setTimeout(function () {
-            entityTakenByAgent = entity;
-            getAllEntity();
-          }, 200);
+          if (
+            (cellsList[cellIndex(entity.position.x, entity.position.y)]
+              .walls[0] == "false" &&
+              this.position.x == entity.position.x &&
+              this.position.y == entity.position.y - 1) ||
+            (cellsList[cellIndex(entity.position.x, entity.position.y)]
+              .walls[1] == "false" &&
+              this.position.x == entity.position.x + 1 &&
+              this.position.y == entity.position.y) ||
+            (cellsList[cellIndex(entity.position.x, entity.position.y)]
+              .walls[2] == "false" &&
+              this.position.x == entity.position.x &&
+              this.position.y == entity.position.y + 1) ||
+            (cellsList[cellIndex(entity.position.x, entity.position.y)]
+              .walls[3] == "false" &&
+              this.position.x == entity.position.x - 1 &&
+              this.position.y == entity.position.y)
+          ) {
+            // TO DO: cambiare posizione dell'entità presa in -1
+            updateEntityPosition(entity.id, -1, -1, 0);
+            setTimeout(function () {
+              entityTakenByAgent = entity;
+              getAllEntity();
+            }, 200);
+          }
         }
       }
     }
-    console.log("Manip: ", entityTakenByAgent);
   }
 
   /**
-   * DA CAMBIARE
-   * @param {dict} info Dizionario dove può essere presente GOAL, PATH E THEME(?)
+   * @param {dict} info Il robot arriva in un determinato punto (GOAL), percorrendo un determinato percorso (PATH).
    */
   motion(info) {
     if (info["GOAL"] != undefined) {
@@ -275,7 +286,7 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Dizionario che può contenere THEME e LOCATION_OF_CONFINEMENT
+   * @param {dict} info Il robot rilascia l'entità che ha in mano (THEME) in un determinato punto (LOCATION_OF_CONFINEMENT).
    */
   releasing(info) {
     console.log("Releas: ", entityTakenByAgent);
@@ -355,32 +366,39 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Dizionario che può contenere Source (zone) e THEME (entity)
+   * @param {dict} info Il robot prende un'entità (THEME).
    * SOURCE poco utile perché se sappiamo l'id del THEME allora sappiamo già dov'è.
    */
   taking(info) {
-    console.log("Tak: ", entityTakenByAgent);
-
     /*if (info["SOURCE"] != undefined) {
       // Abbiamo informazioni della zona e dell'entità.
     }*/
-    // Abbiamo solo informazioni sull'entità da prendere.
     // TO DO: check se possiamo muovere l'oggetto.
-    var entSel;
-    for (var i = 0; i < itemsList.length; i++) {
-      if (itemsList[i].id == info["THEME"]) {
-        entSel = itemsList[i];
+    var listaAbilita = [];
+    for (var i = 0; i < abilityList.length; i++) {
+      if (info["THEME"] == abilityList[i][0]) {
+        listaAbilita = abilityList[i];
       }
     }
-    var nearCell = findNearestCellToEntity(entSel);
-    var path = astarAlg(
-      cellsList[cellIndex(this.position.x, this.position.y)],
-      nearCell
-    );
-    for (var i = 0; i < path.length; i++) {
-      cellPath.push(path[i]);
+    if (listaAbilita.includes("move_ability")) {
+      var entSel;
+      for (var i = 0; i < itemsList.length; i++) {
+        if (itemsList[i].id == info["THEME"]) {
+          entSel = itemsList[i];
+        }
+      }
+      var nearCell = findNearestCellToEntity(entSel);
+      var path = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        nearCell
+      );
+      for (var i = 0; i < path.length; i++) {
+        cellPath.push(path[i]);
+      }
+      cellPath.push(["MANIPULATION", info]);
+    } else {
+      console.log("Non posso afferrare l'entità.");
     }
-    cellPath.push(["MANIPULATION", info]);
   }
 
   moveTo(x, y) {
@@ -514,6 +532,10 @@ function findNearestCellToEntity(entity) {
   return tempCell;
 }
 
+/**
+ * @param {String} location
+ * @returns la Cell più vicina alla location.
+ */
 function findNearestCellToLocation(location) {
   var cellCounter = 100000000;
   var tempCell = -1;

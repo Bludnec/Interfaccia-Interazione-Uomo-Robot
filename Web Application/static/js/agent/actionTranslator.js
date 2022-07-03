@@ -1,19 +1,11 @@
 var output = {
   frames: [
     {
-      name: "BRINGING",
+      name: "TAKING",
       arguments: [
-        {
-          name: "GOAL",
-          value: "kitchen",
-        },
         {
           name: "THEME",
           value: "plate0",
-        },
-        {
-          name: "PATH",
-          value: "bathroom",
         },
       ],
     },
