@@ -18,6 +18,9 @@ class Entity {
   }
   show() {
     var img = eval(`${this.entClass}Image`);
+    if (this.status == "on") {
+      img = eval(`${this.entClass}OnImage`);
+    }
     image(img, this.mapX, this.mapY, w * this.sizeX, w * this.sizeY);
   }
 }

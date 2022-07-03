@@ -2,7 +2,8 @@ var cols, rows;
 var cellsList = [];
 var itemsList = [];
 var abilityList = [];
-var positioningList;
+var positioningList = [];
+var statusList = [];
 var urlList;
 var modifica = false;
 
@@ -78,7 +79,9 @@ var bedImage,
   wardrobeImage,
   windowImage;
 var agentImage;
+var laptopOnImage, microwaveOnImage;
 
+var entityWithPowerStatus = ["laptopOn", "microwaveOn"];
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
@@ -89,6 +92,9 @@ function preload() {
      * Creo la lista delle immagini selezionabili sulla web-app
      */
     for (var i = 0; i < data.length; i++) {
+      if (entityWithPowerStatus.includes(data[i]["Class"])) {
+        continue;
+      }
       var img = document.createElement("img");
       img.src = data[i]["Url"];
       img.id = `entity-${i}`;
@@ -141,8 +147,14 @@ function preload() {
         case "laptop":
           laptopImage = loadImage(data[i]["Url"]);
           break;
+        case "laptopOn":
+          laptopOnImage = loadImage(data[i]["Url"]);
+          break;
         case "microwave":
           microwaveImage = loadImage(data[i]["Url"]);
+          break;
+        case "microwaveOn":
+          microwaveOnImage = loadImage(data[i]["Url"]);
           break;
         case "plate":
           plateImage = loadImage(data[i]["Url"]);
@@ -309,6 +321,10 @@ function clickEntityImage() {
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
+    if (entityWithPowerStatus.includes(this.alt + "On")) {
+      document.getElementById("power_status_col").classList.remove("hidden");
+      document.getElementById("power_status").classList.remove("hidden");
+    }
   } else {
     tilImage.src = this.src;
     tilClass.innerHTML = this.alt;
@@ -317,6 +333,10 @@ function clickEntityImage() {
     idItemSelected = this.id;
     indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
+    if (entityWithPowerStatus.includes(this.alt + "On")) {
+      document.getElementById("power_status_col").classList.remove("hidden");
+      document.getElementById("power_status").classList.remove("hidden");
+    }
   }
 }
 
@@ -331,6 +351,9 @@ function deselectEntityImage() {
   idItemSelected = null;
   indexItemSelected = null;
   classItemSelected = null;
+
+  document.getElementById("power_status_col").classList.add("hidden");
+  document.getElementById("power_status").classList.add("hidden");
 }
 
 /* Return the array's index of the cell in position i,j. */

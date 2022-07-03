@@ -162,10 +162,18 @@ function mouseReleased() {
               document.getElementById("til-x").value,
               document.getElementById("til-y").value
             );
-            idCounter++;
           }
-
-          deselectEntityImage();
+          if (entityWithPowerStatus.includes(classItemSelected + "On")) {
+            setTimeout(function () {
+              insertEntityStatus(
+                (classItemSelected + idCounter.toString()).toString(),
+                "power",
+                document.getElementById("power_status").value
+              );
+              idCounter++;
+              deselectEntityImage();
+            }, 200);
+          }
         }
         /**
          *  Se è stata scelta l'opzione on_top.
@@ -198,6 +206,17 @@ function mouseReleased() {
                     document.getElementById("til-x").value,
                     document.getElementById("til-y").value
                   );
+                  if (
+                    entityWithPowerStatus.includes(classItemSelected + "On")
+                  ) {
+                    setTimeout(function () {
+                      insertEntityStatus(
+                        (classItemSelected + idCounter.toString()).toString(),
+                        "power",
+                        document.getElementById("power_status").value
+                      );
+                    }, 200);
+                  }
                   setTimeout(function () {
                     insertOnTop(
                       classItemSelected + idCounter,
@@ -205,7 +224,7 @@ function mouseReleased() {
                     );
                     idCounter++;
                     deselectEntityImage();
-                  }, 200);
+                  }, 300);
                 }
               }
             );
@@ -227,7 +246,15 @@ function mouseReleased() {
                   document.getElementById("til-x").value,
                   document.getElementById("til-y").value
                 );
-
+                if (entityWithPowerStatus.includes(classItemSelected + "On")) {
+                  setTimeout(function () {
+                    insertEntityStatus(
+                      (classItemSelected + idCounter.toString()).toString(),
+                      "power",
+                      document.getElementById("power_status").value
+                    );
+                  }, 200);
+                }
                 setTimeout(function () {
                   insertOnBottom(
                     classItemSelected + idCounter,
@@ -235,7 +262,7 @@ function mouseReleased() {
                   );
                   deselectEntityImage();
                   idCounter++;
-                }, 200);
+                }, 300);
               }
             }
           );
@@ -264,7 +291,19 @@ function mouseReleased() {
                         document.getElementById("til-x").value,
                         document.getElementById("til-y").value
                       );
-
+                      if (
+                        entityWithPowerStatus.includes(classItemSelected + "On")
+                      ) {
+                        setTimeout(function () {
+                          insertEntityStatus(
+                            (
+                              classItemSelected + idCounter.toString()
+                            ).toString(),
+                            "power",
+                            document.getElementById("power_status").value
+                          );
+                        }, 200);
+                      }
                       // INSERIRE IL CONTROLLO DELLO SPAZIO INTERNO DISPONIBILE !!!!!
                       setTimeout(function () {
                         insertInside(
@@ -273,7 +312,7 @@ function mouseReleased() {
                         );
                         idCounter++;
                         deselectEntityImage();
-                      }, 200);
+                      }, 300);
                     }
                   }
                 );
@@ -360,7 +399,7 @@ function showInfoTable(x, y) {
   }
   document.getElementById("table-entity-on-map1").classList.add("hidden");
   document.getElementById("table-entity-on-map2").classList.add("hidden");
-  console.log(showItem);
+
   // CONTROLLARE SE IL CLICK VIENE FATTO SULL'AGENTE
   if (showItem.length > 0) {
     if (indexItemSelected != null) {

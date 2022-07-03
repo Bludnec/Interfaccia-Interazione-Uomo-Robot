@@ -112,10 +112,12 @@ img(fridge,'static/images/fridge.png').
 img(television,'static/images/television.png').
 img(keyboard,'static/images/keyboard.png').
 img(laptop,'static/images/laptop.png').
+img(laptopOn,'static/images/laptop-on.png').
 img(smartphone,'static/images/smartphone.png').
 img(cup,'static/images/cup.png').
 img(plate,'static/images/plate.png').
 img(microwave,'static/images/microwave.png').
+img(microwaveOn,'static/images/microwave-on.png').
 img(book,'static/images/book.png').
 img(key,'static/images/key.png').
 img(bucket,'static/images/bucket.png').

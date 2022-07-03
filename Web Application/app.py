@@ -226,9 +226,16 @@ def entityInsideSpaceAvailable():
         return jsonify(spaceAvailable)
 
 
-# Get lexical references' enitity.
+# Get lexical references' entity.
 @app.route('/entity/ability/all', methods=['GET'])
 def allEntityAbilityOnMap():
     if request.method == "GET":
         lexRef = getEntityAbilityMapDAOImpl()
+        return jsonify(lexRef)
+
+# Get status' enitity.
+@app.route('/entity/status/all', methods=['GET'])
+def allEntityStatusOnMap():
+    if request.method == "GET":
+        lexRef = getEntityStatusOnMapDAOImpl()
         return jsonify(lexRef)

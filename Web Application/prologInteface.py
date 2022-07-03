@@ -1,3 +1,4 @@
+from asyncio import constants
 from cmath import e
 from itertools import count
 from pyswip import Prolog
@@ -136,7 +137,6 @@ def getEntityPositioningOnMapDAOImpl():
 
     return allPositioning
 
-
 # Agent
 def insertAgentDAOImpl(x,y):
     check = bool(list(prolog.query('agent(_,_)')))
@@ -155,7 +155,7 @@ def deleteAgentDAOImpl():
         print(list(prolog.query('agent(X,Y)'))[0])
         prolog.retract('agent(_,_)')
     except Exception as e: 
-        print("deleteEntityDAOImpl: ", e)
+        print("deleteAgentDAOImpl: ", e)
 
 def updateAgentPositionDAOImpl(x,y):
     deleteAgentDAOImpl()
@@ -181,6 +181,7 @@ def deleteEntityDAOImpl(id):
     try:
         prolog.retract('entity('+id+',_,_,_,_,_ )')
         deleteEntitySizeDAOImpl(id)
+        deleteEntityStatusDAOImpl(id)
     except Exception as e: 
         print("deleteEntityDAOImpl: ", e)
         
@@ -219,21 +220,20 @@ def updateEntityPositionDAOImpl(id, x, y, z):
 
 # Inserisce lo status di un'entità
 def insertEntityStatusDAOImpl(id,status,statusBool):
-    checkAbility = bool(list(prolog.query('entity_with_'+status+'_status('+id+')')))
-    checkPow = list(prolog.query(status+'_status('+id+',X)'))
-    print(checkAbility,checkPow)
+    checkAbility = bool(list(prolog.query(status+'_status_ability('+id+')')))
+    checkPow = bool(list(prolog.query(status+'_status('+id+',_)')))
     if checkAbility and not checkPow:
-        print("cazzo")
         prolog.assertz(status+'_status('+id+','+statusBool+')')
     else:
         print("Non è stato possibile inserire lo status.")
 
 def deleteEntityStatusDAOImpl(id):
     try:
-        prolog.retract('entity('+id+',_,_,_,_,_)')
+        prolog.retract('power_status('+id+',_)')
+        prolog.retract('physical_status('+id+',_)')
         print("Cancellazione andata a buon fine")
-    except:
-        print("Errore nella cancellazione dell'entity")
+    except Exception as e: 
+        print("deleteEntityStatusDAOImpl",e)
 
 # Aggiorna lo stato dell'entità
 def updateEntityStatusDAOImpl(id,statusBool):
@@ -415,3 +415,11 @@ def getEntityAbilityMapDAOImpl():
         abilityList.insert(0,x['Id'])
         allAbility.append(abilityList)
     return allAbility
+
+def getEntityStatusOnMapDAOImpl():
+    allStatus = []
+    powerStatusList = list(prolog.query('power_status(Id,Status)'))
+    physicalStatusList = list(prolog.query('physical_status(Id,Status)'))
+    allStatus.append(powerStatusList)
+    allStatus.append(physicalStatusList)
+    return allStatus

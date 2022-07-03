@@ -501,3 +501,9 @@ async function getEntityPositioningOnMap() {
   let data = await response.json();
   positioningList = data;
 }
+
+async function getEntityStatusOnMap() {
+  let response = await fetch("entity/status/all");
+  let data = await response.json();
+  statusList = data;
+}

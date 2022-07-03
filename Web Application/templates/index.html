@@ -153,6 +153,8 @@
                   <tr>
                     <th scope="col">X</th>
                     <th scope="col">Y</th>
+                    <th scope="col" id="power_status_col" class="hidden">Power status</th>
+                    <th scope="col" id="physical_status_col" class="hidden">Physical status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -177,6 +179,18 @@
                         value="1"
                       />
                     </td>
+                    <td>
+                    <select name="list" id="power_status" class="hidden">
+                      <option value="on">On</option>
+                      <option value="off">Off</option>
+                    </select>
+                    </td>
+                    <td>
+                      <select name="list" id="physical_status" class="hidden">
+                        <option value="open">Open</option>
+                        <option value="closed">Closed</option>
+                      </select>
+                      </td>
                   </tr>
                 </tbody>
               </table>
