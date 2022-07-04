@@ -1,3 +1,17 @@
+var output = {
+  frames: [
+    {
+      name: "CHANGE_OPERATIONAL_STATE",
+      arguments: [
+        {
+          name: "DEVICE",
+          values: ["laptop0"],
+        },
+      ],
+    },
+  ],
+};
+
 function translator(output) {
   // Scansiono tutti i frame presenti dentro "framses"
   console.log(output);

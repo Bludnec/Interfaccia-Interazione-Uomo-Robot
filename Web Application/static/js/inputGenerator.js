@@ -101,8 +101,8 @@ function inputGenerator() {
 
     console.log(JSON.stringify(inputText));
 
-    getOutputText(inputText);
+    //getOutputText(inputText);
   });
 
-  //translator(output);
+  translator(output);
 }

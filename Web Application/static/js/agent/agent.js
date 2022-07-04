@@ -152,9 +152,50 @@ class Agent {
   change_direction(info) {}
 
   /**
-   * @param {Dict} info Il orobot cambia lo stato di un oggetto (DEVICE).
+   * @param {Dict} info Il robot cambia lo stato di un oggetto (DEVICE).
    */
-  change_operational_state(info) {}
+  change_operational_state(info) {
+    for (var i = 0; i < powerStatusList.length; i++) {
+      if (info["DEVICE"] == powerStatusList[i].Id) {
+        var entity;
+        for (var j = 0; j < itemsList.length; j++) {
+          if (itemsList[i].id == powerStatusList[i].Id) {
+            entity = itemsList[i];
+          }
+        }
+        if (
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[0] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y - 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[1] == "false" &&
+            this.position.x == entity.position.x + 1 &&
+            this.position.y == entity.position.y) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[2] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y + 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[3] == "false" &&
+            this.position.x == entity.position.x - 1 &&
+            this.position.y == entity.position.y)
+        ) {
+          if (powerStatusList[i].Status == "on") {
+            updateEntityStatus(entity.id, "off");
+          } else {
+            updateEntityStatus(entity.id, "on");
+          }
+          setTimeout(function () {
+            getEntityStatusOnMap();
+          }, 400);
+          setTimeout(function () {
+            getAllEntity();
+          }, 600);
+        }
+      }
+    }
+  }
 
   /**
    * @param {Dict} info Il robot apre/chiude un'entità (CONTAINING_OBJECT).
@@ -198,7 +239,6 @@ class Agent {
               this.position.x == entity.position.x - 1 &&
               this.position.y == entity.position.y)
           ) {
-            // TO DO: cambiare posizione dell'entità presa in -1
             updateEntityPosition(entity.id, -1, -1, 0);
             setTimeout(function () {
               entityTakenByAgent = entity;
