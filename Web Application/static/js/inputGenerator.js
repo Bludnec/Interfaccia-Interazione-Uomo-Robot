@@ -36,7 +36,6 @@ function inputGenerator() {
     for (var i = 0; i < data[1].length; i++) {
       for (var k = 0; k < listInputText.length; k++) {
         if (listInputText[k] == data[1][i][0]) {
-          console.log(data[1][i][1]);
           var zona = {
             name: data[1][i][0],
             class: data[1][i][0],
@@ -101,7 +100,9 @@ function inputGenerator() {
     }
 
     console.log(JSON.stringify(inputText));
+
+    getOutputText(inputText);
   });
 
-  translator(output);
+  //translator(output);
 }

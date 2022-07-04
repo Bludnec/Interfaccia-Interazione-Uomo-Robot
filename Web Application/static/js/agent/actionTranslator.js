@@ -1,17 +1,3 @@
-var output = {
-  frames: [
-    {
-      name: "TAKING",
-      arguments: [
-        {
-          name: "THEME",
-          values: ["plate0"],
-        },
-      ],
-    },
-  ],
-};
-
 function translator(output) {
   // Scansiono tutti i frame presenti dentro "framses"
   console.log(output);

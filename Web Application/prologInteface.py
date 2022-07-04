@@ -184,6 +184,7 @@ def deleteEntityDAOImpl(id):
         prolog.retract('entity('+id+',_,_,_,_,_ )')
         deleteEntitySizeDAOImpl(id)
         deleteEntityStatusDAOImpl(id)
+        deleteEntityStatusDAOImpl(id)
     except Exception as e: 
         print("deleteEntityDAOImpl: ", e)
         
@@ -198,6 +199,14 @@ def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
     if(sizeBool):
         check = 0
     return check
+
+# Cancella 
+def deleteEntityStatusDAOImpl(id):
+    try:
+        prolog.retract("power_status("+id+",_)")
+        prolog.retract("physical_status("+id+",_)")
+    except Exception as e: 
+        print(e)
 
 # Cancella le dimensioni dell'entità con id in input
 def deleteEntitySizeDAOImpl(id):

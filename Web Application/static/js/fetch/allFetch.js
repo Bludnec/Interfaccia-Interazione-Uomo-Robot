@@ -519,3 +519,31 @@ async function getEntityStatusOnMap() {
   powerStatusList = data[0];
   physicalStatusList = data[1];
 }
+
+function getOutputText(JSONinput) {
+  var myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    "Basic dXRlbnRlX2NvbGF2ZWNjaGk6Y29sYXZlY2NoaVRFU0kyMDIy"
+  );
+  myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Access-Control-Allow-Origin", "http://127.0.0.1:5000/");
+  myHeaders.append("Access-Control-Allow-Credentials", "true");
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify(JSONinput),
+  };
+
+  fetch(
+    "http://sag.art.uniroma2.it/transformers_backend/get_srl",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      translator(result);
+    })
+    .catch((error) => console.log("error", error));
+}
