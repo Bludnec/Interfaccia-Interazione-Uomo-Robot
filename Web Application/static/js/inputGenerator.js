@@ -33,6 +33,25 @@ function inputGenerator() {
         }
       }
     }
+    for (var i = 0; i < data[1].length; i++) {
+      for (var k = 0; k < listInputText.length; k++) {
+        if (listInputText[k] == data[1][i][0]) {
+          console.log(data[1][i][1]);
+          var zona = {
+            name: data[1][i][0],
+            class: data[1][i][0],
+            position: {
+              X: data[1][i][2].X,
+              Y: data[1][i][2].Y,
+              Z: "0",
+            },
+            properties: [{ name: "walkable_ability", value: "true" }],
+            lexical_references: data[1][i][1],
+          };
+          inputText.entities.push(zona);
+        }
+      }
+    }
 
     for (var i = 0; i < entitySelected.length; i++) {
       var entity = {

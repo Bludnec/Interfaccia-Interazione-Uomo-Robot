@@ -119,6 +119,7 @@ def entityStatus():
         return jsonify(status)
     if request.method == "POST":
         req = request.get_json()
+        print(req)
         insertEntityStatusDAOImpl(req['id'],req['status'],req['statusBool'])
         return jsonify(req)
     if request.method == "DELETE":

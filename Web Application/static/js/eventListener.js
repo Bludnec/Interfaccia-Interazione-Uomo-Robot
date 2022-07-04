@@ -168,7 +168,7 @@ function mouseReleased() {
               insertEntityStatus(
                 (classItemSelected + idCounter.toString()).toString(),
                 "power",
-                document.getElementById("power_status").value
+                document.getElementById("power_status_value").value
               );
               idCounter++;
               deselectEntityImage();
@@ -179,7 +179,7 @@ function mouseReleased() {
               insertEntityStatus(
                 (classItemSelected + idCounter.toString()).toString(),
                 "physical",
-                document.getElementById("physical_status").value
+                document.getElementById("physical_status_value").value
               );
               idCounter++;
               deselectEntityImage();
@@ -224,7 +224,7 @@ function mouseReleased() {
                       insertEntityStatus(
                         (classItemSelected + idCounter.toString()).toString(),
                         "power",
-                        document.getElementById("power_status").value
+                        document.getElementById("power_status_value").value
                       );
                     }, 200);
                   }
@@ -262,7 +262,7 @@ function mouseReleased() {
                     insertEntityStatus(
                       (classItemSelected + idCounter.toString()).toString(),
                       "power",
-                      document.getElementById("power_status").value
+                      document.getElementById("power_status_value").value
                     );
                   }, 200);
                 }
@@ -311,7 +311,7 @@ function mouseReleased() {
                               classItemSelected + idCounter.toString()
                             ).toString(),
                             "power",
-                            document.getElementById("power_status").value
+                            document.getElementById("power_status_value").value
                           );
                         }, 200);
                       }

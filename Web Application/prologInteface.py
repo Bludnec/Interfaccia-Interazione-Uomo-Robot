@@ -101,8 +101,10 @@ def getLexicalMapDAOImpl():
 
     for x in zone:
         zoneMap = list(prolog.query("cell(Id,X,Y,"+x['Zone']+",Walls)"))
+        lexRefZoneMap = list(prolog.query("zone_lex_ref("+x['Zone']+",List)"))
         if zoneMap != []:
             zoneMap.insert(0,x['Zone'])
+            zoneMap.insert(1,lexRefZoneMap[0]["List"])
         allLexRef[1].append(zoneMap)
 
     return allLexRef

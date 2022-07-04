@@ -21,6 +21,8 @@ zone(livingroom).
 zone(balcony).
 zone(bathroom). 
 
+zone_lex_ref(kitchen,['cookhouse','galley','cookhouse']).
+
 % Classe - class(name).
 class(table).
 class(wardrobe).
