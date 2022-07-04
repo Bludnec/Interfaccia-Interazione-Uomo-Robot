@@ -73,6 +73,7 @@ size(window,medium).
 size(window,big).
 size(glass,small).
 size(door,medium).
+size(door,small).
 size(rug,small).
 size(rug,medium).
 size(rug,big).
@@ -86,6 +87,7 @@ weight(sofa,heavy).
 weight(chair,medium).
 weight(fridge,heavy).
 weight(television,medium).
+weight(television,small).
 weight(keyboard,light).
 weight(laptop,light).
 weight(smartphone,light).
@@ -107,14 +109,18 @@ weight(bed,heavy).
 img(agent,'static/images/agent.png').
 img(table,'static/images/table.png').
 img(wardrobe,'static/images/wardrobe.png').
+img(wardrobeOpen,'static/images/wardrobeOpen.png').
 img(sofa,'static/images/sofa.png').
 img(chair,'static/images/chair.png').
 img(fridge,'static/images/fridge.png').
+img(fridgeOpen,'static/images/fridgeOpen.png').
 img(television,'static/images/television.png').
+img(televisionOn,'static/images/televisionOn.png').
 img(keyboard,'static/images/keyboard.png').
 img(laptop,'static/images/laptop.png').
 img(laptopOn,'static/images/laptop-on.png').
 img(smartphone,'static/images/smartphone.png').
+img(smartphoneOn,'static/images/smartphoneOn.png').
 img(cup,'static/images/cup.png').
 img(plate,'static/images/plate.png').
 img(microwave,'static/images/microwave.png').
@@ -124,9 +130,12 @@ img(key,'static/images/key.png').
 img(bucket,'static/images/bucket.png').
 img(jar,'static/images/jar.png').
 img(lamp,'static/images/lamp.png').
+img(lampOn,'static/images/lampOn.png').
 img(window,'static/images/window.png').
+img(windowOpen,'static/images/windowOpen.png').
 img(glass,'static/images/glass.png').
 img(door,'static/images/door.png').
+img(doorOpen,'static/images/doorOpen.png').
 img(rug,'static/images/rug.png').
 img(bed,'static/images/bed.png').
 

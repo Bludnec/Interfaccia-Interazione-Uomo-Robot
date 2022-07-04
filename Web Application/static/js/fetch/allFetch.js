@@ -27,6 +27,11 @@ async function getAllEntity() {
             entity.status = powerStatusList[k].Status;
           }
         }
+        for (var k = 0; k < physicalStatusList.length; k++) {
+          if (physicalStatusList[k].Id == data[0][i].Id) {
+            entity.status = physicalStatusList[k].Status;
+          }
+        }
         sX = data[1][i].SizeX - 1;
         sY = data[1][i].SizeY - 1;
         /**
@@ -508,8 +513,9 @@ async function getEntityPositioningOnMap() {
   positioningList = data;
 }
 
-async function getEntityPowerStatusOnMap() {
-  let response = await fetch("entity/power-status/all");
+async function getEntityStatusOnMap() {
+  let response = await fetch("entity/status/all");
   let data = await response.json();
   powerStatusList = data[0];
+  physicalStatusList = data[1];
 }

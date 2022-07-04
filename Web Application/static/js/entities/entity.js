@@ -21,6 +21,9 @@ class Entity {
     if (this.status == "on") {
       img = eval(`${this.entClass}OnImage`);
     }
+    if (this.status == "open") {
+      img = eval(`${this.entClass}OpenImage`);
+    }
     image(img, this.mapX, this.mapY, w * this.sizeX, w * this.sizeY);
   }
 }

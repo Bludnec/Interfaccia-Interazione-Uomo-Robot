@@ -60,7 +60,14 @@ function inputGenerator() {
                 }
               }
             } else if (abilityList[j][k] == "physical_status_ability") {
-              // AGGIUNGERE CONTROLLO PHYSICAL STATUS
+              for (var q = 0; q < physicalStatusList.length; q++) {
+                if (physicalStatusList[q].Id == entitySelected[i][0]) {
+                  prop = {
+                    name: abilityList[j][k],
+                    value: physicalStatusList[q].Status,
+                  };
+                }
+              }
             } else {
               prop = {
                 name: abilityList[j][k],

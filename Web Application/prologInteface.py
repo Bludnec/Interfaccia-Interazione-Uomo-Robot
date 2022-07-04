@@ -415,7 +415,7 @@ def getEntityAbilityMapDAOImpl():
         allAbility.append(abilityList)
     return allAbility
 
-def getEntityPowerStatusOnMapDAOImpl():
+def getEntityStatusOnMapDAOImpl():
     allStatus = []
     powerStatusList = list(prolog.query('power_status(Id,Status)'))
     physicalStatusList = list(prolog.query('physical_status(Id,Status)'))

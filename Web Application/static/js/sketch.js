@@ -4,6 +4,7 @@ var itemsList = [];
 var abilityList = [];
 var positioningList = [];
 var powerStatusList = [];
+var physicalStatusList = [];
 var urlList;
 var modifica = false;
 
@@ -79,9 +80,25 @@ var bedImage,
   wardrobeImage,
   windowImage;
 var agentImage;
-var laptopOnImage, microwaveOnImage;
-
-var entityWithPowerStatus = ["laptopOn", "microwaveOn"];
+var laptopOnImage,
+  microwaveOnImage,
+  televisionOnImage,
+  smartphoneOnImage,
+  lampOnImage;
+var wardrobeOpenImage, fridgeOpenImage, doorOpenImage, windowOpenImage;
+var entityWithPowerStatus = [
+  "laptopOn",
+  "microwaveOn",
+  "televisionOn",
+  "smartphoneOn",
+  "lampOn",
+];
+var entityWithPhysicalStatus = [
+  "wardrobeOpen",
+  "fridgeOpen",
+  "doorOpen",
+  "windowOpen",
+];
 /**
  * The preload() function is used to handle
  *  asynchronous loading of external files in a blocking way
@@ -93,6 +110,9 @@ function preload() {
      */
     for (var i = 0; i < data.length; i++) {
       if (entityWithPowerStatus.includes(data[i]["Class"])) {
+        continue;
+      }
+      if (entityWithPhysicalStatus.includes(data[i]["Class"])) {
         continue;
       }
       var img = document.createElement("img");
@@ -126,8 +146,14 @@ function preload() {
         case "door":
           doorImage = loadImage(data[i]["Url"]);
           break;
+        case "doorOpen":
+          doorOpenImage = loadImage(data[i]["Url"]);
+          break;
         case "fridge":
           fridgeImage = loadImage(data[i]["Url"]);
+          break;
+        case "fridgeOpen":
+          fridgeOpenImage = loadImage(data[i]["Url"]);
           break;
         case "glass":
           glassImage = loadImage(data[i]["Url"]);
@@ -143,6 +169,9 @@ function preload() {
           break;
         case "lamp":
           lampImage = loadImage(data[i]["Url"]);
+          break;
+        case "lampOn":
+          lampOnImage = loadImage(data[i]["Url"]);
           break;
         case "laptop":
           laptopImage = loadImage(data[i]["Url"]);
@@ -165,6 +194,9 @@ function preload() {
         case "smartphone":
           smartphoneImage = loadImage(data[i]["Url"]);
           break;
+        case "smartphoneOn":
+          smartphoneOnImage = loadImage(data[i]["Url"]);
+          break;
         case "sofa":
           sofaImage = loadImage(data[i]["Url"]);
           break;
@@ -174,11 +206,20 @@ function preload() {
         case "television":
           televisionImage = loadImage(data[i]["Url"]);
           break;
+        case "televisionOn":
+          televisionOnImage = loadImage(data[i]["Url"]);
+          break;
         case "wardrobe":
           wardrobeImage = loadImage(data[i]["Url"]);
           break;
+        case "wardrobeOpen":
+          wardrobeOpenImage = loadImage(data[i]["Url"]);
+          break;
         case "window":
           windowImage = loadImage(data[i]["Url"]);
+          break;
+        case "windowOpen":
+          windowOpenImage = loadImage(data[i]["Url"]);
           break;
       }
     }
@@ -325,6 +366,10 @@ function clickEntityImage() {
       document.getElementById("power_status_col").classList.remove("hidden");
       document.getElementById("power_status").classList.remove("hidden");
     }
+    if (entityWithPhysicalStatus.includes(this.alt + "Open")) {
+      document.getElementById("physical_status_col").classList.remove("hidden");
+      document.getElementById("physical_status").classList.remove("hidden");
+    }
   } else {
     tilImage.src = this.src;
     tilClass.innerHTML = this.alt;
@@ -336,6 +381,10 @@ function clickEntityImage() {
     if (entityWithPowerStatus.includes(this.alt + "On")) {
       document.getElementById("power_status_col").classList.remove("hidden");
       document.getElementById("power_status").classList.remove("hidden");
+    }
+    if (entityWithPhysicalStatus.includes(this.alt + "Open")) {
+      document.getElementById("physical_status_col").classList.remove("hidden");
+      document.getElementById("physical_status").classList.remove("hidden");
     }
   }
 }
@@ -354,6 +403,8 @@ function deselectEntityImage() {
 
   document.getElementById("power_status_col").classList.add("hidden");
   document.getElementById("power_status").classList.add("hidden");
+  document.getElementById("physical_status_col").classList.add("hidden");
+  document.getElementById("physical_status").classList.add("hidden");
 }
 
 /* Return the array's index of the cell in position i,j. */

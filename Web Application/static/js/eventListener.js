@@ -174,6 +174,17 @@ function mouseReleased() {
               deselectEntityImage();
             }, 200);
           }
+          if (entityWithPhysicalStatus.includes(classItemSelected + "Open")) {
+            setTimeout(function () {
+              insertEntityStatus(
+                (classItemSelected + idCounter.toString()).toString(),
+                "physical",
+                document.getElementById("physical_status").value
+              );
+              idCounter++;
+              deselectEntityImage();
+            }, 200);
+          }
         }
         /**
          *  Se è stata scelta l'opzione on_top.
@@ -336,7 +347,7 @@ function mouseReleased() {
       getEntityPositioningOnMap();
     }, 500);
     setTimeout(function () {
-      getEntityPowerStatusOnMap();
+      getEntityStatusOnMap();
     }, 600);
     setTimeout(function () {
       getAllEntity();
