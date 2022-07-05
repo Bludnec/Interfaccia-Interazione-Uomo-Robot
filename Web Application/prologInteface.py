@@ -104,7 +104,6 @@ def getLexicalMapDAOImpl():
         lexRefZoneMap = list(prolog.query("zone_lex_ref("+x['Zone']+",List)"))
         
         if zoneMap != []:
-            print(x,lexRefZoneMap)
             zoneMap.insert(0,x['Zone'])
             zoneMap.insert(1,lexRefZoneMap[0]["List"])
         allLexRef[1].append(zoneMap)
@@ -156,7 +155,6 @@ def getAgentDAOImpl():
 
 def deleteAgentDAOImpl():
     try:
-        print(list(prolog.query('agent(X,Y)'))[0])
         prolog.retract('agent(_,_)')
     except Exception as e: 
         print("deleteAgentDAOImpl: ", e)
@@ -382,7 +380,6 @@ def deleteInsideDAOImpl(id1,id2):
         print("Errore nella cancellazione del fatto inside.")
 
 # Restistuice lo spazio rimanente dentro un'entità facendo il calcolo con quelle già presenti
-# print('InsideSpaceAvaiable: ',getInsideSpaceDAOImpl('id3'))
 def getInsideSpaceAvailableDAOImpl(id):
     if(bool(list(prolog.query('contain_ability('+id+')')))):
         sizeList = getEntitySizeDAOImpl(id)[0]

@@ -21,7 +21,7 @@ function inputGenerator() {
   var entitySelected = [];
 
   getLexicalMap().then((data) => {
-    map = [];
+    map1.clear();
     console.log(data);
     /* data = [[],[]]
      * prima lista di elementi = [[id, classe,x,y lista delle lex_ref],[...]]
@@ -36,11 +36,16 @@ function inputGenerator() {
         }
       }
     }
+    var tempCount = 0;
     for (var i = 0; i < data[1].length; i++) {
       for (var k = 0; k < listInputText.length; k++) {
         if (listInputText[k] == data[1][i][0]) {
+          // x input
+          map1.set(data[1][i][0].charAt(0) + "0", data[1][i][0]);
+          // x output
+          map1.set(data[1][i][0], data[1][i][0].charAt(0) + "0");
           var zona = {
-            name: data[1][i][0],
+            name: map1.get(data[1][i][0]),
             class: data[1][i][0],
             position: {
               X: data[1][i][2].X,
@@ -56,11 +61,13 @@ function inputGenerator() {
     }
 
     for (var i = 0; i < entitySelected.length; i++) {
+      // x input
       map1.set(
         entitySelected[i][0].charAt(0) +
           entitySelected[i][0].charAt(entitySelected[i][0].length - 1),
         entitySelected[i][0]
       );
+      // x output
       map1.set(
         entitySelected[i][0],
         entitySelected[i][0].charAt(0) +
@@ -113,6 +120,7 @@ function inputGenerator() {
     }
 
     console.log(JSON.stringify(inputText));
+    console.log(map1);
 
     getOutputText(inputText);
   });
