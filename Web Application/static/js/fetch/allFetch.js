@@ -522,13 +522,12 @@ async function getEntityStatusOnMap() {
 
 function getOutputText(JSONinput) {
   var myHeaders = new Headers();
-  myHeaders.append(
+  myHeaders.set(
     "Authorization",
-    "Basic dXRlbnRlX2NvbGF2ZWNjaGk6Y29sYXZlY2NoaVRFU0kyMDIy"
+    "Basic " + btoa("utente_colavecchi:colavecchiTESI2022")
   );
   myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Access-Control-Allow-Origin", "http://127.0.0.1:5000/");
-  myHeaders.append("Access-Control-Allow-Credentials", "true");
+  myHeaders.append("Access-Control-Allow-Origin", "0.0.0.0");
 
   var requestOptions = {
     method: "POST",

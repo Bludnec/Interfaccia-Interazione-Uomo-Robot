@@ -1,11 +1,15 @@
 var output = {
   frames: [
     {
-      name: "CHANGE_OPERATIONAL_STATE",
+      name: "BRINGING",
       arguments: [
         {
-          name: "DEVICE",
+          name: "THEME",
           values: ["laptop0"],
+        },
+        {
+          name: "GOAL",
+          values: ["kitchen"],
         },
       ],
     },
@@ -17,14 +21,15 @@ function translator(output) {
   console.log(output);
   var infoAzione = {};
   for (var i = 0; i < output.frames.length; i++) {
-    var azione = output.frames[i].name;
+    var azione = output.frames[i].name.toLowerCase();
     infoAzione.azione = azione;
     for (var j = 0; j < output.frames[i].arguments.length; j++) {
-      var name = output.frames[i].arguments[j].name;
-      var values = output.frames[i].arguments[j].values[0];
+      var name = output.frames[i].arguments[j].name.toLowerCase();
+      var values = map1.get(output.frames[i].arguments[j].values[0]);
 
       infoAzione[name] = values;
     }
   }
+  console.log(infoAzione);
   cellPath.push([infoAzione.azione, infoAzione]);
 }

@@ -70,11 +70,11 @@ class Agent {
 
   // FRAME
   /**
-   * @param {dict} info Il robot si muove verso un GOAL.
+   * @param {dict} info Il robot si muove verso un goal.
    */
   arriving(info) {
-    if (info["GOAL"] != undefined) {
-      var nearestCell = findNearestCellToLocation(info["GOAL"]);
+    if (info["goal"] != undefined) {
+      var nearestCell = findNearestCellToLocation(info["goal"]);
       if (!(nearestCell == -1)) {
         cellPath = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
@@ -88,15 +88,15 @@ class Agent {
 
   attaching(info) {}
   /**
-   * @param {Dict} info Il robot porta un oggetto (THEME) ad una destinazione (GOAL), facendo un determirnato percorso (PATH) e
+   * @param {Dict} info Il robot porta un oggetto (theme) ad una destinazione (goal), facendo un determirnato percorso (path) e
    * partendo da un determinato punto (SOURCE)
    */
   bringing(info) {
-    if (info["PATH"] != undefined) {
+    if (info["path"] != undefined) {
       // MOTION
       var entityZoneToRelease;
       for (var i = 0; i < itemsList.length; i++) {
-        if (itemsList[i].id == info["PATH"]) {
+        if (itemsList[i].id == info["path"]) {
           entityZoneToRelease = itemsList[i];
           break;
         }
@@ -109,7 +109,7 @@ class Agent {
           cellaVicinoEntità
         );
       } else {
-        var nearestCell = findNearestCellToLocation(info["PATH"]);
+        var nearestCell = findNearestCellToLocation(info["path"]);
         if (!(nearestCell == -1)) {
           cellPath = astarAlg(
             cellsList[cellIndex(this.position.x, this.position.y)],
@@ -121,7 +121,7 @@ class Agent {
     // TAKING
     var entSel;
     for (var i = 0; i < itemsList.length; i++) {
-      if (itemsList[i].id == info["THEME"]) {
+      if (itemsList[i].id == info["theme"]) {
         entSel = itemsList[i];
       }
     }
@@ -133,17 +133,17 @@ class Agent {
     for (var i = 0; i < path.length; i++) {
       cellPath.push(path[i]);
     }
-    // MANIPULATION
+    // manipulation
     var newInfo = {
-      THEME: info["THEME"],
+      theme: info["theme"],
     };
-    cellPath.push(["MANIPULATION", newInfo]);
+    cellPath.push(["manipulation", newInfo]);
 
     newInfo = {
-      LOCATION_OF_CONFINEMENT: info["GOAL"],
-      THEME: info["THEME"],
+      location_of_confinement: info["goal"],
+      theme: info["theme"],
     };
-    cellPath.push(["RELEASING", newInfo]);
+    cellPath.push(["releasing", newInfo]);
   }
 
   /**
@@ -152,11 +152,11 @@ class Agent {
   change_direction(info) {}
 
   /**
-   * @param {Dict} info Il robot cambia lo stato di un oggetto (DEVICE).
+   * @param {Dict} info Il robot cambia lo stato di un oggetto (device).
    */
   change_operational_state(info) {
     for (var i = 0; i < powerStatusList.length; i++) {
-      if (info["DEVICE"] == powerStatusList[i].Id) {
+      if (info["device"] == powerStatusList[i].Id) {
         var entity;
         for (var j = 0; j < itemsList.length; j++) {
           if (itemsList[i].id == powerStatusList[i].Id) {
@@ -192,6 +192,13 @@ class Agent {
           setTimeout(function () {
             getAllEntity();
           }, 600);
+        } else if (!cellPath.length > 1) {
+          var nearCell = findNearestCellToEntity(entity);
+          cellPath = astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            nearCell
+          );
+          cellPath.push(["change_operational_state", info]);
         }
       }
     }
@@ -203,21 +210,21 @@ class Agent {
   closure(info) {}
 
   /**
-   * @param {*} info  Un robot afferra un'entità (THEME).
+   * @param {*} info  Un robot afferra un'entità (theme).
    */
   manipulation(info) {
     var listaAbilita = [];
     for (var i = 0; i < abilityList.length; i++) {
-      if (info["THEME"] == abilityList[i][0]) {
+      if (info["theme"] == abilityList[i][0]) {
         listaAbilita = abilityList[i];
       }
     }
     if (listaAbilita.includes("move_ability")) {
-      if (info["THEME"] != undefined) {
+      if (info["theme"] != undefined) {
         if (entityTakenByAgent == undefined) {
           var entity;
           for (var i = 0; i < itemsList.length; i++) {
-            if (itemsList[i].id == info["THEME"]) {
+            if (itemsList[i].id == info["theme"]) {
               entity = itemsList[i];
             }
           }
@@ -244,6 +251,13 @@ class Agent {
               entityTakenByAgent = entity;
               getAllEntity();
             }, 200);
+          } else {
+            var nearCell = findNearestCellToEntity(entity);
+            cellPath = astarAlg(
+              cellsList[cellIndex(this.position.x, this.position.y)],
+              nearCell
+            );
+            cellPath.push(["manipulation", info]);
           }
         }
       }
@@ -251,13 +265,13 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Il robot arriva in un determinato punto (GOAL), percorrendo un determinato percorso (PATH).
+   * @param {dict} info Il robot arriva in un determinato punto (goal), percorrendo un determinato percorso (path).
    */
   motion(info) {
-    if (info["GOAL"] != undefined) {
-      if (info["PATH"] != undefined) {
+    if (info["goal"] != undefined) {
+      if (info["path"] != undefined) {
         // se path è una zona
-        var nearestCell = findNearestCellToLocation(info["PATH"]);
+        var nearestCell = findNearestCellToLocation(info["path"]);
         if (!(nearestCell == -1)) {
           var path = astarAlg(
             cellsList[cellIndex(this.position.x, this.position.y)],
@@ -274,7 +288,7 @@ class Agent {
         // se path è un oggetto
         var entityZoneToRelease;
         for (var i = 0; i < itemsList.length; i++) {
-          if ((itemsList[i].id = info["PATH"])) {
+          if ((itemsList[i].id = info["path"])) {
             entityZoneToRelease = itemsList[i];
           }
         }
@@ -294,7 +308,7 @@ class Agent {
           }
         }
       }
-      var nearestCell = findNearestCellToLocation(info["GOAL"]);
+      var nearestCell = findNearestCellToLocation(info["goal"]);
       if (!(nearestCell == -1)) {
         var path = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
@@ -306,7 +320,7 @@ class Agent {
       }
       var entityZoneToRelease;
       for (var i = 0; i < itemsList.length; i++) {
-        if ((itemsList[i].id = info["GOAL"])) {
+        if ((itemsList[i].id = info["goal"])) {
           entityZoneToRelease = itemsList[i];
           break;
         }
@@ -326,17 +340,17 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Il robot rilascia l'entità che ha in mano (THEME) in un determinato punto (LOCATION_OF_CONFINEMENT).
+   * @param {dict} info Il robot rilascia l'entità che ha in mano (theme) in un determinato punto (location_of_confinement).
    */
   releasing(info) {
     console.log("Releas: ", entityTakenByAgent);
     if (entityTakenByAgent != undefined) {
-      if (entityTakenByAgent.id == info["THEME"]) {
-        if (info["LOCATION_OF_CONFINEMENT"] != undefined) {
+      if (entityTakenByAgent.id == info["theme"]) {
+        if (info["location_of_confinement"] != undefined) {
           // L'agente sa dove deve lasciare l'entità che ha in mano.
           var entityZoneToRelease;
           for (var i = 0; i < itemsList.length; i++) {
-            if (itemsList[i].id == info["LOCATION_OF_CONFINEMENT"]) {
+            if (itemsList[i].id == info["location_of_confinement"]) {
               entityZoneToRelease = itemsList[i];
             }
           }
@@ -360,12 +374,12 @@ class Agent {
               for (var i = 0; i < path.length; i++) {
                 cellPath.push(path[i]);
               }
-              cellPath.push(["RELEASING", info]);
+              cellPath.push(["releasing", info]);
             }
           } else {
             // L'agente deve portarlo in una zona.
             var nearestCell = findNearestCellToLocation(
-              info["LOCATION_OF_CONFINEMENT"]
+              info["location_of_confinement"]
             );
             var path;
             if (!(nearestCell == -1)) {
@@ -390,7 +404,7 @@ class Agent {
               for (var i = 0; i < path.length; i++) {
                 cellPath.push(path[i]);
               }
-              cellPath.push(["RELEASING", info]);
+              cellPath.push(["releasing", info]);
             }
           }
         } else {
@@ -406,24 +420,22 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Il robot prende un'entità (THEME).
-   * SOURCE poco utile perché se sappiamo l'id del THEME allora sappiamo già dov'è.
+   * @param {dict} info Il robot prende un'entità (theme).
+   * SOURCE poco utile perché se sappiamo l'id del theme allora sappiamo già dov'è.
    */
   taking(info) {
-    /*if (info["SOURCE"] != undefined) {
-      // Abbiamo informazioni della zona e dell'entità.
-    }*/
-    // TO DO: check se possiamo muovere l'oggetto.
+    console.log(info);
     var listaAbilita = [];
     for (var i = 0; i < abilityList.length; i++) {
-      if (info["THEME"] == abilityList[i][0]) {
+      console.log(info["theme"], abilityList[i][0]);
+      if (info["theme"] == abilityList[i][0]) {
         listaAbilita = abilityList[i];
       }
     }
     if (listaAbilita.includes("move_ability")) {
       var entSel;
       for (var i = 0; i < itemsList.length; i++) {
-        if (itemsList[i].id == info["THEME"]) {
+        if (itemsList[i].id == info["theme"]) {
           entSel = itemsList[i];
         }
       }
@@ -435,7 +447,7 @@ class Agent {
       for (var i = 0; i < path.length; i++) {
         cellPath.push(path[i]);
       }
-      cellPath.push(["MANIPULATION", info]);
+      cellPath.push(["manipulation", info]);
     } else {
       console.log("Non posso afferrare l'entità.");
     }

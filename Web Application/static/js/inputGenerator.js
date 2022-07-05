@@ -6,6 +6,8 @@ var translateButton = document
 // listOfZone[2]
 var listOfZone = [];
 
+var map1 = new Map();
+
 function inputGenerator() {
   var inputText = {};
   var sentence = document.getElementById("input-text").value;
@@ -19,6 +21,7 @@ function inputGenerator() {
   var entitySelected = [];
 
   getLexicalMap().then((data) => {
+    map = [];
     console.log(data);
     /* data = [[],[]]
      * prima lista di elementi = [[id, classe,x,y lista delle lex_ref],[...]]
@@ -53,8 +56,18 @@ function inputGenerator() {
     }
 
     for (var i = 0; i < entitySelected.length; i++) {
+      map1.set(
+        entitySelected[i][0].charAt(0) +
+          entitySelected[i][0].charAt(entitySelected[i][0].length - 1),
+        entitySelected[i][0]
+      );
+      map1.set(
+        entitySelected[i][0],
+        entitySelected[i][0].charAt(0) +
+          entitySelected[i][0].charAt(entitySelected[i][0].length - 1)
+      );
       var entity = {
-        name: entitySelected[i][0],
+        name: map1.get(entitySelected[i][0]),
         class: entitySelected[i][1],
         position: {
           x: entitySelected[i][2],
@@ -101,8 +114,8 @@ function inputGenerator() {
 
     console.log(JSON.stringify(inputText));
 
-    //getOutputText(inputText);
+    getOutputText(inputText);
   });
 
-  translator(output);
+  //translator(output);
 }

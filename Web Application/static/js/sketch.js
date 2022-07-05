@@ -266,7 +266,6 @@ function setup() {
  * contained inside its block until the program is stopped.
  */
 function draw() {
-  console.log(powerStatusList);
   frameRate(3);
   if (itemsList.length == 0 || modifica) {
     getAllEntity();
@@ -310,37 +309,37 @@ function draw() {
 function actionFounder() {
   //switch case con le azioni
   switch (cellPath[0][0]) {
-    case "ARRIVING":
+    case "arriving":
       agent.arriving(cellPath[0][1]);
       break;
-    case "ATTACHING":
+    case "attaching":
       agent.attaching(cellPath[0][1]);
       break;
-    case "BRINGING":
+    case "bringing":
       agent.bringing(cellPath[0][1]);
       break;
-    case "CHANGE_DIRECTION":
+    case "change_direction":
       agent.change_direction(cellPath[0][1]);
       break;
-    case "CHANGE_OPERATIONAL_STATE":
+    case "change_operational_state":
       agent.change_operational_state(cellPath[0][1]);
       break;
-    case "CLOSURE":
+    case "closure":
       agent.closure(cellPath[0][1]);
       break;
-    case "MANIPULATION":
+    case "manipulation":
       agent.manipulation(cellPath[0][1]);
       break;
-    case "MOTION":
+    case "motion":
       agent.motion(cellPath[0][1]);
       break;
-    case "PLACING":
+    case "placing":
       agent.bringing(cellPath[0][1]);
       break;
-    case "RELEASING":
+    case "releasing":
       agent.releasing(cellPath[0][1]);
       break;
-    case "TAKING":
+    case "taking":
       agent.taking(cellPath[0][1]);
       break;
     default:

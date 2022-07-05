@@ -102,7 +102,9 @@ def getLexicalMapDAOImpl():
     for x in zone:
         zoneMap = list(prolog.query("cell(Id,X,Y,"+x['Zone']+",Walls)"))
         lexRefZoneMap = list(prolog.query("zone_lex_ref("+x['Zone']+",List)"))
+        
         if zoneMap != []:
+            print(x,lexRefZoneMap)
             zoneMap.insert(0,x['Zone'])
             zoneMap.insert(1,lexRefZoneMap[0]["List"])
         allLexRef[1].append(zoneMap)
@@ -184,7 +186,6 @@ def deleteEntityDAOImpl(id):
         prolog.retract('entity('+id+',_,_,_,_,_ )')
         deleteEntitySizeDAOImpl(id)
         deleteEntityStatusDAOImpl(id)
-        deleteEntityStatusDAOImpl(id)
     except Exception as e: 
         print("deleteEntityDAOImpl: ", e)
         
@@ -223,7 +224,8 @@ def getEntitySizeDAOImpl(id):
 def updateEntityPositionDAOImpl(id, x, y, z):
     entityValues = getEntityDAOImpl(id)
     entitySize = getEntitySizeDAOImpl(id)
-    deleteEntityDAOImpl(id)
+    prolog.retract('entity('+id+',_,_,_,_,_ )')
+    deleteEntitySizeDAOImpl(id)
     prolog.assertz("entity(" + id + "," + entityValues["Name"] + "," +
                    entityValues["Class"]+","+str(x) + "," + str(y) + "," + str(z) + ")")
     prolog.assertz("entity_size(" + id + "," + str(entitySize['SizeX']) + "," + str(entitySize['SizeY']) + ")")
@@ -237,13 +239,7 @@ def insertEntityStatusDAOImpl(id,status,statusBool):
     else:
         print("Non è stato possibile inserire lo status.")
 
-def deleteEntityStatusDAOImpl(id):
-    try:
-        prolog.retract('power_status('+id+',_)')
-        prolog.retract('physical_status('+id+',_)')
-        print("Cancellazione andata a buon fine")
-    except Exception as e: 
-        print("deleteEntityStatusDAOImpl",e)
+
 
 # Aggiorna lo stato dell'entità
 def updateEntityStatusDAOImpl(id,statusBool):
@@ -358,7 +354,7 @@ def deleteOnBottomDAOImpl(id1,id2):
     try:
         prolog.retract('on_bottom('+id1+','+id2+')')
     except Exception as e: 
-        print("deleteEntityDAOImpl: ", e)
+        print("deleteOnBottomDAOImpl: ", e)
 
 # Inserisce il fatto insinde(idInside, idContainer) nel KB.
 def insertInsideDAOImpl(idInside, idContainer):
