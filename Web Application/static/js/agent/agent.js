@@ -493,6 +493,15 @@ class Agent {
         } else {
           // L'agente non ha una location dove lasciare l'entità.
           // TO DO: LASCIARE L'OGGETTO IN UNA CELLA ADIACENTE POSSIBILE.
+          if (
+            cellsList[
+              cellIndex(agent.position.x, entity.position.y).walls[0] == "false"
+            ] &&
+            cellsList[cellIndex(agent.position.x, entity.position.y)]
+              .occupied == undefined
+          ) {
+            // rilascialo nella cella sopra
+          }
         }
       } else {
         console.log("Non ho quell'entità in mano.");

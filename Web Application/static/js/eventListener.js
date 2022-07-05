@@ -417,11 +417,13 @@ function showInfoTable(x, y) {
   document.getElementById("table-entity-on-map1").classList.add("hidden");
   document.getElementById("table-entity-on-map2").classList.add("hidden");
 
-  // CONTROLLARE SE IL CLICK VIENE FATTO SULL'AGENTE
+  // TO DO: MOSTRARE AGENTE
+
   if (showItem.length > 0) {
     if (indexItemSelected != null) {
       deselectEntityImage();
     }
+
     for (var i = 0; i < showItem.length; i++) {
       // controllo se clicco un elemento o l'agente
       document
