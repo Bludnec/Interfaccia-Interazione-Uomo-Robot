@@ -541,7 +541,6 @@ function getOutputText(JSONinput) {
   )
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       translator(result);
     })
     .catch((error) => console.log("error", error));

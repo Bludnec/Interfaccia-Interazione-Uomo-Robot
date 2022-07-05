@@ -76,10 +76,13 @@ class Agent {
     if (info["goal"] != undefined) {
       var nearestCell = findNearestCellToLocation(info["goal"]);
       if (!(nearestCell == -1)) {
-        cellPath = astarAlg(
+        var path = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
           nearestCell
         );
+        for (var o = 0; o < path.length; o++) {
+          cellPath.push(path[o]);
+        }
       } else {
         console.log("Non posso arrivare in quella zona.");
       }
@@ -104,17 +107,23 @@ class Agent {
       if (entityZoneToRelease != undefined) {
         // L'agente arrivare vicino ad un'entità.
         var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
-        cellPath = astarAlg(
+        var path = astarAlg(
           cellsList[cellIndex(this.position.x, this.position.y)],
           cellaVicinoEntità
         );
+        for (var o = 0; o < path.length; o++) {
+          cellPath.push(path[o]);
+        }
       } else {
         var nearestCell = findNearestCellToLocation(info["path"]);
         if (!(nearestCell == -1)) {
-          cellPath = astarAlg(
+          var path = astarAlg(
             cellsList[cellIndex(this.position.x, this.position.y)],
             nearestCell
           );
+          for (var o = 0; o < path.length; o++) {
+            cellPath.push(path[o]);
+          }
         }
       }
     }
@@ -140,7 +149,7 @@ class Agent {
     cellPath.push(["manipulation", newInfo]);
 
     newInfo = {
-      location_of_confinement: info["goal"],
+      goal: info["goal"],
       theme: info["theme"],
     };
     cellPath.push(["releasing", newInfo]);
@@ -159,55 +168,128 @@ class Agent {
       if (info["device"] == powerStatusList[i].Id) {
         var entity;
         for (var j = 0; j < itemsList.length; j++) {
-          if (itemsList[i].id == powerStatusList[i].Id) {
-            entity = itemsList[i];
+          if (itemsList[j].id == powerStatusList[i].Id) {
+            entity = itemsList[j];
           }
-        }
-        if (
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[0] == "false" &&
-            this.position.x == entity.position.x &&
-            this.position.y == entity.position.y - 1) ||
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[1] == "false" &&
-            this.position.x == entity.position.x + 1 &&
-            this.position.y == entity.position.y) ||
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[2] == "false" &&
-            this.position.x == entity.position.x &&
-            this.position.y == entity.position.y + 1) ||
-          (cellsList[cellIndex(entity.position.x, entity.position.y)]
-            .walls[3] == "false" &&
-            this.position.x == entity.position.x - 1 &&
-            this.position.y == entity.position.y)
-        ) {
-          if (powerStatusList[i].Status == "on") {
-            updateEntityStatus(entity.id, "off");
-          } else {
-            updateEntityStatus(entity.id, "on");
-          }
-          setTimeout(function () {
-            getEntityStatusOnMap();
-          }, 400);
-          setTimeout(function () {
-            getAllEntity();
-          }, 600);
-        } else if (!cellPath.length > 1) {
-          var nearCell = findNearestCellToEntity(entity);
-          cellPath = astarAlg(
-            cellsList[cellIndex(this.position.x, this.position.y)],
-            nearCell
-          );
-          cellPath.push(["change_operational_state", info]);
         }
       }
+    }
+    if (entity != undefined) {
+      if (
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[0] ==
+          "false" &&
+          this.position.x == entity.position.x &&
+          this.position.y == entity.position.y - 1) ||
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[1] ==
+          "false" &&
+          this.position.x == entity.position.x + 1 &&
+          this.position.y == entity.position.y) ||
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[2] ==
+          "false" &&
+          this.position.x == entity.position.x &&
+          this.position.y == entity.position.y + 1) ||
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[3] ==
+          "false" &&
+          this.position.x == entity.position.x - 1 &&
+          this.position.y == entity.position.y)
+      ) {
+        if (entity.status == "on") {
+          updateEntityStatus(entity.id, "off");
+        } else {
+          updateEntityStatus(entity.id, "on");
+        }
+        setTimeout(function () {
+          getEntityStatusOnMap();
+        }, 400);
+        setTimeout(function () {
+          getAllEntity();
+        }, 600);
+      } else {
+        var nearCell = findNearestCellToEntity(entity);
+        var path = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          nearCell
+        );
+        for (var o = 0; o < path.length; o++) {
+          cellPath.push(path[o]);
+        }
+        cellPath.push(["change_operational_state", info]);
+      }
+    } else {
+      console.log(
+        "Non posso eseguire l'azione perché non trovo l'oggetto richiesto."
+      );
     }
   }
 
   /**
    * @param {Dict} info Il robot apre/chiude un'entità (CONTAINING_OBJECT).
    */
-  closure(info) {}
+  closure(info) {
+    for (var i = 0; i < physicalStatusList.length; i++) {
+      if (
+        info["containing_object"] == physicalStatusList[i].Id ||
+        info["container_portal"] == physicalStatusList[i].Id
+      ) {
+        var entity;
+        for (var j = 0; j < itemsList.length; j++) {
+          if (itemsList[j].id == physicalStatusList[i].Id) {
+            entity = itemsList[j];
+          }
+        }
+        console.log(entity);
+      }
+    }
+    if (entity != undefined) {
+      if (
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[0] ==
+          "false" &&
+          this.position.x == entity.position.x &&
+          this.position.y == entity.position.y - 1) ||
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[1] ==
+          "false" &&
+          this.position.x == entity.position.x + 1 &&
+          this.position.y == entity.position.y) ||
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[2] ==
+          "false" &&
+          this.position.x == entity.position.x &&
+          this.position.y == entity.position.y + 1) ||
+        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[3] ==
+          "false" &&
+          this.position.x == entity.position.x - 1 &&
+          this.position.y == entity.position.y)
+      ) {
+        if (entity.status == "open" && info["container_portal"] != undefined) {
+          updateEntityStatus(entity.id, "closed");
+        } else if (
+          entity.status == "closed" &&
+          info["containing_object"] != undefined
+        ) {
+          updateEntityStatus(entity.id, "open");
+        }
+        setTimeout(function () {
+          getEntityStatusOnMap();
+        }, 400);
+        setTimeout(function () {
+          getAllEntity();
+        }, 600);
+      } else {
+        var nearCell = findNearestCellToEntity(entity);
+        var path = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          nearCell
+        );
+        for (var o = 0; o < path.length; o++) {
+          cellPath.push(path[o]);
+        }
+        cellPath.push(["closure", info]);
+      }
+    } else {
+      console.log(
+        "Non posso eseguire l'azione perché non trovo l'oggetto richiesto."
+      );
+    }
+  }
 
   /**
    * @param {*} info  Un robot afferra un'entità (theme).
@@ -253,10 +335,13 @@ class Agent {
             }, 200);
           } else {
             var nearCell = findNearestCellToEntity(entity);
-            cellPath = astarAlg(
+            var path = astarAlg(
               cellsList[cellIndex(this.position.x, this.position.y)],
               nearCell
             );
+            for (var o = 0; o < path.length; o++) {
+              cellPath.push(path[o]);
+            }
             cellPath.push(["manipulation", info]);
           }
         }
@@ -340,17 +425,17 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Il robot rilascia l'entità che ha in mano (theme) in un determinato punto (location_of_confinement).
+   * @param {dict} info Il robot rilascia l'entità che ha in mano (theme) in un determinato punto (goal).
    */
   releasing(info) {
     console.log("Releas: ", entityTakenByAgent);
     if (entityTakenByAgent != undefined) {
       if (entityTakenByAgent.id == info["theme"]) {
-        if (info["location_of_confinement"] != undefined) {
+        if (info["goal"] != undefined) {
           // L'agente sa dove deve lasciare l'entità che ha in mano.
           var entityZoneToRelease;
           for (var i = 0; i < itemsList.length; i++) {
-            if (itemsList[i].id == info["location_of_confinement"]) {
+            if (itemsList[i].id == info["goal"]) {
               entityZoneToRelease = itemsList[i];
             }
           }
@@ -378,9 +463,7 @@ class Agent {
             }
           } else {
             // L'agente deve portarlo in una zona.
-            var nearestCell = findNearestCellToLocation(
-              info["location_of_confinement"]
-            );
+            var nearestCell = findNearestCellToLocation(info["goal"]);
             var path;
             if (!(nearestCell == -1)) {
               path = astarAlg(
@@ -427,7 +510,6 @@ class Agent {
     console.log(info);
     var listaAbilita = [];
     for (var i = 0; i < abilityList.length; i++) {
-      console.log(info["theme"], abilityList[i][0]);
       if (info["theme"] == abilityList[i][0]) {
         listaAbilita = abilityList[i];
       }

@@ -1,14 +1,14 @@
-var output = {
+var output1 = {
   frames: [
     {
-      name: "BRINGING",
+      name: "bringing",
       arguments: [
         {
-          name: "THEME",
+          name: "theme",
           values: ["laptop0"],
         },
         {
-          name: "GOAL",
+          name: "goal",
           values: ["kitchen"],
         },
       ],
@@ -26,7 +26,6 @@ function translator(output) {
     for (var j = 0; j < output.frames[i].arguments.length; j++) {
       var name = output.frames[i].arguments[j].name.toLowerCase();
       var values = map1.get(output.frames[i].arguments[j].values[0]);
-
       infoAzione[name] = values;
     }
   }

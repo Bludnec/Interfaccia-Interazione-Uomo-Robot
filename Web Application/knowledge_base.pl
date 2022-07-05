@@ -155,7 +155,7 @@ lex_ref(fridge,['fridge','refrigerator']).
 lex_ref(television,['television','tv']).
 lex_ref(keyboard,['keyboard','fingerboard']).
 lex_ref(laptop,['laptop','portable computer','pc']).
-lex_ref(smartphone,['smartphone','cellular','cell phone','telephone','mobile phone']).
+lex_ref(smartphone,['smartphone','cellular','cell phone','telephone','mobile phone','phone']).
 lex_ref(cup,['cup','bowl','tome']).
 lex_ref(plate,['plate','dish']).
 lex_ref(microwave,['microwave']).

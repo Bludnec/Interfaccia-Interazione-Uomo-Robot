@@ -41,16 +41,17 @@ function inputGenerator() {
       for (var k = 0; k < listInputText.length; k++) {
         if (listInputText[k] == data[1][i][0]) {
           // x input
-          map1.set(data[1][i][0].charAt(0) + "0", data[1][i][0]);
+          map1.set(data[1][i][0].charAt(0) + "0" + tempCount, data[1][i][0]);
           // x output
-          map1.set(data[1][i][0], data[1][i][0].charAt(0) + "0");
+          map1.set(data[1][i][0], data[1][i][0].charAt(0) + "0" + tempCount);
+          tempCount++;
           var zona = {
             name: map1.get(data[1][i][0]),
             class: data[1][i][0],
             position: {
-              X: data[1][i][2].X,
-              Y: data[1][i][2].Y,
-              Z: "0",
+              x: data[1][i][2].X,
+              y: data[1][i][2].Y,
+              z: "0",
             },
             properties: [{ name: "walkable_ability", value: "true" }],
             lexical_references: data[1][i][1],
@@ -120,7 +121,6 @@ function inputGenerator() {
     }
 
     console.log(JSON.stringify(inputText));
-    console.log(map1);
 
     getOutputText(inputText);
   });
