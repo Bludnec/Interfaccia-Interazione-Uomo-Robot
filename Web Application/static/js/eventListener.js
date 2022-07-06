@@ -458,6 +458,11 @@ function checkWallNeighbor(cell, x, y) {
   return check;
 }
 
+/**
+ * @param {int} x
+ * @param {int} y
+ * @return Mostra le tabelle delle informazioni delle entità in posizione x,y.
+ */
 function showInfoTable(x, y) {
   // se viene cliccato un oggetto sulla mappa riporta le sue info nella info-box
   var showItem = [];
@@ -468,7 +473,15 @@ function showInfoTable(x, y) {
   }
   // TO DO: SE 0 ENTITY, NON CANCELLO LA TABLE MA REIMPOSTO I VALORI A PREDEFINITI
   if (showItem.length < 1) {
-    document.getElementById("table-entity-on-map0").classList.add("hidden");
+    document.getElementById(`teom-coordinates0`).innerHTML = "X:0" + " Y:0";
+
+    document.getElementById(`teom-id0`).innerHTML = "Id";
+
+    document.getElementById(`teom-position0`).innerHTML = "On the floor";
+
+    document.getElementById(`teom-class0`).innerHTML = "Class";
+
+    document.getElementById(`teom-image0`).src = `static/images/empty.png`;
   }
 
   if (cellsList[cellIndex(x, y)].occupied != null) {
@@ -482,6 +495,18 @@ function showInfoTable(x, y) {
   document.getElementById("table-entity-on-map2").classList.add("hidden");
 
   // TO DO: MOSTRARE AGENTE
+  if (x == agent.position.x && y == agent.position.y) {
+    document.getElementById(`teom-coordinates0`).innerHTML =
+      "X:" + x + " Y:" + y;
+
+    document.getElementById(`teom-id0`).innerHTML = "agent";
+
+    document.getElementById(`teom-position0`).innerHTML = "On the floor";
+
+    document.getElementById(`teom-class0`).innerHTML = "Agent";
+
+    document.getElementById(`teom-image0`).src = `static/images/agent.png`;
+  }
 
   if (showItem.length > 0) {
     if (indexItemSelected != null) {
