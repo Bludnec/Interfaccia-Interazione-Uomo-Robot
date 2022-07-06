@@ -23,6 +23,16 @@ def getAllEntityDAOImpl():
         finalList = []
     return finalList
 
+def deleteAllEntityDAOImpl():
+    prolog.retractall('entity(_,_,_,_,_,_)')
+    prolog.retractall('entity_size(_,_,_)')
+    prolog.retractall('on_top(_,_)')
+    prolog.retractall('on_bottom(_,_)')
+    prolog.retractall('inside(_,_)')
+    prolog.retractall('power_status(_,_)')
+    prolog.retractall('physical_status(_,_)')
+    prolog.retractall('agent(_,_)')
+
 # Inserisce il fatto cell_occupied(id).
 def insertCellOccupiedDAOImpl(x,y,id):
     if not bool(list(prolog.query('cell_occupied('+str(x)+','+str(y)+','+str(id)+')'))):

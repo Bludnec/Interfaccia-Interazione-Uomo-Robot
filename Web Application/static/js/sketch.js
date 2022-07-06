@@ -105,126 +105,129 @@ var entityWithPhysicalStatus = [
  *  asynchronous loading of external files in a blocking way
  */
 function preload() {
-  getAllUrl().then((data) => {
-    /**
-     * Creo la lista delle immagini selezionabili sulla web-app
-     */
-    for (var i = 0; i < data.length; i++) {
-      if (entityWithPowerStatus.includes(data[i]["Class"])) {
-        continue;
-      }
-      if (entityWithPhysicalStatus.includes(data[i]["Class"])) {
-        continue;
-      }
-      var img = document.createElement("img");
-      img.src = data[i]["Url"];
-      img.id = `entity-${i}`;
-      img.addEventListener("click", clickEntityImage);
-      img.alt = data[i]["Class"];
+  deleteAllEntity();
+  setTimeout(function () {
+    getAllUrl().then((data) => {
+      /**
+       * Creo la lista delle immagini selezionabili sulla web-app
+       */
+      for (var i = 0; i < data.length; i++) {
+        if (entityWithPowerStatus.includes(data[i]["Class"])) {
+          continue;
+        }
+        if (entityWithPhysicalStatus.includes(data[i]["Class"])) {
+          continue;
+        }
+        var img = document.createElement("img");
+        img.src = data[i]["Url"];
+        img.id = `entity-${i}`;
+        img.addEventListener("click", clickEntityImage);
+        img.alt = data[i]["Class"];
 
-      document.getElementById("img-list").appendChild(img);
-    }
-    for (i = 0; i < data.length; i++) {
-      switch (data[i]["Class"]) {
-        case "agent":
-          agentImage = loadImage(data[i]["Url"]);
-          break;
-        case "bed":
-          bedImage = loadImage(data[i]["Url"]);
-          break;
-        case "book":
-          bookImage = loadImage(data[i]["Url"]);
-          break;
-        case "bucket":
-          bucketImage = loadImage(data[i]["Url"]);
-          break;
-        case "chair":
-          chairImage = loadImage(data[i]["Url"]);
-          break;
-        case "cup":
-          cupImage = loadImage(data[i]["Url"]);
-          break;
-        case "door":
-          doorImage = loadImage(data[i]["Url"]);
-          break;
-        case "doorOpen":
-          doorOpenImage = loadImage(data[i]["Url"]);
-          break;
-        case "fridge":
-          fridgeImage = loadImage(data[i]["Url"]);
-          break;
-        case "fridgeOpen":
-          fridgeOpenImage = loadImage(data[i]["Url"]);
-          break;
-        case "glass":
-          glassImage = loadImage(data[i]["Url"]);
-          break;
-        case "jar":
-          jarImage = loadImage(data[i]["Url"]);
-          break;
-        case "key":
-          keyImage = loadImage(data[i]["Url"]);
-          break;
-        case "keyboard":
-          keyboardImage = loadImage(data[i]["Url"]);
-          break;
-        case "lamp":
-          lampImage = loadImage(data[i]["Url"]);
-          break;
-        case "lampOn":
-          lampOnImage = loadImage(data[i]["Url"]);
-          break;
-        case "laptop":
-          laptopImage = loadImage(data[i]["Url"]);
-          break;
-        case "laptopOn":
-          laptopOnImage = loadImage(data[i]["Url"]);
-          break;
-        case "microwave":
-          microwaveImage = loadImage(data[i]["Url"]);
-          break;
-        case "microwaveOn":
-          microwaveOnImage = loadImage(data[i]["Url"]);
-          break;
-        case "plate":
-          plateImage = loadImage(data[i]["Url"]);
-          break;
-        case "rug":
-          rugImage = loadImage(data[i]["Url"]);
-          break;
-        case "smartphone":
-          smartphoneImage = loadImage(data[i]["Url"]);
-          break;
-        case "smartphoneOn":
-          smartphoneOnImage = loadImage(data[i]["Url"]);
-          break;
-        case "sofa":
-          sofaImage = loadImage(data[i]["Url"]);
-          break;
-        case "table":
-          tableImage = loadImage(data[i]["Url"]);
-          break;
-        case "television":
-          televisionImage = loadImage(data[i]["Url"]);
-          break;
-        case "televisionOn":
-          televisionOnImage = loadImage(data[i]["Url"]);
-          break;
-        case "wardrobe":
-          wardrobeImage = loadImage(data[i]["Url"]);
-          break;
-        case "wardrobeOpen":
-          wardrobeOpenImage = loadImage(data[i]["Url"]);
-          break;
-        case "window":
-          windowImage = loadImage(data[i]["Url"]);
-          break;
-        case "windowOpen":
-          windowOpenImage = loadImage(data[i]["Url"]);
-          break;
+        document.getElementById("img-list").appendChild(img);
       }
-    }
-  });
+      for (i = 0; i < data.length; i++) {
+        switch (data[i]["Class"]) {
+          case "agent":
+            agentImage = loadImage(data[i]["Url"]);
+            break;
+          case "bed":
+            bedImage = loadImage(data[i]["Url"]);
+            break;
+          case "book":
+            bookImage = loadImage(data[i]["Url"]);
+            break;
+          case "bucket":
+            bucketImage = loadImage(data[i]["Url"]);
+            break;
+          case "chair":
+            chairImage = loadImage(data[i]["Url"]);
+            break;
+          case "cup":
+            cupImage = loadImage(data[i]["Url"]);
+            break;
+          case "door":
+            doorImage = loadImage(data[i]["Url"]);
+            break;
+          case "doorOpen":
+            doorOpenImage = loadImage(data[i]["Url"]);
+            break;
+          case "fridge":
+            fridgeImage = loadImage(data[i]["Url"]);
+            break;
+          case "fridgeOpen":
+            fridgeOpenImage = loadImage(data[i]["Url"]);
+            break;
+          case "glass":
+            glassImage = loadImage(data[i]["Url"]);
+            break;
+          case "jar":
+            jarImage = loadImage(data[i]["Url"]);
+            break;
+          case "key":
+            keyImage = loadImage(data[i]["Url"]);
+            break;
+          case "keyboard":
+            keyboardImage = loadImage(data[i]["Url"]);
+            break;
+          case "lamp":
+            lampImage = loadImage(data[i]["Url"]);
+            break;
+          case "lampOn":
+            lampOnImage = loadImage(data[i]["Url"]);
+            break;
+          case "laptop":
+            laptopImage = loadImage(data[i]["Url"]);
+            break;
+          case "laptopOn":
+            laptopOnImage = loadImage(data[i]["Url"]);
+            break;
+          case "microwave":
+            microwaveImage = loadImage(data[i]["Url"]);
+            break;
+          case "microwaveOn":
+            microwaveOnImage = loadImage(data[i]["Url"]);
+            break;
+          case "plate":
+            plateImage = loadImage(data[i]["Url"]);
+            break;
+          case "rug":
+            rugImage = loadImage(data[i]["Url"]);
+            break;
+          case "smartphone":
+            smartphoneImage = loadImage(data[i]["Url"]);
+            break;
+          case "smartphoneOn":
+            smartphoneOnImage = loadImage(data[i]["Url"]);
+            break;
+          case "sofa":
+            sofaImage = loadImage(data[i]["Url"]);
+            break;
+          case "table":
+            tableImage = loadImage(data[i]["Url"]);
+            break;
+          case "television":
+            televisionImage = loadImage(data[i]["Url"]);
+            break;
+          case "televisionOn":
+            televisionOnImage = loadImage(data[i]["Url"]);
+            break;
+          case "wardrobe":
+            wardrobeImage = loadImage(data[i]["Url"]);
+            break;
+          case "wardrobeOpen":
+            wardrobeOpenImage = loadImage(data[i]["Url"]);
+            break;
+          case "window":
+            windowImage = loadImage(data[i]["Url"]);
+            break;
+          case "windowOpen":
+            windowOpenImage = loadImage(data[i]["Url"]);
+            break;
+        }
+      }
+    });
+  }, 200);
 
   loadedCellMap = loadJSON("static/map/map.json");
 }
@@ -239,7 +242,6 @@ function setup() {
    * If boolLoadMap = true => load the saved map, else create a new one.
    * If boolLoadMap = true => create a new canvas and new cellsList loading che old map.
    */
-
   if (boolLoadMap) {
     itemsList = [];
     /* Load the saved map */
@@ -293,10 +295,22 @@ function draw() {
        * celle per cella ogni giro di draw().
        */
       if (cellPath != -1 && cellPath.length != 0) {
-        console.log(cellPath[0], cellPath[0].id);
         if (cellPath[0].id != undefined) {
           agent.moveTo(cellPath[0].x, cellPath[0].y);
           cellPath.shift();
+          /**
+           * Se il robot ha in mano qualcosa, aggiorno anche la sua posizione.
+           */
+          if (entityTakenByAgent != undefined) {
+            setTimeout(function () {
+              updateEntityPosition(
+                entityTakenByAgent.id,
+                agent.position.x,
+                agent.position.y,
+                0
+              );
+            }, 200);
+          }
         } else {
           actionFounder();
           cellPath.splice(0, 1);

@@ -14,6 +14,13 @@ def getAllEntity():
     lista = getAllEntityDAOImpl()
     return jsonify(lista)
 
+# Delete all entity from KB.
+@app.route('/delete-all-entity',methods=['DELETE'])
+def deleteAllEntity():
+    lista = deleteAllEntityDAOImpl()
+    return jsonify(lista)
+
+
 # Get all cells from KB.
 @app.route('/map', methods=['POST','DELETE','GET'])
 def map():

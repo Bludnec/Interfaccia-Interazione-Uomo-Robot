@@ -328,7 +328,12 @@ class Agent {
               this.position.x == entity.position.x - 1 &&
               this.position.y == entity.position.y)
           ) {
-            updateEntityPosition(entity.id, -1, -1, 0);
+            updateEntityPosition(
+              entity.id,
+              agent.position.x,
+              agent.position.y,
+              0
+            );
             setTimeout(function () {
               entityTakenByAgent = entity;
               getAllEntity();
@@ -491,16 +496,77 @@ class Agent {
             }
           }
         } else {
-          // L'agente non ha una location dove lasciare l'entità.
-          // TO DO: LASCIARE L'OGGETTO IN UNA CELLA ADIACENTE POSSIBILE.
+          /**
+           * Il robot non ha una location dove lasciare l'entità
+           * quindi la lascia vicino a se.
+           */
           if (
-            cellsList[
-              cellIndex(agent.position.x, entity.position.y).walls[0] == "false"
-            ] &&
-            cellsList[cellIndex(agent.position.x, entity.position.y)]
+            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[0] ==
+              "false" &&
+            cellsList[cellIndex(agent.position.x, agent.position.y - 1)]
               .occupied == undefined
           ) {
-            // rilascialo nella cella sopra
+            updateEntityPosition(
+              entityTakenByAgent.id,
+              agent.position.x,
+              agent.position.y - 1,
+              0
+            );
+            setTimeout(function () {
+              entityTakenByAgent = undefined;
+              getAllEntity();
+            }, 200);
+          }
+          if (
+            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[1] ==
+              "false" &&
+            cellsList[cellIndex(agent.position.x + 1, agent.position.y)]
+              .occupied == undefined
+          ) {
+            updateEntityPosition(
+              entityTakenByAgent.id,
+              agent.position.x + 1,
+              agent.position.y,
+              0
+            );
+            setTimeout(function () {
+              entityTakenByAgent = undefined;
+              getAllEntity();
+            }, 200);
+          }
+          if (
+            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[2] ==
+              "false" &&
+            cellsList[cellIndex(agent.position.x, agent.position.y + 1)]
+              .occupied == undefined
+          ) {
+            updateEntityPosition(
+              entityTakenByAgent.id,
+              agent.position.x,
+              agent.position.y + 1,
+              0
+            );
+            setTimeout(function () {
+              entityTakenByAgent = undefined;
+              getAllEntity();
+            }, 200);
+          }
+          if (
+            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[3] ==
+              "false" &&
+            cellsList[cellIndex(agent.position.x - 1, agent.position.y)]
+              .occupied == undefined
+          ) {
+            updateEntityPosition(
+              entityTakenByAgent.id,
+              agent.position.x - 1,
+              agent.position.y,
+              0
+            );
+            setTimeout(function () {
+              entityTakenByAgent = undefined;
+              getAllEntity();
+            }, 200);
           }
         }
       } else {
@@ -516,7 +582,6 @@ class Agent {
    * SOURCE poco utile perché se sappiamo l'id del theme allora sappiamo già dov'è.
    */
   taking(info) {
-    console.log(info);
     var listaAbilita = [];
     for (var i = 0; i < abilityList.length; i++) {
       if (info["theme"] == abilityList[i][0]) {

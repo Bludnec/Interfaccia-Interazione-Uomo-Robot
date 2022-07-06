@@ -14,13 +14,15 @@ document.getElementById("delete-entity-btn0").addEventListener("click", () => {
     deleteCellOccupied(document.getElementById("teom-id0").innerHTML);
     deleteEntity(document.getElementById("teom-id0").innerHTML);
   }
-  showInfoTable(lastCoordinates[0], lastCoordinates[1]);
   setTimeout(function () {
     getMap();
   }, 300);
   setTimeout(function () {
     getAllEntity();
   }, 600);
+  setTimeout(function () {
+    showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+  }, 700);
 });
 document.getElementById("delete-entity-btn1").addEventListener("click", () => {
   if (document.getElementById("teom-class1").innerHTML == "Agent") {
@@ -30,13 +32,15 @@ document.getElementById("delete-entity-btn1").addEventListener("click", () => {
     deleteCellOccupied(document.getElementById("teom-id1").innerHTML);
     deleteEntity(document.getElementById("teom-id1").innerHTML);
   }
-  showInfoTable(lastCoordinates[0], lastCoordinates[1]);
   setTimeout(function () {
     getMap();
   }, 300);
   setTimeout(function () {
     getAllEntity();
   }, 600);
+  setTimeout(function () {
+    showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+  }, 700);
 });
 document.getElementById("delete-entity-btn2").addEventListener("click", () => {
   if (document.getElementById("teom-class2").innerHTML == "Agent") {
@@ -46,13 +50,15 @@ document.getElementById("delete-entity-btn2").addEventListener("click", () => {
     deleteCellOccupied(document.getElementById("teom-id2").innerHTML);
     deleteEntity(document.getElementById("teom-id2").innerHTML);
   }
-  showInfoTable(lastCoordinates[0], lastCoordinates[1]);
   setTimeout(function () {
     getMap();
   }, 300);
   setTimeout(function () {
     getAllEntity();
   }, 600);
+  setTimeout(function () {
+    showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+  }, 700);
 });
 
 var imgItemSelected = document

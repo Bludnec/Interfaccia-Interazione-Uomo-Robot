@@ -56,6 +56,16 @@ async function getAllEntity() {
   }
 }
 
+function deleteAllEntity() {
+  fetch("/delete-all-entity", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+}
+
 function insertCellOccupied(x, y, id) {
   fetch(`/cell-occupied`, {
     method: "POST",
