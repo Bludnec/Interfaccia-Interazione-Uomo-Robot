@@ -134,25 +134,29 @@ class Agent {
         entSel = itemsList[i];
       }
     }
-    var nearCell = findNearestCellToEntity(entSel);
-    var path = astarAlg(
-      cellsList[cellIndex(this.position.x, this.position.y)],
-      nearCell
-    );
-    for (var i = 0; i < path.length; i++) {
-      cellPath.push(path[i]);
-    }
-    // manipulation
-    var newInfo = {
-      theme: info["theme"],
-    };
-    cellPath.push(["manipulation", newInfo]);
+    if (entSel != undefined) {
+      var nearCell = findNearestCellToEntity(entSel);
+      var path = astarAlg(
+        cellsList[cellIndex(this.position.x, this.position.y)],
+        nearCell
+      );
+      for (var i = 0; i < path.length; i++) {
+        cellPath.push(path[i]);
+      }
+      // manipulation
+      var newInfo = {
+        theme: info["theme"],
+      };
+      cellPath.push(["manipulation", newInfo]);
 
-    newInfo = {
-      goal: info["goal"],
-      theme: info["theme"],
-    };
-    cellPath.push(["releasing", newInfo]);
+      newInfo = {
+        goal: info["goal"],
+        theme: info["theme"],
+      };
+      cellPath.push(["releasing", newInfo]);
+    } else {
+      console.log("Non ho trovato l'oggetto da afferrare.");
+    }
   }
 
   /**
@@ -174,46 +178,51 @@ class Agent {
         }
       }
     }
+
     if (entity != undefined) {
-      if (
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[0] ==
-          "false" &&
-          this.position.x == entity.position.x &&
-          this.position.y == entity.position.y - 1) ||
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[1] ==
-          "false" &&
-          this.position.x == entity.position.x + 1 &&
-          this.position.y == entity.position.y) ||
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[2] ==
-          "false" &&
-          this.position.x == entity.position.x &&
-          this.position.y == entity.position.y + 1) ||
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[3] ==
-          "false" &&
-          this.position.x == entity.position.x - 1 &&
-          this.position.y == entity.position.y)
-      ) {
-        if (entity.status == "on") {
-          updateEntityStatus(entity.id, "off");
+      if (info["operational_state"] != entity.status) {
+        if (
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[0] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y - 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[1] == "false" &&
+            this.position.x == entity.position.x + 1 &&
+            this.position.y == entity.position.y) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[2] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y + 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[3] == "false" &&
+            this.position.x == entity.position.x - 1 &&
+            this.position.y == entity.position.y)
+        ) {
+          if (entity.status == "on") {
+            updateEntityStatus(entity.id, "off");
+          } else {
+            updateEntityStatus(entity.id, "on");
+          }
+          setTimeout(function () {
+            getEntityStatusOnMap();
+          }, 400);
+          setTimeout(function () {
+            getAllEntity();
+          }, 600);
         } else {
-          updateEntityStatus(entity.id, "on");
+          var nearCell = findNearestCellToEntity(entity);
+          var path = astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            nearCell
+          );
+          for (var o = 0; o < path.length; o++) {
+            cellPath.push(path[o]);
+          }
+          cellPath.push(["change_operational_state", info]);
         }
-        setTimeout(function () {
-          getEntityStatusOnMap();
-        }, 400);
-        setTimeout(function () {
-          getAllEntity();
-        }, 600);
       } else {
-        var nearCell = findNearestCellToEntity(entity);
-        var path = astarAlg(
-          cellsList[cellIndex(this.position.x, this.position.y)],
-          nearCell
-        );
-        for (var o = 0; o < path.length; o++) {
-          cellPath.push(path[o]);
-        }
-        cellPath.push(["change_operational_state", info]);
+        console.log("L'oggetto si trova già in quello stato.");
       }
     } else {
       console.log(
@@ -241,48 +250,55 @@ class Agent {
       }
     }
     if (entity != undefined) {
-      if (
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[0] ==
-          "false" &&
-          this.position.x == entity.position.x &&
-          this.position.y == entity.position.y - 1) ||
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[1] ==
-          "false" &&
-          this.position.x == entity.position.x + 1 &&
-          this.position.y == entity.position.y) ||
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[2] ==
-          "false" &&
-          this.position.x == entity.position.x &&
-          this.position.y == entity.position.y + 1) ||
-        (cellsList[cellIndex(entity.position.x, entity.position.y)].walls[3] ==
-          "false" &&
-          this.position.x == entity.position.x - 1 &&
-          this.position.y == entity.position.y)
-      ) {
-        if (entity.status == "open" && info["container_portal"] != undefined) {
-          updateEntityStatus(entity.id, "closed");
-        } else if (
-          entity.status == "closed" &&
-          info["containing_object"] != undefined
+      if (info["operational_state"] != entity.status) {
+        if (
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[0] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y - 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[1] == "false" &&
+            this.position.x == entity.position.x + 1 &&
+            this.position.y == entity.position.y) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[2] == "false" &&
+            this.position.x == entity.position.x &&
+            this.position.y == entity.position.y + 1) ||
+          (cellsList[cellIndex(entity.position.x, entity.position.y)]
+            .walls[3] == "false" &&
+            this.position.x == entity.position.x - 1 &&
+            this.position.y == entity.position.y)
         ) {
-          updateEntityStatus(entity.id, "open");
+          if (
+            entity.status == "open" &&
+            info["container_portal"] != undefined
+          ) {
+            updateEntityStatus(entity.id, "closed");
+          } else if (
+            entity.status == "closed" &&
+            info["containing_object"] != undefined
+          ) {
+            updateEntityStatus(entity.id, "open");
+          }
+          setTimeout(function () {
+            getEntityStatusOnMap();
+          }, 400);
+          setTimeout(function () {
+            getAllEntity();
+          }, 600);
+        } else {
+          var nearCell = findNearestCellToEntity(entity);
+          var path = astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            nearCell
+          );
+          for (var o = 0; o < path.length; o++) {
+            cellPath.push(path[o]);
+          }
+          cellPath.push(["closure", info]);
         }
-        setTimeout(function () {
-          getEntityStatusOnMap();
-        }, 400);
-        setTimeout(function () {
-          getAllEntity();
-        }, 600);
       } else {
-        var nearCell = findNearestCellToEntity(entity);
-        var path = astarAlg(
-          cellsList[cellIndex(this.position.x, this.position.y)],
-          nearCell
-        );
-        for (var o = 0; o < path.length; o++) {
-          cellPath.push(path[o]);
-        }
-        cellPath.push(["closure", info]);
+        console.log("L'entità si trova già in quello stato.");
       }
     } else {
       console.log(

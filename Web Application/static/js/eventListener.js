@@ -7,58 +7,114 @@ var checkColor = document.getElementById("color-checkbox");
 var checkMoveAgent = document.getElementById("move-agent");
 
 document.getElementById("delete-entity-btn0").addEventListener("click", () => {
-  if (document.getElementById("teom-class0").innerHTML == "Agent") {
-    agent = null;
-    deleteAgent();
-  } else {
-    deleteCellOccupied(document.getElementById("teom-id0").innerHTML);
-    deleteEntity(document.getElementById("teom-id0").innerHTML);
+  var check = false;
+  for (var i = 0; i < positioningList.length; i++) {
+    for (var j = 0; j < positioningList[i].length; j++) {
+      if (
+        positioningList[i][j][1] ==
+        document.getElementById("teom-id0").innerHTML
+      ) {
+        check = true;
+      }
+    }
   }
-  setTimeout(function () {
-    getMap();
-  }, 300);
-  setTimeout(function () {
-    getAllEntity();
-  }, 600);
-  setTimeout(function () {
-    showInfoTable(lastCoordinates[0], lastCoordinates[1]);
-  }, 700);
+  if (!check) {
+    if (document.getElementById("teom-class0").innerHTML == "Agent") {
+      agent = null;
+      deleteAgent();
+    } else {
+      deleteCellOccupied(document.getElementById("teom-id0").innerHTML);
+      deleteEntity(document.getElementById("teom-id0").innerHTML);
+    }
+
+    setTimeout(function () {
+      getMap();
+    }, 300);
+    setTimeout(function () {
+      getAllEntity();
+    }, 600);
+    setTimeout(function () {
+      getEntityPositioningOnMap();
+      showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+    }, 700);
+  } else {
+    console.log(
+      "Non posso cancellare l'entità perché ha altre entità sopra/sotto."
+    );
+  }
 });
 document.getElementById("delete-entity-btn1").addEventListener("click", () => {
-  if (document.getElementById("teom-class1").innerHTML == "Agent") {
-    agent = null;
-    deleteAgent();
-  } else {
-    deleteCellOccupied(document.getElementById("teom-id1").innerHTML);
-    deleteEntity(document.getElementById("teom-id1").innerHTML);
+  var check = false;
+  for (var i = 0; i < positioningList.length; i++) {
+    for (var j = 0; j < positioningList[i].length; j++) {
+      if (
+        positioningList[i][j][1] ==
+        document.getElementById("teom-id1").innerHTML
+      ) {
+        check = true;
+      }
+    }
   }
-  setTimeout(function () {
-    getMap();
-  }, 300);
-  setTimeout(function () {
-    getAllEntity();
-  }, 600);
-  setTimeout(function () {
-    showInfoTable(lastCoordinates[0], lastCoordinates[1]);
-  }, 700);
+  if (!check) {
+    if (document.getElementById("teom-class1").innerHTML == "Agent") {
+      agent = null;
+      deleteAgent();
+    } else {
+      deleteCellOccupied(document.getElementById("teom-id1").innerHTML);
+      deleteEntity(document.getElementById("teom-id1").innerHTML);
+    }
+    setTimeout(function () {
+      getMap();
+    }, 300);
+    setTimeout(function () {
+      getAllEntity();
+    }, 600);
+    setTimeout(function () {
+      getEntityPositioningOnMap();
+      showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+    }, 700);
+  } else {
+    console.log(
+      "Non posso cancellare l'entità perché ha altre entità sopra/sotto."
+    );
+  }
 });
 document.getElementById("delete-entity-btn2").addEventListener("click", () => {
-  if (document.getElementById("teom-class2").innerHTML == "Agent") {
-    agent = null;
-    deleteAgent();
-  } else {
-    deleteCellOccupied(document.getElementById("teom-id2").innerHTML);
-    deleteEntity(document.getElementById("teom-id2").innerHTML);
+  var check = false;
+  for (var i = 0; i < positioningList.length; i++) {
+    for (var j = 0; j < positioningList[i].length; j++) {
+      if (
+        positioningList[i][j][1] ==
+        document.getElementById("teom-id2").innerHTML
+      ) {
+        cos;
+        check = true;
+      }
+    }
   }
-  setTimeout(function () {
-    getMap();
-  }, 300);
-  setTimeout(function () {
-    getAllEntity();
-  }, 600);
-  setTimeout(function () {
-    showInfoTable(lastCoordinates[0], lastCoordinates[1]);
-  }, 700);
+  if (!check) {
+    if (document.getElementById("teom-class2").innerHTML == "Agent") {
+      agent = null;
+      deleteAgent();
+    } else {
+      deleteCellOccupied(document.getElementById("teom-id2").innerHTML);
+      deleteEntity(document.getElementById("teom-id2").innerHTML);
+    }
+    setTimeout(function () {
+      getMap();
+    }, 300);
+    setTimeout(function () {
+      getAllEntity();
+    }, 600);
+    setTimeout(function () {
+      getEntityPositioningOnMap();
+      showInfoTable(lastCoordinates[0], lastCoordinates[1]);
+    }, 700);
+  } else {
+    console.log(
+      "Non posso cancellare l'entità perché ha altre entità sopra/sotto."
+    );
+  }
 });
 
 var imgItemSelected = document
@@ -364,8 +420,6 @@ function mouseReleased() {
   }
 }
 
-function mouseDragged() {}
-
 /**
  * @param {int} x
  * @param {int} y
@@ -412,6 +466,10 @@ function showInfoTable(x, y) {
       showItem.push(itemsList[i]);
     }
   }
+  // TO DO: SE 0 ENTITY, NON CANCELLO LA TABLE MA REIMPOSTO I VALORI A PREDEFINITI
+  if (showItem.length < 1) {
+    document.getElementById("table-entity-on-map0").classList.add("hidden");
+  }
 
   if (cellsList[cellIndex(x, y)].occupied != null) {
     for (var i = 0; i < itemsList.length; i++) {
@@ -435,6 +493,22 @@ function showInfoTable(x, y) {
       document
         .getElementById(`table-entity-on-map${i}`)
         .classList.remove("hidden");
+      if (showItem.length == 1) {
+        document
+          .getElementById(`table-entity-on-map${i}`)
+          .classList.remove("width_33");
+        document
+          .getElementById(`table-entity-on-map${i}`)
+          .classList.add("width_50");
+      }
+      if (showItem.length >= 2) {
+        document
+          .getElementById(`table-entity-on-map${i}`)
+          .classList.remove("width_50");
+        document
+          .getElementById(`table-entity-on-map${i}`)
+          .classList.add("width_33");
+      }
 
       document.getElementById(`teom-coordinates${i}`).innerHTML =
         "X:" + showItem[i].position.x + " Y:" + showItem[i].position.y;

@@ -285,6 +285,7 @@ function draw() {
       itemsList[i].show();
     }
   }
+
   // Se è stato istanziato l'agente, lo mostra sulla mappa.
   if (agent != null) {
     agent.show();

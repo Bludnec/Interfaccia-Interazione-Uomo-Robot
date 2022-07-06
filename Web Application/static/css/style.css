@@ -127,13 +127,14 @@ footer {
   width: 40%;
 }
 
-#table-entity-on-map {
-  float: left;
-}
 .width_33 {
-  width: 33%;
+  width: 32%;
+  float: left;
+  margin-right: 10px;
 }
 
 .width_50 {
-  width: 50%;
+  width: 49%;
+  margin-right: 10px;
+  float: left;
 }

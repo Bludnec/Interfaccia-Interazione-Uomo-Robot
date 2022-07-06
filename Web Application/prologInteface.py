@@ -392,7 +392,7 @@ def deleteInsideDAOImpl(id1,id2):
 # Restistuice lo spazio rimanente dentro un'entità facendo il calcolo con quelle già presenti
 def getInsideSpaceAvailableDAOImpl(id):
     if(bool(list(prolog.query('contain_ability('+id+')')))):
-        sizeList = getEntitySizeDAOImpl(id)[0]
+        sizeList = getEntitySizeDAOImpl(id)
         spaceAvailable = sizeList['SizeX']*sizeList['SizeY']
         listEnt = getInsideDAOImpl(id)
         for x in listEnt:

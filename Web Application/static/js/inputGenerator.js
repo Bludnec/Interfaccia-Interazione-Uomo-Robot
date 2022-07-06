@@ -36,30 +36,6 @@ function inputGenerator() {
         }
       }
     }
-    var tempCount = 0;
-    for (var i = 0; i < data[1].length; i++) {
-      for (var k = 0; k < listInputText.length; k++) {
-        if (listInputText[k] == data[1][i][0]) {
-          // x input
-          map1.set(data[1][i][0].charAt(0) + "0" + tempCount, data[1][i][0]);
-          // x output
-          map1.set(data[1][i][0], data[1][i][0].charAt(0) + "0" + tempCount);
-          tempCount++;
-          var zona = {
-            name: map1.get(data[1][i][0]),
-            class: data[1][i][0],
-            position: {
-              x: data[1][i][2].X,
-              y: data[1][i][2].Y,
-              z: "0",
-            },
-            properties: [{ name: "walkable_ability", value: "true" }],
-            lexical_references: data[1][i][1],
-          };
-          inputText.entities.push(zona);
-        }
-      }
-    }
 
     for (var i = 0; i < entitySelected.length; i++) {
       // x input
@@ -119,7 +95,30 @@ function inputGenerator() {
       }
       inputText.entities.push(entity);
     }
-
+    var tempCount = 0;
+    for (var i = 0; i < data[1].length; i++) {
+      for (var k = 0; k < listInputText.length; k++) {
+        if (listInputText[k] == data[1][i][0]) {
+          // x input
+          map1.set(data[1][i][0].charAt(0) + "0" + tempCount, data[1][i][0]);
+          // x output
+          map1.set(data[1][i][0], data[1][i][0].charAt(0) + "0" + tempCount);
+          tempCount++;
+          var zona = {
+            name: map1.get(data[1][i][0]),
+            class: data[1][i][0],
+            position: {
+              x: data[1][i][2].X,
+              y: data[1][i][2].Y,
+              z: "0",
+            },
+            properties: [{ name: "walkable_ability", value: "true" }],
+            lexical_references: data[1][i][1],
+          };
+          inputText.entities.push(zona);
+        }
+      }
+    }
     console.log(JSON.stringify(inputText));
 
     getOutputText(inputText);
