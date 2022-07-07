@@ -495,7 +495,7 @@ function showInfoTable(x, y) {
   document.getElementById("table-entity-on-map2").classList.add("hidden");
 
   // TO DO: MOSTRARE AGENTE
-  if (x == agent.position.x && y == agent.position.y) {
+  if (agent != null && x == agent.position.x && y == agent.position.y) {
     document.getElementById(`teom-coordinates0`).innerHTML =
       "X:" + x + " Y:" + y;
 

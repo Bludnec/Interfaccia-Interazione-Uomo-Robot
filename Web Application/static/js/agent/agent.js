@@ -311,15 +311,15 @@ class Agent {
    * @param {*} info  Un robot afferra un'entità (theme).
    */
   manipulation(info) {
-    var listaAbilita = [];
-    for (var i = 0; i < abilityList.length; i++) {
-      if (info["theme"] == abilityList[i][0]) {
-        listaAbilita = abilityList[i];
+    if (entityTakenByAgent == undefined) {
+      var listaAbilita = [];
+      for (var i = 0; i < abilityList.length; i++) {
+        if (info["theme"] == abilityList[i][0]) {
+          listaAbilita = abilityList[i];
+        }
       }
-    }
-    if (listaAbilita.includes("move_ability")) {
-      if (info["theme"] != undefined) {
-        if (entityTakenByAgent == undefined) {
+      if (listaAbilita.includes("move_ability")) {
+        if (info["theme"] != undefined) {
           var entity;
           for (var i = 0; i < itemsList.length; i++) {
             if (itemsList[i].id == info["theme"]) {
@@ -382,6 +382,8 @@ class Agent {
           }
         }
       }
+    } else {
+      console.log("Ho già un'entità in mano.");
     }
   }
 
@@ -515,7 +517,6 @@ class Agent {
                 0
               );
               setTimeout(function () {
-                entityTakenByAgent = entity;
                 document.getElementById("taken-class").innerHTML = "Class";
                 document.getElementById("taken-id").innerHTML = "Id";
                 document.getElementById("taken-coordinates").innerHTML =
@@ -551,6 +552,12 @@ class Agent {
               0
             );
             setTimeout(function () {
+              document.getElementById("taken-class").innerHTML = "Class";
+              document.getElementById("taken-id").innerHTML = "Id";
+              document.getElementById("taken-coordinates").innerHTML =
+                "X:0 Y:0";
+              document.getElementById("taken-image").src =
+                "static/images/empty.png";
               entityTakenByAgent = undefined;
               getAllEntity();
             }, 200);
@@ -568,6 +575,12 @@ class Agent {
               0
             );
             setTimeout(function () {
+              document.getElementById("taken-class").innerHTML = "Class";
+              document.getElementById("taken-id").innerHTML = "Id";
+              document.getElementById("taken-coordinates").innerHTML =
+                "X:0 Y:0";
+              document.getElementById("taken-image").src =
+                "static/images/empty.png";
               entityTakenByAgent = undefined;
               getAllEntity();
             }, 200);
@@ -585,6 +598,12 @@ class Agent {
               0
             );
             setTimeout(function () {
+              document.getElementById("taken-class").innerHTML = "Class";
+              document.getElementById("taken-id").innerHTML = "Id";
+              document.getElementById("taken-coordinates").innerHTML =
+                "X:0 Y:0";
+              document.getElementById("taken-image").src =
+                "static/images/empty.png";
               entityTakenByAgent = undefined;
               getAllEntity();
             }, 200);
@@ -602,6 +621,12 @@ class Agent {
               0
             );
             setTimeout(function () {
+              document.getElementById("taken-class").innerHTML = "Class";
+              document.getElementById("taken-id").innerHTML = "Id";
+              document.getElementById("taken-coordinates").innerHTML =
+                "X:0 Y:0";
+              document.getElementById("taken-image").src =
+                "static/images/empty.png";
               entityTakenByAgent = undefined;
               getAllEntity();
             }, 200);
