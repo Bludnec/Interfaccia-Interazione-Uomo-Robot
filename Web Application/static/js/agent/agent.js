@@ -352,6 +352,21 @@ class Agent {
             );
             setTimeout(function () {
               entityTakenByAgent = entity;
+              document.getElementById("taken-class").innerHTML =
+                entityTakenByAgent.entClass;
+              document.getElementById("taken-id").innerHTML =
+                entityTakenByAgent.id;
+              document.getElementById("taken-coordinates").innerHTML =
+                "X:" +
+                entityTakenByAgent.position.x +
+                " Y:" +
+                entityTakenByAgent.position.y;
+              document.getElementById(
+                "taken-image"
+              ).src = `static/images/${entityTakenByAgent.entClass}.png`;
+
+              entityTakenByAgent.id;
+
               getAllEntity();
             }, 200);
           } else {
@@ -500,6 +515,13 @@ class Agent {
                 0
               );
               setTimeout(function () {
+                entityTakenByAgent = entity;
+                document.getElementById("taken-class").innerHTML = "Class";
+                document.getElementById("taken-id").innerHTML = "Id";
+                document.getElementById("taken-coordinates").innerHTML =
+                  "X:0 Y:0";
+                document.getElementById("taken-image").src =
+                  "static/images/empty.png";
                 entityTakenByAgent = undefined;
                 getAllEntity();
               }, 200);
