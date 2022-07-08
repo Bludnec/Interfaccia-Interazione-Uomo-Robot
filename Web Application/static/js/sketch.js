@@ -262,6 +262,22 @@ function setup() {
     boolLoadMap = false;
   }
   /* Create canvas */
+
+  rows = document.getElementById("height").value;
+  cols = document.getElementById("width").value;
+
+  var canvas = createCanvas(cols * w, rows * w);
+  canvas.parent("canvas-zone");
+
+  deleteMap();
+
+  setTimeout(function () {
+    insertMap(cols, rows);
+  }, 200);
+
+  setTimeout(function () {
+    getMap();
+  }, 500);
 }
 
 /**

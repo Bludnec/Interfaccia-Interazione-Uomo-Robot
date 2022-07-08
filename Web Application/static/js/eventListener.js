@@ -39,7 +39,7 @@ document.getElementById("delete-entity-btn0").addEventListener("click", () => {
     }, 700);
   } else {
     console.log(
-      "Non posso cancellare l'entità perché ha altre entità sopra/sotto."
+      "Non posso cancellare l'entità perché ha altre entità sopra, sotto o dentro."
     );
   }
 });
@@ -345,8 +345,16 @@ function mouseReleased() {
           getSpaceAvailable(itemsList[indexEl].id).then((data) => {
             if (
               data >=
-              document.getElementById("til-x").value *
-                document.getElementById("til-y").value
+                document.getElementById("til-x").value *
+                  document.getElementById("til-y").value &&
+              document.getElementById("til-x").value <=
+                itemsList[indexEl].sizeX &&
+              document.getElementById("til-y").value <=
+                itemsList[indexEl].sizeY &&
+              parseInt(x) +
+                parseInt(document.getElementById("til-x").value) -
+                1 <=
+                itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
             ) {
               setTimeout(function () {
                 getClassAbility(itemsList[indexEl].entClass, "contain").then(
@@ -391,7 +399,7 @@ function mouseReleased() {
                 );
               }, 300);
             } else {
-              console.log("Non c'è spazio disponibile per quest'entità.");
+              console.log("Non è possibile inserire l'entità.");
             }
           });
         }
