@@ -539,98 +539,22 @@ class Agent {
            * Il robot non ha una location dove lasciare l'entità
            * quindi la lascia vicino a se.
            */
-          if (
-            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[0] ==
-              "false" &&
-            cellsList[cellIndex(agent.position.x, agent.position.y - 1)]
-              .occupied == undefined
-          ) {
-            updateEntityPosition(
-              entityTakenByAgent.id,
-              agent.position.x,
-              agent.position.y - 1,
-              0
-            );
-            setTimeout(function () {
-              document.getElementById("taken-class").innerHTML = "Class";
-              document.getElementById("taken-id").innerHTML = "Id";
-              document.getElementById("taken-coordinates").innerHTML =
-                "X:0 Y:0";
-              document.getElementById("taken-image").src =
-                "static/images/empty.png";
-              entityTakenByAgent = undefined;
-              getAllEntity();
-            }, 200);
-          }
-          if (
-            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[1] ==
-              "false" &&
-            cellsList[cellIndex(agent.position.x + 1, agent.position.y)]
-              .occupied == undefined
-          ) {
-            updateEntityPosition(
-              entityTakenByAgent.id,
-              agent.position.x + 1,
-              agent.position.y,
-              0
-            );
-            setTimeout(function () {
-              document.getElementById("taken-class").innerHTML = "Class";
-              document.getElementById("taken-id").innerHTML = "Id";
-              document.getElementById("taken-coordinates").innerHTML =
-                "X:0 Y:0";
-              document.getElementById("taken-image").src =
-                "static/images/empty.png";
-              entityTakenByAgent = undefined;
-              getAllEntity();
-            }, 200);
-          }
-          if (
-            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[2] ==
-              "false" &&
-            cellsList[cellIndex(agent.position.x, agent.position.y + 1)]
-              .occupied == undefined
-          ) {
-            updateEntityPosition(
-              entityTakenByAgent.id,
-              agent.position.x,
-              agent.position.y + 1,
-              0
-            );
-            setTimeout(function () {
-              document.getElementById("taken-class").innerHTML = "Class";
-              document.getElementById("taken-id").innerHTML = "Id";
-              document.getElementById("taken-coordinates").innerHTML =
-                "X:0 Y:0";
-              document.getElementById("taken-image").src =
-                "static/images/empty.png";
-              entityTakenByAgent = undefined;
-              getAllEntity();
-            }, 200);
-          }
-          if (
-            cellsList[cellIndex(agent.position.x, agent.position.y)].walls[3] ==
-              "false" &&
-            cellsList[cellIndex(agent.position.x - 1, agent.position.y)]
-              .occupied == undefined
-          ) {
-            updateEntityPosition(
-              entityTakenByAgent.id,
-              agent.position.x - 1,
-              agent.position.y,
-              0
-            );
-            setTimeout(function () {
-              document.getElementById("taken-class").innerHTML = "Class";
-              document.getElementById("taken-id").innerHTML = "Id";
-              document.getElementById("taken-coordinates").innerHTML =
-                "X:0 Y:0";
-              document.getElementById("taken-image").src =
-                "static/images/empty.png";
-              entityTakenByAgent = undefined;
-              getAllEntity();
-            }, 200);
-          }
+
+          updateEntityPosition(
+            entityTakenByAgent.id,
+            agent.position.x,
+            agent.position.y,
+            0
+          );
+          setTimeout(function () {
+            document.getElementById("taken-class").innerHTML = "Class";
+            document.getElementById("taken-id").innerHTML = "Id";
+            document.getElementById("taken-coordinates").innerHTML = "X:0 Y:0";
+            document.getElementById("taken-image").src =
+              "static/images/empty.png";
+            entityTakenByAgent = undefined;
+            getAllEntity();
+          }, 200);
         }
       } else {
         console.log("Non ho quell'entità in mano.");
