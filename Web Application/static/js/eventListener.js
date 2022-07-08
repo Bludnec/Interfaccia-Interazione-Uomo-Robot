@@ -235,8 +235,9 @@ function mouseReleased() {
               idCounter++;
               deselectEntityImage();
             }, 200);
-          }
-          if (entityWithPhysicalStatus.includes(classItemSelected + "Open")) {
+          } else if (
+            entityWithPhysicalStatus.includes(classItemSelected + "Open")
+          ) {
             setTimeout(function () {
               insertEntityStatus(
                 (classItemSelected + idCounter.toString()).toString(),
@@ -246,6 +247,8 @@ function mouseReleased() {
               idCounter++;
               deselectEntityImage();
             }, 200);
+          } else {
+            idCounter++;
           }
         }
         /**
