@@ -312,6 +312,7 @@ function draw() {
        * celle per cella ogni giro di draw().
        */
       if (cellPath != -1 && cellPath.length != 0) {
+        console.log(cellPath[0]);
         if (cellPath[0].id != undefined) {
           agent.moveTo(cellPath[0].x, cellPath[0].y);
           cellPath.shift();

@@ -95,6 +95,7 @@ class Agent {
    * partendo da un determinato punto (SOURCE)
    */
   bringing(info) {
+    console.log(info);
     if (info["path"] != undefined) {
       // MOTION
       var entityZoneToRelease;
@@ -492,30 +493,6 @@ class Agent {
                 path[0].y,
                 0
               );
-            } else {
-              path.pop();
-              for (var i = 0; i < path.length; i++) {
-                cellPath.push(path[i]);
-              }
-              cellPath.push(["releasing", info]);
-            }
-          } else {
-            // L'agente deve portarlo in una zona.
-            var nearestCell = findNearestCellToLocation(info["goal"]);
-            var path;
-            if (!(nearestCell == -1)) {
-              path = astarAlg(
-                cellsList[cellIndex(this.position.x, this.position.y)],
-                nearestCell
-              );
-            }
-            if (path.length == 1) {
-              updateEntityPosition(
-                entityTakenByAgent.id,
-                path[0].x,
-                path[0].y,
-                0
-              );
               setTimeout(function () {
                 document.getElementById("taken-class").innerHTML = "Class";
                 document.getElementById("taken-id").innerHTML = "Id";
@@ -533,6 +510,40 @@ class Agent {
               }
               cellPath.push(["releasing", info]);
             }
+          } else {
+            // L'agente deve portarlo in una zona.
+            var nearestCell = findNearestCellToLocation(info["goal"]);
+            var path;
+            if (!(nearestCell == -1)) {
+              path = astarAlg(
+                cellsList[cellIndex(this.position.x, this.position.y)],
+                nearestCell
+              );
+              if (path.length == 1) {
+                updateEntityPosition(
+                  entityTakenByAgent.id,
+                  path[0].x,
+                  path[0].y,
+                  0
+                );
+                setTimeout(function () {
+                  document.getElementById("taken-class").innerHTML = "Class";
+                  document.getElementById("taken-id").innerHTML = "Id";
+                  document.getElementById("taken-coordinates").innerHTML =
+                    "X:0 Y:0";
+                  document.getElementById("taken-image").src =
+                    "static/images/empty.png";
+                  entityTakenByAgent = undefined;
+                  getAllEntity();
+                }, 200);
+              } else {
+                path.pop();
+                for (var i = 0; i < path.length; i++) {
+                  cellPath.push(path[i]);
+                }
+                cellPath.push(["releasing", info]);
+              }
+            }
           }
         } else {
           /**
@@ -546,6 +557,7 @@ class Agent {
             agent.position.y,
             0
           );
+
           setTimeout(function () {
             document.getElementById("taken-class").innerHTML = "Class";
             document.getElementById("taken-id").innerHTML = "Id";
