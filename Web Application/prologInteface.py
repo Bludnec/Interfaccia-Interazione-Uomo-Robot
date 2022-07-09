@@ -288,8 +288,6 @@ def getEntityAbilitiesDAOImpl(id):
         abilitiesList.append('moveAbility')
     if(bool(list(prolog.query('walkable_ability('+id+')')))):
         abilitiesList.append('walkableAbility')
-    if(bool(list(prolog.query('open_ability('+id+')')))):
-        abilitiesList.append('openAbility')
     if(bool(list(prolog.query('putting_under_ability('+id+')')))):
         abilitiesList.append('puttingUnderAbility')
     return abilitiesList
@@ -420,9 +418,7 @@ def getEntityAbilityMapDAOImpl():
         if(bool(list(prolog.query('move_ability('+x['Id']+')')))):
             abilityList.append("move_ability")                     
         if(bool(list(prolog.query('walkable_ability('+x['Id']+')')))):
-            abilityList.append("walkable_ability")
-        if(bool(list(prolog.query('open_ability('+x['Id']+')')))):
-            abilityList.append("open_ability")                     
+            abilityList.append("walkable_ability")                  
         if(bool(list(prolog.query('putting_under_ability('+x['Id']+')')))):
             abilityList.append("putting_under_ability")  
         abilityList.insert(0,x['Id'])

@@ -258,16 +258,6 @@ walkable_ability(Id):-
     is_class(Id,Class),
     walkable_ability(Class).
 
-% Si può chiudere/aprire l'oggetto.
-open_ability(wardrobe).
-open_ability(fridge).
-open_ability(window).
-open_ability(door).
-
-open_ability(Id):-
-    is_class(Id,Class),
-    open_ability(Class).
-
 % contenere qualcosa sotto
 putting_under_ability(table).
 putting_under_ability(chair).
