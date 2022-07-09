@@ -31,6 +31,7 @@ function inputGenerator() {
       for (var j = 0; j < data[0][i][5]["List"].length; j++) {
         for (var k = 0; k < listInputText.length; k++) {
           if (listInputText[k] == data[0][i][5]["List"][j]) {
+            console.log(listInputText[k], data[0][i][5]["List"][j]);
             entitySelected.push(data[0][i]);
           }
         }
