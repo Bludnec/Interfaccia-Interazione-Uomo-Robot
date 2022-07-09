@@ -173,7 +173,7 @@ function mouseReleased() {
   checkWallNeighbor(cellsList[cellIndex(0, 0)], 2, 1);
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
-  if (boolImgItemSelected) {
+  if (boolImgItemSelected && cellsList[cellIndex(x, y)].zone != "null") {
     var indexEl = getElementInPosition(x, y);
     if (!(cellsList[cellIndex(x, y)].occupied == null)) {
       for (var i = 0; i < itemsList.length; i++) {
