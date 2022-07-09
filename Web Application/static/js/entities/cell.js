@@ -44,7 +44,7 @@ class Cell {
         break;
 
       default:
-        fill(51);
+        fill(180);
       // code block
     }
     noStroke();
