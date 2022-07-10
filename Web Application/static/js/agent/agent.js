@@ -179,7 +179,47 @@ class Agent {
   /**
    * @param {Dict} info Il robot va verso una direzione (DIRECTION).
    */
-  change_direction(info) {}
+  change_direction(info) {
+    if (info["direction"] != undefined) {
+      var movement = info["direction"];
+      if (movement == "left") {
+        cellPath.push(
+          astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            cellsList[cellIndex(this.position.x - 1, this.position.y)]
+          )[0]
+        );
+        console.log(cellPath[0]);
+      }
+      if (movement == "right") {
+        cellPath.push(
+          astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            cellsList[cellIndex(this.position.x + 1, this.position.y)]
+          )[0]
+        );
+        console.log(cellPath[0]);
+      }
+      if (movement == "ahead") {
+        cellPath.push(
+          astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            cellsList[cellIndex(this.position.x, this.position.y - 1)]
+          )[0]
+        );
+        console.log(cellPath[0]);
+      }
+      if (movement == "back") {
+        cellPath.push(
+          astarAlg(
+            cellsList[cellIndex(this.position.x, this.position.y)],
+            cellsList[cellIndex(this.position.x, this.position.y + 1)]
+          )[0]
+        );
+        console.log(cellPath[0]);
+      }
+    }
+  }
 
   /**
    * @param {Dict} info Il robot cambia lo stato di un oggetto (device).
