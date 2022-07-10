@@ -145,16 +145,16 @@ class Agent {
         cellPath.push(path[i]);
       }
       // manipulation
-      var newInfo = {
-        theme: info["theme"],
+      var newInfo2 = {
+        entity: info["theme"],
       };
-      cellPath.push(["manipulation", newInfo]);
+      cellPath.push(["manipulation", newInfo2]);
 
-      newInfo = {
+      var newInfo3 = {
         goal: info["goal"],
         theme: info["theme"],
       };
-      cellPath.push(["releasing", newInfo]);
+      cellPath.push(["releasing", newInfo3]);
     } else {
       console.log("Non ho trovato l'oggetto da afferrare.");
     }
@@ -309,21 +309,22 @@ class Agent {
   }
 
   /**
-   * @param {*} info  Un robot afferra un'entità (theme).
+   * @param {*} info  Un robot afferra un'entità (entity).
    */
   manipulation(info) {
+    console.log(info);
     if (entityTakenByAgent == undefined) {
       var listaAbilita = [];
       for (var i = 0; i < abilityList.length; i++) {
-        if (info["theme"] == abilityList[i][0]) {
+        if (info["entity"] == abilityList[i][0]) {
           listaAbilita = abilityList[i];
         }
       }
       if (listaAbilita.includes("move_ability")) {
-        if (info["theme"] != undefined) {
+        if (info["entity"] != undefined) {
           var entity;
           for (var i = 0; i < itemsList.length; i++) {
-            if (itemsList[i].id == info["theme"]) {
+            if (itemsList[i].id == info["entity"]) {
               entity = itemsList[i];
             }
           }
@@ -351,6 +352,13 @@ class Agent {
               agent.position.y,
               0
             );
+            entityTakenByAgent = entity;
+            console.log(entity.id);
+            setTimeout(function () {
+              deletePositioning(entity.id);
+              getEntityPositioningOnMap();
+            }, 200);
+
             setTimeout(function () {
               entityTakenByAgent = entity;
               document.getElementById("taken-class").innerHTML =
@@ -366,11 +374,11 @@ class Agent {
                 "taken-image"
               ).src = `static/images/${entityTakenByAgent.entClass}.png`;
 
-              entityTakenByAgent.id;
-
               getAllEntity();
-            }, 200);
+            }, 500);
+            console.log("1");
           } else {
+            console.log("2");
             var nearCell = findNearestCellToEntity(entity);
             var path = astarAlg(
               cellsList[cellIndex(this.position.x, this.position.y)],
@@ -386,6 +394,7 @@ class Agent {
     } else {
       console.log("Ho già un'entità in mano.");
     }
+    console.log(entityTakenByAgent);
   }
 
   /**
@@ -468,6 +477,7 @@ class Agent {
    */
   releasing(info) {
     console.log("Releas: ", entityTakenByAgent);
+    console.log(info);
     if (entityTakenByAgent != undefined) {
       if (entityTakenByAgent.id == info["theme"]) {
         if (info["goal"] != undefined) {
@@ -602,7 +612,10 @@ class Agent {
       for (var i = 0; i < path.length; i++) {
         cellPath.push(path[i]);
       }
-      cellPath.push(["manipulation", info]);
+      var newInfo = {
+        entity: info["theme"],
+      };
+      cellPath.push(["manipulation", newInfo]);
     } else {
       console.log("Non posso afferrare l'entità.");
     }

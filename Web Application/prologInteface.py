@@ -432,3 +432,9 @@ def getEntityStatusOnMapDAOImpl():
     allStatus.append(powerStatusList)
     allStatus.append(physicalStatusList)
     return allStatus
+
+def deletePositioningDAOImpl(id):
+    print(id)
+    prolog.retractall("on_top("+id+",_)")
+    prolog.retractall("on_bottom("+id+",_)")
+    prolog.retractall("inside("+id+",_)")

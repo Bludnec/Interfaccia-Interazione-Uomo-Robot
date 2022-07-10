@@ -247,3 +247,11 @@ def allEntityStatusOnMap():
     if request.method == "GET":
         lexRef = getEntityStatusOnMapDAOImpl()
         return jsonify(lexRef)
+
+
+@app.route('/delete-positioning', methods=['DELETE'])
+def deletePositioning():
+    if request.method == "DELETE":
+        req = request.get_json()
+        deletePositioningDAOImpl(req['id'])
+        return jsonify(req)

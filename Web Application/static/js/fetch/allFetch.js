@@ -555,3 +555,16 @@ function getOutputText(JSONinput) {
     })
     .catch((error) => console.log("error", error));
 }
+
+function deletePositioning(id) {
+  fetch("delete-positioning", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: id,
+    }),
+  });
+}
