@@ -80,11 +80,27 @@ class Agent {
           cellsList[cellIndex(this.position.x, this.position.y)],
           nearestCell
         );
-        for (var o = 0; o < path.length; o++) {
-          cellPath.push(path[o]);
+        for (var i = 0; i < path.length; i++) {
+          cellPath.push(path[i]);
         }
-      } else {
-        console.log("Non posso arrivare in quella zona.");
+      }
+      var entityZoneToRelease;
+      for (var i = 0; i < itemsList.length; i++) {
+        if ((itemsList[i].id = info["goal"])) {
+          entityZoneToRelease = itemsList[i];
+          break;
+        }
+      }
+      if (entityZoneToRelease != undefined) {
+        // L'agente arrivare vicino ad un'entità.
+        var cellaVicinoEntità = findNearestCellToEntity(entityZoneToRelease);
+        var path = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          cellaVicinoEntità
+        );
+        for (var i = 0; i < path.length; i++) {
+          cellPath.push(path[i]);
+        }
       }
     }
   }
@@ -587,8 +603,7 @@ class Agent {
   }
 
   /**
-   * @param {dict} info Il robot prende un'entità (theme).
-   * SOURCE poco utile perché se sappiamo l'id del theme allora sappiamo già dov'è.
+   * @param {dict} info Il robot prende un'entità (theme).ì
    */
   taking(info) {
     var listaAbilita = [];
