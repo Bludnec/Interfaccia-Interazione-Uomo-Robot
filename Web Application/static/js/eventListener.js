@@ -141,6 +141,12 @@ function mousePressed() {
 
   var thisCell = cellsList[cellIndex(x, y)];
 
+  document.getElementById("cell-id").innerHTML = thisCell.id;
+
+  document.getElementById("cell-coordinates").innerHTML =
+    "X:" + thisCell.x + " Y:" + thisCell.y;
+  document.getElementById("cell-zone").innerHTML = thisCell.zone;
+
   if (agent != null && checkMoveAgent.checked == true) {
     var start = cellsList[cellIndex(agent.position.x, agent.position.y)];
     var end = thisCell;
@@ -483,17 +489,6 @@ function showInfoTable(x, y) {
     }
   }
   // TO DO: SE 0 ENTITY, NON CANCELLO LA TABLE MA REIMPOSTO I VALORI A PREDEFINITI
-  if (showItem.length < 1) {
-    document.getElementById(`teom-coordinates0`).innerHTML = "X:0" + " Y:0";
-
-    document.getElementById(`teom-id0`).innerHTML = "Id";
-
-    document.getElementById(`teom-position0`).innerHTML = "On the floor";
-
-    document.getElementById(`teom-class0`).innerHTML = "Class";
-
-    document.getElementById(`teom-image0`).src = `static/images/empty.png`;
-  }
 
   if (cellsList[cellIndex(x, y)].occupied != null) {
     for (var i = 0; i < itemsList.length; i++) {
@@ -502,6 +497,7 @@ function showInfoTable(x, y) {
       }
     }
   }
+  document.getElementById("table-entity-on-map0").classList.add("hidden");
   document.getElementById("table-entity-on-map1").classList.add("hidden");
   document.getElementById("table-entity-on-map2").classList.add("hidden");
 
@@ -529,22 +525,6 @@ function showInfoTable(x, y) {
       document
         .getElementById(`table-entity-on-map${i}`)
         .classList.remove("hidden");
-      if (showItem.length == 1) {
-        document
-          .getElementById(`table-entity-on-map${i}`)
-          .classList.remove("width_33");
-        document
-          .getElementById(`table-entity-on-map${i}`)
-          .classList.add("width_50");
-      }
-      if (showItem.length >= 2) {
-        document
-          .getElementById(`table-entity-on-map${i}`)
-          .classList.remove("width_50");
-        document
-          .getElementById(`table-entity-on-map${i}`)
-          .classList.add("width_33");
-      }
 
       document.getElementById(`teom-coordinates${i}`).innerHTML =
         "X:" + showItem[i].position.x + " Y:" + showItem[i].position.y;

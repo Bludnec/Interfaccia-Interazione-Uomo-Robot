@@ -81,6 +81,7 @@ var bedImage,
   wardrobeImage,
   windowImage;
 var agentImage;
+var plusImage;
 var laptopOnImage,
   microwaveOnImage,
   televisionOnImage,
@@ -228,7 +229,7 @@ function preload() {
       }
     });
   }, 200);
-
+  plusImage = loadImage("static/images/plus.png");
   loadedCellMap = loadJSON("static/map/map.json");
 }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -88,11 +88,14 @@
               <div class="io-grid-element">
                 <textarea id="input-text" placeholder="Input text"></textarea>
               </div>
-              <div class="io-grid-element" id="io-button">
+              <div class="io-grid-element">
+                <textarea readonly id="output-text" placeholder="Output text"></textarea>
+              </div>
                 <button id="translate-button">
                   <p>Avvia comando</p>
                 </button>
-              </div>
+
+                <div class="clear-float"></div>
             </div>
             <div id="motion-agent">
               <label for="checkBox">Muovi agente</label><br />
@@ -199,7 +202,35 @@
           </div>
 
           <div id="_target_5">
-            <div class="width_50" id="table-entity-on-map0" >
+            <div class="width_33" id="cell-table" >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Class</th>
+                    <th scope="col">Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="cell-class">Cell</td>
+                    <td id="cell-id">Id</td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th scope="col">Coordinates</th>
+                    <th scope="col">Zone</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="cell-coordinates">X:0 Y:0</td>
+                    <td id="cell-zone">Zone</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="width_33 hidden" id="table-entity-on-map0" >
               <table class="table">
                 <thead>
                   <tr>
