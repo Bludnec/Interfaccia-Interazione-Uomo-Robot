@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_file, current_app, send_from_directory
+import os
 from prologInteface import *
 import json
 
@@ -20,6 +21,11 @@ def deleteAllEntity():
     lista = deleteAllEntityDAOImpl()
     return jsonify(lista)
 
+@app.route('/download')
+def downloadFile ():
+    #For windows you need to use drive name [ex: F:/Example.pdf]
+    path = "C:/Users/colav/Documents/GitHub/Tesi-di-laurea/Web Application/knowledge_base.txt"
+    return send_file(path, as_attachment=True)
 
 # Get all cells from KB.
 @app.route('/map', methods=['POST','DELETE','GET'])
