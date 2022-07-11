@@ -5,7 +5,7 @@ from pyswip import Prolog
 import json
 
 prolog = Prolog()
-prolog.consult('knowledge_base.pl')
+prolog.consult('knowledge_base.txt')
 
 # Restituisce una lista contenente una lista di tutte le entità 
 # salvate nel KB e un'altra lista con le dimensioni delle entità.
