@@ -105,7 +105,6 @@ class Agent {
     }
   }
 
-  attaching(info) {}
   /**
    * @param {Dict} info Il robot porta un oggetto (theme) ad una destinazione (goal), facendo un determirnato percorso (path) e
    * partendo da un determinato punto (SOURCE)
