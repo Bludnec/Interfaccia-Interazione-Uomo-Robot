@@ -176,7 +176,7 @@ def updateAgentPositionDAOImpl(x,y):
 
 # Entity
 def insertEntityDAOImpl(entity):
-    check = insertEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])
+    check = checkEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])
     if(check != 0):
         print('Valori delle dimensioni non valide.')
     else:
@@ -200,7 +200,7 @@ def deleteEntityDAOImpl(id):
         
 # Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
-def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
+def checkEntitySizeDAOImpl(entClass,sizeX,sizeY):
     check = -1
     if not bool(list(prolog.query('space(TheSize,'+ sizeX + ',' +sizeY+')'))):
         return -1
@@ -209,7 +209,7 @@ def insertEntitySizeDAOImpl(entClass,sizeX,sizeY):
     if(sizeBool):
         check = 0
     return check
-
+    
 # Cancella 
 def deleteEntityStatusDAOImpl(id):
     try:

@@ -260,6 +260,7 @@ function mouseReleased() {
               tilY
             );
           }
+
           if (entityWithPowerStatus.includes(classItemSelected + "On")) {
             setTimeout(function () {
               insertEntityStatus(
