@@ -15,6 +15,8 @@ class Cell {
 
     this.occupied = null;
 
+    this.path = false;
+
     this.g = 0;
     this.f = 0;
     this.h = 0;
@@ -26,29 +28,35 @@ class Cell {
   /* Posiziona le celle in ordine sullo schermo in base alle coordinate*/
   show() {
     /*Creo il rettangolo della cella */
-    switch (this.zone) {
-      case "kitchen":
-        fill("red");
-        break;
-      case "bathroom":
-        fill("blue");
-        break;
-      case "bedroom":
-        fill("yellow");
-        break;
-      case "livingroom":
-        fill("brown");
-        break;
-      case "balcony":
-        fill("green");
-        break;
+    if (!this.path) {
+      switch (this.zone) {
+        case "kitchen":
+          fill("red");
+          break;
+        case "bathroom":
+          fill("blue");
+          break;
+        case "bedroom":
+          fill("yellow");
+          break;
+        case "livingroom":
+          fill("brown");
+          break;
+        case "balcony":
+          fill("green");
+          break;
 
-      default:
-        fill(180);
-      // code block
+        default:
+          fill(180);
+        // code block
+      }
+      noStroke();
+      rect(this.mapX, this.mapY, w, w);
+    } else {
+      fill(204, 255, 153);
+      noStroke();
+      rect(this.mapX, this.mapY, w, w);
     }
-    noStroke();
-    rect(this.mapX, this.mapY, w, w);
 
     /**
      * Creo un bordo intorno alle

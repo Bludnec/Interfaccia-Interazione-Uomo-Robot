@@ -141,3 +141,7 @@ footer {
   margin-right: 10px;
   float: left;
 }
+
+#delete-path {
+  margin-left: 10px;
+}

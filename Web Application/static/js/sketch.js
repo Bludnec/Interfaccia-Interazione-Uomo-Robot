@@ -47,14 +47,30 @@ document.getElementById("drawButton").addEventListener("click", () => {
   canvas.parent("canvas-zone");
 
   deleteMap();
+  agent = undefined;
+  setTimeout(function () {
+    deleteAllEntity();
+  }, 200);
+
+  setTimeout(function () {
+    getAllEntity();
+  }, 300);
 
   setTimeout(function () {
     insertMap(cols, rows);
-  }, 200);
+  }, 400);
 
   setTimeout(function () {
     getMap();
   }, 500);
+});
+
+document.getElementById("delete-path").addEventListener("click", () => {
+  for (var i = 0; i < cellsList.length; i++) {
+    for (var i = 0; i < cellsList.length; i++) {
+      cellsList[i].path = false;
+    }
+  }
 });
 
 var CellMap;

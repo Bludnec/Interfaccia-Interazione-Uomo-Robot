@@ -25,6 +25,7 @@ def getAllEntityDAOImpl():
 
 def deleteAllEntityDAOImpl():
     prolog.retractall('entity(_,_,_,_,_,_)')
+    prolog.retractall('agent(_,_)')
     prolog.retractall('entity_size(_,_,_)')
     prolog.retractall('on_top(_,_)')
     prolog.retractall('on_bottom(_,_)')
