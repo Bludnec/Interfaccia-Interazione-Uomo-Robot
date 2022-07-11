@@ -171,7 +171,7 @@ class Agent {
       };
       cellPath.push(["releasing", newInfo3]);
     } else {
-      console.log("Non ho trovato l'oggetto da afferrare.");
+      alert("Non ho trovato l'oggetto da afferrare.");
     }
   }
 
@@ -278,10 +278,10 @@ class Agent {
           cellPath.push(["change_operational_state", info]);
         }
       } else {
-        console.log("L'oggetto si trova già in quello stato.");
+        alert("L'oggetto si trova già in quello stato.");
       }
     } else {
-      console.log(
+      alert(
         "Non posso eseguire l'azione perché non trovo l'oggetto richiesto."
       );
     }
@@ -354,10 +354,10 @@ class Agent {
           cellPath.push(["closure", info]);
         }
       } else {
-        console.log("L'entità si trova già in quello stato.");
+        alert("L'entità si trova già in quello stato.");
       }
     } else {
-      console.log(
+      alert(
         "Non posso eseguire l'azione perché non trovo l'oggetto richiesto."
       );
     }
@@ -447,9 +447,8 @@ class Agent {
         }
       }
     } else {
-      console.log("Ho già un'entità in mano.");
+      alert("Ho già un'entità in mano.");
     }
-    console.log(entityTakenByAgent);
   }
 
   /**
@@ -472,6 +471,8 @@ class Agent {
             this.position.x = path[path.length - 1].x;
             this.position.y = path[path.length - 1].y;
           }
+        } else if (nearestCell == -1) {
+          alert("Non posso fare quel percorso.");
         }
         // se path è un oggetto
         var entityZoneToRelease;
@@ -505,6 +506,8 @@ class Agent {
         for (var i = 0; i < path.length; i++) {
           cellPath.push(path[i]);
         }
+      } else if (nearestCell == -1) {
+        alert("Non ho trovato il goal.");
       }
       var entityZoneToRelease;
       for (var i = 0; i < itemsList.length; i++) {
@@ -634,10 +637,10 @@ class Agent {
           }, 200);
         }
       } else {
-        console.log("Non ho quell'entità in mano.");
+        alert("Non ho quell'entità in mano.");
       }
     } else {
-      console.log("Non ho niente in mano.");
+      alert("Non ho niente in mano.");
     }
   }
 
@@ -671,7 +674,7 @@ class Agent {
       };
       cellPath.push(["manipulation", newInfo]);
     } else {
-      console.log("Non posso afferrare l'entità.");
+      alert("Non posso afferrare l'entità.");
     }
   }
 

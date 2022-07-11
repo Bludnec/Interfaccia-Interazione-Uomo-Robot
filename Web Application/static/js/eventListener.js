@@ -38,7 +38,7 @@ document.getElementById("delete-entity-btn0").addEventListener("click", () => {
       showInfoTable(lastCoordinates[0], lastCoordinates[1]);
     }, 700);
   } else {
-    console.log(
+    alert(
       "Non posso cancellare l'entità perché ha altre entità sopra, sotto o dentro."
     );
   }
@@ -74,8 +74,8 @@ document.getElementById("delete-entity-btn1").addEventListener("click", () => {
       showInfoTable(lastCoordinates[0], lastCoordinates[1]);
     }, 700);
   } else {
-    console.log(
-      "Non posso cancellare l'entità perché ha altre entità sopra/sotto."
+    alert(
+      "Non posso cancellare l'entità perché ha altre entità sopra, sotto o dentro."
     );
   }
 });
@@ -111,8 +111,8 @@ document.getElementById("delete-entity-btn2").addEventListener("click", () => {
       showInfoTable(lastCoordinates[0], lastCoordinates[1]);
     }, 700);
   } else {
-    console.log(
-      "Non posso cancellare l'entità perché ha altre entità sopra/sotto."
+    alert(
+      "Non posso cancellare l'entità perché ha altre entità sopra, sotto o dentro."
     );
   }
 });
@@ -189,7 +189,17 @@ function mouseReleased() {
       }
     }
     // se è l'agente = crea l'agente
-    if (classItemSelected == "agent") {
+    if (
+      classItemSelected == "agent" &&
+      !(indexEl == null && cellsList[cellIndex(x, y)].occupied == null)
+    ) {
+      alert("Non posso inserire il robot in quella posizione");
+    }
+    if (
+      classItemSelected == "agent" &&
+      indexEl == null &&
+      cellsList[cellIndex(x, y)].occupied == null
+    ) {
       if (agent == null) {
         insertAgent(x.toString(), y.toString());
       } else {
@@ -408,7 +418,7 @@ function mouseReleased() {
                 );
               }, 300);
             } else {
-              console.log("Non è possibile inserire l'entità.");
+              alert("Non è possibile inserire l'entità.");
             }
           });
         }
@@ -434,6 +444,13 @@ function mouseReleased() {
     setTimeout(function () {
       getMap();
     }, 900);
+  } else if (
+    !checkColor.checked &&
+    !checkWalls.checked &&
+    boolImgItemSelected
+  ) {
+    deselectEntityImage();
+    alert("Non è possibile inserire un'entità su una cella indefinita.");
   }
 }
 

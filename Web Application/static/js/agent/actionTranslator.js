@@ -24,21 +24,21 @@ function translator(output) {
   for (var i = 0; i < output.frames.length; i++) {
     var azione = output.frames[i].name.toLowerCase();
     infoAzione.azione = azione;
-    stringaOutput = stringaOutput + output.frames[i].name + "[";
+    stringaOutput = stringaOutput + output.frames[i].name + "( ";
     for (var j = 0; j < output.frames[i].arguments.length; j++) {
       var name = output.frames[i].arguments[j].name.toLowerCase();
       var values;
-      stringaOutput = stringaOutput + output.frames[i].arguments[j].name + "[";
+      stringaOutput = stringaOutput + output.frames[i].arguments[j].name + "(";
       if (map1.get(output.frames[i].arguments[j].values[0]) != undefined) {
         values = map1.get(output.frames[i].arguments[j].values[0]);
       } else {
         values = output.frames[i].arguments[j].values[0];
       }
-      stringaOutput = stringaOutput + values + "]";
+      stringaOutput = stringaOutput + values + ") ";
       infoAzione[name] = values;
     }
   }
-  stringaOutput = stringaOutput + "]";
+  stringaOutput = stringaOutput + ")";
   document.getElementById("output-text").innerHTML = stringaOutput;
   cellPath.push([infoAzione.azione, infoAzione]);
 }
