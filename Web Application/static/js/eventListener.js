@@ -195,6 +195,30 @@ function mouseReleased() {
     ) {
       alert("Non posso inserire il robot in quella posizione");
     }
+    var tilX;
+    var tilY;
+    if (document.getElementById("size").value == "big") {
+      if (document.getElementById("orientation").value == "horizontal") {
+        tilX = 4;
+        tilY = 1;
+      } else {
+        tilX = 1;
+        tilY = 4;
+      }
+    }
+    if (document.getElementById("size").value == "medium") {
+      if (document.getElementById("orientation").value == "horizontal") {
+        tilX = 2;
+        tilY = 1;
+      } else {
+        tilX = 1;
+        tilY = 2;
+      }
+    }
+    if (document.getElementById("size").value == "small") {
+      tilX = 1;
+      tilY = 1;
+    }
     if (
       classItemSelected == "agent" &&
       indexEl == null &&
@@ -212,15 +236,10 @@ function mouseReleased() {
        * oppure se viene messo sopra ad un muro.
        */
       if (
-        (document.getElementById("til-x").value == 1 &&
-          document.getElementById("til-y").value == 1) ||
-        (parseInt(document.getElementById("til-x").value) + x - 1 < cols &&
-          parseInt(document.getElementById("til-y").value) + y - 1 < rows &&
-          !checkWallNeighbor(
-            cellsList[cellIndex(x, y)],
-            document.getElementById("til-x").value,
-            document.getElementById("til-y").value
-          ))
+        (tilX == 1 && tilY == 1) ||
+        (parseInt(tilX) + x - 1 < cols &&
+          parseInt(tilY) + y - 1 < rows &&
+          !checkWallNeighbor(cellsList[cellIndex(x, y)], tilX, tilY))
       ) {
         if (
           indexItemSelected != null &&
@@ -237,8 +256,8 @@ function mouseReleased() {
               x,
               y,
               0,
-              document.getElementById("til-x").value,
-              document.getElementById("til-y").value
+              tilX,
+              tilY
             );
           }
           if (entityWithPowerStatus.includes(classItemSelected + "On")) {
@@ -272,13 +291,9 @@ function mouseReleased() {
          */
         if (indexEl != null && tilPosition.value == "on-top") {
           if (
-            document.getElementById("til-x").value <=
-              itemsList[indexEl].sizeX &&
-            document.getElementById("til-y").value <=
-              itemsList[indexEl].sizeY &&
-            parseInt(x) +
-              parseInt(document.getElementById("til-x").value) -
-              1 <=
+            tilX <= itemsList[indexEl].sizeX &&
+            tilY <= itemsList[indexEl].sizeY &&
+            parseInt(x) + parseInt(tilX) - 1 <=
               itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
           ) {
             getClassAbility(itemsList[indexEl].entClass, "support").then(
@@ -295,8 +310,8 @@ function mouseReleased() {
                     x,
                     y,
                     1,
-                    document.getElementById("til-x").value,
-                    document.getElementById("til-y").value
+                    tilX,
+                    tilY
                   );
                   if (
                     entityWithPowerStatus.includes(classItemSelected + "On")
@@ -335,8 +350,8 @@ function mouseReleased() {
                   x,
                   y,
                   0,
-                  document.getElementById("til-x").value,
-                  document.getElementById("til-y").value
+                  tilX,
+                  tilY
                 );
                 if (entityWithPowerStatus.includes(classItemSelected + "On")) {
                   setTimeout(function () {
@@ -363,16 +378,10 @@ function mouseReleased() {
         if (indexEl != null && tilPosition.value == "inside") {
           getSpaceAvailable(itemsList[indexEl].id).then((data) => {
             if (
-              data >=
-                document.getElementById("til-x").value *
-                  document.getElementById("til-y").value &&
-              document.getElementById("til-x").value <=
-                itemsList[indexEl].sizeX &&
-              document.getElementById("til-y").value <=
-                itemsList[indexEl].sizeY &&
-              parseInt(x) +
-                parseInt(document.getElementById("til-x").value) -
-                1 <=
+              data >= tilX * tilY &&
+              tilX <= itemsList[indexEl].sizeX &&
+              tilY <= itemsList[indexEl].sizeY &&
+              parseInt(x) + parseInt(tilX) - 1 <=
                 itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
             ) {
               setTimeout(function () {
@@ -388,8 +397,8 @@ function mouseReleased() {
                         x,
                         y,
                         0,
-                        document.getElementById("til-x").value,
-                        document.getElementById("til-y").value
+                        tilX,
+                        tilY
                       );
                       if (
                         entityWithPowerStatus.includes(classItemSelected + "On")
