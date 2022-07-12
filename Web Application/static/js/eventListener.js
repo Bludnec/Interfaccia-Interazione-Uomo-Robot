@@ -198,13 +198,8 @@ function mouseReleased() {
     var tilX;
     var tilY;
     if (document.getElementById("size").value == "big") {
-      if (document.getElementById("orientation").value == "horizontal") {
-        tilX = 4;
-        tilY = 1;
-      } else {
-        tilX = 1;
-        tilY = 4;
-      }
+      tilX = 2;
+      tilY = 2;
     }
     if (document.getElementById("size").value == "medium") {
       if (document.getElementById("orientation").value == "horizontal") {

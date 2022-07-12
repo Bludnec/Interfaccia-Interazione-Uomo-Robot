@@ -172,8 +172,6 @@ lex_ref(bed,['bed','kip']).
 
 % Grandezza spazio
 space(big,2,2).
-space(big,1,4).
-space(big,4,1).
 space(medium,1,2).
 space(medium,2,1).
 space(small,1,1).
