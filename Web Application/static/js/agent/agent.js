@@ -472,7 +472,7 @@ class Agent {
         // se path è un oggetto
         var entityZoneToRelease;
         for (var i = 0; i < itemsList.length; i++) {
-          if ((itemsList[i].id = info["path"])) {
+          if (itemsList[i].id == info["path"]) {
             entityZoneToRelease = itemsList[i];
           }
         }
@@ -502,9 +502,9 @@ class Agent {
           cellPath.push(path[i]);
         }
       }
-      var entityZoneToRelease;
+      var entityZoneToRelease = undefined;
       for (var i = 0; i < itemsList.length; i++) {
-        if ((itemsList[i].id = info["goal"])) {
+        if (itemsList[i].id == info["goal"]) {
           entityZoneToRelease = itemsList[i];
           break;
         }
