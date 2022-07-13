@@ -1,5 +1,3 @@
-% entity(id,name,class,x,y).
-% status(id, status).   status = on/off - open/closed
 :- dynamic class/1.
 :- dynamic power_status/2.      % power_status(id,status). status = true/false (on/off)
 :- dynamic physical_status/2.   % physical_status(id,status). status = true/false (open/closed)
