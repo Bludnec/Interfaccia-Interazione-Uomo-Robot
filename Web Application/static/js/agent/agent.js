@@ -431,9 +431,7 @@ class Agent {
 
               getAllEntity();
             }, 500);
-            console.log("1");
           } else {
-            console.log("2");
             var nearCell = findNearestCellToEntity(entity);
             var path = astarAlg(
               cellsList[cellIndex(this.position.x, this.position.y)],
