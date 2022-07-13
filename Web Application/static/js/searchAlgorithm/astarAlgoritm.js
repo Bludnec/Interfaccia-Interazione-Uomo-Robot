@@ -46,13 +46,7 @@ function astarAlg(start, end) {
         ret.push(curr);
         curr = curr.parent;
       }
-      for (var i = 0; i < cellsList.length; i++) {
-        cellsList[i].path = false;
-      }
-      start.path = true;
-      for (var i = 0; i < ret.length; i++) {
-        cellsList[cellIndex(ret[i].x, ret[i].y)].path = true;
-      }
+
       /* Return path list (cell's list.) */
       return ret.reverse();
     }
