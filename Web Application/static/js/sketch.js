@@ -330,6 +330,7 @@ function draw() {
        */
       if (cellPath != -1 && cellPath.length != 0) {
         if (cellPath[0].id != undefined) {
+          cellsList[cellIndex(cellPath[0].x, cellPath[0].y)].path = true;
           agent.moveTo(cellPath[0].x, cellPath[0].y);
           cellPath.shift();
           /**

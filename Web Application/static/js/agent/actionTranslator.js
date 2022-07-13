@@ -39,6 +39,7 @@ function translator(output) {
     }
   }
   stringaOutput = stringaOutput + ")";
+  cellPath = [];
   document.getElementById("output-text").innerHTML = stringaOutput;
   cellPath.push([infoAzione.azione, infoAzione]);
 }

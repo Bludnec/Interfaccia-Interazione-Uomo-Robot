@@ -90,7 +90,6 @@ function astarAlg(start, end) {
       }
     }
   }
-  alert("Non ci posso arrivare");
   return -1;
 }
 

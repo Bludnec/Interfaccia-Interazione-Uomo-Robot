@@ -146,10 +146,12 @@ class Agent {
     // TAKING
     var entSel;
     for (var i = 0; i < itemsList.length; i++) {
+      console.log(itemsList[i].id, info["theme"]);
       if (itemsList[i].id == info["theme"]) {
         entSel = itemsList[i];
       }
     }
+    console.log(entSel);
     if (entSel != undefined) {
       var nearCell = findNearestCellToEntity(entSel);
       var path = astarAlg(
@@ -499,8 +501,6 @@ class Agent {
         for (var i = 0; i < path.length; i++) {
           cellPath.push(path[i]);
         }
-      } else if (nearestCell == -1) {
-        alert("Non ho trovato il goal.");
       }
       var entityZoneToRelease;
       for (var i = 0; i < itemsList.length; i++) {
