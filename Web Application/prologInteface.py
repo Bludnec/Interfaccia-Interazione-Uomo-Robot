@@ -443,5 +443,36 @@ def deletePositioningDAOImpl(id):
 
 def getInfoDownloadDAOImpl():
     finalList = []
+    entityList = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
+    sizeList = list(prolog.query('entity_size(Id,SizeX,SizeY)'))
+    check = bool(list(prolog.query('agent(_,_)')))
+    if(check):
+        entityList.append(list(prolog.query('agent(X,Y)'))[0])
+    finalList.append(entityList)
+    finalList.append(sizeList)
+
+    # power stasus
+    powStatus = list(prolog.query('power_status(Id,Status)'))
+    # phy stasus
+    phyStatus = list(prolog.query('physical_status(Id,Status)'))
+    finalList.append(powStatus)
+    finalList.append(phyStatus)
+
+    #on top bottom inside
+    top = list(prolog.query('on_top(Id1,Id2)'))
+    bottom = list(prolog.query('on_bottom(Id1,Id2)'))
+    inside = list(prolog.query('inside(Id1,Id2)'))
+    
+    finalList.append(top)
+    finalList.append(bottom)
+    finalList.append(inside)
+
+    # cell e celloccupied
+    # sort(key=lambda x: x["brand"])
+    cellList = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
+    cellOccList = list(prolog.query('cell_occupied(X,Y,Id)'))
+    
+    finalList.append(cellList)
+    finalList.append(cellOccList)
 
     return finalList

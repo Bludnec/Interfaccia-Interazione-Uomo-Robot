@@ -29,7 +29,12 @@
       </h1>
       <br />
       
-      <a href="{{ url_for('downloadFile', filename="knowledge_base.txt") }}">File</a>
+      <!-- <a href="{{ url_for('downloadFile', filename="knowledge_base.txt") }}">File</a> -->
+      <form id="upload">
+        <input type="file" id="file" accept=".json">
+      
+        <button>Upload</button>
+      </form>
       <button id="buttontest">download </button>
 
       <!-- Tab per modifica -->
