@@ -6,6 +6,7 @@ import json
 
 prolog = Prolog()
 prolog.consult('knowledge_base.txt')
+prolog.consult('test.txt')
 
 # Restituisce una lista contenente una lista di tutte le entità 
 # salvate nel KB e un'altra lista con le dimensioni delle entità.
