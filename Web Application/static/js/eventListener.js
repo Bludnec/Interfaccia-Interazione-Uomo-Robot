@@ -6,6 +6,20 @@ var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 var checkMoveAgent = document.getElementById("move-agent");
 
+document.getElementById("buttontest").addEventListener("click", () => {
+  getInfoDownload().then((data) => {
+    console.log(data);
+    download(data, "json.txt", "text/plain");
+  });
+});
+
+function download(content, fileName, contentType) {
+  var a = document.createElement("a");
+  var file = new Blob([content], { type: contentType });
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
 document.getElementById("delete-entity-btn0").addEventListener("click", () => {
   var check = false;
   for (var i = 0; i < positioningList.length; i++) {

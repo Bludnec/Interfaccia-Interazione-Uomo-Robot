@@ -261,3 +261,11 @@ def deletePositioning():
         req = request.get_json()
         deletePositioningDAOImpl(req['id'])
         return jsonify(req)
+
+
+# Get info kb for download
+@app.route('/info/download', methods=['GET'])
+def infoDownload():
+    if request.method == "GET":
+        lexRef = getInfoDownloadDAOImpl()
+        return jsonify(lexRef)        

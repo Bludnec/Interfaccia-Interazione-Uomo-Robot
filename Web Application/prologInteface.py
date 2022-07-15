@@ -439,3 +439,9 @@ def deletePositioningDAOImpl(id):
     prolog.retractall("on_top("+id+",_)")
     prolog.retractall("on_bottom("+id+",_)")
     prolog.retractall("inside("+id+",_)")
+
+
+def getInfoDownloadDAOImpl():
+    finalList = []
+
+    return finalList

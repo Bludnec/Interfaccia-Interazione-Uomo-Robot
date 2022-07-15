@@ -568,3 +568,9 @@ function deletePositioning(id) {
     }),
   });
 }
+
+async function getInfoDownload() {
+  let response = await fetch("info/download");
+  let data = await response.json();
+  return data;
+}

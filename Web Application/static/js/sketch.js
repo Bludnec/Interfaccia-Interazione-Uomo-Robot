@@ -246,7 +246,7 @@ function preload() {
     });
   }, 200);
   plusImage = loadImage("static/images/plus.png");
-  loadedCellMap = loadJSON("static/map/map.json");
+  //loadedCellMap = loadJSON("static/map/map.json");
 }
 
 /**
@@ -278,6 +278,7 @@ function setup() {
     }
     boolLoadMap = false;
   }
+
   /* Create canvas */
 
   rows = document.getElementById("height").value;
