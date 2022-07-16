@@ -1,4 +1,5 @@
 from asyncio import constants
+from calendar import c
 from cmath import e
 from itertools import count
 from pyswip import Prolog
@@ -477,19 +478,32 @@ def postInfoUploadDAOImpl(info):
     jsonInfo = info['info']
     deleteAllEntityDAOImpl()
     deleteMapDAOImpl()
+
     # top
     for x in jsonInfo['top']:
-        prolog.assertz('on_top(+'+x['Id1']+ ',',+x['Id2']+')')
-
+        insertOnTopDAOImpl(x['Id1'],x['Id2'])
     # bottom
     for x in jsonInfo['bottom']:
-        prolog.assertz('on_bottom(+'+x['Id1']+ ',',+x['Id2']+')')
+        insertOnBottomDAOImpl(x['Id1'],x['Id2'])
 
     # inside
     for x in jsonInfo['inside']:
-        prolog.assertz('inside(+'+x['Id1']+ ',',+x['Id2']+')')    
+        insertInsideDAOImpl(x['Id1'],x['Id2'])
 
+    # entity
+    for x in jsonInfo['entity']:
+        prolog.assertz("entity(" + x["Id"] + "," + x["Name"] + "," +
+                    x["Class"]+","+str(x["X"]) + "," + str(x["Y"]) + "," + str(x["Z"]) + ")")
+    # entity size
+    for x in jsonInfo['entitySize']:
+        prolog.assertz("entity_size(" + x["Id"] + "," +str(x["SizeX"]) + "," + str(x["SizeY"]) +  ")")    
+    # pow status
+    # phy status
     # cellList
     for x in jsonInfo['cellList']:
         prolog.assertz('cell(+'+str(x['Id'])+','+str(x['X'])+','+str(x['Y'])+','+
         x['Zone']+',['+x['Walls'][0]+ ','+x['Walls'][1]+','+x['Walls'][2]+','+x['Walls'][3]+'])')
+    
+    # cellOccList
+    for x in jsonInfo['cellOccList']:
+        print('')

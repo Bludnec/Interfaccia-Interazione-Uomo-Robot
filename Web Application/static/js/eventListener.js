@@ -21,8 +21,20 @@ function logFile(event) {
     getMap();
   }, 400);
   setTimeout(function () {
-    getAllEntity();
+    getEntityAbilityOnMap();
   }, 500);
+  setTimeout(function () {
+    getAllEntity();
+  }, 600);
+  setTimeout(function () {
+    getEntityPositioningOnMap();
+  }, 700);
+  setTimeout(function () {
+    getEntityStatusOnMap();
+  }, 800);
+  setTimeout(function () {
+    getAllEntity();
+  }, 900);
 }
 
 /**
