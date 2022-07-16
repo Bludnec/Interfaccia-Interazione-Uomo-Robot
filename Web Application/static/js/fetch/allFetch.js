@@ -570,7 +570,20 @@ function deletePositioning(id) {
 }
 
 async function getInfoDownload() {
-  let response = await fetch("info/download");
+  let response = await fetch("/info/download-upload");
   let data = await response.json();
   return data;
+}
+
+function postInfoUpload(info) {
+  fetch(`/info/download-upload`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      info: info,
+    }),
+  });
 }

@@ -13,6 +13,16 @@ function logFile(event) {
   let json = JSON.parse(str);
   console.log("string", str);
   console.log("json", json);
+
+  setTimeout(function () {
+    postInfoUpload(json);
+  }, 200);
+  setTimeout(function () {
+    getMap();
+  }, 400);
+  setTimeout(function () {
+    getAllEntity();
+  }, 500);
 }
 
 /**

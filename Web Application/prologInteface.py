@@ -248,8 +248,6 @@ def insertEntityStatusDAOImpl(id,status,statusBool):
     else:
         print("Non è stato possibile inserire lo status.")
 
-
-
 # Aggiorna lo stato dell'entità
 def updateEntityStatusDAOImpl(id,statusBool):
     checkPow = list(prolog.query('power_status('+id+',X)'))
@@ -442,37 +440,56 @@ def deletePositioningDAOImpl(id):
 
 
 def getInfoDownloadDAOImpl():
-    finalList = []
+
+    finalList = {}
     entityList = list(prolog.query('entity(Id,Name,Class,X,Y,Z)'))
     sizeList = list(prolog.query('entity_size(Id,SizeX,SizeY)'))
     check = bool(list(prolog.query('agent(_,_)')))
     if(check):
         entityList.append(list(prolog.query('agent(X,Y)'))[0])
-    finalList.append(entityList)
-    finalList.append(sizeList)
+
 
     # power stasus
     powStatus = list(prolog.query('power_status(Id,Status)'))
     # phy stasus
     phyStatus = list(prolog.query('physical_status(Id,Status)'))
-    finalList.append(powStatus)
-    finalList.append(phyStatus)
+
 
     #on top bottom inside
     top = list(prolog.query('on_top(Id1,Id2)'))
     bottom = list(prolog.query('on_bottom(Id1,Id2)'))
     inside = list(prolog.query('inside(Id1,Id2)'))
     
-    finalList.append(top)
-    finalList.append(bottom)
-    finalList.append(inside)
+
 
     # cell e celloccupied
     # sort(key=lambda x: x["brand"])
     cellList = list(prolog.query('cell(Id,X,Y,Zone,Walls)'))
     cellOccList = list(prolog.query('cell_occupied(X,Y,Id)'))
     
-    finalList.append(cellList)
-    finalList.append(cellOccList)
+
+    finalList = {'entity': entityList, 'entitySize': sizeList, 'powStatus': powStatus, 'phyStatus':phyStatus,
+    'top':top, 'bottom':bottom,'inside':inside,'cellList':cellList, 'cellOccList':cellOccList}
 
     return finalList
+
+def postInfoUploadDAOImpl(info):
+    jsonInfo = info['info']
+    deleteAllEntityDAOImpl()
+    deleteMapDAOImpl()
+    # top
+    for x in jsonInfo['top']:
+        prolog.assertz('on_top(+'+x['Id1']+ ',',+x['Id2']+')')
+
+    # bottom
+    for x in jsonInfo['bottom']:
+        prolog.assertz('on_bottom(+'+x['Id1']+ ',',+x['Id2']+')')
+
+    # inside
+    for x in jsonInfo['inside']:
+        prolog.assertz('inside(+'+x['Id1']+ ',',+x['Id2']+')')    
+
+    # cellList
+    for x in jsonInfo['cellList']:
+        prolog.assertz('cell(+'+str(x['Id'])+','+str(x['X'])+','+str(x['Y'])+','+
+        x['Zone']+',['+x['Walls'][0]+ ','+x['Walls'][1]+','+x['Walls'][2]+','+x['Walls'][3]+'])')

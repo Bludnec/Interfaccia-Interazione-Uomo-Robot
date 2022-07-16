@@ -264,8 +264,12 @@ def deletePositioning():
 
 
 # Get info kb for download
-@app.route('/info/download', methods=['GET'])
-def infoDownload():
+@app.route('/info/download-upload', methods=['GET','POST'])
+def infoDownloadUpload():
     if request.method == "GET":
         lexRef = getInfoDownloadDAOImpl()
-        return jsonify(lexRef)        
+        return jsonify(lexRef)
+    if request.method == "POST":
+        req = request.get_json()
+        postInfoUploadDAOImpl(req)
+        return jsonify(req)
