@@ -492,9 +492,12 @@ def postInfoUploadDAOImpl(info):
 
     # entity
     for x in jsonInfo['entity']:
-        prolog.assertz("entity(" + x["Id"] + "," + x["Name"] + "," +
+        if(len(x) > 2):
+            prolog.assertz("entity(" + x["Id"] + "," + x["Name"] + "," +
                     x["Class"]+","+str(x["X"]) + "," + str(x["Y"]) + "," + str(x["Z"]) + ")")
-                    
+        else:
+            prolog.assertz('agent('+ str(x["X"]) + "," + str(x["Y"]) +')')
+
     # entity size
     for x in jsonInfo['entitySize']:
         prolog.assertz("entity_size(" + x["Id"] + "," +str(x["SizeX"]) + "," + str(x["SizeY"]) + ")")
