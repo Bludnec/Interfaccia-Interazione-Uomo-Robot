@@ -494,11 +494,19 @@ def postInfoUploadDAOImpl(info):
     for x in jsonInfo['entity']:
         prolog.assertz("entity(" + x["Id"] + "," + x["Name"] + "," +
                     x["Class"]+","+str(x["X"]) + "," + str(x["Y"]) + "," + str(x["Z"]) + ")")
+                    
     # entity size
     for x in jsonInfo['entitySize']:
-        prolog.assertz("entity_size(" + x["Id"] + "," +str(x["SizeX"]) + "," + str(x["SizeY"]) +  ")")    
+        prolog.assertz("entity_size(" + x["Id"] + "," +str(x["SizeX"]) + "," + str(x["SizeY"]) + ")")
+
     # pow status
+    for x in jsonInfo['powStatus']:
+        prolog.assertz("power_status(" + x["Id"] + "," + x["Status"] + ")")    
+
     # phy status
+    for x in jsonInfo['phyStatus']:
+        prolog.assertz("physical_status(" + x["Id"] + "," + x["Status"] + ")")    
+
     # cellList
     for x in jsonInfo['cellList']:
         prolog.assertz('cell(+'+str(x['Id'])+','+str(x['X'])+','+str(x['Y'])+','+
