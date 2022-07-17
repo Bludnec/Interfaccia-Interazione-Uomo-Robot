@@ -403,9 +403,13 @@ class Agent {
               this.position.x == entity.position.x - 1 &&
               this.position.y == entity.position.y)
           ) {
-            updateEntityPosition(entity.id, -1, -1, 0);
+            updateEntityPosition(
+              entity.id,
+              agent.position.x,
+              agent.position.y,
+              0
+            );
             entityTakenByAgent = entity;
-            console.log(entity.id);
             setTimeout(function () {
               deletePositioning(entity.id);
               getEntityPositioningOnMap();

@@ -111,18 +111,43 @@ function neighbors(node) {
    * sopra di essi per poi vedere dopo se ha walkable_ability per
    * poter far passare l'agente sopra.
    */
+  var doorBool = false;
   for (var i = 0; i < itemsList.length; i++) {
     if (itemsList[i].position.x == x + 1 && itemsList[i].position.y == y) {
-      nodeRight = itemsList[i].id;
+      if (checkOpenDoor(itemsList[i])) {
+        nodeRight = 0;
+        doorBool = true;
+      } else {
+        nodeRight = itemsList[i].id;
+        doorBool = true;
+      }
     }
     if (itemsList[i].position.x == x - 1 && itemsList[i].position.y == y) {
-      nodeLeft = itemsList[i].id;
+      if (checkOpenDoor(itemsList[i])) {
+        nodeLeft = 0;
+        doorBool = true;
+      } else {
+        nodeLeft = itemsList[i].id;
+        doorBool = true;
+      }
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
-      nodeDown = itemsList[i].id;
+      if (checkOpenDoor(itemsList[i])) {
+        nodeDown = 0;
+        doorBool = true;
+      } else {
+        nodeDown = itemsList[i].id;
+        doorBool = true;
+      }
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y - 1) {
-      nodeUp = itemsList[i].id;
+      if (checkOpenDoor(itemsList[i])) {
+        nodeUp = 0;
+        doorBool = true;
+      } else {
+        nodeUp = itemsList[i].id;
+        doorBool = true;
+      }
     }
   }
   /**
@@ -143,37 +168,39 @@ function neighbors(node) {
     nodeUp = cellsList[cellIndex(x, y - 1)].occupied;
   }
 
-  for (var i = 0; i < abilityList.length; i++) {
-    if (abilityList[i][0] == nodeRight) {
-      var found = abilityList[i].find(
-        (element) => element == "walkable_ability"
-      );
-      if (found != undefined) {
-        nodeRight = 0;
+  if (!doorBool) {
+    for (var i = 0; i < abilityList.length; i++) {
+      if (abilityList[i][0] == nodeRight) {
+        var found = abilityList[i].find(
+          (element) => element == "walkable_ability"
+        );
+        if (found != undefined) {
+          nodeRight = 0;
+        }
       }
-    }
-    if (abilityList[i][0] == nodeLeft) {
-      var found = abilityList[i].find(
-        (element) => element == "walkable_ability"
-      );
-      if (found != undefined) {
-        nodeLeft = 0;
+      if (abilityList[i][0] == nodeLeft) {
+        var found = abilityList[i].find(
+          (element) => element == "walkable_ability"
+        );
+        if (found != undefined) {
+          nodeLeft = 0;
+        }
       }
-    }
-    if (abilityList[i][0] == nodeUp) {
-      var found = abilityList[i].find(
-        (element) => element == "walkable_ability"
-      );
-      if (found != undefined) {
-        nodeUp = 0;
+      if (abilityList[i][0] == nodeUp) {
+        var found = abilityList[i].find(
+          (element) => element == "walkable_ability"
+        );
+        if (found != undefined) {
+          nodeUp = 0;
+        }
       }
-    }
-    if (abilityList[i][0] == nodeDown) {
-      var found = abilityList[i].find(
-        (element) => element == "walkable_ability"
-      );
-      if (found != undefined) {
-        nodeDown = 0;
+      if (abilityList[i][0] == nodeDown) {
+        var found = abilityList[i].find(
+          (element) => element == "walkable_ability"
+        );
+        if (found != undefined) {
+          nodeDown = 0;
+        }
       }
     }
   }
@@ -204,4 +231,18 @@ function heuristic(pos0, pos1) {
   var d1 = Math.abs(pos1.i - pos0.i);
   var d2 = Math.abs(pos1.j - pos0.j);
   return d1 + d2;
+}
+
+function checkOpenDoor(entity) {
+  if (entity.entClass == "door") {
+    for (var j = 0; j < physicalStatusList.length; j++) {
+      if (entity.id == physicalStatusList[j]["Id"]) {
+        if (physicalStatusList[j]["Status"] == "open") {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+  }
 }
