@@ -14,6 +14,28 @@ function logFile(event) {
   console.log("string", str);
   console.log("json", json);
 
+  var maxX = 0;
+  var maxY = 0;
+  for (var i = 0; i < json["cellList"].length; i++) {
+    if (maxX < json["cellList"][i]["X"]) {
+      maxX = json["cellList"][i]["X"];
+    }
+  }
+  for (var i = 0; i < json["cellList"].length; i++) {
+    if (maxY < json["cellList"][i]["Y"]) {
+      maxY = json["cellList"][i]["Y"];
+    }
+  }
+  maxX += 1;
+  maxY += 1;
+  document.getElementById("height").value = maxY;
+  document.getElementById("width").value = maxX;
+  rows = document.getElementById("height").value;
+  cols = document.getElementById("width").value;
+
+  var canvas = createCanvas(cols * w, rows * w);
+  canvas.parent("canvas-zone");
+
   setTimeout(function () {
     postInfoUpload(json);
   }, 200);
