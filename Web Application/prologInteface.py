@@ -476,8 +476,7 @@ def getInfoDownloadDAOImpl():
 
 def postInfoUploadDAOImpl(info):
     jsonInfo = info['info']
-    deleteAllEntityDAOImpl()
-    deleteMapDAOImpl()
+
 
     # top
     for x in jsonInfo['top']:
