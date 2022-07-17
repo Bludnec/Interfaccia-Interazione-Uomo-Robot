@@ -263,7 +263,13 @@ function insertEntity(id, name, classe, x, y, z, sizeX, sizeY) {
       "Content-Type": "application/json",
     },
     body: json_string,
-  });
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data != "true") {
+        alert(data);
+      }
+    });
 }
 
 async function getEntity(id) {

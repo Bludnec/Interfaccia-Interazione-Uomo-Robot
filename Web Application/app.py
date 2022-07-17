@@ -86,7 +86,6 @@ def entityPositioning():
         lexMap = getEntityPositioningOnMapDAOImpl()
         return jsonify(lexMap) 
 
-
 # Agent.
 @app.route('/agent', methods=['POST','DELETE','GET','PATCH'])
 def agent():
@@ -110,8 +109,8 @@ def agent():
 def entity():
     if request.method == "POST":
         req = request.get_json()
-        insertEntityDAOImpl(req)
-        return jsonify(req)
+        resp = insertEntityDAOImpl(req)
+        return jsonify(resp)
     if request.method == "DELETE":
         req = request.get_json()
         deleteEntityDAOImpl(req['id'])

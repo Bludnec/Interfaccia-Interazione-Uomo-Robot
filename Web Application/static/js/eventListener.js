@@ -38,16 +38,16 @@ function logFile(event) {
 
   setTimeout(function () {
     postInfoUpload(json);
-  }, 200);
+  }, 100);
   setTimeout(function () {
     getMap();
+  }, 200);
+  setTimeout(function () {
+    getAllEntity();
   }, 400);
   setTimeout(function () {
     getEntityAbilityOnMap();
   }, 500);
-  setTimeout(function () {
-    getAllEntity();
-  }, 600);
   setTimeout(function () {
     getEntityPositioningOnMap();
   }, 700);
@@ -539,16 +539,16 @@ function mouseReleased() {
     }, 400);
     setTimeout(function () {
       getEntityPositioningOnMap();
-    }, 500);
-    setTimeout(function () {
-      getEntityStatusOnMap();
     }, 600);
     setTimeout(function () {
+      getEntityStatusOnMap();
+    }, 800);
+    setTimeout(function () {
       getAllEntity();
-    }, 700);
+    }, 1000);
     setTimeout(function () {
       getMap();
-    }, 900);
+    }, 1200);
   } else if (
     !checkColor.checked &&
     !checkWalls.checked &&

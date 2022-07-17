@@ -179,11 +179,12 @@ def updateAgentPositionDAOImpl(x,y):
 def insertEntityDAOImpl(entity):
     check = checkEntitySizeDAOImpl(entity['class'], entity['sizeX'],entity['sizeY'])
     if(check != 0):
-        print('Valori delle dimensioni non valide.')
+        return 'Valori delle dimensioni non valide.'
     else:
         prolog.assertz("entity(" + entity["id"] + "," + entity["name"] + "," +
                     entity["class"]+","+entity["x"] + "," + entity["y"] + "," + entity["z"] + ")")
         prolog.assertz('entity_size('+entity['id']+','+entity['sizeX']+','+entity['sizeY']+')')
+        return "true"
 
 # Return i valori Name,Class,X,Y,Z di un entity.
 def getEntityDAOImpl(id):
