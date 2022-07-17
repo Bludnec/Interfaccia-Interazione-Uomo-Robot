@@ -11,57 +11,30 @@ let file = document.querySelector("#file");
 function logFile(event) {
   let str = event.target.result;
   let json = JSON.parse(str);
-  //console.log("string", str);
-  //console.log("json", json);
-
-  //console.log(json["cellList"]);
-  var maxX = 0;
-  var maxY = 0;
-  for (var i = 0; i < json["cellList"].length; i++) {
-    if (maxX < json["cellList"][i]["X"]) {
-      maxX = json["cellList"][i]["X"];
-    }
-  }
-  for (var i = 0; i < json["cellList"].length; i++) {
-    if (maxY < json["cellList"][i]["Y"]) {
-      maxY = json["cellList"][i]["Y"];
-    }
-  }
-  console.log(maxX, maxY);
-  document.getElementById("height").value = maxY;
-  document.getElementById("width").value = maxX;
-
-  var canvas = createCanvas(maxX * w, maxY * w);
-  canvas.parent("canvas-zone");
-
-  setTimeout(function () {
-    deleteAllEntity();
-  }, 200);
-  setTimeout(function () {
-    deleteMap();
-  }, 300);
+  console.log("string", str);
+  console.log("json", json);
 
   setTimeout(function () {
     postInfoUpload(json);
-  }, 400);
+  }, 200);
   setTimeout(function () {
     getMap();
-  }, 500);
+  }, 400);
   setTimeout(function () {
     getEntityAbilityOnMap();
+  }, 500);
+  setTimeout(function () {
+    getAllEntity();
   }, 600);
   setTimeout(function () {
-    getAllEntity();
+    getEntityPositioningOnMap();
   }, 700);
   setTimeout(function () {
-    getEntityPositioningOnMap();
+    getEntityStatusOnMap();
   }, 800);
   setTimeout(function () {
-    getEntityStatusOnMap();
-  }, 900);
-  setTimeout(function () {
     getAllEntity();
-  }, 1000);
+  }, 900);
 }
 
 /**

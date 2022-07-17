@@ -260,7 +260,6 @@ function setup() {
    * If boolLoadMap = true => create a new canvas and new cellsList loading che old map.
    */
   if (boolLoadMap) {
-    console.log("prova");
     itemsList = [];
     /* Load the saved map */
     // POST della nuova mappa
