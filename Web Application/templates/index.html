@@ -29,13 +29,7 @@
       </h1>
       <br />
       
-      <!-- <a href="{{ url_for('downloadFile', filename="knowledge_base.txt") }}">File</a> -->
-      <form id="upload">
-        <input type="file" id="file" accept=".json">
-      
-        <button>Upload</button>
-      </form>
-      <button id="buttontest">download </button>
+
 
       <!-- Tab per modifica -->
       <div id="tab-list">
@@ -46,7 +40,8 @@
         >
           <li><a href="#_target_1">Impostazioni mappa</a></li>
           <li><a href="#_target_2">Modifica celle</a></li>
-          <li><a href="#_target_3">Comandi</a></li>
+          <li><a href="#_target_3">Comandi</a></li>          
+          <li><a href="#_target_0">Upload/Download Mappa</a></li>
         </ul>
 
         <div class="border bd-default no-border-top p-2">
@@ -112,6 +107,14 @@
                 title="Abilita per muovere l'agente"
               />
             </div>
+          </div>
+          <div id="_target_0">
+            <form id="upload">
+              <input type="file" id="file" accept=".json">
+            
+              <button>Upload</button>
+            </form>
+            <button id="buttontest">Download </button>
           </div>
           <div class="clear-float"></div>
         </div>

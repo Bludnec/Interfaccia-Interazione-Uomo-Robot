@@ -157,7 +157,7 @@ lex_ref(smartphone,['smartphone','cellular','cell phone','telephone','mobile pho
 lex_ref(cup,['cup','bowl','tome','mug']).
 lex_ref(plate,['plate','dish']).
 lex_ref(microwave,['microwave']).
-lex_ref(book,['book','volume','chalice']).
+lex_ref(book,['book','volume']).
 lex_ref(key,['key']).
 lex_ref(bucket,['bucket','pail']).
 lex_ref(jar,['jar','vase','pot','pickle']).

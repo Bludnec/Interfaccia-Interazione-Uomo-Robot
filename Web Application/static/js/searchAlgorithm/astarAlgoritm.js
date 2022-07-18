@@ -119,7 +119,6 @@ function neighbors(node) {
         doorBool = true;
       } else {
         nodeRight = itemsList[i].id;
-        doorBool = true;
       }
     }
     if (itemsList[i].position.x == x - 1 && itemsList[i].position.y == y) {
@@ -128,7 +127,6 @@ function neighbors(node) {
         doorBool = true;
       } else {
         nodeLeft = itemsList[i].id;
-        doorBool = true;
       }
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y + 1) {
@@ -137,7 +135,6 @@ function neighbors(node) {
         doorBool = true;
       } else {
         nodeDown = itemsList[i].id;
-        doorBool = true;
       }
     }
     if (itemsList[i].position.x == x && itemsList[i].position.y == y - 1) {
@@ -146,7 +143,6 @@ function neighbors(node) {
         doorBool = true;
       } else {
         nodeUp = itemsList[i].id;
-        doorBool = true;
       }
     }
   }
