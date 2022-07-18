@@ -143,106 +143,7 @@ function preload() {
 
         document.getElementById("img-list").appendChild(img);
       }
-      for (i = 0; i < data.length; i++) {
-        switch (data[i]["Class"]) {
-          case "agent":
-            agentImage = loadImage(data[i]["Url"]);
-            break;
-          case "bed":
-            bedImage = loadImage(data[i]["Url"]);
-            break;
-          case "book":
-            bookImage = loadImage(data[i]["Url"]);
-            break;
-          case "bucket":
-            bucketImage = loadImage(data[i]["Url"]);
-            break;
-          case "chair":
-            chairImage = loadImage(data[i]["Url"]);
-            break;
-          case "cup":
-            cupImage = loadImage(data[i]["Url"]);
-            break;
-          case "door":
-            doorImage = loadImage(data[i]["Url"]);
-            break;
-          case "doorOpen":
-            doorOpenImage = loadImage(data[i]["Url"]);
-            break;
-          case "fridge":
-            fridgeImage = loadImage(data[i]["Url"]);
-            break;
-          case "fridgeOpen":
-            fridgeOpenImage = loadImage(data[i]["Url"]);
-            break;
-          case "glass":
-            glassImage = loadImage(data[i]["Url"]);
-            break;
-          case "jar":
-            jarImage = loadImage(data[i]["Url"]);
-            break;
-          case "key":
-            keyImage = loadImage(data[i]["Url"]);
-            break;
-          case "keyboard":
-            keyboardImage = loadImage(data[i]["Url"]);
-            break;
-          case "lamp":
-            lampImage = loadImage(data[i]["Url"]);
-            break;
-          case "lampOn":
-            lampOnImage = loadImage(data[i]["Url"]);
-            break;
-          case "laptop":
-            laptopImage = loadImage(data[i]["Url"]);
-            break;
-          case "laptopOn":
-            laptopOnImage = loadImage(data[i]["Url"]);
-            break;
-          case "microwave":
-            microwaveImage = loadImage(data[i]["Url"]);
-            break;
-          case "microwaveOn":
-            microwaveOnImage = loadImage(data[i]["Url"]);
-            break;
-          case "plate":
-            plateImage = loadImage(data[i]["Url"]);
-            break;
-          case "rug":
-            rugImage = loadImage(data[i]["Url"]);
-            break;
-          case "smartphone":
-            smartphoneImage = loadImage(data[i]["Url"]);
-            break;
-          case "smartphoneOn":
-            smartphoneOnImage = loadImage(data[i]["Url"]);
-            break;
-          case "sofa":
-            sofaImage = loadImage(data[i]["Url"]);
-            break;
-          case "table":
-            tableImage = loadImage(data[i]["Url"]);
-            break;
-          case "television":
-            televisionImage = loadImage(data[i]["Url"]);
-            break;
-          case "televisionOn":
-            televisionOnImage = loadImage(data[i]["Url"]);
-            break;
-          case "wardrobe":
-            wardrobeImage = loadImage(data[i]["Url"]);
-            break;
-          case "wardrobeOpen":
-            wardrobeOpenImage = loadImage(data[i]["Url"]);
-            break;
-          case "window":
-            windowImage = loadImage(data[i]["Url"]);
-            break;
-          case "windowOpen":
-            windowOpenImage = loadImage(data[i]["Url"]);
-            break;
-        }
-      }
+      assegnazioneVariabili(data);
     });
   }, 200);
   plusImage = loadImage("static/images/plus.png");
@@ -464,4 +365,117 @@ function cellIndex(i, j) {
     return -1;
   }
   return i + j * cols;
+}
+
+/**
+ * 
+ * @param {*} data 
+ * funzione per l'assegnazioni delle variabili delle immagini
+ * se viene aggiunta una nuova classe, creare la nuova variable immagine classImage
+ * e aggiungere allo switch
+ * case "nameClass":
+        nameImage = loadImage(data[i]["Url"]);
+        break;
+ */
+function assegnazioneVariabili(data) {
+  for (i = 0; i < data.length; i++) {
+    switch (data[i]["Class"]) {
+      case "agent":
+        agentImage = loadImage(data[i]["Url"]);
+        break;
+      case "bed":
+        bedImage = loadImage(data[i]["Url"]);
+        break;
+      case "book":
+        bookImage = loadImage(data[i]["Url"]);
+        break;
+      case "bucket":
+        bucketImage = loadImage(data[i]["Url"]);
+        break;
+      case "chair":
+        chairImage = loadImage(data[i]["Url"]);
+        break;
+      case "cup":
+        cupImage = loadImage(data[i]["Url"]);
+        break;
+      case "door":
+        doorImage = loadImage(data[i]["Url"]);
+        break;
+      case "doorOpen":
+        doorOpenImage = loadImage(data[i]["Url"]);
+        break;
+      case "fridge":
+        fridgeImage = loadImage(data[i]["Url"]);
+        break;
+      case "fridgeOpen":
+        fridgeOpenImage = loadImage(data[i]["Url"]);
+        break;
+      case "glass":
+        glassImage = loadImage(data[i]["Url"]);
+        break;
+      case "jar":
+        jarImage = loadImage(data[i]["Url"]);
+        break;
+      case "key":
+        keyImage = loadImage(data[i]["Url"]);
+        break;
+      case "keyboard":
+        keyboardImage = loadImage(data[i]["Url"]);
+        break;
+      case "lamp":
+        lampImage = loadImage(data[i]["Url"]);
+        break;
+      case "lampOn":
+        lampOnImage = loadImage(data[i]["Url"]);
+        break;
+      case "laptop":
+        laptopImage = loadImage(data[i]["Url"]);
+        break;
+      case "laptopOn":
+        laptopOnImage = loadImage(data[i]["Url"]);
+        break;
+      case "microwave":
+        microwaveImage = loadImage(data[i]["Url"]);
+        break;
+      case "microwaveOn":
+        microwaveOnImage = loadImage(data[i]["Url"]);
+        break;
+      case "plate":
+        plateImage = loadImage(data[i]["Url"]);
+        break;
+      case "rug":
+        rugImage = loadImage(data[i]["Url"]);
+        break;
+      case "smartphone":
+        smartphoneImage = loadImage(data[i]["Url"]);
+        break;
+      case "smartphoneOn":
+        smartphoneOnImage = loadImage(data[i]["Url"]);
+        break;
+      case "sofa":
+        sofaImage = loadImage(data[i]["Url"]);
+        break;
+      case "table":
+        tableImage = loadImage(data[i]["Url"]);
+        break;
+      case "television":
+        televisionImage = loadImage(data[i]["Url"]);
+        break;
+      case "televisionOn":
+        televisionOnImage = loadImage(data[i]["Url"]);
+        break;
+      case "wardrobe":
+        wardrobeImage = loadImage(data[i]["Url"]);
+        break;
+      case "wardrobeOpen":
+        wardrobeOpenImage = loadImage(data[i]["Url"]);
+        break;
+      case "window":
+        windowImage = loadImage(data[i]["Url"]);
+        break;
+      case "windowOpen":
+        windowOpenImage = loadImage(data[i]["Url"]);
+        break;
+    }
+  }
 }
