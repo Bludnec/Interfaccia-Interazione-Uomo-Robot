@@ -802,7 +802,9 @@ function findNearestCellToEntity(entity) {
       cellCounter = path.length;
     }
   }
-
+  if (tempCell == -1) {
+    alert("non posso arrivarci");
+  }
   return tempCell;
 }
 
@@ -824,6 +826,9 @@ function findNearestCellToLocation(location) {
         tempCell = cellsList[i];
       }
     }
+  }
+  if (tempCell == -1) {
+    alert("non posso arrivarci");
   }
   return tempCell;
 }

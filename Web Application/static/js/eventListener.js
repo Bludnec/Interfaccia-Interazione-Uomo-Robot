@@ -383,6 +383,12 @@ function mouseReleased() {
             idCounter++;
           }
         }
+        if (
+          cellsList[cellIndex(x, y)].occupied != null &&
+          tilPosition.value == "on-floor"
+        ) {
+          alert("C'è già un'altra entità per terra.");
+        }
         /**
          *  Se è stata scelta l'opzione on_top.
          */
@@ -486,7 +492,6 @@ function mouseReleased() {
                   (contain) => {
                     if (contain) {
                       // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
-                      console.log("entity inside");
                       insertEntity(
                         classItemSelected + idCounter,
                         classItemSelected,
@@ -528,6 +533,8 @@ function mouseReleased() {
             }
           });
         }
+      } else {
+        alert("Non è possibile inserire l'oggetto lì");
       }
     }
     boolImgItemSelected = false;
