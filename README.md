@@ -15,4 +15,4 @@ https://flask.palletsprojects.com/en/2.1.x/installation/
 PySwip 
 https://github.com/yuce/pyswip/blob/master/INSTALL.md#windows 
 
-Installare SWI-Prolog (link per il download nel link precedente)
+SWI-Prolog (link per il download nel link precedente)
