@@ -145,3 +145,8 @@ footer {
 #delete-path {
   margin-left: 10px;
 }
+
+#file {
+  height: auto;
+  width: 300px;
+}

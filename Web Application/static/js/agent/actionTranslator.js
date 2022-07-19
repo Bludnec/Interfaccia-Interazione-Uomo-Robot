@@ -17,6 +17,7 @@ var output1 = {
 };
 
 function translator(output) {
+  clearPath();
   // Scansiono tutti i frame presenti dentro "framses"
   console.log(output);
   var infoAzione = {};
@@ -37,9 +38,9 @@ function translator(output) {
       stringaOutput = stringaOutput + values + ") ";
       infoAzione[name] = values;
     }
+    stringaOutput = stringaOutput + ")";
+    cellPath = [];
+    document.getElementById("output-text").innerHTML = stringaOutput;
+    cellPath.push([infoAzione.azione, infoAzione]);
   }
-  stringaOutput = stringaOutput + ")";
-  cellPath = [];
-  document.getElementById("output-text").innerHTML = stringaOutput;
-  cellPath.push([infoAzione.azione, infoAzione]);
 }

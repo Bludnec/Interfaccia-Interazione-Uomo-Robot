@@ -65,13 +65,7 @@ document.getElementById("drawButton").addEventListener("click", () => {
   }, 500);
 });
 
-document.getElementById("delete-path").addEventListener("click", () => {
-  for (var i = 0; i < cellsList.length; i++) {
-    for (var i = 0; i < cellsList.length; i++) {
-      cellsList[i].path = false;
-    }
-  }
-});
+document.getElementById("delete-path").addEventListener("click", clearPath());
 
 var CellMap;
 var bedImage,
@@ -476,6 +470,14 @@ function assegnazioneVariabili(data) {
       case "windowOpen":
         windowOpenImage = loadImage(data[i]["Url"]);
         break;
+    }
+  }
+}
+
+function clearPath() {
+  for (var i = 0; i < cellsList.length; i++) {
+    for (var i = 0; i < cellsList.length; i++) {
+      cellsList[i].path = false;
     }
   }
 }
