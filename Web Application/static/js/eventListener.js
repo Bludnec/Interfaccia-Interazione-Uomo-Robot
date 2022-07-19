@@ -82,6 +82,14 @@ function handleSubmit(event) {
 
 // Listen for submit events
 form.addEventListener("submit", handleSubmit);
+
+document.getElementById("buttontest").addEventListener("click", () => {
+  getInfoDownload().then((data) => {
+    console.log(JSON.stringify(data));
+    download(JSON.stringify(data), "map.txt", "text/plain");
+  });
+});
+
 ////////////////
 
 var idCounter = 0;
@@ -91,13 +99,6 @@ var lastCoordinates = [];
 var checkWalls = document.getElementById("walls-checkbox");
 var checkColor = document.getElementById("color-checkbox");
 var checkMoveAgent = document.getElementById("move-agent");
-
-document.getElementById("buttontest").addEventListener("click", () => {
-  getInfoDownload().then((data) => {
-    console.log(JSON.stringify(data));
-    download(JSON.stringify(data), "json.txt", "text/plain");
-  });
-});
 
 function download(content, fileName, contentType) {
   var a = document.createElement("a");

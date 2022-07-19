@@ -65,7 +65,7 @@ document.getElementById("drawButton").addEventListener("click", () => {
   }, 500);
 });
 
-document.getElementById("delete-path").addEventListener("click", clearPath());
+document.getElementById("delete-path").addEventListener("click", clearPath);
 
 var CellMap;
 var bedImage,
