@@ -9,10 +9,10 @@ python -m flask run
 
 Pacchetti da installare
 
+Flask
 https://flask.palletsprojects.com/en/2.1.x/installation/
-$ pip install Flask
 
-Seguire le istruzioni per PySwip 
+PySwip 
 https://github.com/yuce/pyswip/blob/master/INSTALL.md#windows 
 
 Installare SWI-Prolog (link per il download nel link precedente)
