@@ -149,4 +149,15 @@ footer {
 #file {
   height: auto;
   width: 300px;
+  float: left;
+}
+
+#upload-btn {
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#buttontest {
+  margin-left: 10px;
+  margin-top: 10px;
 }
