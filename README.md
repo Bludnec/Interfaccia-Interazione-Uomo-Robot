@@ -2,9 +2,9 @@
 
 Per far partire l'applicazione
 andare nel folder dove sono stati inseriti i file ed eseguire i comandi:
-set FLASK_APP=app
-set FLASK_ENV=development
-python -m flask run
+set FLASK_APP=app  
+set FLASK_ENV=development  
+python -m flask run  
 
 
 Pacchetti da installare
