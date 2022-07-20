@@ -2,12 +2,14 @@ async function getAllEntity() {
   let response = await fetch("get-all-entity");
   let data = await response.json();
   itemsList = [];
-  data[0].sort(function (a, b) {
-    return a.id - b.id;
-  });
-  data[1].sort(function (a, b) {
-    return a.id - b.id;
-  });
+  if (data[0] != undefined && data[1] != undefined) {
+    data[0].sort(function (a, b) {
+      return a.id - b.id;
+    });
+    data[1].sort(function (a, b) {
+      return a.id - b.id;
+    });
+  }
 
   if (!(data.length == 0)) {
     for (var i = 0; i < data[0].length; i++) {
