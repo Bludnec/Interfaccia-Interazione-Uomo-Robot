@@ -92,18 +92,6 @@ document.getElementById("buttontest").addEventListener("click", () => {
 
 ////////////////
 
-/**
- * Disabilitato l'apparizione del menù dopo il click destro.
- */
-window.addEventListener(
-  "contextmenu",
-  function (e) {
-    // do something here...
-    e.preventDefault();
-  },
-  false
-);
-
 var idCounter = 0;
 
 var lastCoordinates = [];

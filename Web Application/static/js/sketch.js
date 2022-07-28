@@ -180,6 +180,8 @@ function setup() {
   cols = document.getElementById("width").value;
 
   var canvas = createCanvas(cols * w, rows * w);
+  // Disabilità l'apparizione della tendina dopo il click destro sul canvas.
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
   canvas.parent("canvas-zone");
 
   deleteMap();
