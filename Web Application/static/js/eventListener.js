@@ -239,34 +239,36 @@ function mousePressed() {
   var y = parseInt(mouseY / w);
 
   if (mouseButton === RIGHT) {
-    ellipse(50, 50, 50, 50);
+    deleteCellOnMap(x, y);
   }
-  lastCoordinates = [x, y];
+  if (mouseButton === LEFT) {
+    lastCoordinates = [x, y];
 
-  var thisCell = cellsList[cellIndex(x, y)];
+    var thisCell = cellsList[cellIndex(x, y)];
 
-  document.getElementById("cell-id").innerHTML = thisCell.id;
+    document.getElementById("cell-id").innerHTML = thisCell.id;
 
-  document.getElementById("cell-coordinates").innerHTML =
-    "X:" + thisCell.x + " Y:" + thisCell.y;
-  document.getElementById("cell-zone").innerHTML = thisCell.zone;
+    document.getElementById("cell-coordinates").innerHTML =
+      "X:" + thisCell.x + " Y:" + thisCell.y;
+    document.getElementById("cell-zone").innerHTML = thisCell.zone;
 
-  if (agent != null && checkMoveAgent.checked == true) {
-    var start = cellsList[cellIndex(agent.position.x, agent.position.y)];
-    var end = thisCell;
-    cellPath = astarAlg(start, end);
+    if (agent != null && checkMoveAgent.checked == true) {
+      var start = cellsList[cellIndex(agent.position.x, agent.position.y)];
+      var end = thisCell;
+      cellPath = astarAlg(start, end);
+    }
+
+    if (thisCell != undefined && checkColor.checked == true) {
+      /* Color the cell and assign the value "zone" to the cell. */
+      colorCellMap(x, y);
+    }
+    /* Modifica dei muri */
+    if (thisCell != undefined && checkWalls.checked == true) {
+      editWalls(mouseX, mouseY);
+    }
+
+    showInfoTable(x, y);
   }
-
-  if (thisCell != undefined && checkColor.checked == true) {
-    /* Color the cell and assign the value "zone" to the cell. */
-    colorCellMap(x, y);
-  }
-  /* Modifica dei muri */
-  if (thisCell != undefined && checkWalls.checked == true) {
-    editWalls(mouseX, mouseY);
-  }
-
-  showInfoTable(x, y);
 }
 
 function mouseReleased() {
@@ -284,7 +286,7 @@ function mouseReleased() {
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
   if (boolImgItemSelected && cellsList[cellIndex(x, y)].zone != "null") {
-    var indexEl = getElementInPosition(x, y);
+    var indexEl = getEntityInPosition(x, y);
     if (!(cellsList[cellIndex(x, y)].occupied == null)) {
       for (var i = 0; i < itemsList.length; i++) {
         if (cellsList[cellIndex(x, y)].occupied == itemsList[i].id) {
@@ -575,7 +577,7 @@ function mouseReleased() {
  * @param {int} y
  * @returns indice dell'elemento nella itemsList in posizione x,y
  */
-function getElementInPosition(x, y) {
+function getEntityInPosition(x, y) {
   if (agent != null && agent.position.x == x && agent.position.y == y) {
     return -1;
   }
@@ -585,6 +587,19 @@ function getElementInPosition(x, y) {
     }
   }
   return null;
+}
+
+function getEntitiesInPosition(x, y) {
+  var entitiesList = [];
+  if (agent != null && agent.position.x == x && agent.position.y == y) {
+    return -1;
+  }
+  for (var i = 0; i < itemsList.length; i++) {
+    if (itemsList[i].position.x == x && itemsList[i].position.y == y) {
+      entitiesList.push(itemsList[i]);
+    }
+  }
+  return entitiesList;
 }
 
 /**
@@ -697,6 +712,31 @@ function showInfoTable(x, y) {
       document.getElementById(
         `teom-image${i}`
       ).src = `static/images/${showItem[i].entClass}.png`;
+    }
+  }
+}
+
+function deleteCellOnMap(x, y) {
+  var thisCell = cellsList[cellIndex(x, y)];
+  var thisEntitiesList = getEntitiesInPosition(x, y);
+  console.log(thisEntitiesList);
+  // se la cella ha zone diverso da null (ovvero è istanziata)
+  if (thisCell.zone != "null") {
+    var result = confirm("Are you sure?");
+
+    // if OK
+    if (result) {
+      deleteCell(thisCell.id);
+
+      setTimeout(function () {
+        insertCell(thisCell.id, x, y, "null", ["true", "true", "true", "true"]);
+      }, 200);
+      setTimeout(function () {
+        getMap();
+      }, 500);
+      // if Cancel
+    } else {
+      console.log("Cancellazione cella annullata.");
     }
   }
 }

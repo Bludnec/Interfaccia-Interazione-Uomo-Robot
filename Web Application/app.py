@@ -54,7 +54,7 @@ def cellOccupied():
         return jsonify("Delete cell occupied")
 
 # Cell.
-@app.route('/cell', methods=['POST','PATCH'])
+@app.route('/cell', methods=['POST','PATCH','DELETE'])
 def cell():
     if request.method == "POST":
         req = request.get_json()
@@ -63,6 +63,10 @@ def cell():
     if request.method == "PATCH":
         req = request.get_json()
         updateCellDAOImpl(req['id'],req['x'],req['y'],req['zone'],req['walls'])
+        return jsonify(req)
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteCellDAOImpl(req['id'])
         return jsonify(req)
 
 # Cell.
