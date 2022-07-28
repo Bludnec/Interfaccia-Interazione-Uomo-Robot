@@ -92,6 +92,18 @@ document.getElementById("buttontest").addEventListener("click", () => {
 
 ////////////////
 
+/**
+ * Disabilitato l'apparizione del menù dopo il click destro.
+ */
+window.addEventListener(
+  "contextmenu",
+  function (e) {
+    // do something here...
+    e.preventDefault();
+  },
+  false
+);
+
 var idCounter = 0;
 
 var lastCoordinates = [];
@@ -238,6 +250,9 @@ function mousePressed() {
   var x = parseInt(mouseX / w);
   var y = parseInt(mouseY / w);
 
+  if (mouseButton === RIGHT) {
+    ellipse(50, 50, 50, 50);
+  }
   lastCoordinates = [x, y];
 
   var thisCell = cellsList[cellIndex(x, y)];
