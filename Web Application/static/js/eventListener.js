@@ -714,9 +714,9 @@ function deleteCellOnMap(x, y) {
       setTimeout(function () {
         insertCell(thisCell.id, x, y, "null", ["true", "true", "true", "true"]);
       }, 200);
-      setTimeout(function () {
-        getMap();
-      }, 500);
+      updateNeighborsCellsAfterDeleteTheCellInPosition(x, y);
+
+      reloadInfoMap(600);
       // if Cancel
     } else {
       console.log("Cancellazione cella annullata.");
@@ -747,4 +747,72 @@ function reloadInfoMap(time) {
   setTimeout(function () {
     getAllEntity();
   }, time + 900);
+}
+
+/**
+ * Aggiorna i muri delle celle intorno alla cella appena cancellata, impostandoli su "true".
+ * @param {int} x
+ * @param {int} y
+ */
+function updateNeighborsCellsAfterDeleteTheCellInPosition(x, y) {
+  /**
+   * Aggiorna i muri intorno alla cella cancellata.
+   */
+  setTimeout(function () {
+    updateCell(
+      cellsList[cellIndex(x + 1, y)].id,
+      x + 1,
+      y,
+      cellsList[cellIndex(x + 1, y)].zone,
+      [
+        cellsList[cellIndex(x + 1, y)].walls[0],
+        cellsList[cellIndex(x + 1, y)].walls[1],
+        cellsList[cellIndex(x + 1, y)].walls[2],
+        "true",
+      ]
+    );
+  }, 300);
+  setTimeout(function () {
+    updateCell(
+      cellsList[cellIndex(x - 1, y)].id,
+      x - 1,
+      y,
+      cellsList[cellIndex(x - 1, y)].zone,
+      [
+        cellsList[cellIndex(x - 1, y)].walls[0],
+        "true",
+        cellsList[cellIndex(x - 1, y)].walls[2],
+        cellsList[cellIndex(x - 1, y)].walls[3],
+      ]
+    );
+  }, 400);
+  setTimeout(function () {
+    updateCell(
+      cellsList[cellIndex(x, y + 1)].id,
+      x,
+      y + 1,
+      cellsList[cellIndex(x, y + 1)].zone,
+      [
+        "true",
+        cellsList[cellIndex(x, y + 1)].walls[1],
+        cellsList[cellIndex(x, y + 1)].walls[2],
+        cellsList[cellIndex(x, y + 1)].walls[3],
+      ]
+    );
+  }, 500);
+  setTimeout(function () {
+    updateCell(
+      cellsList[cellIndex(x, y - 1)].id,
+      x,
+      y - 1,
+      cellsList[cellIndex(x, y - 1)].zone,
+      [
+        cellsList[cellIndex(x, y - 1)].walls[0],
+        cellsList[cellIndex(x, y - 1)].walls[1],
+        "true",
+        cellsList[cellIndex(x, y - 1)].walls[3],
+      ]
+    );
+  }, 600);
+  /************************************ */
 }
