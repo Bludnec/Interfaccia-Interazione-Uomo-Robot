@@ -1,80 +1,3 @@
-///////////////
-
-// Get the form and file field
-let form = document.querySelector("#upload");
-let file = document.querySelector("#file");
-
-/**
- * Log the uploaded file to the console
- * @param {event} Event The file loaded event
- */
-function logFile(event) {
-  let str = event.target.result;
-  let json = JSON.parse(str);
-  console.log("string", str);
-  console.log("json", json);
-
-  var maxX = 0;
-  var maxY = 0;
-  for (var i = 0; i < json["cellList"].length; i++) {
-    if (maxX < json["cellList"][i]["X"]) {
-      maxX = json["cellList"][i]["X"];
-    }
-  }
-  for (var i = 0; i < json["cellList"].length; i++) {
-    if (maxY < json["cellList"][i]["Y"]) {
-      maxY = json["cellList"][i]["Y"];
-    }
-  }
-  maxX += 1;
-  maxY += 1;
-  document.getElementById("height").value = maxY;
-  document.getElementById("width").value = maxX;
-  rows = document.getElementById("height").value;
-  cols = document.getElementById("width").value;
-
-  var canvas = createCanvas(cols * w, rows * w);
-  canvas.parent("canvas-zone");
-
-  setTimeout(function () {
-    postInfoUpload(json);
-  }, 100);
-  reloadInfoMap(time);
-}
-
-/**
- * Handle submit events
- * @param  {Event} event The event object
- */
-function handleSubmit(event) {
-  // Stop the form from reloading the page
-  event.preventDefault();
-
-  // If there's no file, do nothing
-  if (!file.value.length) return;
-
-  // Create a new FileReader() object
-  let reader = new FileReader();
-
-  // Setup the callback event to run when the file is read
-  reader.onload = logFile;
-
-  // Read the file
-  reader.readAsText(file.files[0]);
-}
-
-// Listen for submit events
-form.addEventListener("submit", handleSubmit);
-
-document.getElementById("buttontest").addEventListener("click", () => {
-  getInfoDownload().then((data) => {
-    console.log(JSON.stringify(data));
-    download(JSON.stringify(data), "map.txt", "text/plain");
-  });
-});
-
-////////////////
-
 var idCounter = 0;
 
 var lastCoordinates = [];
@@ -530,21 +453,8 @@ function mouseReleased() {
      * Aspetto che venga inserito l'entità nel db per poi prendere la nuova lista
      * di abilità delle entità nella mappa
      */
-    setTimeout(function () {
-      getEntityAbilityOnMap();
-    }, 400);
-    setTimeout(function () {
-      getEntityPositioningOnMap();
-    }, 600);
-    setTimeout(function () {
-      getEntityStatusOnMap();
-    }, 800);
-    setTimeout(function () {
-      getAllEntity();
-    }, 1000);
-    setTimeout(function () {
-      getMap();
-    }, 1200);
+
+    reloadInfoMap(400);
   } else if (
     !checkColor.checked &&
     !checkWalls.checked &&
@@ -699,10 +609,15 @@ function showInfoTable(x, y) {
   }
 }
 
+/**
+ * Funzione per cancellare la cella in x,y col tasto destro.
+ * @param {int} x
+ * @param {int} y
+ */
 function deleteCellOnMap(x, y) {
   var thisCell = cellsList[cellIndex(x, y)];
   var thisEntitiesList = getEntitiesInPosition(x, y);
-  console.log(thisEntitiesList);
+
   // se la cella ha zone diverso da null (ovvero è istanziata)
   if (thisCell.zone != "null") {
     var result = confirm("Are you sure?");
@@ -710,13 +625,19 @@ function deleteCellOnMap(x, y) {
     // if OK
     if (result) {
       deleteCell(thisCell.id);
-
       setTimeout(function () {
         insertCell(thisCell.id, x, y, "null", ["true", "true", "true", "true"]);
       }, 200);
-      updateNeighborsCellsAfterDeleteTheCellInPosition(x, y);
+      // time 600
+      updateNeighborsCellsAfterDeleteCellInPosition(x, y);
 
-      reloadInfoMap(600);
+      if (thisCell.occupied != null) {
+        console.log("test");
+      }
+
+      deleteEntities(thisEntitiesList);
+
+      reloadInfoMap(500);
       // if Cancel
     } else {
       console.log("Cancellazione cella annullata.");
@@ -734,19 +655,19 @@ function reloadInfoMap(time) {
   }, time + 200);
   setTimeout(function () {
     getAllEntity();
-  }, time + 400);
+  }, time + 300);
   setTimeout(function () {
     getEntityAbilityOnMap();
-  }, time + 500);
+  }, time + 400);
   setTimeout(function () {
     getEntityPositioningOnMap();
-  }, time + 700);
+  }, time + 500);
   setTimeout(function () {
     getEntityStatusOnMap();
-  }, time + 800);
+  }, time + 600);
   setTimeout(function () {
     getAllEntity();
-  }, time + 900);
+  }, time + 700);
 }
 
 /**
@@ -754,7 +675,7 @@ function reloadInfoMap(time) {
  * @param {int} x
  * @param {int} y
  */
-function updateNeighborsCellsAfterDeleteTheCellInPosition(x, y) {
+function updateNeighborsCellsAfterDeleteCellInPosition(x, y) {
   /**
    * Aggiorna i muri intorno alla cella cancellata.
    */

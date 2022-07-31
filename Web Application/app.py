@@ -127,6 +127,13 @@ def entity():
         updateEntityPositionDAOImpl(req['id'], req['x'],req['y'],req['z'])
         return jsonify(req)
 
+@app.route('/entities', methods=['DELETE'])
+def entities():
+    if request.method == "DELETE":
+        req = request.get_json()
+        deleteEntitiesDAOImpl(req['listId'])
+        return jsonify(req)
+
 # Entity status.
 @app.route('/entity/status', methods=['POST','DELETE','GET','PATCH'])
 def entityStatus():
@@ -276,3 +283,4 @@ def infoDownloadUpload():
         req = request.get_json()
         postInfoUploadDAOImpl(req)
         return jsonify(req)
+

@@ -1,10 +1,21 @@
+// GET
 async function getEntity(id) {
   let response = await fetch(`entity?id=${id}`);
   let data = await response.json();
   return data;
 }
 
-// Funzione per l'inserimento di una nuova entità nel KB
+/**
+ * Funzione per inserire l'entità nella base di conoscenza (FETCH)
+ * @param {String} id
+ * @param {String} name
+ * @param {String} classe
+ * @param {int} x
+ * @param {int} y
+ * @param {int} z
+ * @param {int} sizeX
+ * @param {int} sizeY
+ */
 function insertEntity(id, name, classe, x, y, z, sizeX, sizeY) {
   var json_arr = {};
   json_arr["id"] = id;
@@ -33,6 +44,10 @@ function insertEntity(id, name, classe, x, y, z, sizeX, sizeY) {
     });
 }
 
+/**
+ * Funzione per cancellare l'entità dalla base di conoscenza. (FETCH)
+ * @param {String} id id dell'entità da cancellare.
+ */
 function deleteEntity(id) {
   fetch("/entity", {
     method: "DELETE",
@@ -45,6 +60,21 @@ function deleteEntity(id) {
     }),
   });
 }
+
+function deleteEntities(listId) {
+  fetch("/entities", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      listId: listId,
+    }),
+  });
+}
+
+////////////////////////////
 function deleteEntityStatus(id) {
   fetch("entity/status", {
     method: "DELETE",

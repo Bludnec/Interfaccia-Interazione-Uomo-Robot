@@ -203,6 +203,10 @@ def deleteEntityDAOImpl(id):
         deleteEntityStatusDAOImpl(id)
     except Exception as e: 
         print("deleteEntityDAOImpl: ", e)
+
+def deleteEntitiesDAOImpl(idList):
+    for x in idList:
+        deleteEntityDAOImpl(x['id'])
         
 # Inserisce le dimensioni dell'entità appena istanziata. Se le dimensioni
 # non corrispondono con quelle del KB, non inserisce l'oggetto.
