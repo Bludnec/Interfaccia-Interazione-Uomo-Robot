@@ -620,7 +620,9 @@ function deleteCellOnMap(x, y) {
 
   // se la cella ha zone diverso da null (ovvero è istanziata)
   if (thisCell.zone != "null") {
-    var result = confirm("Are you sure?");
+    var result = confirm(
+      "Sei sicuro di voler rimuovere la cella con il suo contenuto? Se esiste un'entità in questa cella che ha dimensione maggiore di 1, verranno cancellati anche eventuali entità che si trovano sopra/sotto a quest'ultima."
+    );
 
     // if OK
     if (result) {
