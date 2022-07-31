@@ -39,24 +39,7 @@ function logFile(event) {
   setTimeout(function () {
     postInfoUpload(json);
   }, 100);
-  setTimeout(function () {
-    getMap();
-  }, 200);
-  setTimeout(function () {
-    getAllEntity();
-  }, 400);
-  setTimeout(function () {
-    getEntityAbilityOnMap();
-  }, 500);
-  setTimeout(function () {
-    getEntityPositioningOnMap();
-  }, 700);
-  setTimeout(function () {
-    getEntityStatusOnMap();
-  }, 800);
-  setTimeout(function () {
-    getAllEntity();
-  }, 900);
+  reloadInfoMap(time);
 }
 
 /**
@@ -739,4 +722,29 @@ function deleteCellOnMap(x, y) {
       console.log("Cancellazione cella annullata.");
     }
   }
+}
+
+/**
+ * Funzione per ricaricare tutte le informazioni della mappa (celle e entità, con relative proprietà.)
+ * @param {int} time Time stabilisce dopo quanto deve iniziare il ricaricamento delle informazioni della mappa.
+ */
+function reloadInfoMap(time) {
+  setTimeout(function () {
+    getMap();
+  }, time + 200);
+  setTimeout(function () {
+    getAllEntity();
+  }, time + 400);
+  setTimeout(function () {
+    getEntityAbilityOnMap();
+  }, time + 500);
+  setTimeout(function () {
+    getEntityPositioningOnMap();
+  }, time + 700);
+  setTimeout(function () {
+    getEntityStatusOnMap();
+  }, time + 800);
+  setTimeout(function () {
+    getAllEntity();
+  }, time + 900);
 }

@@ -53,10 +53,6 @@ document.getElementById("drawButton").addEventListener("click", () => {
   }, 200);
 
   setTimeout(function () {
-    getAllEntity();
-  }, 300);
-
-  setTimeout(function () {
     insertMap(cols, rows);
   }, 400);
 
@@ -255,6 +251,9 @@ function draw() {
   // timeout perché sennò va ad influire con le altre query nel backend
 }
 
+/**
+ * Funzione per il riconoscimento dell'azione.
+ */
 function actionFounder() {
   //switch case con le azioni
   switch (cellPath[0][0]) {
