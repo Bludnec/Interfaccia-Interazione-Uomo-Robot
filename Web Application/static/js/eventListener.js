@@ -632,9 +632,27 @@ function deleteCellOnMap(x, y) {
       updateNeighborsCellsAfterDeleteCellInPosition(x, y);
 
       if (thisCell.occupied != null) {
-        console.log("test");
+        var app;
+        for (var i = 0; i < itemsList.length; i++) {
+          if (itemsList[i].id == thisCell.occupied) {
+            app = itemsList[i];
+          }
+        }
+        thisEntitiesList.push.apply(
+          thisEntitiesList,
+          getEntitiesInPosition(app.position.x, app.position.y)
+        );
       }
-
+      for (var i = 0; i < cellsList.length; i++) {
+        for (var j = 0; j < thisEntitiesList.length; j++) {
+          if (cellsList[i].occupied == thisEntitiesList[j].id) {
+            thisEntitiesList.push.apply(
+              thisEntitiesList,
+              getEntitiesInPosition(cellsList[i].x, cellsList[i].y)
+            );
+          }
+        }
+      }
       deleteEntities(thisEntitiesList);
 
       reloadInfoMap(500);
@@ -676,64 +694,68 @@ function reloadInfoMap(time) {
  * @param {int} y
  */
 function updateNeighborsCellsAfterDeleteCellInPosition(x, y) {
-  /**
-   * Aggiorna i muri intorno alla cella cancellata.
-   */
   setTimeout(function () {
-    updateCell(
-      cellsList[cellIndex(x + 1, y)].id,
-      x + 1,
-      y,
-      cellsList[cellIndex(x + 1, y)].zone,
-      [
-        cellsList[cellIndex(x + 1, y)].walls[0],
-        cellsList[cellIndex(x + 1, y)].walls[1],
-        cellsList[cellIndex(x + 1, y)].walls[2],
-        "true",
-      ]
-    );
+    if (cellsList[cellIndex(x + 1, y)] != null) {
+      updateCell(
+        cellsList[cellIndex(x + 1, y)].id,
+        x + 1,
+        y,
+        cellsList[cellIndex(x + 1, y)].zone,
+        [
+          cellsList[cellIndex(x + 1, y)].walls[0],
+          cellsList[cellIndex(x + 1, y)].walls[1],
+          cellsList[cellIndex(x + 1, y)].walls[2],
+          "true",
+        ]
+      );
+    }
   }, 300);
   setTimeout(function () {
-    updateCell(
-      cellsList[cellIndex(x - 1, y)].id,
-      x - 1,
-      y,
-      cellsList[cellIndex(x - 1, y)].zone,
-      [
-        cellsList[cellIndex(x - 1, y)].walls[0],
-        "true",
-        cellsList[cellIndex(x - 1, y)].walls[2],
-        cellsList[cellIndex(x - 1, y)].walls[3],
-      ]
-    );
+    if (cellsList[cellIndex(x - 1, y)] != null) {
+      updateCell(
+        cellsList[cellIndex(x - 1, y)].id,
+        x - 1,
+        y,
+        cellsList[cellIndex(x - 1, y)].zone,
+        [
+          cellsList[cellIndex(x - 1, y)].walls[0],
+          "true",
+          cellsList[cellIndex(x - 1, y)].walls[2],
+          cellsList[cellIndex(x - 1, y)].walls[3],
+        ]
+      );
+    }
   }, 400);
   setTimeout(function () {
-    updateCell(
-      cellsList[cellIndex(x, y + 1)].id,
-      x,
-      y + 1,
-      cellsList[cellIndex(x, y + 1)].zone,
-      [
-        "true",
-        cellsList[cellIndex(x, y + 1)].walls[1],
-        cellsList[cellIndex(x, y + 1)].walls[2],
-        cellsList[cellIndex(x, y + 1)].walls[3],
-      ]
-    );
+    if (cellsList[cellIndex(x, y + 1)] != null) {
+      updateCell(
+        cellsList[cellIndex(x, y + 1)].id,
+        x,
+        y + 1,
+        cellsList[cellIndex(x, y + 1)].zone,
+        [
+          "true",
+          cellsList[cellIndex(x, y + 1)].walls[1],
+          cellsList[cellIndex(x, y + 1)].walls[2],
+          cellsList[cellIndex(x, y + 1)].walls[3],
+        ]
+      );
+    }
   }, 500);
   setTimeout(function () {
-    updateCell(
-      cellsList[cellIndex(x, y - 1)].id,
-      x,
-      y - 1,
-      cellsList[cellIndex(x, y - 1)].zone,
-      [
-        cellsList[cellIndex(x, y - 1)].walls[0],
-        cellsList[cellIndex(x, y - 1)].walls[1],
-        "true",
-        cellsList[cellIndex(x, y - 1)].walls[3],
-      ]
-    );
+    if (cellsList[cellIndex(x, y - 1)] != null) {
+      updateCell(
+        cellsList[cellIndex(x, y - 1)].id,
+        x,
+        y - 1,
+        cellsList[cellIndex(x, y - 1)].zone,
+        [
+          cellsList[cellIndex(x, y - 1)].walls[0],
+          cellsList[cellIndex(x, y - 1)].walls[1],
+          "true",
+          cellsList[cellIndex(x, y - 1)].walls[3],
+        ]
+      );
+    }
   }, 600);
-  /************************************ */
 }

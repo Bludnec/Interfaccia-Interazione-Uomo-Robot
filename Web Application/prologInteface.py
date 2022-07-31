@@ -201,6 +201,7 @@ def deleteEntityDAOImpl(id):
         prolog.retract('entity('+id+',_,_,_,_,_ )')
         deleteEntitySizeDAOImpl(id)
         deleteEntityStatusDAOImpl(id)
+        deleteCellOccupiedDAOImpl(id)
     except Exception as e: 
         print("deleteEntityDAOImpl: ", e)
 
