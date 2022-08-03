@@ -366,7 +366,7 @@ class Agent {
   }
 
   /**
-   * @param {*} info  Un robot afferra un'entità (entity).
+   * @param {Dict} info  Un robot afferra un'entità (entity).
    */
   manipulation(info) {
     console.log(info);
@@ -401,6 +401,8 @@ class Agent {
             (cellsList[cellIndex(entity.position.x, entity.position.y)]
               .walls[3] == "false" &&
               this.position.x == entity.position.x - 1 &&
+              this.position.y == entity.position.y) ||
+            (this.position.x == entity.position.x &&
               this.position.y == entity.position.y)
           ) {
             updateEntityPosition(
@@ -659,12 +661,25 @@ class Agent {
         }
       }
       var nearCell = findNearestCellToEntity(entSel);
-      var path = astarAlg(
-        cellsList[cellIndex(this.position.x, this.position.y)],
-        nearCell
+      console.log(
+        this.position.x,
+        entSel.position.x,
+        this.position.y,
+        entSel.position.y
       );
-      for (var i = 0; i < path.length; i++) {
-        cellPath.push(path[i]);
+      if (
+        !(
+          this.position.x == entSel.position.x &&
+          this.position.y == entSel.position.y
+        )
+      ) {
+        var path = astarAlg(
+          cellsList[cellIndex(this.position.x, this.position.y)],
+          nearCell
+        );
+        for (var i = 0; i < path.length; i++) {
+          cellPath.push(path[i]);
+        }
       }
       var newInfo = {
         entity: info["theme"],

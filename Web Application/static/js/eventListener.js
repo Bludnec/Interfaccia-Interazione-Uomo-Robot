@@ -310,6 +310,9 @@ function mouseReleased() {
             parseInt(x) + parseInt(tilX) - 1 <=
               itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
           ) {
+            // CONTROLLARE SE GIà ESISTE UN'OGGETTO LI SOPRA
+            //
+            //
             getClassAbility(itemsList[indexEl].entClass, "support").then(
               (supportBool) => {
                 if (supportBool) {
