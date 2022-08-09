@@ -6,7 +6,7 @@ set FLASK_APP=app
 set FLASK_ENV=development  
 python -m flask run
 
-#Requirements
+#Requirements  
 pip install flask
 pip install git+https://github.com/yuce/pyswip@master#egg=pyswip
 
