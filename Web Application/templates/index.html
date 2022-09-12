@@ -19,10 +19,6 @@
 
     <link
       rel="stylesheet"
-      href="https://cdn.metroui.org.ua/v4.3.2/css/metro-all.min.css"
-    />
-    <link
-      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
     />
 
@@ -30,107 +26,195 @@
   </head>
 
   <body>
-    <div id="container">
-      <h2 id="title">
-        Supporto grafico per la modellazione del contesto <br />in interfacce
-        robotiche vocali
-      </h2>
-      <br />
+    <div class="container">
+      <!--  Navbar -->
+      <nav class="navbar navbar-expand-lg bg-light sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">SGMCIR</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Entities</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" disabled>Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End navbar-->
 
-      <!-- Tab per modifica -->
-      <div id="tab-list">
-        <ul
-          data-cls-tabs="flex-justify-start"
-          data-role="tabs"
-          data-expand="true"
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#home-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="home-tab-pane"
+            aria-selected="true"
+          >
+            Impostazioni mappa
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="profile-tab-pane"
+            aria-selected="false"
+          >
+            Modifica celle
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="contact-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#contact-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="contact-tab-pane"
+            aria-selected="false"
+          >
+            Comandi
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="disabled-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#disabled-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="disabled-tab-pane"
+            aria-selected="false"
+          >
+            Upload/Download Mappa
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home-tab-pane"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+          tabindex="0"
         >
-          <li><a href="#_target_1">Impostazioni mappa</a></li>
-          <li><a href="#_target_2">Modifica celle</a></li>
-          <li><a href="#_target_3">Comandi</a></li>
-          <li><a href="#_target_0">Upload/Download Mappa</a></li>
-        </ul>
-
-        <div class="border bd-default no-border-top p-2">
-          <div id="_target_1">
-            <div id="righe-label">
-              <label for="fname">Numero righe</label>
-              <input
-                type="number"
-                id="height"
-                name="height"
-                value="6"
-                min="1"
-              />
-            </div>
-            <div id="colonne-label">
-              <label for="lname">Numero colonne</label>
-              <input type="number" id="width" name="width" value="8" min="1" />
-            </div>
-            <button type="button" id="drawButton">Redraw canvas</button>
-            <div class="clear-float"></div>
+          <div id="righe-label">
+            <label for="fname">Numero righe</label>
+            <input type="number" id="height" name="height" value="6" min="1" />
           </div>
-          <div id="_target_2">
-            <select name="list" id="zone">
-              <option value="kitchen">Kitchen</option>
-              <option value="bathroom">Bathroom</option>
-              <option value="livingroom">Living Room</option>
-              <option value="bedroom">Bedroom</option>
-              <option value="balcony">Balcony</option>
-            </select>
-            <label for="checkBox">Cambia zona</label>
-            <input
-              type="checkbox"
-              id="color-checkbox"
-              title="Abilitare modifiche"
-            />
-            <label for="checkBox">Modifica muri</label>
-            <input
-              type="checkbox"
-              id="walls-checkbox"
-              title="Abilita per cambiare i muri"
-            />
-            <button id="delete-path">Cancella percorso</button>
+          <div id="colonne-label">
+            <label for="lname">Numero colonne</label>
+            <input type="number" id="width" name="width" value="8" min="1" />
           </div>
-          <div id="_target_3">
-            <div id="input-output-grid">
-              <div class="io-grid-element">
-                <textarea id="input-text" placeholder="Input text"></textarea>
-              </div>
-              <div class="io-grid-element">
-                <textarea
-                  readonly
-                  id="output-text"
-                  placeholder="Output text"
-                ></textarea>
-              </div>
-              <button id="translate-button">
-                <p>Avvia comando</p>
-              </button>
-
-              <div class="clear-float"></div>
-            </div>
-            <div id="motion-agent">
-              <label for="checkBox">Muovi agente</label><br />
-              <input
-                type="checkbox"
-                id="move-agent"
-                title="Abilita per muovere l'agente"
-              />
-            </div>
-            <button id="delete-path">Cancella percorso</button>
-          </div>
-          <div id="_target_0">
-            <form id="upload">
-              <input type="file" id="file" accept=".json" />
-
-              <button id="upload-btn">Upload</button>
-            </form>
-            <button id="buttontest">Download</button>
-          </div>
+          <button type="button" id="drawButton">Redraw canvas</button>
           <div class="clear-float"></div>
         </div>
+        <div
+          class="tab-pane fade"
+          id="profile-tab-pane"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+          tabindex="0"
+        >
+          <select name="list" id="zone">
+            <option value="kitchen">Kitchen</option>
+            <option value="bathroom">Bathroom</option>
+            <option value="livingroom">Living Room</option>
+            <option value="bedroom">Bedroom</option>
+            <option value="balcony">Balcony</option>
+          </select>
+          <label for="checkBox">Cambia zona</label>
+          <input
+            type="checkbox"
+            id="color-checkbox"
+            title="Abilitare modifiche"
+          />
+          <label for="checkBox">Modifica muri</label>
+          <input
+            type="checkbox"
+            id="walls-checkbox"
+            title="Abilita per cambiare i muri"
+          />
+          <button id="delete-path">Cancella percorso</button>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="contact-tab-pane"
+          role="tabpanel"
+          aria-labelledby="contact-tab"
+          tabindex="0"
+        >
+          <div id="input-output-grid">
+            <div class="io-grid-element">
+              <textarea id="input-text" placeholder="Input text"></textarea>
+            </div>
+            <div class="io-grid-element">
+              <textarea
+                readonly
+                id="output-text"
+                placeholder="Output text"
+              ></textarea>
+            </div>
+            <button id="translate-button">
+              <p>Avvia comando</p>
+            </button>
+          </div>
+          <div id="motion-agent">
+            <label for="checkBox">Muovi agente</label><br />
+            <input
+              type="checkbox"
+              id="move-agent"
+              title="Abilita per muovere l'agente"
+            />
+          </div>
+          <button id="delete-path">Cancella percorso</button>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="disabled-tab-pane"
+          role="tabpanel"
+          aria-labelledby="disabled-tab"
+          tabindex="0"
+        >
+          <form id="upload">
+            <input type="file" id="file" accept=".json" />
+
+            <button id="upload-btn">Upload</button>
+          </form>
+          <button id="buttontest">Download</button>
+        </div>
       </div>
-      <!---->
+      <hr />
 
       <div id="canvas-zone"></div>
       <div id="tab-list">
@@ -433,6 +517,11 @@
 
     <script src="static\js\sketch.js"></script>
 
-    <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
