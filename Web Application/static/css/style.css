@@ -64,7 +64,6 @@ canvas {
   resize: none;
   min-height: 60px;
   line-height: 20px;
-
   margin-right: 10px;
 }
 
@@ -102,4 +101,9 @@ canvas {
   height: auto;
   width: 300px;
   float: left;
+}
+
+#pills-tab {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
