@@ -57,6 +57,7 @@ def getMapDAOImpl():
         finalList.append(statusList)
     except Exception as e: 
         print("getMapDAOImpl: ", e)
+        e.with_traceback()
     return finalList
 
 def insertMapDAOImpl(i,j):
