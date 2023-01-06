@@ -284,3 +284,11 @@ def infoDownloadUpload():
         postInfoUploadDAOImpl(req)
         return jsonify(req)
 
+# Sent info for dataset constructor
+@app.route('/dataset-constructor', methods=['GET','POST'])
+def datasetConstructor():
+    if request.method == "POST":
+        req = request.get_json()
+        print(req)
+        return jsonify(req)
+

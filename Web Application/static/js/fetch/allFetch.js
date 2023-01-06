@@ -1,5 +1,5 @@
 async function getAllEntity() {
-  let response = await fetch("get-all-entity");
+  let response = await fetch('get-all-entity');
   let data = await response.json();
   itemsList = [];
   if (data[0] != undefined && data[1] != undefined) {
@@ -52,28 +52,28 @@ async function getAllEntity() {
         }
         entity = itemsList.push(entity);
       } else {
-        agent = new Agent("robot", position);
+        agent = new Agent('robot', position);
       }
     }
   }
 }
 
 function deleteAllEntity() {
-  fetch("/delete-all-entity", {
-    method: "DELETE",
+  fetch('/delete-all-entity', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   });
 }
 
 function insertCellOccupied(x, y, id) {
   fetch(`/cell-occupied`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       x: x,
@@ -84,11 +84,11 @@ function insertCellOccupied(x, y, id) {
 }
 
 function deleteCellOccupied(id) {
-  fetch("/cell-occupied", {
-    method: "DELETE",
+  fetch('/cell-occupied', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       id: id,
@@ -96,7 +96,7 @@ function deleteCellOccupied(id) {
   });
 }
 async function getMap() {
-  let response = await fetch("map");
+  let response = await fetch('map');
   let data = await response.json();
   cellsList = [];
   for (var i = 0; i < data[0].length; i++) {
@@ -132,10 +132,10 @@ async function getMap() {
 
 function insertMap(i, j) {
   fetch(`map`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       i: i,
@@ -145,11 +145,11 @@ function insertMap(i, j) {
 }
 
 function deleteMap() {
-  fetch("map", {
-    method: "DELETE",
+  fetch('map', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   });
 }
@@ -162,10 +162,10 @@ async function getCellInZone(zone) {
 
 function insertAgent(x, y) {
   fetch(`agent`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       x: x,
@@ -175,47 +175,47 @@ function insertAgent(x, y) {
 }
 
 function deleteAgent() {
-  fetch("agent", {
-    method: "DELETE",
+  fetch('agent', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   });
 }
 
 function updateAgentPosition(x, y) {
-  fetch("agent", {
-    method: "PATCH",
+  fetch('agent', {
+    method: 'PATCH',
     body: JSON.stringify({
       x: x,
       y: y,
     }),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
+      'Content-type': 'application/json; charset=UTF-8',
     },
   });
 }
 
 async function getAgent() {
-  let response = await fetch("/agent");
+  let response = await fetch('/agent');
   let data = await response.json();
   var position = new Position(data.X, data.Y, 0);
-  agent = new Agent("robot", position);
+  agent = new Agent('robot', position);
 }
 
 async function getAllUrl() {
-  let response = await fetch("get-all-url");
+  let response = await fetch('get-all-url');
   let data = await response.json();
   return data;
 }
 
 function insertOnTop(idOnTop, idSupport) {
   fetch(`entity/on-top`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       idOnTop: idOnTop,
@@ -237,11 +237,11 @@ async function getEntitySupport(id) {
 }
 
 function deleteOnTop(id1, id2) {
-  fetch("entity/on-top", {
-    method: "DELETE",
+  fetch('entity/on-top', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       id1: id1,
@@ -252,10 +252,10 @@ function deleteOnTop(id1, id2) {
 
 function insertOnBottom(idOnBottom, idTop) {
   fetch(`entity/on-bottom`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       idOnBottom: idOnBottom,
@@ -277,11 +277,11 @@ async function getEntityCover(id) {
 }
 
 function deleteOnBottom(id1, id2) {
-  fetch("entity/on-bottom", {
-    method: "DELETE",
+  fetch('entity/on-bottom', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       id1: id1,
@@ -292,10 +292,10 @@ function deleteOnBottom(id1, id2) {
 
 function insertInside(idInside, idContainer) {
   fetch(`entity/inside`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       idInside: idInside,
@@ -317,11 +317,11 @@ async function getEntityCover(id) {
 }
 
 function deleteInside(id1, id2) {
-  fetch("entity/inside", {
-    method: "DELETE",
+  fetch('entity/inside', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       id1: id1,
@@ -343,19 +343,19 @@ async function getLexicalMap() {
 }
 
 async function getEntityAbilityOnMap() {
-  let response = await fetch("entity/ability/all");
+  let response = await fetch('entity/ability/all');
   let data = await response.json();
   abilityList = data;
 }
 
 async function getEntityPositioningOnMap() {
-  let response = await fetch("entity/positioning");
+  let response = await fetch('entity/positioning');
   let data = await response.json();
   positioningList = data;
 }
 
 async function getEntityStatusOnMap() {
-  let response = await fetch("entity/status/all");
+  let response = await fetch('entity/status/all');
   let data = await response.json();
   powerStatusList = data[0];
   physicalStatusList = data[1];
@@ -364,35 +364,35 @@ async function getEntityStatusOnMap() {
 function getOutputText(JSONinput) {
   var myHeaders = new Headers();
   myHeaders.set(
-    "Authorization",
-    "Basic " + btoa("utente_colavecchi:colavecchiTESI2022")
+    'Authorization',
+    'Basic ' + btoa('utente_colavecchi:colavecchiTESI2022')
   );
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Access-Control-Allow-Origin", "0.0.0.0");
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Access-Control-Allow-Origin', '0.0.0.0');
 
   var requestOptions = {
-    method: "POST",
+    method: 'POST',
     headers: myHeaders,
     body: JSON.stringify(JSONinput),
   };
 
   fetch(
-    "http://sag.art.uniroma2.it/transformers_backend/get_srl",
+    'http://sag.art.uniroma2.it/transformers_backend/get_srl',
     requestOptions
   )
     .then((response) => response.json())
     .then((result) => {
       translator(result);
     })
-    .catch((error) => console.log("error", error));
+    .catch((error) => console.log('error', error));
 }
 
 function deletePositioning(id) {
-  fetch("delete-positioning", {
-    method: "DELETE",
+  fetch('delete-positioning', {
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       id: id,
@@ -401,20 +401,34 @@ function deletePositioning(id) {
 }
 
 async function getInfoDownload() {
-  let response = await fetch("/info/download-upload");
+  let response = await fetch('/info/download-upload');
   let data = await response.json();
   return data;
 }
 
 function postInfoUpload(info) {
   fetch(`/info/download-upload`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       info: info,
+    }),
+  });
+}
+
+function sendConstructor(question, answer) {
+  fetch(`/dataset-constructor`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      question: question,
+      answer: answer,
     }),
   });
 }
