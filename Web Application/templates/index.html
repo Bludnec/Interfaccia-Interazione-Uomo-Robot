@@ -63,6 +63,7 @@
       <!-- End navbar-->
 
       <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <!-- Impostazioni mappa button -->
         <li class="nav-item" role="presentation">
           <button
             class="nav-link active"
@@ -77,6 +78,7 @@
             Impostazioni mappa
           </button>
         </li>
+        <!-- Modifica celle button -->
         <li class="nav-item" role="presentation">
           <button
             class="nav-link"
@@ -91,20 +93,22 @@
             Modifica celle
           </button>
         </li>
+        <!-- Comandi button -->
         <li class="nav-item" role="presentation">
           <button
             class="nav-link"
-            id="contact-tab"
+            id="commands-tab"
             data-bs-toggle="tab"
-            data-bs-target="#contact-tab-pane"
+            data-bs-target="#commands-tab-pane"
             type="button"
             role="tab"
-            aria-controls="contact-tab-pane"
+            aria-controls="commands-tab-pane"
             aria-selected="false"
           >
             Comandi
           </button>
         </li>
+        <!-- Upload/Download Mappa button -->
         <li class="nav-item" role="presentation">
           <button
             class="nav-link"
@@ -119,8 +123,39 @@
             Upload/Download Mappa
           </button>
         </li>
+        <!-- Costruzione content button -->
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="costruzione-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#costruzione-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="costruzione-tab-pane"
+            aria-selected="false"
+          >
+            Costruzione
+          </button>
+        </li>
+        <!-- Q&A button -->
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="qa-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#qa-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="qa-tab-pane"
+            aria-selected="false"
+          >
+            Q&A
+          </button>
+        </li>
       </ul>
       <div class="tab-content" id="myTabContent">
+        <!-- Impostazioni mappa content -->
         <div
           class="tab-pane fade show active"
           id="home-tab-pane"
@@ -130,15 +165,30 @@
         >
           <div id="righe-label">
             <label for="fname">Numero righe</label>
-            <input type="number" id="height" name="height" value="6" min="1" max="50"/>
+            <input
+              type="number"
+              id="height"
+              name="height"
+              value="6"
+              min="1"
+              max="50"
+            />
           </div>
           <div id="colonne-label">
             <label for="lname">Numero colonne</label>
-            <input type="number" id="width" name="width" value="8" min="1" max="50"/>
+            <input
+              type="number"
+              id="width"
+              name="width"
+              value="8"
+              min="1"
+              max="50"
+            />
           </div>
           <button type="button" id="drawButton">Redraw canvas</button>
           <div class="clear-float"></div>
         </div>
+        <!-- Modifica celle content -->
         <div
           class="tab-pane fade"
           id="profile-tab-pane"
@@ -167,11 +217,12 @@
           />
           <button id="delete-path">Cancella percorso</button>
         </div>
+        <!-- Comandi content -->
         <div
           class="tab-pane fade"
-          id="contact-tab-pane"
+          id="commands-tab-pane"
           role="tabpanel"
-          aria-labelledby="contact-tab"
+          aria-labelledby="commands-tab"
           tabindex="0"
         >
           <div id="input-output-grid">
@@ -185,7 +236,7 @@
                 placeholder="Output text"
               ></textarea>
             </div>
-            <button id="translate-button">
+            <button class="btn btn-primary" id="translate-button">
               <p>Avvia comando</p>
             </button>
           </div>
@@ -199,6 +250,7 @@
           </div>
           <button id="delete-path">Cancella percorso</button>
         </div>
+        <!-- Upload/Donwload Mappa content -->
         <div
           class="tab-pane fade"
           id="disabled-tab-pane"
@@ -207,11 +259,106 @@
           tabindex="0"
         >
           <form id="upload">
-            <input type="file" id="file" accept=".txt" />
-
-            <button id="upload-btn">Upload</button>
+            <div class="mb-3">
+              <input type="file" id="file" accept=".txt" />
+            </div>
+            <button class="btn btn-primary" id="upload-btn">Upload</button>
           </form>
-          <button id="buttontest">Download</button>
+          <button class="btn btn-primary" id="buttontest">Download</button>
+        </div>
+        <!-- Costruzione content -->
+        <div
+          class="tab-pane fade"
+          id="costruzione-tab-pane"
+          role="tabpanel"
+          aria-labelledby="costruzione-tab"
+          tabindex="0"
+        >
+          <div class="container text-left">
+            <div class="row">
+              <div class="col-5">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Question"
+                    id="question-costruzione"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="question-costruzione">Question</label>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Answer"
+                    id="answer-costruzione"
+                    style="height: 100px"
+                  ></textarea>
+                  <label for="answer-costruzione">Answer</label>
+                </div>
+              </div>
+              <div class="col">
+                <button
+                  id="send-construction-info"
+                  class="btn btn-primary"
+                  style="margin-top: 10px"
+                >
+                  Invia <i class="bi bi-send"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Q&A content -->
+        <div
+          class="tab-pane fade"
+          id="qa-tab-pane"
+          role="tabpanel"
+          aria-labelledby="qa-tab"
+          tabindex="0"
+        >
+          <div class="container text-center">
+            <div class="row">
+              <!-- Question -->
+              <div class="col-5">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="question-textarea"
+                  ></textarea>
+                  <label for="floatingTextarea">Question</label>
+                </div>
+              </div>
+              <!-- Answer -->
+              <div class="col-5">
+                <div class="form-floating mb-3">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="floatingTextareaDisabled"
+                    disabled
+                  ></textarea>
+                  <label for="floatingTextareaDisabled">Answer</label>
+                </div>
+              </div>
+              <!-- Feedback buttons -->
+              <div class="col">
+                <button
+                  class="btn btn-success btn-lg"
+                  id="success-answer-button"
+                >
+                  <i class="bi bi-hand-thumbs-up"></i>
+                </button>
+              </div>
+              <div class="col">
+                <button class="btn btn-danger btn-lg" id="fail-answer-button">
+                  <i class="bi bi-hand-thumbs-up"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <hr />
