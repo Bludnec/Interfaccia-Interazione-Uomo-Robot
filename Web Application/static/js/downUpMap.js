@@ -9,8 +9,8 @@ let file = document.querySelector('#file');
 function logFile(event) {
   let str = event.target.result;
   let json = JSON.parse(str);
-  console.log('string', str);
-  console.log('json', json);
+  //console.log('string', str);
+  //console.log('json', json);
 
   var maxX = 0;
   var maxY = 0;

@@ -523,7 +523,7 @@ def postInfoUploadDAOImpl(info):
 
     # cellList
     for x in jsonInfo['cellList']:
-        prolog.assertz('cell(+'+str(x['Id'])+','+str(x['X'])+','+str(x['Y'])+','+
+        prolog.assertz('cell('+str(x['Id'])+','+str(x['X'])+','+str(x['Y'])+','+
         x['Zone']+',['+x['Walls'][0]+ ','+x['Walls'][1]+','+x['Walls'][2]+','+x['Walls'][3]+'])')
     
     # cellOccList
