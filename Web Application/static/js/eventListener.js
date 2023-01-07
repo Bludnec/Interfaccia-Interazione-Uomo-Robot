@@ -39,12 +39,7 @@ document.getElementById('map-width').addEventListener('keyup', () => {
 document
   .getElementById('send-construction-info')
   .addEventListener('click', () => {
-    getInfoDownload().then((data) => {
-      var questionText = document.getElementById('question-costruzione').value;
-      var answerText = document.getElementById('answer-costruzione').value;
-      console.log(questionText, answerText, data);
-      sendConstructor(questionText, answerText, data);
-    });
+    inputDatasetConstructor();
   });
 
 document.getElementById('delete-entity-btn0').addEventListener('click', () => {
@@ -342,7 +337,7 @@ function mouseReleased() {
             tilX <= itemsList[indexEl].sizeX &&
             tilY <= itemsList[indexEl].sizeY &&
             parseInt(x) + parseInt(tilX) - 1 <=
-              itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
+            itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
           ) {
             // CONTROLLARE SE GIà ESISTE UN'OGGETTO LI SOPRA
             //
@@ -433,7 +428,7 @@ function mouseReleased() {
               tilX <= itemsList[indexEl].sizeX &&
               tilY <= itemsList[indexEl].sizeY &&
               parseInt(x) + parseInt(tilX) - 1 <=
-                itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
+              itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
             ) {
               setTimeout(function () {
                 getClassAbility(itemsList[indexEl].entClass, 'contain').then(

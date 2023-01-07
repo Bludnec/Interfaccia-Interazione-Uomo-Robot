@@ -419,7 +419,8 @@ function postInfoUpload(info) {
   });
 }
 
-function sendConstructor(question, answer, map) {
+function sendConstructor(info) {
+  console.log(info);
   fetch('/dataset-constructor', {
     method: 'POST',
     headers: {
@@ -427,9 +428,7 @@ function sendConstructor(question, answer, map) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      question: question,
-      answer: answer,
-      map: map,
+      info: info
     }),
   });
 }

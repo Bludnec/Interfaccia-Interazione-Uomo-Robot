@@ -285,7 +285,7 @@ def infoDownloadUpload():
         return jsonify(req)
 
 # Sent info for dataset constructor
-@app.route('/dataset-constructor', methods=['GET','POST'])
+@app.route('/dataset-constructor', methods=['POST'])
 def datasetConstructor():
     if request.method == "POST":
         req = request.get_json()

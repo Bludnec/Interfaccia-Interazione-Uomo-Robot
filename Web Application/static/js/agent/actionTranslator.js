@@ -17,6 +17,7 @@ var output1 = {
 };
 
 function translator(output) {
+  console.log(map1)
   clearPath();
   // Scansiono tutti i frame presenti dentro "framses"
   console.log(output);
@@ -43,4 +44,5 @@ function translator(output) {
     document.getElementById("output-text").innerHTML = stringaOutput;
     cellPath.push([infoAzione.azione, infoAzione]);
   }
+  map1.clear();
 }
