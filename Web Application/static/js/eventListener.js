@@ -2,46 +2,36 @@ var idCounter = 0;
 
 var lastCoordinates = [];
 
-var checkWalls = document.getElementById('walls-checkbox');
-var checkColor = document.getElementById('color-checkbox');
-var checkMoveAgent = document.getElementById('move-agent');
+var checkWalls = document.getElementById("walls-checkbox");
+var checkColor = document.getElementById("color-checkbox");
+var checkMoveAgent = document.getElementById("move-agent");
 
 function download(content, fileName, contentType) {
-  var a = document.createElement('a');
+  var a = document.createElement("a");
   var file = new Blob([content], { type: contentType });
   a.href = URL.createObjectURL(file);
   a.download = fileName;
   a.click();
 }
-
-document
-  .getElementById('send-construction-info')
-  .addEventListener('click', () => {
-    var questionText = document.getElementById('question-costruzione').value;
-    var answerText = document.getElementById('answer-costruzione').value;
-    // console.log(questionText, answerText);
-    sendConstructor(questionText, answerText);
-  });
-
-document.getElementById('delete-entity-btn0').addEventListener('click', () => {
+document.getElementById("delete-entity-btn0").addEventListener("click", () => {
   var check = false;
   for (var i = 0; i < positioningList.length; i++) {
     for (var j = 0; j < positioningList[i].length; j++) {
       if (
         positioningList[i][j][1] ==
-        document.getElementById('teom-id0').innerHTML
+        document.getElementById("teom-id0").innerHTML
       ) {
         check = true;
       }
     }
   }
   if (!check) {
-    if (document.getElementById('teom-class0').innerHTML == 'Agent') {
+    if (document.getElementById("teom-class0").innerHTML == "Agent") {
       agent = null;
       deleteAgent();
     } else {
-      deleteCellOccupied(document.getElementById('teom-id0').innerHTML);
-      deleteEntity(document.getElementById('teom-id0').innerHTML);
+      deleteCellOccupied(document.getElementById("teom-id0").innerHTML);
+      deleteEntity(document.getElementById("teom-id0").innerHTML);
     }
 
     setTimeout(function () {
@@ -60,25 +50,25 @@ document.getElementById('delete-entity-btn0').addEventListener('click', () => {
     );
   }
 });
-document.getElementById('delete-entity-btn1').addEventListener('click', () => {
+document.getElementById("delete-entity-btn1").addEventListener("click", () => {
   var check = false;
   for (var i = 0; i < positioningList.length; i++) {
     for (var j = 0; j < positioningList[i].length; j++) {
       if (
         positioningList[i][j][1] ==
-        document.getElementById('teom-id1').innerHTML
+        document.getElementById("teom-id1").innerHTML
       ) {
         check = true;
       }
     }
   }
   if (!check) {
-    if (document.getElementById('teom-class1').innerHTML == 'Agent') {
+    if (document.getElementById("teom-class1").innerHTML == "Agent") {
       agent = null;
       deleteAgent();
     } else {
-      deleteCellOccupied(document.getElementById('teom-id1').innerHTML);
-      deleteEntity(document.getElementById('teom-id1').innerHTML);
+      deleteCellOccupied(document.getElementById("teom-id1").innerHTML);
+      deleteEntity(document.getElementById("teom-id1").innerHTML);
     }
     setTimeout(function () {
       getMap();
@@ -96,13 +86,13 @@ document.getElementById('delete-entity-btn1').addEventListener('click', () => {
     );
   }
 });
-document.getElementById('delete-entity-btn2').addEventListener('click', () => {
+document.getElementById("delete-entity-btn2").addEventListener("click", () => {
   var check = false;
   for (var i = 0; i < positioningList.length; i++) {
     for (var j = 0; j < positioningList[i].length; j++) {
       if (
         positioningList[i][j][1] ==
-        document.getElementById('teom-id2').innerHTML
+        document.getElementById("teom-id2").innerHTML
       ) {
         cos;
         check = true;
@@ -110,12 +100,12 @@ document.getElementById('delete-entity-btn2').addEventListener('click', () => {
     }
   }
   if (!check) {
-    if (document.getElementById('teom-class2').innerHTML == 'Agent') {
+    if (document.getElementById("teom-class2").innerHTML == "Agent") {
       agent = null;
       deleteAgent();
     } else {
-      deleteCellOccupied(document.getElementById('teom-id2').innerHTML);
-      deleteEntity(document.getElementById('teom-id2').innerHTML);
+      deleteCellOccupied(document.getElementById("teom-id2").innerHTML);
+      deleteEntity(document.getElementById("teom-id2").innerHTML);
     }
     setTimeout(function () {
       getMap();
@@ -135,8 +125,8 @@ document.getElementById('delete-entity-btn2').addEventListener('click', () => {
 });
 
 var imgItemSelected = document
-  .getElementById('til-image')
-  .addEventListener('drag', imgDrag);
+  .getElementById("til-image")
+  .addEventListener("drag", imgDrag);
 
 var boolMousePressed = false;
 var indexItemPressed;
@@ -162,11 +152,11 @@ function mousePressed() {
 
     var thisCell = cellsList[cellIndex(x, y)];
 
-    document.getElementById('cell-id').innerHTML = thisCell.id;
+    document.getElementById("cell-id").innerHTML = thisCell.id;
 
-    document.getElementById('cell-coordinates').innerHTML =
-      'X:' + thisCell.x + ' Y:' + thisCell.y;
-    document.getElementById('cell-zone').innerHTML = thisCell.zone;
+    document.getElementById("cell-coordinates").innerHTML =
+      "X:" + thisCell.x + " Y:" + thisCell.y;
+    document.getElementById("cell-zone").innerHTML = thisCell.zone;
 
     if (agent != null && checkMoveAgent.checked == true) {
       var start = cellsList[cellIndex(agent.position.x, agent.position.y)];
@@ -201,7 +191,7 @@ function mouseReleased() {
   checkWallNeighbor(cellsList[cellIndex(0, 0)], 2, 1);
 
   /* inserisce l'entità nuova solo se è stata selezionata e il drag è iniziato dall'img dell info-point */
-  if (boolImgItemSelected && cellsList[cellIndex(x, y)].zone != 'null') {
+  if (boolImgItemSelected && cellsList[cellIndex(x, y)].zone != "null") {
     var indexEl = getEntityInPosition(x, y);
     if (!(cellsList[cellIndex(x, y)].occupied == null)) {
       for (var i = 0; i < itemsList.length; i++) {
@@ -212,19 +202,19 @@ function mouseReleased() {
     }
     // se è l'agente = crea l'agente
     if (
-      classItemSelected == 'agent' &&
+      classItemSelected == "agent" &&
       !(indexEl == null && cellsList[cellIndex(x, y)].occupied == null)
     ) {
-      alert('Non posso inserire il robot in quella posizione');
+      alert("Non posso inserire il robot in quella posizione");
     }
     var tilX;
     var tilY;
-    if (document.getElementById('size').value == 'big') {
+    if (document.getElementById("size").value == "big") {
       tilX = 2;
       tilY = 2;
     }
-    if (document.getElementById('size').value == 'medium') {
-      if (document.getElementById('orientation').value == 'horizontal') {
+    if (document.getElementById("size").value == "medium") {
+      if (document.getElementById("orientation").value == "horizontal") {
         tilX = 2;
         tilY = 1;
       } else {
@@ -232,12 +222,12 @@ function mouseReleased() {
         tilY = 2;
       }
     }
-    if (document.getElementById('size').value == 'small') {
+    if (document.getElementById("size").value == "small") {
       tilX = 1;
       tilY = 1;
     }
     if (
-      classItemSelected == 'agent' &&
+      classItemSelected == "agent" &&
       indexEl == null &&
       cellsList[cellIndex(x, y)].occupied == null
     ) {
@@ -260,7 +250,7 @@ function mouseReleased() {
       ) {
         if (
           indexItemSelected != null &&
-          tilPosition.value == 'on-floor' &&
+          tilPosition.value == "on-floor" &&
           cellsList[cellIndex(x, y)].occupied == null
         ) {
           // controllo se posso metterlo
@@ -278,24 +268,24 @@ function mouseReleased() {
             );
           }
 
-          if (entityWithPowerStatus.includes(classItemSelected + 'On')) {
+          if (entityWithPowerStatus.includes(classItemSelected + "On")) {
             setTimeout(function () {
               insertEntityStatus(
                 (classItemSelected + idCounter.toString()).toString(),
-                'power',
-                document.getElementById('power_status_value').value
+                "power",
+                document.getElementById("power_status_value").value
               );
               idCounter++;
               deselectEntityImage();
             }, 200);
           } else if (
-            entityWithPhysicalStatus.includes(classItemSelected + 'Open')
+            entityWithPhysicalStatus.includes(classItemSelected + "Open")
           ) {
             setTimeout(function () {
               insertEntityStatus(
                 (classItemSelected + idCounter.toString()).toString(),
-                'physical',
-                document.getElementById('physical_status_value').value
+                "physical",
+                document.getElementById("physical_status_value").value
               );
               idCounter++;
               deselectEntityImage();
@@ -306,14 +296,14 @@ function mouseReleased() {
         }
         if (
           cellsList[cellIndex(x, y)].occupied != null &&
-          tilPosition.value == 'on-floor'
+          tilPosition.value == "on-floor"
         ) {
           alert("C'è già un'altra entità per terra.");
         }
         /**
          *  Se è stata scelta l'opzione on_top.
          */
-        if (indexEl != null && tilPosition.value == 'on-top') {
+        if (indexEl != null && tilPosition.value == "on-top") {
           if (
             tilX <= itemsList[indexEl].sizeX &&
             tilY <= itemsList[indexEl].sizeY &&
@@ -323,7 +313,7 @@ function mouseReleased() {
             // CONTROLLARE SE GIà ESISTE UN'OGGETTO LI SOPRA
             //
             //
-            getClassAbility(itemsList[indexEl].entClass, 'support').then(
+            getClassAbility(itemsList[indexEl].entClass, "support").then(
               (supportBool) => {
                 if (supportBool) {
                   /**
@@ -341,13 +331,13 @@ function mouseReleased() {
                     tilY
                   );
                   if (
-                    entityWithPowerStatus.includes(classItemSelected + 'On')
+                    entityWithPowerStatus.includes(classItemSelected + "On")
                   ) {
                     setTimeout(function () {
                       insertEntityStatus(
                         (classItemSelected + idCounter.toString()).toString(),
-                        'power',
-                        document.getElementById('power_status_value').value
+                        "power",
+                        document.getElementById("power_status_value").value
                       );
                     }, 200);
                   }
@@ -365,8 +355,8 @@ function mouseReleased() {
           }
         }
         // se è scelta l'opzione on bottom
-        if (indexEl != null && tilPosition.value == 'on-bottom') {
-          getClassAbility(itemsList[indexEl].entClass, 'putting_under').then(
+        if (indexEl != null && tilPosition.value == "on-bottom") {
+          getClassAbility(itemsList[indexEl].entClass, "putting_under").then(
             (puttingUnder) => {
               if (puttingUnder) {
                 // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
@@ -380,12 +370,12 @@ function mouseReleased() {
                   tilX,
                   tilY
                 );
-                if (entityWithPowerStatus.includes(classItemSelected + 'On')) {
+                if (entityWithPowerStatus.includes(classItemSelected + "On")) {
                   setTimeout(function () {
                     insertEntityStatus(
                       (classItemSelected + idCounter.toString()).toString(),
-                      'power',
-                      document.getElementById('power_status_value').value
+                      "power",
+                      document.getElementById("power_status_value").value
                     );
                   }, 200);
                 }
@@ -402,7 +392,7 @@ function mouseReleased() {
           );
         }
         // se è scelta l'opzione inside
-        if (indexEl != null && tilPosition.value == 'inside') {
+        if (indexEl != null && tilPosition.value == "inside") {
           getSpaceAvailable(itemsList[indexEl].id).then((data) => {
             if (
               data >= tilX * tilY &&
@@ -412,7 +402,7 @@ function mouseReleased() {
                 itemsList[indexEl].position.x + itemsList[indexEl].sizeX - 1
             ) {
               setTimeout(function () {
-                getClassAbility(itemsList[indexEl].entClass, 'contain').then(
+                getClassAbility(itemsList[indexEl].entClass, "contain").then(
                   (contain) => {
                     if (contain) {
                       // se l'oggetto già esistente ha l'abilita support allora metto l'oggetto nuovo sopra e asserisco on_top
@@ -427,15 +417,15 @@ function mouseReleased() {
                         tilY
                       );
                       if (
-                        entityWithPowerStatus.includes(classItemSelected + 'On')
+                        entityWithPowerStatus.includes(classItemSelected + "On")
                       ) {
                         setTimeout(function () {
                           insertEntityStatus(
                             (
                               classItemSelected + idCounter.toString()
                             ).toString(),
-                            'power',
-                            document.getElementById('power_status_value').value
+                            "power",
+                            document.getElementById("power_status_value").value
                           );
                         }, 200);
                       }
@@ -517,12 +507,12 @@ function getEntitiesInPosition(x, y) {
 function checkWallNeighbor(cell, x, y) {
   check = false;
   for (var i = 0; i < x - 1; i++) {
-    if (cellsList[cellIndex(cell.x + i, cell.y)].walls[1] == 'true') {
+    if (cellsList[cellIndex(cell.x + i, cell.y)].walls[1] == "true") {
       check = true;
     }
   }
   for (var i = 0; i < y - 1; i++) {
-    if (cellsList[cellIndex(cell.x, cell.y + i)].walls[2] == 'true') {
+    if (cellsList[cellIndex(cell.x, cell.y + i)].walls[2] == "true") {
       check = true;
     }
   }
@@ -551,20 +541,20 @@ function showInfoTable(x, y) {
       }
     }
   }
-  document.getElementById('table-entity-on-map0').classList.add('hidden');
-  document.getElementById('table-entity-on-map1').classList.add('hidden');
-  document.getElementById('table-entity-on-map2').classList.add('hidden');
+  document.getElementById("table-entity-on-map0").classList.add("hidden");
+  document.getElementById("table-entity-on-map1").classList.add("hidden");
+  document.getElementById("table-entity-on-map2").classList.add("hidden");
 
   // TO DO: MOSTRARE AGENTE
   if (agent != null && x == agent.position.x && y == agent.position.y) {
     document.getElementById(`teom-coordinates0`).innerHTML =
-      'X:' + x + ' Y:' + y;
+      "X:" + x + " Y:" + y;
 
-    document.getElementById(`teom-id0`).innerHTML = 'agent';
+    document.getElementById(`teom-id0`).innerHTML = "agent";
 
-    document.getElementById(`teom-position0`).innerHTML = 'On the floor';
+    document.getElementById(`teom-position0`).innerHTML = "On the floor";
 
-    document.getElementById(`teom-class0`).innerHTML = 'Agent';
+    document.getElementById(`teom-class0`).innerHTML = "Agent";
 
     document.getElementById(`teom-image0`).src = `static/images/agent.png`;
   }
@@ -578,21 +568,21 @@ function showInfoTable(x, y) {
       // controllo se clicco un elemento o l'agente
       document
         .getElementById(`table-entity-on-map${i}`)
-        .classList.remove('hidden');
+        .classList.remove("hidden");
 
       document.getElementById(`teom-coordinates${i}`).innerHTML =
-        'X:' + showItem[i].position.x + ' Y:' + showItem[i].position.y;
+        "X:" + showItem[i].position.x + " Y:" + showItem[i].position.y;
 
       document.getElementById(`teom-id${i}`).innerHTML = showItem[i].id;
 
-      document.getElementById(`teom-position${i}`).innerHTML = 'On the floor';
+      document.getElementById(`teom-position${i}`).innerHTML = "On the floor";
 
       for (var k = 0; k < positioningList[0].length; k++) {
         if (
           positioningList[0][k][0] ==
           document.getElementById(`teom-id${i}`).innerHTML
         ) {
-          document.getElementById(`teom-position${i}`).innerHTML = 'On top';
+          document.getElementById(`teom-position${i}`).innerHTML = "On top";
         }
       }
       for (var k = 0; k < positioningList[1].length; k++) {
@@ -600,7 +590,7 @@ function showInfoTable(x, y) {
           positioningList[1][k][0] ==
           document.getElementById(`teom-id${i}`).innerHTML
         ) {
-          document.getElementById(`teom-position${i}`).innerHTML = 'On bottom';
+          document.getElementById(`teom-position${i}`).innerHTML = "On bottom";
         }
       }
       for (var k = 0; k < positioningList[2].length; k++) {
@@ -608,7 +598,7 @@ function showInfoTable(x, y) {
           positioningList[2][k][0] ==
           document.getElementById(`teom-id${i}`).innerHTML
         ) {
-          document.getElementById(`teom-position${i}`).innerHTML = 'Inside';
+          document.getElementById(`teom-position${i}`).innerHTML = "Inside";
         }
       }
 
@@ -632,7 +622,7 @@ function deleteCellOnMap(x, y) {
   var thisEntitiesList = getEntitiesInPosition(x, y);
 
   // se la cella ha zone diverso da null (ovvero è istanziata)
-  if (thisCell.zone != 'null') {
+  if (thisCell.zone != "null") {
     var result = confirm(
       "Sei sicuro di voler rimuovere la cella con il suo contenuto? Se esiste un'entità in questa cella che ha dimensione maggiore di 1, verranno cancellati anche eventuali entità che si trovano sopra/sotto a quest'ultima."
     );
@@ -641,7 +631,7 @@ function deleteCellOnMap(x, y) {
     if (result) {
       deleteCell(thisCell.id);
       setTimeout(function () {
-        insertCell(thisCell.id, x, y, 'null', ['true', 'true', 'true', 'true']);
+        insertCell(thisCell.id, x, y, "null", ["true", "true", "true", "true"]);
       }, 200);
       // time 600
       updateNeighborsCellsAfterDeleteCellInPosition(x, y);
@@ -673,7 +663,7 @@ function deleteCellOnMap(x, y) {
       reloadInfoMap(500);
       // if Cancel
     } else {
-      console.log('Cancellazione cella annullata.');
+      console.log("Cancellazione cella annullata.");
     }
   }
 }
@@ -720,7 +710,7 @@ function updateNeighborsCellsAfterDeleteCellInPosition(x, y) {
           cellsList[cellIndex(x + 1, y)].walls[0],
           cellsList[cellIndex(x + 1, y)].walls[1],
           cellsList[cellIndex(x + 1, y)].walls[2],
-          'true',
+          "true",
         ]
       );
     }
@@ -734,7 +724,7 @@ function updateNeighborsCellsAfterDeleteCellInPosition(x, y) {
         cellsList[cellIndex(x - 1, y)].zone,
         [
           cellsList[cellIndex(x - 1, y)].walls[0],
-          'true',
+          "true",
           cellsList[cellIndex(x - 1, y)].walls[2],
           cellsList[cellIndex(x - 1, y)].walls[3],
         ]
@@ -749,7 +739,7 @@ function updateNeighborsCellsAfterDeleteCellInPosition(x, y) {
         y + 1,
         cellsList[cellIndex(x, y + 1)].zone,
         [
-          'true',
+          "true",
           cellsList[cellIndex(x, y + 1)].walls[1],
           cellsList[cellIndex(x, y + 1)].walls[2],
           cellsList[cellIndex(x, y + 1)].walls[3],
@@ -767,7 +757,7 @@ function updateNeighborsCellsAfterDeleteCellInPosition(x, y) {
         [
           cellsList[cellIndex(x, y - 1)].walls[0],
           cellsList[cellIndex(x, y - 1)].walls[1],
-          'true',
+          "true",
           cellsList[cellIndex(x, y - 1)].walls[3],
         ]
       );
