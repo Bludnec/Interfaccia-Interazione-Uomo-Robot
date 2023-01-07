@@ -14,13 +14,37 @@ function download(content, fileName, contentType) {
   a.click();
 }
 
+document.getElementById('map-height').addEventListener('keyup', () => {
+  var num = document.getElementById('map-height').value;
+  if (num > 50) {
+    console.log(num);
+    document.getElementById('map-height').value = 50;
+  } else if (num < 0) {
+    console.log(num);
+    document.getElementById('map-height').value = 0;
+  }
+});
+
+document.getElementById('map-width').addEventListener('keyup', () => {
+  var num = document.getElementById('map-width').value;
+  if (num > 50) {
+    console.log(num);
+    document.getElementById('map-width').value = 50;
+  } else if (num < 0) {
+    console.log(num);
+    document.getElementById('map-width').value = 0;
+  }
+});
+
 document
   .getElementById('send-construction-info')
   .addEventListener('click', () => {
-    var questionText = document.getElementById('question-costruzione').value;
-    var answerText = document.getElementById('answer-costruzione').value;
-    // console.log(questionText, answerText);
-    sendConstructor(questionText, answerText);
+    getInfoDownload().then((data) => {
+      var questionText = document.getElementById('question-costruzione').value;
+      var answerText = document.getElementById('answer-costruzione').value;
+      console.log(questionText, answerText, data);
+      sendConstructor(questionText, answerText, data);
+    });
   });
 
 document.getElementById('delete-entity-btn0').addEventListener('click', () => {

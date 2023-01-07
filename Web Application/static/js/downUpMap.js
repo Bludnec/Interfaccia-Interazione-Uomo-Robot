@@ -1,6 +1,6 @@
 // Get the form and file field
-let form = document.querySelector("#upload");
-let file = document.querySelector("#file");
+let form = document.querySelector('#upload');
+let file = document.querySelector('#file');
 
 /**
  * Log the uploaded file to the console
@@ -9,30 +9,30 @@ let file = document.querySelector("#file");
 function logFile(event) {
   let str = event.target.result;
   let json = JSON.parse(str);
-  console.log("string", str);
-  console.log("json", json);
+  console.log('string', str);
+  console.log('json', json);
 
   var maxX = 0;
   var maxY = 0;
-  for (var i = 0; i < json["cellList"].length; i++) {
-    if (maxX < json["cellList"][i]["X"]) {
-      maxX = json["cellList"][i]["X"];
+  for (var i = 0; i < json['cellList'].length; i++) {
+    if (maxX < json['cellList'][i]['X']) {
+      maxX = json['cellList'][i]['X'];
     }
   }
-  for (var i = 0; i < json["cellList"].length; i++) {
-    if (maxY < json["cellList"][i]["Y"]) {
-      maxY = json["cellList"][i]["Y"];
+  for (var i = 0; i < json['cellList'].length; i++) {
+    if (maxY < json['cellList'][i]['Y']) {
+      maxY = json['cellList'][i]['Y'];
     }
   }
   maxX += 1;
   maxY += 1;
-  document.getElementById("height").value = maxY;
-  document.getElementById("width").value = maxX;
-  rows = document.getElementById("height").value;
-  cols = document.getElementById("width").value;
+  document.getElementById('map-height').value = maxY;
+  document.getElementById('map-width').value = maxX;
+  rows = document.getElementById('map-height').value;
+  cols = document.getElementById('map-width').value;
 
   var canvas = createCanvas(cols * w, rows * w);
-  canvas.parent("canvas-zone");
+  canvas.parent('canvas-zone');
 
   setTimeout(function () {
     postInfoUpload(json);
@@ -62,11 +62,10 @@ function handleSubmit(event) {
 }
 
 // Listen for submit events
-form.addEventListener("submit", handleSubmit);
+form.addEventListener('submit', handleSubmit);
 
-document.getElementById("buttontest").addEventListener("click", () => {
+document.getElementById('donload-btn').addEventListener('click', () => {
   getInfoDownload().then((data) => {
-    console.log(JSON.stringify(data));
-    download(JSON.stringify(data), "map.txt", "text/plain");
+    download(JSON.stringify(data), 'map.txt', 'text/plain');
   });
 });
