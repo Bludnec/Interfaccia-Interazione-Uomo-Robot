@@ -45,11 +45,6 @@ canvas {
   float: left;
 }
 
-#height,
-#width {
-  width: 50%;
-}
-
 #tab-list {
   margin-bottom: 20px;
   margin-top: 20px;
