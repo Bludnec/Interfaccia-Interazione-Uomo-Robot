@@ -163,47 +163,29 @@
           aria-labelledby="home-tab"
           tabindex="0"
         >
-          <div class="container text-center">
-            <div class="row row-cols-auto">
-              <div class="col">
-                <div id="righe-label">
-                  <label for="fname"><b>Righe</b></label>
-                  <input
-                    type="number"
-                    id="map-height"
-                    name="map-height"
-                    value="6"
-                    min="1"
-                    max="50"
-                  />
-                </div>
-              </div>
-              <div class="col">
-                <div id="colonne-label">
-                  <label for="lname"> <b>Colonne</b></label>
-                  <input
-                    type="number"
-                    id="map-width"
-                    name="map-width"
-                    value="8"
-                    min="1"
-                    max="50"
-                  />
-                </div>
-              </div>
-              <div class="col">
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  style="margin-top: 15px"
-                  id="drawButton"
-                >
-                  Ridimensiona mappa
-                </button>
-              </div>
-            </div>
+          <div id="righe-label">
+            <label for="fname">Numero righe</label>
+            <input
+              type="number"
+              id="height"
+              name="height"
+              value="6"
+              min="1"
+              max="50"
+            />
           </div>
-
+          <div id="colonne-label">
+            <label for="lname">Numero colonne</label>
+            <input
+              type="number"
+              id="width"
+              name="width"
+              value="8"
+              min="1"
+              max="50"
+            />
+          </div>
+          <button type="button" id="drawButton">Redraw canvas</button>
           <div class="clear-float"></div>
         </div>
         <!-- Modifica celle content -->
@@ -282,7 +264,7 @@
             </div>
             <button class="btn btn-primary" id="upload-btn">Upload</button>
           </form>
-          <button class="btn btn-primary" id="donload-btn">Download</button>
+          <button class="btn btn-primary" id="buttontest">Download</button>
         </div>
         <!-- Costruzione content -->
         <div

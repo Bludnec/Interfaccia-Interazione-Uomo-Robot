@@ -22,13 +22,13 @@ var idItemSelected;
 var classItemSelected;
 
 // Table image list
-var tilImage = document.getElementById('til-image');
-var tilId = document.getElementById('til-id');
-var tilClass = document.getElementById('til-class');
+var tilImage = document.getElementById("til-image");
+var tilId = document.getElementById("til-id");
+var tilClass = document.getElementById("til-class");
 
-var tilPosition = document.getElementById('til-position');
-var tilX = document.getElementById('til-x');
-var tilY = document.getElementById('til-y');
+var tilPosition = document.getElementById("til-position");
+var tilX = document.getElementById("til-x");
+var tilY = document.getElementById("til-y");
 
 var boolLoadMap = false;
 
@@ -36,15 +36,15 @@ var agent;
 
 var w = 60;
 
-document.getElementById('drawButton').addEventListener('click', () => {
+document.getElementById("drawButton").addEventListener("click", () => {
   cellsList = [];
   /* Create a new canvas with new cellsList */
   // POST i x j cell map
-  rows = document.getElementById('map-height').value;
-  cols = document.getElementById('map-width').value;
+  rows = document.getElementById("height").value;
+  cols = document.getElementById("width").value;
 
   var canvas = createCanvas(cols * w, rows * w);
-  canvas.parent('canvas-zone');
+  canvas.parent("canvas-zone");
 
   deleteMap();
   agent = undefined;
@@ -61,7 +61,7 @@ document.getElementById('drawButton').addEventListener('click', () => {
   }, 500);
 });
 
-document.getElementById('delete-path').addEventListener('click', clearPath);
+document.getElementById("delete-path").addEventListener("click", clearPath);
 
 var CellMap;
 var bedImage,
@@ -95,17 +95,17 @@ var laptopOnImage,
   lampOnImage;
 var wardrobeOpenImage, fridgeOpenImage, doorOpenImage, windowOpenImage;
 var entityWithPowerStatus = [
-  'laptopOn',
-  'microwaveOn',
-  'televisionOn',
-  'smartphoneOn',
-  'lampOn',
+  "laptopOn",
+  "microwaveOn",
+  "televisionOn",
+  "smartphoneOn",
+  "lampOn",
 ];
 var entityWithPhysicalStatus = [
-  'wardrobeOpen',
-  'fridgeOpen',
-  'doorOpen',
-  'windowOpen',
+  "wardrobeOpen",
+  "fridgeOpen",
+  "doorOpen",
+  "windowOpen",
 ];
 /**
  * The preload() function is used to handle
@@ -119,24 +119,24 @@ function preload() {
        * Creo la lista delle immagini selezionabili sulla web-app
        */
       for (var i = 0; i < data.length; i++) {
-        if (entityWithPowerStatus.includes(data[i]['Class'])) {
+        if (entityWithPowerStatus.includes(data[i]["Class"])) {
           continue;
         }
-        if (entityWithPhysicalStatus.includes(data[i]['Class'])) {
+        if (entityWithPhysicalStatus.includes(data[i]["Class"])) {
           continue;
         }
-        var img = document.createElement('img');
-        img.src = data[i]['Url'];
+        var img = document.createElement("img");
+        img.src = data[i]["Url"];
         img.id = `entity-${i}`;
-        img.addEventListener('click', clickEntityImage);
-        img.alt = data[i]['Class'];
+        img.addEventListener("click", clickEntityImage);
+        img.alt = data[i]["Class"];
 
-        document.getElementById('img-list').appendChild(img);
+        document.getElementById("img-list").appendChild(img);
       }
       assegnazioneVariabili(data);
     });
   }, 200);
-  plusImage = loadImage('static/images/plus.png');
+  plusImage = loadImage("static/images/plus.png");
   //loadedCellMap = loadJSON("static/map/map.json");
 }
 
@@ -172,13 +172,13 @@ function setup() {
 
   /* Create canvas */
 
-  rows = document.getElementById('map-height').value;
-  cols = document.getElementById('map-width').value;
+  rows = document.getElementById("height").value;
+  cols = document.getElementById("width").value;
 
   var canvas = createCanvas(cols * w, rows * w);
   // Disabilità l'apparizione della tendina dopo il click destro sul canvas.
-  canvas.elt.addEventListener('contextmenu', (e) => e.preventDefault());
-  canvas.parent('canvas-zone');
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  canvas.parent("canvas-zone");
 
   deleteMap();
 
@@ -257,81 +257,81 @@ function draw() {
 function actionFounder() {
   //switch case con le azioni
   switch (cellPath[0][0]) {
-    case 'arriving':
+    case "arriving":
       agent.arriving(cellPath[0][1]);
       break;
-    case 'attaching':
+    case "attaching":
       agent.attaching(cellPath[0][1]);
       break;
-    case 'bringing':
+    case "bringing":
       agent.bringing(cellPath[0][1]);
       break;
-    case 'change_direction':
+    case "change_direction":
       agent.change_direction(cellPath[0][1]);
       break;
-    case 'change_operational_state':
+    case "change_operational_state":
       agent.change_operational_state(cellPath[0][1]);
       break;
-    case 'closure':
+    case "closure":
       agent.closure(cellPath[0][1]);
       break;
-    case 'manipulation':
+    case "manipulation":
       agent.manipulation(cellPath[0][1]);
       break;
-    case 'motion':
+    case "motion":
       agent.motion(cellPath[0][1]);
       break;
-    case 'placing':
+    case "placing":
       agent.bringing(cellPath[0][1]);
       break;
-    case 'releasing':
+    case "releasing":
       agent.releasing(cellPath[0][1]);
       break;
-    case 'taking':
+    case "taking":
       agent.taking(cellPath[0][1]);
       break;
     default:
-      console.log('Non sono riuscito a capire il comando.');
+      console.log("Non sono riuscito a capire il comando.");
   }
 }
 
 /* Functions for click an entity */
 function clickEntityImage() {
-  if (this.classList == 'selected') {
+  if (this.classList == "selected") {
     deselectEntityImage();
   } else if (idItemSelected != this.id && idItemSelected != null) {
     deselectEntityImage();
-    this.classList.add('selected');
+    this.classList.add("selected");
 
     tilImage.src = this.src;
     tilClass.innerHTML = this.alt;
 
     idItemSelected = this.id;
-    indexItemSelected = idItemSelected.replace(/\D/g, '');
+    indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
-    if (entityWithPowerStatus.includes(this.alt + 'On')) {
-      document.getElementById('power_status_col').classList.remove('hidden');
-      document.getElementById('power_status').classList.remove('hidden');
+    if (entityWithPowerStatus.includes(this.alt + "On")) {
+      document.getElementById("power_status_col").classList.remove("hidden");
+      document.getElementById("power_status").classList.remove("hidden");
     }
-    if (entityWithPhysicalStatus.includes(this.alt + 'Open')) {
-      document.getElementById('physical_status_col').classList.remove('hidden');
-      document.getElementById('physical_status').classList.remove('hidden');
+    if (entityWithPhysicalStatus.includes(this.alt + "Open")) {
+      document.getElementById("physical_status_col").classList.remove("hidden");
+      document.getElementById("physical_status").classList.remove("hidden");
     }
   } else {
     tilImage.src = this.src;
     tilClass.innerHTML = this.alt;
 
-    this.classList.add('selected');
+    this.classList.add("selected");
     idItemSelected = this.id;
-    indexItemSelected = idItemSelected.replace(/\D/g, '');
+    indexItemSelected = idItemSelected.replace(/\D/g, "");
     classItemSelected = this.alt;
-    if (entityWithPowerStatus.includes(this.alt + 'On')) {
-      document.getElementById('power_status_col').classList.remove('hidden');
-      document.getElementById('power_status').classList.remove('hidden');
+    if (entityWithPowerStatus.includes(this.alt + "On")) {
+      document.getElementById("power_status_col").classList.remove("hidden");
+      document.getElementById("power_status").classList.remove("hidden");
     }
-    if (entityWithPhysicalStatus.includes(this.alt + 'Open')) {
-      document.getElementById('physical_status_col').classList.remove('hidden');
-      document.getElementById('physical_status').classList.remove('hidden');
+    if (entityWithPhysicalStatus.includes(this.alt + "Open")) {
+      document.getElementById("physical_status_col").classList.remove("hidden");
+      document.getElementById("physical_status").classList.remove("hidden");
     }
   }
 }
@@ -340,18 +340,18 @@ function clickEntityImage() {
 function deselectEntityImage() {
   document
     .getElementById(`entity-${indexItemSelected}`)
-    .classList.remove('selected');
-  tilImage.src = 'static/images/empty.png';
-  tilClass.innerHTML = 'Select an entity';
+    .classList.remove("selected");
+  tilImage.src = "static/images/empty.png";
+  tilClass.innerHTML = "Select an entity";
 
   idItemSelected = null;
   indexItemSelected = null;
   classItemSelected = null;
 
-  document.getElementById('power_status_col').classList.add('hidden');
-  document.getElementById('power_status').classList.add('hidden');
-  document.getElementById('physical_status_col').classList.add('hidden');
-  document.getElementById('physical_status').classList.add('hidden');
+  document.getElementById("power_status_col").classList.add("hidden");
+  document.getElementById("power_status").classList.add("hidden");
+  document.getElementById("physical_status_col").classList.add("hidden");
+  document.getElementById("physical_status").classList.add("hidden");
 }
 
 /* Return the array's index of the cell in position i,j. */
@@ -374,102 +374,102 @@ function cellIndex(i, j) {
  */
 function assegnazioneVariabili(data) {
   for (i = 0; i < data.length; i++) {
-    switch (data[i]['Class']) {
-      case 'agent':
-        agentImage = loadImage(data[i]['Url']);
+    switch (data[i]["Class"]) {
+      case "agent":
+        agentImage = loadImage(data[i]["Url"]);
         break;
-      case 'bed':
-        bedImage = loadImage(data[i]['Url']);
+      case "bed":
+        bedImage = loadImage(data[i]["Url"]);
         break;
-      case 'book':
-        bookImage = loadImage(data[i]['Url']);
+      case "book":
+        bookImage = loadImage(data[i]["Url"]);
         break;
-      case 'bucket':
-        bucketImage = loadImage(data[i]['Url']);
+      case "bucket":
+        bucketImage = loadImage(data[i]["Url"]);
         break;
-      case 'chair':
-        chairImage = loadImage(data[i]['Url']);
+      case "chair":
+        chairImage = loadImage(data[i]["Url"]);
         break;
-      case 'cup':
-        cupImage = loadImage(data[i]['Url']);
+      case "cup":
+        cupImage = loadImage(data[i]["Url"]);
         break;
-      case 'door':
-        doorImage = loadImage(data[i]['Url']);
+      case "door":
+        doorImage = loadImage(data[i]["Url"]);
         break;
-      case 'doorOpen':
-        doorOpenImage = loadImage(data[i]['Url']);
+      case "doorOpen":
+        doorOpenImage = loadImage(data[i]["Url"]);
         break;
-      case 'fridge':
-        fridgeImage = loadImage(data[i]['Url']);
+      case "fridge":
+        fridgeImage = loadImage(data[i]["Url"]);
         break;
-      case 'fridgeOpen':
-        fridgeOpenImage = loadImage(data[i]['Url']);
+      case "fridgeOpen":
+        fridgeOpenImage = loadImage(data[i]["Url"]);
         break;
-      case 'glass':
-        glassImage = loadImage(data[i]['Url']);
+      case "glass":
+        glassImage = loadImage(data[i]["Url"]);
         break;
-      case 'jar':
-        jarImage = loadImage(data[i]['Url']);
+      case "jar":
+        jarImage = loadImage(data[i]["Url"]);
         break;
-      case 'key':
-        keyImage = loadImage(data[i]['Url']);
+      case "key":
+        keyImage = loadImage(data[i]["Url"]);
         break;
-      case 'keyboard':
-        keyboardImage = loadImage(data[i]['Url']);
+      case "keyboard":
+        keyboardImage = loadImage(data[i]["Url"]);
         break;
-      case 'lamp':
-        lampImage = loadImage(data[i]['Url']);
+      case "lamp":
+        lampImage = loadImage(data[i]["Url"]);
         break;
-      case 'lampOn':
-        lampOnImage = loadImage(data[i]['Url']);
+      case "lampOn":
+        lampOnImage = loadImage(data[i]["Url"]);
         break;
-      case 'laptop':
-        laptopImage = loadImage(data[i]['Url']);
+      case "laptop":
+        laptopImage = loadImage(data[i]["Url"]);
         break;
-      case 'laptopOn':
-        laptopOnImage = loadImage(data[i]['Url']);
+      case "laptopOn":
+        laptopOnImage = loadImage(data[i]["Url"]);
         break;
-      case 'microwave':
-        microwaveImage = loadImage(data[i]['Url']);
+      case "microwave":
+        microwaveImage = loadImage(data[i]["Url"]);
         break;
-      case 'microwaveOn':
-        microwaveOnImage = loadImage(data[i]['Url']);
+      case "microwaveOn":
+        microwaveOnImage = loadImage(data[i]["Url"]);
         break;
-      case 'plate':
-        plateImage = loadImage(data[i]['Url']);
+      case "plate":
+        plateImage = loadImage(data[i]["Url"]);
         break;
-      case 'rug':
-        rugImage = loadImage(data[i]['Url']);
+      case "rug":
+        rugImage = loadImage(data[i]["Url"]);
         break;
-      case 'smartphone':
-        smartphoneImage = loadImage(data[i]['Url']);
+      case "smartphone":
+        smartphoneImage = loadImage(data[i]["Url"]);
         break;
-      case 'smartphoneOn':
-        smartphoneOnImage = loadImage(data[i]['Url']);
+      case "smartphoneOn":
+        smartphoneOnImage = loadImage(data[i]["Url"]);
         break;
-      case 'sofa':
-        sofaImage = loadImage(data[i]['Url']);
+      case "sofa":
+        sofaImage = loadImage(data[i]["Url"]);
         break;
-      case 'table':
-        tableImage = loadImage(data[i]['Url']);
+      case "table":
+        tableImage = loadImage(data[i]["Url"]);
         break;
-      case 'television':
-        televisionImage = loadImage(data[i]['Url']);
+      case "television":
+        televisionImage = loadImage(data[i]["Url"]);
         break;
-      case 'televisionOn':
-        televisionOnImage = loadImage(data[i]['Url']);
+      case "televisionOn":
+        televisionOnImage = loadImage(data[i]["Url"]);
         break;
-      case 'wardrobe':
-        wardrobeImage = loadImage(data[i]['Url']);
+      case "wardrobe":
+        wardrobeImage = loadImage(data[i]["Url"]);
         break;
-      case 'wardrobeOpen':
-        wardrobeOpenImage = loadImage(data[i]['Url']);
+      case "wardrobeOpen":
+        wardrobeOpenImage = loadImage(data[i]["Url"]);
         break;
-      case 'window':
-        windowImage = loadImage(data[i]['Url']);
+      case "window":
+        windowImage = loadImage(data[i]["Url"]);
         break;
-      case 'windowOpen':
-        windowOpenImage = loadImage(data[i]['Url']);
+      case "windowOpen":
+        windowOpenImage = loadImage(data[i]["Url"]);
         break;
     }
   }
