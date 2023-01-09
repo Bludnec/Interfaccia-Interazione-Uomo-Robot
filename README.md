@@ -10,9 +10,11 @@ python -m flask run
 pip install flask
 pip install git+https://github.com/yuce/pyswip@master#egg=pyswip
 
-installare Swi-Prolog da qui: 
+installare Swi-Prolog da qui:
 https://www.swi-prolog.org/download/stable
 
 https://github.com/yuce/pyswip/blob/master/INSTALL.md#windows
 
 SWI-Prolog (link per il download nel link precedente)
+
+Installato jQuery.

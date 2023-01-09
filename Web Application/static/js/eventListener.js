@@ -14,6 +14,14 @@ function download(content, fileName, contentType) {
   a.click();
 }
 
+document.getElementById('wrong-feedback-qa').addEventListener('click', () => {
+  document.getElementById('qa-answer-textarea').removeAttribute('disabled');
+});
+
+document.getElementById('ok-feedback-qa').addEventListener('click', () => {
+  document.getElementById('qa-answer-textarea').setAttribute("disabled", "true");
+});
+
 document.getElementById('map-height').addEventListener('keyup', () => {
   var num = document.getElementById('map-height').value;
   if (num > 50) {
@@ -79,6 +87,7 @@ document.getElementById('delete-entity-btn0').addEventListener('click', () => {
     );
   }
 });
+
 document.getElementById('delete-entity-btn1').addEventListener('click', () => {
   var check = false;
   for (var i = 0; i < positioningList.length; i++) {

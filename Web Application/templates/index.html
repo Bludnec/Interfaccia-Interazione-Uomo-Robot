@@ -336,43 +336,69 @@
           aria-labelledby="qa-tab"
           tabindex="0"
         >
-          <div class="container text-center">
-            <div class="row">
+          <div class="container text-left">
+            <div class="row align-items-center">
               <!-- Question -->
-              <div class="col-5">
+              <div class="col-4">
                 <div class="form-floating">
                   <textarea
                     class="form-control"
                     placeholder="Leave a comment here"
-                    id="question-textarea"
+                    id="qa-question-textarea"
                   ></textarea>
-                  <label for="floatingTextarea">Question</label>
+                  <label for="qa-question-textarea">Question</label>
                 </div>
               </div>
               <!-- Answer -->
-              <div class="col-5">
-                <div class="form-floating mb-3">
+              <div class="col-4">
+                <div class="form-floating">
                   <textarea
                     class="form-control"
                     placeholder="Leave a comment here"
-                    id="floatingTextareaDisabled"
+                    id="qa-answer-textarea"
                     disabled
                   ></textarea>
-                  <label for="floatingTextareaDisabled">Answer</label>
+                  <label for="qa-answer-textarea">Answer</label>
                 </div>
               </div>
               <!-- Feedback buttons -->
-              <div class="col">
-                <button
-                  class="btn btn-success btn-lg"
-                  id="success-answer-button"
+              <div class="col-1">
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic radio toggle button group"
                 >
-                  <i class="bi bi-hand-thumbs-up"></i>
-                </button>
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="ok-feedback-qa"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-success btn-l"
+                    for="ok-feedback-qa"
+                    ><i class="bi bi-hand-thumbs-up"></i
+                  ></label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="wrong-feedback-qa"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-danger btn-l"
+                    for="wrong-feedback-qa"
+                    ><i class="bi bi-hand-thumbs-down"></i
+                  ></label>
+                </div>
               </div>
-              <div class="col">
-                <button class="btn btn-danger btn-lg" id="fail-answer-button">
-                  <i class="bi bi-hand-thumbs-up"></i>
+              <div class="col-2">
+                <button class="btn btn-primary" id="send-feedback-qa">
+                  Send Feedback <i class="bi bi-send"></i>
                 </button>
               </div>
             </div>
