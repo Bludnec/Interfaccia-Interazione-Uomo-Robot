@@ -336,7 +336,7 @@
           aria-labelledby="qa-tab"
           tabindex="0"
         >
-          <div class="container text-left">
+          <div class="container text-center">
             <div class="row align-items-center">
               <!-- Question -->
               <div class="col-4">
@@ -348,6 +348,12 @@
                   ></textarea>
                   <label for="qa-question-textarea">Question</label>
                 </div>
+              </div>
+              <!-- Button send Question-->
+              <div class="col-1">
+                <button class="btn btn-sm btn-primary" id="send-question-qa">
+                  <i class="bi bi-arrow-right-short fs-4"></i>
+                </button>
               </div>
               <!-- Answer -->
               <div class="col-4">
@@ -396,6 +402,7 @@
                   ></label>
                 </div>
               </div>
+              <!-- Send Feedback button-->
               <div class="col-2">
                 <button class="btn btn-primary" id="send-feedback-qa">
                   Send Feedback <i class="bi bi-send"></i>
