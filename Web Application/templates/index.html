@@ -214,26 +214,47 @@
           aria-labelledby="profile-tab"
           tabindex="0"
         >
-          <select name="list" id="zone">
-            <option value="kitchen">Kitchen</option>
-            <option value="bathroom">Bathroom</option>
-            <option value="livingroom">Living Room</option>
-            <option value="bedroom">Bedroom</option>
-            <option value="balcony">Balcony</option>
-          </select>
-          <label for="checkBox">Cambia zona</label>
-          <input
-            type="checkbox"
-            id="color-checkbox"
-            title="Abilitare modifiche"
-          />
-          <label for="checkBox">Modifica muri</label>
-          <input
-            type="checkbox"
-            id="walls-checkbox"
-            title="Abilita per cambiare i muri"
-          />
-          <button id="delete-path">Cancella percorso</button>
+          <div class="container">
+            <div class="row row-cols-auto">
+              <div class="col">
+                <select class="form-select" name="list" id="zone">
+                  <option value="kitchen">Kitchen</option>
+                  <option value="bathroom">Bathroom</option>
+                  <option value="livingroom">Living Room</option>
+                  <option value="bedroom">Bedroom</option>
+                  <option value="balcony">Balcony</option>
+                </select>
+              </div>
+              <div class="col">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="color-checkbox"
+                    title="Abilitare modifiche"
+                  />
+                  <label class="form-check-label" for="color-checkbox"
+                    >Cambia zona</label
+                  >
+                </div>
+              </div>
+
+              <div class="col">
+                <label for="checkBox">Modifica muri</label>
+                <input
+                  type="checkbox"
+                  id="walls-checkbox"
+                  title="Abilita per cambiare i muri"
+                />
+              </div>
+              <div class="col">
+                <button class="btn btn-danger" id="delete-path">
+                  Cancella percorso
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Comandi content -->
         <div
@@ -747,18 +768,14 @@
         </div>
       </div>
       <!-- Footer -->
-      <footer class="bg-light text-center text-lg-start">
-        <div
-          class="text-center p-3"
-          style="background-color: rgba(0, 0, 0, 0.2)"
-        >
-          <h6>
-            Lorenzo Colavecchi -
-            <a href="https://github.com/Bludnec"
-              >GitHub <i class="bi bi-github"></i
-            ></a>
-          </h6>
-        </div>
+      <hr />
+      <footer class="bg-light text-center">
+        <h6>
+          Lorenzo Colavecchi -
+          <a href="https://github.com/Bludnec"
+            >GitHub <i class="bi bi-github"></i
+          ></a>
+        </h6>
       </footer>
     </div>
 
