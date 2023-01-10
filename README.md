@@ -1,20 +1,16 @@
-# Tesi-di-laurea
+# Introduction
 
-Per far partire l'applicazione
-andare nel folder dove sono stati inseriti i file ed eseguire i comandi:  
-set FLASK_APP=app  
-set FLASK_ENV=development  
-python -m flask run
+# Install Requirements
 
-#Requirements  
+Comadi per intallare le librerie richieste:
 pip install flask
 pip install git+https://github.com/yuce/pyswip@master#egg=pyswip
 
 installare Swi-Prolog da qui:
 https://www.swi-prolog.org/download/stable
 
-https://github.com/yuce/pyswip/blob/master/INSTALL.md#windows
+# How to run
 
-SWI-Prolog (link per il download nel link precedente)
-
-Installato jQuery.
+Per far partire l'applicazione
+andare nel folder dove sono stati inseriti i file ed eseguire i comandi:  
+python -m flask run
