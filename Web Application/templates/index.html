@@ -26,7 +26,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container" style="margin-top: 20px">
       <!--  Navbar -->
       <!-- <nav class="navbar navbar-expand-lg bg-light sticky-top">
         <div class="container-fluid">
@@ -151,6 +151,21 @@
             aria-selected="false"
           >
             Q&A
+          </button>
+        </li>
+        <!-- Feedback button -->
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="feedback-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#feedback-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="feedback-tab-pane"
+            aria-selected="false"
+          >
+            Feedback
           </button>
         </li>
       </ul>
@@ -355,7 +370,6 @@
             </div>
           </div>
         </div>
-
         <!-- Q&A content -->
         <div
           class="tab-pane fade"
@@ -433,6 +447,93 @@
               <!-- Send Feedback button-->
               <div class="col-2">
                 <button class="btn btn-primary" id="send-feedback-qa">
+                  Send Feedback <i class="bi bi-send"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Feedback content -->
+        <div
+          class="tab-pane fade"
+          id="feedback-tab-pane"
+          role="tabpanel"
+          aria-labelledby="feedback-tab"
+          tabindex="0"
+        >
+          <div class="container text-center">
+            <div class="row align-items-center">
+              <!-- Question -->
+              <div class="col-4">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="feedback-question-textarea"
+                    disabled
+                  ></textarea>
+                  <label for="feedback-question-textarea">Question</label>
+                </div>
+              </div>
+              <!-- Button send Question-->
+              <div class="col-1">
+                <button
+                  class="btn btn-sm btn-primary"
+                  id="send-question-feedback"
+                >
+                  <i class="bi bi-arrow-right-short fs-4"></i>
+                </button>
+              </div>
+              <!-- Answer -->
+              <div class="col-4">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    placeholder="Leave a comment here"
+                    id="feedback-answer-textarea"
+                    disabled
+                  ></textarea>
+                  <label for="feedback-answer-textarea">Answer</label>
+                </div>
+              </div>
+              <!-- Feedback buttons -->
+              <div class="col-1">
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic radio toggle button group"
+                >
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="ok-feedback-feedback"
+                    autocomplete="off"
+                    checked
+                  />
+                  <label
+                    class="btn btn-outline-success btn-l"
+                    for="ok-feedback-feedback"
+                    ><i class="bi bi-hand-thumbs-up"></i
+                  ></label>
+
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="btnradio"
+                    id="wrong-feedback-feedback"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-danger btn-l"
+                    for="wrong-feedback-feedback"
+                    ><i class="bi bi-hand-thumbs-down"></i
+                  ></label>
+                </div>
+              </div>
+              <!-- Send Feedback button-->
+              <div class="col-2">
+                <button class="btn btn-primary" id="send-feedback-feedback">
                   Send Feedback <i class="bi bi-send"></i>
                 </button>
               </div>

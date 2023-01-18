@@ -14,14 +14,24 @@ function download(content, fileName, contentType) {
   a.click();
 }
 
-// Event Listener per feedback negativo -> abilita answer textarea 
+// Event Listener per feedback negativo -> abilita answer textarea (Q&A)
 document.getElementById('wrong-feedback-qa').addEventListener('click', () => {
   document.getElementById('qa-answer-textarea').removeAttribute('disabled');
 });
 
-// Event Listener per feedback negativo -> disabilita answer textarea 
+// Event Listener per feedback negativo -> disabilita answer textarea (Q&A)
 document.getElementById('ok-feedback-qa').addEventListener('click', () => {
   document.getElementById('qa-answer-textarea').setAttribute("disabled", "true");
+});
+
+// Event Listener per feedback negativo -> abilita answer textarea (Feedback)
+document.getElementById('wrong-feedback-feedback').addEventListener('click', () => {
+  document.getElementById('feedback-answer-textarea').removeAttribute('disabled');
+});
+
+// Event Listener per feedback negativo -> disabilita answer textarea (Feedback)
+document.getElementById('ok-feedback-feedback').addEventListener('click', () => {
+  document.getElementById('feedback-answer-textarea').setAttribute("disabled", "true");
 });
 
 // Invia la question di Q&A
