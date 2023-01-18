@@ -214,26 +214,53 @@
           aria-labelledby="profile-tab"
           tabindex="0"
         >
-          <select name="list" id="zone">
-            <option value="kitchen">Kitchen</option>
-            <option value="bathroom">Bathroom</option>
-            <option value="livingroom">Living Room</option>
-            <option value="bedroom">Bedroom</option>
-            <option value="balcony">Balcony</option>
-          </select>
-          <label for="checkBox">Cambia zona</label>
-          <input
-            type="checkbox"
-            id="color-checkbox"
-            title="Abilitare modifiche"
-          />
-          <label for="checkBox">Modifica muri</label>
-          <input
-            type="checkbox"
-            id="walls-checkbox"
-            title="Abilita per cambiare i muri"
-          />
-          <button id="delete-path">Cancella percorso</button>
+          <div class="container">
+            <div class="row row-cols-auto">
+              <div class="col">
+                <select class="form-select" name="list" id="zone">
+                  <option value="kitchen">Kitchen</option>
+                  <option value="bathroom">Bathroom</option>
+                  <option value="livingroom">Living Room</option>
+                  <option value="bedroom">Bedroom</option>
+                  <option value="balcony">Balcony</option>
+                </select>
+              </div>
+              <div class="col">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="color-checkbox"
+                    title="Abilitare modifiche"
+                  />
+                  <label class="form-check-label" for="color-checkbox"
+                    >Cambia zona</label
+                  >
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="walls-checkbox"
+                    title="Abilita per cambiare i muri"
+                  />
+                  <label class="form-check-label" for="walls-checkbox"
+                    >Modifica muri</label
+                  >
+                </div>
+              </div>
+              <div class="col">
+                <button class="btn btn-danger" id="delete-path">
+                  Cancella percorso
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Comandi content -->
         <div
@@ -328,6 +355,7 @@
             </div>
           </div>
         </div>
+
         <!-- Q&A content -->
         <div
           class="tab-pane fade"
@@ -336,7 +364,7 @@
           aria-labelledby="qa-tab"
           tabindex="0"
         >
-          <div class="container text-left">
+          <div class="container text-center">
             <div class="row align-items-center">
               <!-- Question -->
               <div class="col-4">
@@ -348,6 +376,12 @@
                   ></textarea>
                   <label for="qa-question-textarea">Question</label>
                 </div>
+              </div>
+              <!-- Button send Question-->
+              <div class="col-1">
+                <button class="btn btn-sm btn-primary" id="send-question-qa">
+                  <i class="bi bi-arrow-right-short fs-4"></i>
+                </button>
               </div>
               <!-- Answer -->
               <div class="col-4">
@@ -396,6 +430,7 @@
                   ></label>
                 </div>
               </div>
+              <!-- Send Feedback button-->
               <div class="col-2">
                 <button class="btn btn-primary" id="send-feedback-qa">
                   Send Feedback <i class="bi bi-send"></i>
@@ -407,8 +442,11 @@
       </div>
       <hr />
 
+      <!-- Canvas - Mappa -->
       <div id="canvas-zone"></div>
 
+      <!-- Tabella inferiore -->
+      <!-- Menu tabella inferiore-->
       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
           <button
@@ -453,6 +491,7 @@
           </button>
         </li>
       </ul>
+      <!-- Contenuto tabella inferiore-->
       <div class="tab-content" id="pills-tabContent">
         <div
           class="tab-pane fade show active"
@@ -461,76 +500,80 @@
           aria-labelledby="pills-home-tab"
           tabindex="0"
         >
-          <div id="entita">
-            <div class="column" id="img-list"></div>
-          </div>
-          <div id="table-img-list">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Position</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img id="til-image" src="static\images\empty.png" />
-                  </td>
-                  <td id="til-class">Select an entity</td>
-                  <td>
-                    <select name="list" id="til-position">
-                      <option value="on-floor">On the floor</option>
-                      <option value="on-top">On top</option>
-                      <option value="on-bottom">On bottom</option>
-                      <option value="inside">Inside</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Size</th>
-                  <th scope="col">Orientation</th>
-                  <th scope="col" id="power_status_col" class="hidden">
-                    Power status
-                  </th>
-                  <th scope="col" id="physical_status_col" class="hidden">
-                    Physical status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <select name="list" id="size">
-                      <option value="small">Small</option>
-                      <option value="medium">Medium</option>
-                      <option value="big">Big</option>
-                    </select>
-                  </td>
-                  <td>
-                    <select name="list" id="orientation">
-                      <option value="horizontal">Horizontal</option>
-                      <option value="vertical">Vertical</option>
-                    </select>
-                  </td>
-                  <td id="power_status" class="hidden">
-                    <select name="list" id="power_status_value">
-                      <option value="on">On</option>
-                      <option value="off">Off</option>
-                    </select>
-                  </td>
-                  <td id="physical_status" class="hidden">
-                    <select name="list" id="physical_status_value">
-                      <option value="open">Open</option>
-                      <option value="closed">Closed</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="container">
+            <div class="row">
+              <div class="col-7" id="entita">
+                <div class="column" id="img-list"></div>
+              </div>
+              <div class="col-5" id="table-img-list">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Class</th>
+                      <th scope="col">Position</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img id="til-image" src="static\images\empty.png" />
+                      </td>
+                      <td id="til-class">Select an entity</td>
+                      <td>
+                        <select name="list" id="til-position">
+                          <option value="on-floor">On the floor</option>
+                          <option value="on-top">On top</option>
+                          <option value="on-bottom">On bottom</option>
+                          <option value="inside">Inside</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">Size</th>
+                      <th scope="col">Orientation</th>
+                      <th scope="col" id="power_status_col" class="hidden">
+                        Power status
+                      </th>
+                      <th scope="col" id="physical_status_col" class="hidden">
+                        Physical status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select name="list" id="size">
+                          <option value="small">Small</option>
+                          <option value="medium">Medium</option>
+                          <option value="big">Big</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="list" id="orientation">
+                          <option value="horizontal">Horizontal</option>
+                          <option value="vertical">Vertical</option>
+                        </select>
+                      </td>
+                      <td id="power_status" class="hidden">
+                        <select name="list" id="power_status_value">
+                          <option value="on">On</option>
+                          <option value="off">Off</option>
+                        </select>
+                      </td>
+                      <td id="physical_status" class="hidden">
+                        <select name="list" id="physical_status_value">
+                          <option value="open">Open</option>
+                          <option value="closed">Closed</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -540,147 +583,151 @@
           aria-labelledby="pills-profile-tab"
           tabindex="0"
         >
-          <div class="width_33" id="cell-table">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Class</th>
-                  <th scope="col">Id</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="cell-class">Cell</td>
-                  <td id="cell-id">Id</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Coordinates</th>
-                  <th scope="col">Zone</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="cell-coordinates">X:0 Y:0</td>
-                  <td id="cell-zone">Zone</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="width_33 hidden" id="table-entity-on-map0">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Id</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img id="teom-image0" src="static\images\empty.png" />
-                  </td>
-                  <td id="teom-class0">Class</td>
-                  <td id="teom-id0">Id</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Position</th>
-                  <th scope="col">Coordinates</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="teom-position0">On the floor</td>
-                  <td id="teom-coordinates0">X:0 Y:0</td>
-                  <td id="teom-delete0">
-                    <button id="delete-entity-btn0">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="width_33 hidden" id="table-entity-on-map1">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Id</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img id="teom-image1" src="static\images\empty.png" />
-                  </td>
-                  <td id="teom-class1">Class</td>
-                  <td id="teom-id1">Id</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Position</th>
-                  <th scope="col">Coordinates</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="teom-position1">On the floor</td>
-                  <td id="teom-coordinates1">X:0 Y:0</td>
-                  <td id="teom-delete1">
-                    <button id="delete-entity-btn1">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="width_33 hidden" id="table-entity-on-map2">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Id</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img id="teom-image2" src="static\images\empty.png" />
-                  </td>
-                  <td id="teom-class2">Class</td>
-                  <td id="teom-id2">Id</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Position</th>
-                  <th scope="col">Coordinates</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="teom-position2">On the floor</td>
-                  <td id="teom-coordinates2">X:0 Y:0</td>
-                  <td id="teom-delete2">
-                    <button id="delete-entity-btn2">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="container text-center">
+            <div class="row">
+              <div class="col">
+                <table class="table" id="cell-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Class</th>
+                      <th scope="col">Id</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="cell-class">Cell</td>
+                      <td id="cell-id">Id</td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">Coordinates</th>
+                      <th scope="col">Zone</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="cell-coordinates">X:0 Y:0</td>
+                      <td id="cell-zone">Zone</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col">
+                <table class="table hidden" id="table-entity-on-map0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Class</th>
+                      <th scope="col">Id</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img id="teom-image0" src="static\images\empty.png" />
+                      </td>
+                      <td id="teom-class0">Class</td>
+                      <td id="teom-id0">Id</td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">Position</th>
+                      <th scope="col">Coordinates</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="teom-position0">On the floor</td>
+                      <td id="teom-coordinates0">X:0 Y:0</td>
+                      <td id="teom-delete0">
+                        <button id="delete-entity-btn0">
+                          <i class="bi bi-trash3-fill"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col">
+                <table class="table hidden" id="table-entity-on-map1">
+                  <thead>
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Class</th>
+                      <th scope="col">Id</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img id="teom-image1" src="static\images\empty.png" />
+                      </td>
+                      <td id="teom-class1">Class</td>
+                      <td id="teom-id1">Id</td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">Position</th>
+                      <th scope="col">Coordinates</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="teom-position1">On the floor</td>
+                      <td id="teom-coordinates1">X:0 Y:0</td>
+                      <td id="teom-delete1">
+                        <button id="delete-entity-btn1">
+                          <i class="bi bi-trash3-fill"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col">
+                <table class="table hidden" id="table-entity-on-map2">
+                  <thead>
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Class</th>
+                      <th scope="col">Id</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img id="teom-image2" src="static\images\empty.png" />
+                      </td>
+                      <td id="teom-class2">Class</td>
+                      <td id="teom-id2">Id</td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">Position</th>
+                      <th scope="col">Coordinates</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="teom-position2">On the floor</td>
+                      <td id="teom-coordinates2">X:0 Y:0</td>
+                      <td id="teom-delete2">
+                        <button id="delete-entity-btn2">
+                          <i class="bi bi-trash3-fill"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -690,39 +737,45 @@
           aria-labelledby="pills-contact-tab"
           tabindex="0"
         >
-          <div class="width_50" id="taken-entity">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Class</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <img id="taken-image" src="static\images\empty.png" />
-                  </td>
-                  <td id="taken-class">Class</td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Coordinates</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td id="taken-id">Id</td>
-                  <td id="taken-coordinates">X:0 Y:0</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="container text-center">
+            <div class="row">
+              <div class="col-3">
+                <table class="table" id="taken-entity">
+                  <thead>
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Class</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img id="taken-image" src="static\images\empty.png" />
+                      </td>
+                      <td id="taken-class">Class</td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Coordinates</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="taken-id">Id</td>
+                      <td id="taken-coordinates">X:0 Y:0</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <footer>
+      <!-- Footer -->
+      <hr />
+      <footer class="bg-light text-center">
         <h6>
           Lorenzo Colavecchi -
           <a href="https://github.com/Bludnec"

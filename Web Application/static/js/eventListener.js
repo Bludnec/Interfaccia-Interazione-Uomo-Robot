@@ -14,12 +14,20 @@ function download(content, fileName, contentType) {
   a.click();
 }
 
+// Event Listener per feedback negativo -> abilita answer textarea 
 document.getElementById('wrong-feedback-qa').addEventListener('click', () => {
   document.getElementById('qa-answer-textarea').removeAttribute('disabled');
 });
 
+// Event Listener per feedback negativo -> disabilita answer textarea 
 document.getElementById('ok-feedback-qa').addEventListener('click', () => {
   document.getElementById('qa-answer-textarea').setAttribute("disabled", "true");
+});
+
+// Invia la question di Q&A
+document.getElementById('send-question-qa').addEventListener('click', () => {
+  var qa_question = document.getElementById('qa-question-textarea').value;
+  console.log(qa_question);
 });
 
 document.getElementById('map-height').addEventListener('keyup', () => {
