@@ -292,3 +292,9 @@ def datasetConstructor():
         print(req)
         return jsonify(req)
 
+baseFolderPath = r'static\map'
+
+@app.route('/static/map/')
+def mapList():
+    fNames = [x.name for x in os.scandir(baseFolderPath)]
+    return jsonify(fNames)

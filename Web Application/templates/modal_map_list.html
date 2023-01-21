@@ -5,6 +5,7 @@
   class="btn btn-primary"
   data-bs-toggle="modal"
   data-bs-target="#exampleModal"
+  id="mappe_salvate"
 >
   Mappe Salvate
 </button>
@@ -31,11 +32,12 @@
         ></button>
       </div>
       <div class="modal-body">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select
+          id="option_lista_mappe"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected>Lista mappe salvate</option>
         </select>
       </div>
       <div class="modal-footer">
@@ -45,3 +47,20 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("#mappe_salvate").click(function () {
+    fetch("/static/map/")
+      .then((response) => response.json())
+      .then((data) => {
+        $("#option_lista_mappe").find("option").remove().end();
+        for (let i = 0; i < data.length; i++) {
+          let option = document.createElement("option");
+          option.value = data[i];
+          option.text = data[i];
+          $("#option_lista_mappe").append(option);
+        }
+      })
+      .catch((error) => console.log("Error:", error));
+  });
+</script>
