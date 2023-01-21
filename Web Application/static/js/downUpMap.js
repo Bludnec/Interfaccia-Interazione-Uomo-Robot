@@ -64,7 +64,7 @@ function handleSubmit(event) {
 // Listen for submit events
 form.addEventListener('submit', handleSubmit);
 
-document.getElementById('donload-btn').addEventListener('click', () => {
+document.getElementById('download-btn').addEventListener('click', () => {
   getInfoDownload().then((data) => {
     download(JSON.stringify(data), 'map.txt', 'text/plain');
   });

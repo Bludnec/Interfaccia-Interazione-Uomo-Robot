@@ -92,13 +92,11 @@ canvas {
   margin-left: 10px;
 }
 
-#file {
-  height: auto;
-  width: 300px;
-  float: left;
-}
-
 #pills-tab {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+* {
+  border: 1px solid black;
 }

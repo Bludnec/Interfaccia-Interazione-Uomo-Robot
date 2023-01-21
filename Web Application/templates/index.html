@@ -108,21 +108,6 @@
             Comandi
           </button>
         </li>
-        <!-- Upload/Download Mappa button -->
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="disabled-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#disabled-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="disabled-tab-pane"
-            aria-selected="false"
-          >
-            Upload/Download Mappa
-          </button>
-        </li>
         <!-- Costruzione content button -->
         <li class="nav-item" role="presentation">
           <button
@@ -309,22 +294,6 @@
             />
           </div>
           <button id="delete-path">Cancella percorso</button>
-        </div>
-        <!-- Upload/Donwload Mappa content -->
-        <div
-          class="tab-pane fade"
-          id="disabled-tab-pane"
-          role="tabpanel"
-          aria-labelledby="disabled-tab"
-          tabindex="0"
-        >
-          <form id="upload">
-            <div class="mb-3">
-              <input type="file" id="file" accept=".txt" />
-            </div>
-            <button class="btn btn-primary" id="upload-btn">Upload</button>
-          </form>
-          <button class="btn btn-primary" id="donload-btn">Download</button>
         </div>
         <!-- Costruzione content -->
         <div
@@ -542,6 +511,41 @@
         </div>
       </div>
       <hr />
+
+      <!-- Upload/Download grid-->
+      <div class="container" style="margin-bottom: 20px">
+        <div class="row">
+          <div class="col-auto">
+            <button class="btn btn-primary" id="download-btn">
+              Download Map
+            </button>
+          </div>
+          <div class="col-auto">
+            <form id="upload">
+              <button
+                class="btn btn-primary"
+                id="upload-btn"
+                style="margin-right: 20px"
+              >
+                Upload Map
+              </button>
+              <input type="file" id="file" accept=".txt" />
+            </form>
+          </div>
+          <div class="col-auto">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              witd
+            >
+              <option selected>Mappe salvate</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
       <!-- Canvas - Mappa -->
       <div id="canvas-zone"></div>
