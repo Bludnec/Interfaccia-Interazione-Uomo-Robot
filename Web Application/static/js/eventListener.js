@@ -520,8 +520,16 @@ function mouseReleased() {
     boolImgItemSelected
   ) {
     deselectEntityImage();
-    alert("Non è possibile inserire un'entità su una cella indefinita.");
+    tempAlert("errorEntityPosition");
   }
+}
+
+function tempAlert(id) {
+  document.getElementById(id).classList.toggle("hidden")
+  setTimeout(function () {
+    document.getElementById(id).classList.toggle("hidden")
+  }, 3000);
+
 }
 
 /**

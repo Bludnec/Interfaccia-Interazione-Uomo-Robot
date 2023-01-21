@@ -532,21 +532,11 @@
               <input type="file" id="file" accept=".txt" />
             </form>
           </div>
-          <div class="col-auto">
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              witd
-            >
-              <option selected>Mappe salvate</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
+          <div class="col-auto">{% include 'modal_map_list.html' %}</div>
         </div>
       </div>
 
+      {% include 'error_entity.html' %}
       <!-- Canvas - Mappa -->
       <div id="canvas-zone"></div>
 
