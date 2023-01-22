@@ -142,7 +142,6 @@ def entityStatus():
         return jsonify(status)
     if request.method == "POST":
         req = request.get_json()
-        print(req)
         insertEntityStatusDAOImpl(req['id'],req['status'],req['statusBool'])
         return jsonify(req)
     if request.method == "DELETE":
@@ -308,10 +307,14 @@ def mapJsonServer(name):
                 return file_content
         except:
             return jsonify("")
+
     if request.method == 'POST':
         try:
             file_content = request.get_json()
             with open(baseFolderPath+"\\"+name,'w') as f:
-                f.write(file_content)
-        except:
-            return jsonify("")
+                json.dump(file_content,f)
+                # f.write(file_content)
+                return jsonify("success")
+        except Exception as e:
+            print(e)
+            return jsonify(e)

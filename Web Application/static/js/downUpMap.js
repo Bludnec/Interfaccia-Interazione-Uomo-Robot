@@ -38,11 +38,15 @@ function handleSubmit(event) {
 // Listen for submit events
 form.addEventListener('submit', handleSubmit);
 
-// document.getElementById('download-btn').addEventListener('click', () => {
-//   getInfoDownload().then((data) => {
-//     download(JSON.stringify(data), 'map.txt', 'text/plain');
-//   });
-// });
+document.getElementById('download-btn').addEventListener('click', () => {
+  getInfoDownload().then((data) => {
+    let name = $("#text_area_salva_mappa").val()
+    if (name == "" || name == undefined) {
+      name = "map"
+    }
+    download(JSON.stringify(data), name + '.json', 'application/json');
+  });
+});
 
 
 function caricaMappaSalvata(json) {

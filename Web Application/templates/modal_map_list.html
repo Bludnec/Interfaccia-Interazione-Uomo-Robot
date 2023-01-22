@@ -18,7 +18,7 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -39,23 +39,15 @@
             <h2 class="fs-5" style="margin-bottom: 15px">
               Carica la mappa da file
             </h2>
-            <!-- <div class="col-auto">
-            <button class="btn btn-primary" id="download-btn">
-              Download Map
-            </button>
-          </div> -->
+
             <form id="upload">
               <div class="row">
-                <div class="col-9">
+                <div class="col-7">
                   <input type="file" id="file" accept=".txt" />
                 </div>
-                <div class="col-3">
-                  <button
-                    class="btn btn-primary"
-                    id="upload-btn"
-                    style="margin-right: 20px"
-                  >
-                    Carica
+                <div class="col-5">
+                  <button class="btn btn-primary" id="upload-btn">
+                    Carica Mappa
                   </button>
                 </div>
               </div>
@@ -81,17 +73,18 @@
             <div class="col-5">
               <button
                 type="button"
-                class="btn btn-danger"
-                id="elimina_mappa_server"
-              >
-                Elimina
-              </button>
-              <button
-                type="button"
                 class="btn btn-success"
                 id="carica_mappa_server"
               >
                 Carica
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="elimina_mappa_server"
+                disabled
+              >
+                Elimina
               </button>
             </div>
           </div>
@@ -105,29 +98,56 @@
             <h2 class="fs-5" style="margin-bottom: 15px">
               Salva la mappa creata
             </h2>
-            <div class="input-group has-validation">
-              <div class="form-floating is-invalid">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="text_area_salva_mappa"
-                  placeholder="Nome"
-                />
-                <label for="floatingInputGroup2">Nome Mappa</label>
+            <div class="col-7">
+              <div class="input-group has-validation">
+                <div class="form-floating is-invalid">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="text_area_salva_mappa"
+                    placeholder="Nome"
+                  />
+                  <label for="floatingInputGroup2">Nome Mappa</label>
+                </div>
+                <div
+                  class="invalid-feedback visually-hidden"
+                  id="invalid_name_error"
+                >
+                  Inserisci un nome.
+                </div>
               </div>
-              <div
-                class="invalid-feedback visually-hidden"
-                id="invalid_name_error"
-              >
-                Inserisci un nome.
-              </div>
+            </div>
+            <div class="col-5">
+              <button class="btn btn-success" id="button_salva_mappa">
+                Salva sul Server
+              </button>
               <button
                 class="btn btn-primary"
-                type="button"
-                id="button_salva_mappa"
-              ></button>
+                id="download-btn"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title="Scarica file JSON della mappa."
+              >
+                Scarica File
+              </button>
             </div>
           </div>
+        </div>
+
+        <hr />
+
+        <!-- Modal salvataggio mappa success sul server-->
+        <div
+          class="alert alert-success hidden"
+          role="alert"
+          id="save_map_success"
+        >
+          Mappa salvata con successo!
+        </div>
+
+        <!-- Modal salvataggio mappa error sul server-->
+        <div class="alert alert-danger hidden" role="alert" id="save_map_fail">
+          Errore nel caricamento della mappa! Caratteri non validi.
         </div>
       </div>
     </div>
@@ -150,7 +170,7 @@
       }
 
       $("#mappe_salvate").click(caricaListaMappe());
-      // /static/map/<name>
+
       $("#carica_mappa_server").click(function () {
         let name = $("#option_lista_mappe option:selected").text();
         console.log(name);
@@ -172,14 +192,26 @@
           getInfoDownload().then((data) => {
             $("#text_area_salva_mappa").removeClass("is-invalid");
             $("#invalid_name_error").addClass("visually-hidden");
+
             fetch("/static/map/" + name, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),
             })
               .then((response) => response.json())
-              .then((data) => console.log("Success:", data))
-              .catch((error) => console.error("Error:", error));
+              .then((data) => {
+                $("#save_map_success").toggleClass("hidden");
+                caricaListaMappe();
+                setTimeout(function () {
+                  $("#save_map_success").toggleClass("hidden");
+                }, 3000);
+              })
+              .catch((error) => {
+                $("#save_map_fail").toggleClass("hidden");
+                setTimeout(function () {
+                  $("#save_map_fail").toggleClass("hidden");
+                }, 3000);
+              });
           });
         }
       });
