@@ -298,3 +298,13 @@ baseFolderPath = r'static\map'
 def mapList():
     fNames = [x.name for x in os.scandir(baseFolderPath)]
     return jsonify(fNames)
+
+@app.route('/static/map/<name>', methods=['GET', 'POST'])
+def mapJsonServer(name):
+    if request.method == 'GET':
+        try:
+            with open(baseFolderPath+"\\"+name,'r') as f:
+                file_content = f.read()
+                return file_content
+        except:
+            return jsonify("")

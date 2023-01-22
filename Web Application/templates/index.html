@@ -515,31 +515,10 @@
           </div>
         </div>
       </div>
+
       <hr />
 
-      <!-- Upload/Download grid-->
-      <div class="container" style="margin-bottom: 20px">
-        <div class="row">
-          <div class="col-auto">
-            <button class="btn btn-primary" id="download-btn">
-              Download Map
-            </button>
-          </div>
-          <div class="col-auto">
-            <form id="upload">
-              <button
-                class="btn btn-primary"
-                id="upload-btn"
-                style="margin-right: 20px"
-              >
-                Upload Map
-              </button>
-              <input type="file" id="file" accept=".txt" />
-            </form>
-          </div>
-          <div class="col-auto">{% include 'modal_map_list.html' %}</div>
-        </div>
-      </div>
+      <div style="margin-bottom: 20px">{% include 'modal_map_list.html' %}</div>
 
       {% include 'error_entity.html' %}
       <!-- Canvas - Mappa -->

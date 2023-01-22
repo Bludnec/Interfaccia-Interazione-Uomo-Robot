@@ -31,25 +31,76 @@
           aria-label="Close"
         ></button>
       </div>
+      <!-- Upload/Download grid-->
       <div class="modal-body">
-        <select
-          id="option_lista_mappe"
-          class="form-select"
-          aria-label="Default select example"
-        >
-          <option selected>Lista mappe salvate</option>
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger">Elimina</button>
-        <button type="button" class="btn btn-success">Carica</button>
+        <div class="container" style="margin-bottom: 20px">
+          <div class="row">
+            <h2 class="fs-5" style="margin-bottom: 15px">
+              Salva mappa sul server
+            </h2>
+            <!-- <div class="col-auto">
+            <button class="btn btn-primary" id="download-btn">
+              Download Map
+            </button>
+          </div> -->
+            <form id="upload">
+              <div class="row">
+                <div class="col-9">
+                  <input type="file" id="file" accept=".txt" />
+                </div>
+                <div class="col-3">
+                  <button
+                    class="btn btn-primary"
+                    id="upload-btn"
+                    style="margin-right: 20px"
+                  >
+                    Salva
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <hr />
+        <div class="container" style="margin-bottom: 20px">
+          <div class="row">
+            <h2 class="fs-5" style="margin-bottom: 15px">
+              Seleziona la mappa salvata nel server
+            </h2>
+            <div class="col-7">
+              <select
+                id="option_lista_mappe"
+                class="form-select"
+                aria-label="Default select example"
+              ></select>
+            </div>
+            <div class="col-5">
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="elimina_mappa_server"
+              >
+                Elimina
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                id="carica_mappa_server"
+              >
+                Carica
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  $("#mappe_salvate").click(function () {
+  // Carica la lista delle mappe salvate
+  function caricaListaMappe() {
     fetch("/static/map/")
       .then((response) => response.json())
       .then((data) => {
@@ -60,6 +111,19 @@
           option.text = data[i];
           $("#option_lista_mappe").append(option);
         }
+      })
+      .catch((error) => console.log("Error:", error));
+  }
+
+  $("#mappe_salvate").click(caricaListaMappe());
+  // /static/map/<name>
+  $("#carica_mappa_server").click(function () {
+    let name = $("#option_lista_mappe option:selected").text();
+    console.log(name);
+    fetch("/static/map/" + name)
+      .then((response) => response.json())
+      .then((data) => {
+        caricaMappaSalvata(data);
       })
       .catch((error) => console.log("Error:", error));
   });
