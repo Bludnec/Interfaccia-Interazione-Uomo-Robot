@@ -33,10 +33,11 @@
       </div>
       <!-- Upload/Download grid-->
       <div class="modal-body">
+        <!-- Carica mappa da file -->
         <div class="container" style="margin-bottom: 20px">
           <div class="row">
             <h2 class="fs-5" style="margin-bottom: 15px">
-              Salva mappa sul server
+              Carica la mappa da file
             </h2>
             <!-- <div class="col-auto">
             <button class="btn btn-primary" id="download-btn">
@@ -54,7 +55,7 @@
                     id="upload-btn"
                     style="margin-right: 20px"
                   >
-                    Salva
+                    Carica
                   </button>
                 </div>
               </div>
@@ -63,10 +64,12 @@
         </div>
 
         <hr />
+
+        <!-- Seleziona mappa da server -->
         <div class="container" style="margin-bottom: 20px">
           <div class="row">
             <h2 class="fs-5" style="margin-bottom: 15px">
-              Seleziona la mappa salvata nel server
+              Seleziona la mappa salvata
             </h2>
             <div class="col-7">
               <select
@@ -93,38 +96,93 @@
             </div>
           </div>
         </div>
+
+        <hr />
+
+        <!-- Salva mappa creata-->
+        <div class="container" style="margin-bottom: 20px">
+          <div class="row">
+            <h2 class="fs-5" style="margin-bottom: 15px">
+              Salva la mappa creata
+            </h2>
+            <div class="input-group has-validation">
+              <div class="form-floating is-invalid">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="text_area_salva_mappa"
+                  placeholder="Nome"
+                />
+                <label for="floatingInputGroup2">Nome Mappa</label>
+              </div>
+              <div
+                class="invalid-feedback visually-hidden"
+                id="invalid_name_error"
+              >
+                Inserisci un nome.
+              </div>
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="button_salva_mappa"
+              ></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <script>
+      // Carica la lista delle mappe salvate
+      function caricaListaMappe() {
+        fetch("/static/map/")
+          .then((response) => response.json())
+          .then((data) => {
+            $("#option_lista_mappe").find("option").remove().end();
+            for (let i = 0; i < data.length; i++) {
+              let option = document.createElement("option");
+              option.value = data[i];
+              option.text = data[i];
+              $("#option_lista_mappe").append(option);
+            }
+          })
+          .catch((error) => console.log("Error:", error));
+      }
+
+      $("#mappe_salvate").click(caricaListaMappe());
+      // /static/map/<name>
+      $("#carica_mappa_server").click(function () {
+        let name = $("#option_lista_mappe option:selected").text();
+        console.log(name);
+        fetch("/static/map/" + name)
+          .then((response) => response.json())
+          .then((data) => {
+            caricaMappaSalvata(data);
+          })
+          .catch((error) => console.log("Error:", error));
+      });
+
+      // Salva la mappa sul server
+      $("#button_salva_mappa").click(function () {
+        let name = $("#text_area_salva_mappa").val();
+        if (name == "" || name == undefined) {
+          $("#text_area_salva_mappa").addClass("is-invalid");
+          $("#invalid_name_error").removeClass("visually-hidden");
+        } else {
+          getInfoDownload().then((data) => {
+            $("#text_area_salva_mappa").removeClass("is-invalid");
+            $("#invalid_name_error").addClass("visually-hidden");
+            fetch("/static/map/" + name, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            })
+              .then((response) => response.json())
+              .then((data) => console.log("Success:", data))
+              .catch((error) => console.error("Error:", error));
+          });
+        }
+      });
+    </script>
   </div>
 </div>
-
-<script>
-  // Carica la lista delle mappe salvate
-  function caricaListaMappe() {
-    fetch("/static/map/")
-      .then((response) => response.json())
-      .then((data) => {
-        $("#option_lista_mappe").find("option").remove().end();
-        for (let i = 0; i < data.length; i++) {
-          let option = document.createElement("option");
-          option.value = data[i];
-          option.text = data[i];
-          $("#option_lista_mappe").append(option);
-        }
-      })
-      .catch((error) => console.log("Error:", error));
-  }
-
-  $("#mappe_salvate").click(caricaListaMappe());
-  // /static/map/<name>
-  $("#carica_mappa_server").click(function () {
-    let name = $("#option_lista_mappe option:selected").text();
-    console.log(name);
-    fetch("/static/map/" + name)
-      .then((response) => response.json())
-      .then((data) => {
-        caricaMappaSalvata(data);
-      })
-      .catch((error) => console.log("Error:", error));
-  });
-</script>

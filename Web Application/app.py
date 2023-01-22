@@ -308,3 +308,10 @@ def mapJsonServer(name):
                 return file_content
         except:
             return jsonify("")
+    if request.method == 'POST':
+        try:
+            file_content = request.get_json()
+            with open(baseFolderPath+"\\"+name,'w') as f:
+                f.write(file_content)
+        except:
+            return jsonify("")
