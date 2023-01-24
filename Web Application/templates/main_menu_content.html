@@ -113,26 +113,75 @@
   aria-labelledby="commands-tab"
   tabindex="0"
 >
-  <div id="input-output-grid">
-    <div class="io-grid-element">
-      <textarea id="input-text" placeholder="Input text"></textarea>
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Input"
+            id="input-text"
+            style="height: 100px; max-height: 150px"
+          ></textarea>
+          <label for="input-text">Input</label>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Output"
+            id="output-text"
+            style="height: 100px; max-height: 150px"
+          ></textarea>
+          <label for="output-text">Output</label>
+        </div>
+      </div>
+      <div class="col-2">
+        <button class="btn btn-primary" id="translate-button">
+          Avvia Comando
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="io-grid-element">
+      <textarea id="input-text" placeholder="Input"></textarea>
     </div>
     <div class="io-grid-element">
-      <textarea readonly id="output-text" placeholder="Output text"></textarea>
+      <textarea disabled id="output-text" placeholder="Output"></textarea>
+    </div> -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="move-agent"
+          />
+          <label class="form-check-label" for="move-agent"
+            >Muovi Agente manualmente</label
+          >
+        </div>
+        <!-- <div id="motion-agent">
+          <label for="checkBox">Muovi agente</label><br />
+          <input
+            type="checkbox"
+            id="move-agent"
+            title="Abilita per muovere l'agente"
+          />
+        </div> -->
+      </div>
+      <div class="col-2">
+        <button class="btn btn-danger" id="delete-path">
+          Cancella Percorso
+        </button>
+      </div>
     </div>
-    <button class="btn btn-primary" id="translate-button">
-      <p>Avvia comando</p>
-    </button>
   </div>
-  <div id="motion-agent">
-    <label for="checkBox">Muovi agente</label><br />
-    <input
-      type="checkbox"
-      id="move-agent"
-      title="Abilita per muovere l'agente"
-    />
-  </div>
-  <button id="delete-path">Cancella percorso</button>
 </div>
 <!-- Costruzione content -->
 <div

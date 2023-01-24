@@ -50,22 +50,6 @@ canvas {
   margin-top: 20px;
 }
 
-/* Zona inserimento comandi */
-#input-text,
-#output-text {
-  overflow: hidden;
-  width: 40%;
-  float: left;
-  resize: none;
-  min-height: 60px;
-  line-height: 20px;
-  margin-right: 10px;
-}
-
-#translate-button {
-  margin-top: 20px;
-}
-
 #entita {
   float: left;
   width: 60%;
@@ -86,10 +70,6 @@ canvas {
   width: 40%;
   margin-right: 10px;
   float: left;
-}
-
-#delete-path {
-  margin-left: 10px;
 }
 
 #pills-tab {
