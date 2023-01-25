@@ -41,7 +41,7 @@
           style="margin-top: 15px"
           id="drawButton"
         >
-          Ridimensiona mappa
+          Ridimensiona
         </button>
       </div>
     </div>
@@ -138,8 +138,15 @@
         </div>
       </div>
       <div class="col-2">
-        <button class="btn btn-primary" id="translate-button">
+        <button
+          class="btn btn-primary"
+          id="translate-button"
+          style="margin-bottom: 10px"
+        >
           Avvia Comando
+        </button>
+        <button class="btn btn-danger" id="delete-path">
+          Cancella Percorso
         </button>
       </div>
     </div>
@@ -152,7 +159,7 @@
       <textarea disabled id="output-text" placeholder="Output"></textarea>
     </div> -->
 
-  <div class="container">
+  <div class="container" style="margin-top: 15px">
     <div class="row">
       <div class="col-3">
         <div class="form-check form-switch">
@@ -175,11 +182,7 @@
           />
         </div> -->
       </div>
-      <div class="col-2">
-        <button class="btn btn-danger" id="delete-path">
-          Cancella Percorso
-        </button>
-      </div>
+      <div class="col"></div>
     </div>
   </div>
 </div>
@@ -216,12 +219,24 @@
         </div>
       </div>
       <div class="col">
-        <button
-          id="send-construction-info"
-          class="btn btn-primary"
-          style="margin-top: 10px"
-        >
-          Invia <i class="bi bi-send"></i>
+        <button id="send-construction-info">
+          <div class="svg-wrapper-1">
+            <div class="svg-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+              >
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  fill="currentColor"
+                  d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <span>Send</span>
         </button>
       </div>
     </div>
