@@ -3,9 +3,10 @@
 # Install Requirements
 
 Comadi per intallare le librerie richieste:
+'''
 pip install flask
 pip install git+https://github.com/yuce/pyswip@master#egg=pyswip
-
+'''
 installare Swi-Prolog da qui:
 https://www.swi-prolog.org/download/stable
 
